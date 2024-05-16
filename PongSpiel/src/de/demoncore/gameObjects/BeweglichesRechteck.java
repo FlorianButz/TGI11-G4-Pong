@@ -15,13 +15,13 @@ public class BeweglichesRechteck extends GameObject {
 	
 	public void automatischeKreisbewegung() {
 		if(richtung == 0) {
-			positionX += 1;
+			position.x += 1;
 		} else if (richtung == 1) {
-			positionY += 1;
+			position.y += 1;
 		} else if (richtung == 2) {
-			positionX -= 1;
+			position.x -= 1;
 		} else if (richtung == 3) {
-			positionY -= 1;
+			position.y -= 1;
 		}
 		if (schritteInGleicherRichtung > 75) {
 			richtung += 1;

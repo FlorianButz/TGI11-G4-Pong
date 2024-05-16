@@ -2,13 +2,19 @@ package de.demoncore.actions;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.demoncore.game.GameLogic;
+import de.demoncore.utils.Vector3;
 
 public class KeyHandler implements KeyListener {
 
 	GameLogic gamelogic;
+	List<Integer> pressedKeys = new ArrayList<Integer>();
 
+	public static Vector3 playerInput = Vector3.zero; // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
+	
 	public KeyHandler(GameLogic spiellogik) {
 		gamelogic = spiellogik;
 	}
@@ -20,24 +26,26 @@ public class KeyHandler implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			gamelogic.keyLeftarrowpressed = true;
+		if(pressedKeys.contains(e.getKeyCode())) return; // Sperrt die Tastatur wenn gespammt wird
+		pressedKeys.add(e.getKeyCode()); // Sperre
 		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			playerInput = playerInput.subtract(Vector3.one);
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			gamelogic.keyRightarrowpressed = true;
+			playerInput = playerInput.add(Vector3.one);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			gamelogic.keyLeftarrowpressed = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			gamelogic.keyRightarrowpressed = false;
-		}
+		if(pressedKeys.contains(e.getKeyCode())) { pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode())); } // Entfernt die Sperre
 		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			playerInput = playerInput.add(Vector3.one);
+		
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			playerInput = playerInput.subtract(Vector3.one);
+		}
 	}
 
 }
