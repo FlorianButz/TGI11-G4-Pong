@@ -1,4 +1,4 @@
-package game;
+package de.demoncore.game;
 
 public class GameObject {
 

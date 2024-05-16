@@ -1,9 +1,9 @@
-package gui;
+package de.demoncore.gui;
 
 import javax.swing.JFrame;
 
-import actions.KeyHandler;
-import game.GameLogic;
+import de.demoncore.actions.KeyHandler;
+import de.demoncore.game.GameLogic;
 
 public class Gui {
 	

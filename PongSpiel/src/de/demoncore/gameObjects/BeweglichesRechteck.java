@@ -1,6 +1,6 @@
-package gameObjects;
+package de.demoncore.gameObjects;
 
-import game.GameObject;
+import de.demoncore.game.GameObject;
 
 public class BeweglichesRechteck extends GameObject {
 	

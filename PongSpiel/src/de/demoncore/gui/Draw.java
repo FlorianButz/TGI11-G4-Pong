@@ -1,12 +1,12 @@
-package gui;
+package de.demoncore.gui;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import game.GameLogic;
-import game.GameObject;
+import de.demoncore.game.GameLogic;
+import de.demoncore.game.GameObject;
 
 @SuppressWarnings("serial")
 public class Draw extends JLabel{

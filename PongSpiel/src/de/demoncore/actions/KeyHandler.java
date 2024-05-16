@@ -1,9 +1,9 @@
-package actions;
+package de.demoncore.actions;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import game.GameLogic;
+import de.demoncore.game.GameLogic;
 
 public class KeyHandler implements KeyListener {
 
