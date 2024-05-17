@@ -36,7 +36,8 @@ public class ParticleSystem extends GameObject {
 	public Color particleColorEnd = new Color(1, 1, 1, 0);
 
 	public boolean emitLoop = false;
-	public float emitPause = 5;
+	public float emitPause = 5;	// Pause zwischen den spawn
+	public float emitChunk = 5; // Wie viele Partikel auf einem Schlag gespawnt werden
 	public float emitTime = 0;
 
 	public float particleSystemTime = 0;
@@ -100,7 +101,9 @@ public class ParticleSystem extends GameObject {
 
 		if(emitLoop) {
 			if(emitTime >= emitPause) {
-				AddParticle();
+				for(int s = 0; s < emitChunk; s++) {
+					AddParticle();
+				}
 				emitTime = 0;
 			}
 			else

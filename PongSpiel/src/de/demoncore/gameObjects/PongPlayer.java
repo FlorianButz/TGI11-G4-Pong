@@ -14,8 +14,8 @@ public class PongPlayer extends GameObject {
 	
 	ParticleSystem trail;
 	
-	public PongPlayer() {
-		super(300, 400, 20, 20);
+	public PongPlayer(int x, int y) {
+		super(x, y, 20, 20);
 	}
 	
 	@Override
@@ -25,6 +25,7 @@ public class PongPlayer extends GameObject {
 		// Partikel e fekt fuer den spieler
 		if(trail == null) {
 			trail = new ParticleSystem((int)this.position.x, (int)this.position.y);
+			
 			trail.emitLoop = true;
 			trail.particleSpawnArea = new Vector3(10, 10, 10);
 			trail.particleGravity = 0;
