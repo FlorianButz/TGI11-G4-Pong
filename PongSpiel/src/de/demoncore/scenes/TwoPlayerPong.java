@@ -1,19 +1,23 @@
 package de.demoncore.scenes;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import de.demoncore.game.GameLogic;
+import de.demoncore.game.GameObject;
+import de.demoncore.game.ParticleSystem;
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gui.GUIButton;
+import de.demoncore.gui.GUIText;
+import de.demoncore.main.Main;
+import de.demoncore.utils.Vector3;
 
 public class TwoPlayerPong extends BaseScene {
 
 	BeweglichesRechteck beispielObjekt1;
 	PongPlayer player1;
 	PongPlayer player2;
-	PongPlayer player3;
-	PongPlayer player4;
-	PongPlayer player5;
-	PongPlayer player6;
-	PongPlayer player7;
-
 	
 	public TwoPlayerPong() {
 		
@@ -22,14 +26,48 @@ public class TwoPlayerPong extends BaseScene {
 		AddObject(beispielObjekt1);
 		beispielObjekt1.richtung = 0; // Startrichtung
 		
-		player1 = new PongPlayer(250, 250);
+		AddObject(new GameObject(0, 0, 100, 100));
+		
+		player1 = new PongPlayer(0, 0);
 		AddObject(player1);
 		
-		player2 = new PongPlayer();
+		player2 = new PongPlayer(150, 350);
 		AddObject(player2);
 		
+		ParticleSystem p = new ParticleSystem(0, 0);
+
+		p.initialParticleSpeedMax = new Vector3(5, -10);
+		p.initialParticleSpeedMin = new Vector3(-5, 0);
+		p.particleGravity = 0.05f;
 		
+		p.initialParticleSize = 20;
+		p.initialParticleSizeRandom = 10;
+		
+		p.emitLoop = true;
+
+		p.emitPause = 150;
+		p.emitChunk = 25;
+
+		p.particleColorFirst = Color.red;
+		p.particleColorSecond = Color.yellow;
+		
+		p.particleColorEnd = Color.black;
+		
+		p.particleLifetime = 250;
+		p.particleLifetimeRandom = 0;
+		
+		p.Init();
+		AddObject(p);
+		
+		t = new GUIText(0, 150, "Hello, World!", Main.dialogFont.deriveFont(Font.PLAIN, 65F), Color.WHITE);
+		t.SetText("2dq2");
+		AddObject(t);
+		
+		GUIButton a = new GUIButton(0, 50, 200, 75, "Test", Main.uiFont.deriveFont(35F), Color.white);
+		AddObject(a);
 	}
+	
+	GUIText t;
 	
 	@Override
 	public void UpdateScene() {
@@ -38,7 +76,10 @@ public class TwoPlayerPong extends BaseScene {
 		// Laufende Ausführungen im Spiel:
 		beispielObjekt1.automatischeKreisbewegung();
 		
+		t.SetText((int)GameLogic.GetInstance().GetGameTime() + "");
 		
+		//this.cameraZRotation = (float) (Math.sin(GameLogic.GetInstance().GetGameTime() * 0.5f) * 15);
+		//this.cameraPosition = Vector3.one().multiply((float)Math.sin(GameLogic.GetInstance().GetGameTime() * 0.1f) * 25f);
 	}
 
 }

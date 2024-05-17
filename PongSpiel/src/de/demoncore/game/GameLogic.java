@@ -3,6 +3,8 @@ package de.demoncore.game;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.demoncore.gui.Gui;
+
 public class GameLogic {
 	
 	private static GameLogic _instance;
@@ -12,9 +14,6 @@ public class GameLogic {
 	}
 	
 	private Timer gameTimer;
-	public int screenwidth;
-	public int screenheight;
-	
 	public float gameTime = 0;
 	
 	public GameLogic() {
@@ -25,6 +24,7 @@ public class GameLogic {
 			@Override
 			public void run() {
 				gameTime += 0.1f;
+				
 				SceneManager.UpdateScenes();
 			}
 		}, 0, 5);

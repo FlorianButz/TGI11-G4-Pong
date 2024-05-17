@@ -23,6 +23,7 @@ public class ParticleSystem extends GameObject {
 
 	public float initialParticleSize = 5;
 	public float initialParticleSizeRandom = 2;
+	public float endParticleSize = 0;
 
 	public float particleGravity = 0.01f ;
 
@@ -49,6 +50,8 @@ public class ParticleSystem extends GameObject {
 		super(x, y, 25, 25);
 
 		renderSpecial = true;
+		
+		this.anchorPoint = Vector3.one().multiply(0.5f);
 	}
 
 	public void Init() {
@@ -83,7 +86,7 @@ public class ParticleSystem extends GameObject {
 				GameMath.RandomRange(-particleSpawnArea.x, particleSpawnArea.x),
 				GameMath.RandomRange(-particleSpawnArea.y, particleSpawnArea.y)
 				);
-		p.position = p.position.add(randomSpawnPosition).add(this.position);
+		p.position = p.position.add(randomSpawnPosition).add(this.GetPosition());
 
 		float randomColorValue = GameMath.RandomRange(0f, 1f);
 		p.startColor = GameMath.LerpColor(particleColorFirst, particleColorSecond, randomColorValue);
@@ -119,7 +122,8 @@ public class ParticleSystem extends GameObject {
 			p.velocity.y += particleGravity;
 
 			p.color = GameMath.LerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
-
+			p.size = Vector3.one().multiply(GameMath.Lerp(initialParticleSize, endParticleSize, (float)p.currentLifetime / (float)p.maxLifetime));
+			
 			if(p.currentLifetime >= p.maxLifetime) {
 				removeParticles.add(p);
 			}

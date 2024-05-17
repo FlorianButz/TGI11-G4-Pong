@@ -3,6 +3,7 @@ package de.demoncore.rendering;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -15,40 +16,40 @@ import de.demoncore.game.GameObject;
 import de.demoncore.game.Particle;
 import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
+import de.demoncore.gui.GUIObject;
+import de.demoncore.gui.Gui;
 import de.demoncore.utils.Vector3;
 
 @SuppressWarnings("serial")
 public class Draw extends JPanel {
 	
-	private int screenwidth;
-	private int screenheight;
-	
 	ArrayList<GameObject> gameObjectsInScene; // Alle Objekte, die sich in dem Level befinden
 
-	public Draw(GameLogic spiellogik, int screenBreite, int screenHoehe) {
-		gameObjectsInScene = SceneManager.GetActiveScene().GetSceneObjects();
-
-		screenwidth = screenBreite;
-		screenheight = screenHoehe;
-	}
-	
 	public void paintComponent(Graphics g){
-		
 		super.paintComponent(g);
+		
+		gameObjectsInScene = SceneManager.GetActiveScene().GetSceneObjects();
 		Graphics2D g2d = (Graphics2D) g;
 
+		AffineTransform oldTransform = g2d.getTransform();
+		int screenwidth = (int) Gui.GetScreenDimensions().x;
+		int screenheight = (int) Gui.GetScreenDimensions().y;
+		
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
 		
 		AffineTransform transformation = new AffineTransform();
-		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation), this.screenwidth / 2, this.screenheight / 2);
+		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
+				SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
+				SceneManager.GetActiveScene().cameraPosition.y + screenheight / 2);
 		transformation.translate(
-				SceneManager.GetActiveScene().cameraPosition.x + SceneManager.GetActiveScene().localCameraPosition.x,
-				SceneManager.GetActiveScene().cameraPosition.y + SceneManager.GetActiveScene().localCameraPosition.y);
+				SceneManager.GetActiveScene().cameraPosition.x + SceneManager.GetActiveScene().localCameraPosition.x + Gui.GetScreenDimensions().x / 2,
+				SceneManager.GetActiveScene().cameraPosition.y + SceneManager.GetActiveScene().localCameraPosition.y + Gui.GetScreenDimensions().y / 2);
 		
 		g2d.transform(transformation);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		// Zeichne alle Spielobjekte
 		g.setColor(Color.WHITE);
@@ -66,15 +67,37 @@ public class Draw extends JPanel {
 						
 						Vector3 worldPos = GetWorldPoint(p.position);
 						g.setColor(p.color);
-						g.fillRect((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
+						g.fillRect((int)worldPos.x + (int)(p.size.x / 4), (int)worldPos.y + (int)(p.size.y / 4), (int)p.size.x, (int)p.size.y);
 					}
 				}
 				
 			}else {
-				Vector3 worldPos = GetWorldPoint(currentGameObj.position);
+				Vector3 worldPos = GetWorldPoint(currentGameObj.GetPosition());
+				g.setColor(currentGameObj.color);
 				g.fillRect((int)worldPos.x, (int)worldPos.y, (int)currentGameObj.size.x, (int)currentGameObj.size.y);
 			}
 		}
+		
+		g2d.setTransform(oldTransform);
+		
+		// Zeichne GUI
+		for(int guiObj = 0; guiObj < gameObjectsInScene.size(); guiObj++) {
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+				guiObject.Draw(g2d, screenwidth, screenheight);
+			}
+		}
+		
+		// Mouse
+		
+		g2d.setColor(new Color(1, 1, 1, 1f));
+		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x),
+						(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y),
+						11, 11);
+		g2d.setColor(new Color(0, 0, 0, 1f));
+		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x + 3),
+						(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y + 3),
+						5, 5);
 		
 		repaint();
 	}

@@ -5,7 +5,7 @@ import de.demoncore.scenes.*;
 public class SceneManager {
 
 	private static BaseScene activeScene;
-	private static BaseScene gameStartScene = (BaseScene) new TwoPlayerPong();
+	private static BaseScene gameStartScene = (BaseScene) new MainMenu();
 	
 	private static boolean isInitialized = false;
 	

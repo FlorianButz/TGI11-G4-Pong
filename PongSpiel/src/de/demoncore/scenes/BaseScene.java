@@ -38,6 +38,7 @@ public class BaseScene {
 	}
 	
 	public void DestroyObject(GameObject g) {
+		g.OnDestroy();
 		sceneObjects.remove(g);
 	}
 	

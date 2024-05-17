@@ -2,6 +2,8 @@ package de.demoncore.actions;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +12,15 @@ import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
 
-public class KeyHandler implements KeyListener {
+public class KeyHandler implements KeyListener, MouseListener {
 
+	public static List<GameActionListener> listeners = new ArrayList<GameActionListener>();
+	
 	GameLogic gameLogic;
 	List<Integer> pressedKeys = new ArrayList<Integer>();
 
+	public Vector3 mouse = Vector3.zero();
+	
 	public static Vector3 playerInput = Vector3.zero(); // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
 	
 	public KeyHandler(GameLogic gameLogic) {
@@ -48,6 +54,41 @@ public class KeyHandler implements KeyListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			playerInput = playerInput.subtract(Vector3.one());
 		}
+	}
+
+	public void updateMousePos() {
+		
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		for(GameActionListener g : listeners) {
+			g.OnMouseDown(e);
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

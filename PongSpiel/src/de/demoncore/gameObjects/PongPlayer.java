@@ -1,5 +1,7 @@
 package de.demoncore.gameObjects;
 
+import java.awt.Color;
+
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.ParticleSystem;
@@ -33,6 +35,11 @@ public class PongPlayer extends GameObject {
 			trail.initialParticleEmitCountRandom = 0;
 			trail.emitPause = 5;
 			
+			trail.emitChunk = 2;
+
+			trail.particleColorFirst = new Color(1, 1, 1, 0.2f);
+			trail.particleColorSecond = new Color(1, 1, 1, 0.2f);
+			
 			trail.initialParticleSpeedMin = Vector3.one().multiply(-1);
 			trail.initialParticleSpeedMax = Vector3.one();
 			trail.particleSpeedMultiplier = 0.25f;
@@ -48,6 +55,6 @@ public class PongPlayer extends GameObject {
 		playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
 		this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
 		
-		trail.position = this.position.add(trail.size.multiply(0.25f));
+		trail.SetPosition(this.position.add(trail.size.multiply(0.25f)));
 	}
 }
