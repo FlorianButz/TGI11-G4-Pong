@@ -8,11 +8,7 @@ public class TwoPlayerPong extends BaseScene {
 	BeweglichesRechteck beispielObjekt1;
 	PongPlayer player1;
 	PongPlayer player2;
-	PongPlayer player3;
-	PongPlayer player4;
-	PongPlayer player5;
-	PongPlayer player6;
-	PongPlayer player7;
+
 
 	
 	public TwoPlayerPong() {
