@@ -18,7 +18,7 @@ public class TwoPlayerPong extends BaseScene {
 		AddObject(beispielObjekt1);
 		beispielObjekt1.richtung = 0; // Startrichtung
 		
-		player1 = new PongPlayer();
+		player1 = new PongPlayer(250, 250);
 		AddObject(player1);
 		
 		player2 = new PongPlayer();
