@@ -4,8 +4,13 @@ public class Vector3 {
 	
 	public float x, y, z;
 
-	public static Vector3 one = new Vector3(1, 1, 1);
-	public static Vector3 zero = new Vector3(0, 0, 0);
+	public static Vector3 zero() {
+		return new Vector3(0, 0, 0);
+	}
+	
+	public static Vector3 one() {
+		return new Vector3(1, 1, 1);
+	}
 	
 	public Vector3(float x, float y, float z) {
 		this.x = x;

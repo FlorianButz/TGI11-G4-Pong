@@ -3,6 +3,7 @@ package de.demoncore.scenes;
 import de.demoncore.game.GameLogic;
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.utils.Vector3;
 
 public class TwoPlayerPong extends BaseScene {
 
@@ -26,11 +27,7 @@ public class TwoPlayerPong extends BaseScene {
 		super.UpdateScene();
 		
 		// Laufende Ausführungen im Spiel:
-		beispielObjekt1.automatischeKreisbewegung();	
-
-		this.cameraPosition.x = (float) Math.sin(GameLogic.GetInstance().GetGameTime()) * 0.5f;
-		this.cameraPosition.y = (float) Math.cos(GameLogic.GetInstance().GetGameTime()) * 0.5f;
-		//this.cameraZRotation = GameLogic.GetInstance().GetGameTime() * 2;
+		beispielObjekt1.automatischeKreisbewegung();
 	}
 	
 }

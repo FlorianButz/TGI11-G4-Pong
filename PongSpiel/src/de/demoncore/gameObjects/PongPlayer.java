@@ -17,8 +17,6 @@ public class PongPlayer extends GameObject {
 	public void Update() {
 		super.Update();
 		
-		System.out.println(playerVelocity);
-		
 		playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
 		this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
 	}
