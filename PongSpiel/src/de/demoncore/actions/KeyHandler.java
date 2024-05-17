@@ -6,18 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
 
 public class KeyHandler implements KeyListener {
 
-	GameLogic gamelogic;
+	GameLogic gameLogic;
 	List<Integer> pressedKeys = new ArrayList<Integer>();
 
 	public static Vector3 playerInput = Vector3.zero(); // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
 	
-	public KeyHandler(GameLogic spiellogik) {
-		gamelogic = spiellogik;
+	public KeyHandler(GameLogic gameLogic) {
+		this.gameLogic = gameLogic;
 	}
 	
 	@Override
@@ -29,8 +30,6 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(pressedKeys.contains(e.getKeyCode())) return; // Sperrt die Tastatur wenn gespammt wird
 		pressedKeys.add(e.getKeyCode()); // Sperre
-		
-		SceneManager.GetActiveScene().ShakeCamera(25, 0.0005f, 35);
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			playerInput = playerInput.subtract(Vector3.one());

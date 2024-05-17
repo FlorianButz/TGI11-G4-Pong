@@ -1,14 +1,19 @@
-package de.demoncore.gui;
+package de.demoncore.rendering;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
+import de.demoncore.game.Particle;
+import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
 
@@ -49,8 +54,26 @@ public class Draw extends JPanel {
 		g.setColor(Color.WHITE);
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
-			Vector3 worldPos = GetWorldPoint(currentGameObj.position);
-			g.fillRect((int)worldPos.x, (int)worldPos.y, (int)currentGameObj.size.x, (int)currentGameObj.size.y);
+			
+			if(currentGameObj.renderSpecial == true) {
+				
+				if(currentGameObj instanceof ParticleSystem) {
+					ParticleSystem system = (ParticleSystem) currentGameObj;
+
+					List<Particle> ps = new ArrayList<Particle>(system.particles);
+					for (Particle p : ps){
+						if(p == null) continue;
+						
+						Vector3 worldPos = GetWorldPoint(p.position);
+						g.setColor(p.color);
+						g.fillRect((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
+					}
+				}
+				
+			}else {
+				Vector3 worldPos = GetWorldPoint(currentGameObj.position);
+				g.fillRect((int)worldPos.x, (int)worldPos.y, (int)currentGameObj.size.x, (int)currentGameObj.size.y);
+			}
 		}
 		
 		repaint();

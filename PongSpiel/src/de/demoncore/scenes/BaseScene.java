@@ -25,13 +25,20 @@ public class BaseScene {
 	}
 	
 	public void UpdateScene() {
-		for(GameObject gameObject : sceneObjects){
-			gameObject.Update();
+		try {
+			for(GameObject gameObject : sceneObjects){
+				gameObject.Update();
+			}			
+		}catch(Exception e) {
 		}
 	}
 	
 	public void AddObject(GameObject g) {
 		sceneObjects.add(g);
+	}
+	
+	public void DestroyObject(GameObject g) {
+		sceneObjects.remove(g);
 	}
 	
 	public ArrayList<GameObject> GetSceneObjects(){
@@ -44,8 +51,8 @@ public class BaseScene {
 			public void run() {
 				Random random = new Random();
 
-				float lastRandomX = 0;
-				float lastRandomY = 0;
+				float lastCamPosX = 0;
+				float lastCamPosY = 0;
 				
 				for(int i = 1; i < duration; i++) {
 					float fadeOut = GameMath.Lerp(1, 0, (float)i / (float)duration);
@@ -53,14 +60,14 @@ public class BaseScene {
 					float randomX = (float) (random.nextFloat() * magnitude);
 					float randomY = (float) (random.nextFloat() * magnitude);
 
-					float smoothX = GameMath.Lerp(lastRandomX, randomX, roughness / 1000);
-					float smoothY = GameMath.Lerp(lastRandomY, randomY, roughness / 1000);
+					float smoothX = GameMath.Lerp(lastCamPosX, randomX, roughness / 5);
+					float smoothY = GameMath.Lerp(lastCamPosY, randomY, roughness / 5);
 
 					localCameraPosition.x = (smoothX - smoothX * 2f) * fadeOut;
 					localCameraPosition.y = (smoothY - smoothY * 2f) * fadeOut;
 
-					lastRandomX = randomX;
-					lastRandomY = randomY;
+					lastCamPosX = localCameraPosition.x;
+					lastCamPosY = localCameraPosition.y;
 					
 					try {
 						Thread.sleep(10);

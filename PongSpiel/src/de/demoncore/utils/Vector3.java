@@ -25,19 +25,19 @@ public class Vector3 {
 	}
 	
 	public Vector3 multiply(float multiplier) {
-		return new Vector3((float)((float)(x) * multiplier), (float)((float)(x) * multiplier), (float)((float)(z) * multiplier));
+		return new Vector3(x * multiplier, y * multiplier, z * multiplier);
 	}
 	
 	public Vector3 add(Vector3 addition) {
-		return new Vector3((float)(x + addition.x), (float)(y + addition.y), (float)(z + addition.z));
+		return new Vector3(x + addition.x, y + addition.y, z + addition.z);
 	}
 	
 	public Vector3 subtract(Vector3 subtractor) {
-		return new Vector3((float)(x - subtractor.x), (float)(y - subtractor.y), (float)(z - subtractor.z));
+		return new Vector3(x - subtractor.x, y - subtractor.y, z - subtractor.z);
 	}
 	
 	public static Vector3 Lerp(Vector3 start, Vector3 end, float value) {
-		return new Vector3((float)(GameMath.Lerp(start.x, end.x, value)), (float)(GameMath.Lerp(start.x, end.x, value)), (float)(GameMath.Lerp(start.x, end.x, value)));
+		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.x, end.x, value));
 	}
 	
 	public String ToString() {

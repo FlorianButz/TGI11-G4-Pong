@@ -1,9 +1,7 @@
 package de.demoncore.scenes;
 
-import de.demoncore.game.GameLogic;
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PongPlayer;
-import de.demoncore.utils.Vector3;
 
 public class TwoPlayerPong extends BaseScene {
 
@@ -19,7 +17,6 @@ public class TwoPlayerPong extends BaseScene {
 		
 		player1 = new PongPlayer();
 		AddObject(player1);
-	
 	}
 	
 	@Override
@@ -28,6 +25,8 @@ public class TwoPlayerPong extends BaseScene {
 		
 		// Laufende Ausführungen im Spiel:
 		beispielObjekt1.automatischeKreisbewegung();
+		
+		
 	}
 	
 }

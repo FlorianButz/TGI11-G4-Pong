@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
+import de.demoncore.rendering.Draw;
 
 public class Gui {
 	
