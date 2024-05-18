@@ -123,7 +123,7 @@ public class Draw extends JPanel {
 		
 		// Mauszeiger
 		
-		g2d.setTransform(originalTransform);
+		//g2d.setTransform(originalTransform);
 		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
 		
