@@ -37,11 +37,14 @@ public class Vector3 {
 	}
 	
 	public static Vector3 Lerp(Vector3 start, Vector3 end, float value) {
-		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.x, end.x, value));
+		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.y, end.y, value), GameMath.Lerp(start.z, end.z, value));
 	}
 	
 	public String ToString() {
 		return "X: " + x + "; Y: " + y + " Z: " + z; 
 	}
 	
+	public float Magnitude() {
+		return (x + y + z) / 3;
+	}	
 }

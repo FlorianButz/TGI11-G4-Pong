@@ -9,10 +9,9 @@ import de.demoncore.game.SceneManager;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
-public class PongPlayer extends GameObject {
+public class PongPlayer extends RigidBody {
 
-	public int playerSpeed = 4; // Die Geschwindigkeit vom Spieler
-	public float playerVelocity; // Die jetzige Physikalische geschwindigkeit, die der Koerper Spieler hat
+	public float playerAcceleration = 2.75f; // Die Geschwindigkeitszunahme vom Spieler
 	
 	ParticleSystem trail;
 	
@@ -22,9 +21,8 @@ public class PongPlayer extends GameObject {
 	
 	@Override
 	public void Update() {
-		super.Update();
-	
-		// Partikel e fekt fuer den spieler
+		
+		// Partikel effekt fuer den spieler
 		if(trail == null) {
 			trail = new ParticleSystem((int)this.position.x, (int)this.position.y);
 			
@@ -49,14 +47,21 @@ public class PongPlayer extends GameObject {
 			SceneManager.GetActiveScene().AddObject(trail);
 		}
 		
-		if(Math.abs(playerVelocity) >= 0.1) trail.emitLoop = true;
+		if(Math.abs(velocity.Magnitude()) >= 0.1) trail.emitLoop = true;
 		else trail.emitLoop = false;
 		
-		playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
-		this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
+		//playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
+		//this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
+		
+		AddForce(KeyHandler.playerInput.multiply(playerAcceleration));
+
+		System.out.println(KeyHandler.playerInput.ToString());
+		System.out.println(velocity.ToString());
 		
 		trail.SetPosition(this.position);
+		this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(velocity.Magnitude()) / 10);
 		
-		this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(this.playerVelocity) / 10);
+		super.Update();
 	}
+	
 }

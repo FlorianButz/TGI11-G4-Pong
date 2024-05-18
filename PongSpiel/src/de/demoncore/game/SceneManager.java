@@ -27,7 +27,6 @@ public class SceneManager {
 	public static void UpdateScenes() {
 		CheckForInit();
 		activeScene.UpdateScene();
-		activeScene.UpdatePhysics();
 	}
 	
 	public static void LoadScene(BaseScene scene) {

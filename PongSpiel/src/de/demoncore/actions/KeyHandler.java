@@ -38,9 +38,15 @@ public class KeyHandler implements KeyListener, MouseListener {
 		pressedKeys.add(e.getKeyCode()); // Sperre
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput = playerInput.subtract(Vector3.one());
+			playerInput = playerInput.subtract(new Vector3(1, 0, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput = playerInput.add(Vector3.one());
+			playerInput = playerInput.add(new Vector3(1, 0, 0));
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			playerInput = playerInput.subtract(new Vector3(0, 1, 0));
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			playerInput = playerInput.add(new Vector3(0, 1, 0));
 		}
 	}
 
@@ -49,10 +55,16 @@ public class KeyHandler implements KeyListener, MouseListener {
 		if(pressedKeys.contains(e.getKeyCode())) { pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode())); } // Entfernt die Sperre
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput = playerInput.add(Vector3.one());
+			playerInput = playerInput.add(new Vector3(1, 0, 0));
 		
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput = playerInput.subtract(Vector3.one());
+			playerInput = playerInput.subtract(new Vector3(1, 0, 0));
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			playerInput = playerInput.add(new Vector3(0, 1, 0));
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			playerInput = playerInput.subtract(new Vector3(0, 1, 0));
 		}
 	}
 

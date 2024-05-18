@@ -31,25 +31,6 @@ public class BaseScene {
 		}
 	}
 	
-	public void UpdatePhysics() {
-		try {
-			for(GameObject base : sceneObjects){
-				for(GameObject colTest : sceneObjects){
-
-					if(!base.collisionEnabled || !colTest.collisionEnabled) continue;
-					if(base == colTest) continue;
-
-					Rectangle baseBounds = base.GetBoundingBox();
-					Rectangle colTestBounds = colTest.GetBoundingBox();
-					
-					if(baseBounds.intersects(colTestBounds))
-						System.out.println("Collision: " + base.getClass() + " " + colTest.getClass());
-				}
-			}
-		}catch(Exception e) {
-		}
-	}
-	
 	public void AddObject(GameObject g) {
 		sceneObjects.add(g);
 	}

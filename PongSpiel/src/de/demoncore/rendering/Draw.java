@@ -36,16 +36,30 @@ public class Draw extends JPanel {
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
 		
-		AffineTransform oldTransform = g2d.getTransform();
+		AffineTransform originalTransform = (AffineTransform) g2d.getTransform().clone();
+		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
-		
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
+
 		
+		// Groesse an das Fenster anpassen
+		AffineTransform scale = new AffineTransform();
+		scale.translate(screenwidth/2, screenheight/2);
+		
+		float scaleMain =  (( (float)screenwidth / 1920f + (float)screenheight / 1080f ) / 2f);
+		scale.scale(scaleMain, scaleMain);
+		scale.translate(-screenwidth/2, -screenheight/2);
+		
+		g2d.transform(scale);
+		
+		AffineTransform oldTransform = g2d.getTransform();
+		
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
 		AffineTransform transformation = new AffineTransform();
 		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
 				SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
@@ -108,6 +122,8 @@ public class Draw extends JPanel {
 		}
 		
 		// Mauszeiger
+		
+		g2d.setTransform(originalTransform);
 		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
 		

@@ -2,6 +2,8 @@ package de.demoncore.game;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.demoncore.utils.Vector3;
 
@@ -53,10 +55,6 @@ public class GameObject {
 		r.height = sizeY;
 		
 		return r;
-	}
-
-	public void OnCollisionEnter(GameObject other) {
-		
 	}
 	
 }
