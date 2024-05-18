@@ -43,14 +43,15 @@ public class Gui {
 		
 		frame.requestFocus();
 		
+		// Kein Maus Cursor
 		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 		    cursorImg, new Point(0, 0), "blank cursor");
 		frame.getContentPane().setCursor(blankCursor);
 		
 		// FULLSCREEN
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(true);
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//frame.setUndecorated(true);
 		
 		draw = new Draw();
 		

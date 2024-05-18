@@ -63,8 +63,8 @@ public class TwoPlayerPong extends BaseScene {
 		t.SetText("2dq2");
 		AddObject(t);
 		
-		GUIButton a = new GUIButton(0, 50, 200, 75, "Test", Main.uiFont.deriveFont(35F), Color.white);
-		AddObject(a);
+		//GUIButton a = new GUIButton(0, 50, 200, 75, "Test", Main.uiFont.deriveFont(35F), Color.white);
+		//AddObject(a);
 	}
 	
 	GUIText t;

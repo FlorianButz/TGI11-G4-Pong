@@ -25,6 +25,9 @@ public class GUIButton extends GUIObject {
 	public float colorTransitionSmoothing = 0.055f;
 	public float sizeTransitionSmoothing = 0.075f;
 
+	public float normalButtonWidth;
+	public float hoverButtonWidth = 25;
+	public float currentButtonWidth;
 	
 	public float textNormalSize;
 	public float textHoverSize = 5F;
@@ -33,15 +36,21 @@ public class GUIButton extends GUIObject {
 	String text = "";
 	Font font;
 	
-	public GUIButton(int posX, int posY, int width, int height, String text, Font font, Color fontColor) {
+	GUIButtonClickEvent event;
+	
+	public GUIButton(int posX, int posY, int width, int height, String text, Font font, GUIButtonClickEvent e) {
 		super(posX, posY, width, height);
 		
 		this.text = text;
-		this.color = fontColor;
 		this.font = font;
 		
 		textNormalSize = font.getSize();
 		textCurrentSize = textNormalSize;
+		
+		normalButtonWidth = width;
+		currentButtonWidth = normalButtonWidth;
+		
+		event = e;
 	}
 	
 	@Override
@@ -58,6 +67,8 @@ public class GUIButton extends GUIObject {
 		g2d.setFont(font.deriveFont(textCurrentSize));
 		g2d.setColor(currentTextColor);
 		
+		this.size.x = currentButtonWidth;
+		
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
 		g2d.drawString(text, (int)(GetUIPosition(screenWidth, screenHeight).x + this.size.x / 2 - bounds.getWidth() / 2),
 				(int)(GetUIPosition(screenWidth, screenHeight).y + this.size.y / 2 +  textCurrentSize / 3)
@@ -71,7 +82,8 @@ public class GUIButton extends GUIObject {
 		currentColor = normalColor;
 		currentTextColor = normalTextColor;
 		
-		SceneManager.GetActiveScene().ShakeCamera(50, 1, 25);
+		SceneManager.GetActiveScene().ShakeCamera(60, 2, 45);
+		event.ButtonClick();
 	}
 	
 	@Override
@@ -83,6 +95,8 @@ public class GUIButton extends GUIObject {
 			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing);
 		
 			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize + textHoverSize, sizeTransitionSmoothing);
+
+			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing);
 		}
 		else {
 			
@@ -90,6 +104,8 @@ public class GUIButton extends GUIObject {
 			currentTextColor = GameMath.LerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing);
 	
 			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing);
+
+			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing);
 		}
 	
 	}
