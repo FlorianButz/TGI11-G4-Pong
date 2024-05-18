@@ -12,7 +12,7 @@ public class GUIText extends GUIObject {
 	Font font;
 	
 	public GUIText(int posX, int posY, String text, Font font, Color fontColor) {
-		super(posX, posY, 250, 10);
+		super(posX, posY, 250, 250);
 
 		this.text = text;
 		this.color = fontColor;
@@ -25,13 +25,16 @@ public class GUIText extends GUIObject {
 		g2d.setFont(font);
 		
 		size.x = g2d.getFontMetrics().stringWidth(text);
-		size.y = 100;
+		size.y = g2d.getFontMetrics().getMaxAscent() +
+				g2d.getFontMetrics().getMaxDescent() +
+				g2d.getFontMetrics().getMaxAdvance() / 2;
 		
 		super.Draw(g2d, screenWidth, screenHeight);
 	
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
 		g2d.drawString(text, GetUIPosition(screenWidth, screenHeight).x, (float) (GetUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));
 	}
+	
 	
 	public void SetText(String text) {
 		this.text = text;

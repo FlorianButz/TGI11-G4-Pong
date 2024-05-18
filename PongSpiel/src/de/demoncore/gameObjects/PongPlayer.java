@@ -3,8 +3,8 @@ package de.demoncore.gameObjects;
 import java.awt.Color;
 
 import de.demoncore.actions.KeyHandler;
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
-import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
@@ -55,6 +55,8 @@ public class PongPlayer extends GameObject {
 		playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
 		this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
 		
-		trail.SetPosition(this.position.add(trail.size.multiply(0.25f)));
+		trail.SetPosition(this.position);
+		
+		this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(this.playerVelocity) / 10);
 	}
 }

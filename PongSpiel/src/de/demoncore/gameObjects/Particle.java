@@ -1,4 +1,4 @@
-package de.demoncore.game;
+package de.demoncore.gameObjects;
 
 import java.awt.Color;
 
@@ -14,4 +14,6 @@ public class Particle {
 	
 	public int currentLifetime = 0;
 	public int maxLifetime = 0;
+	
+	public int rotation = 0;
 }

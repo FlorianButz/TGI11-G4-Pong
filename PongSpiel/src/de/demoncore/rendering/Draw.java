@@ -1,9 +1,11 @@
 package de.demoncore.rendering;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -11,13 +13,13 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
-import de.demoncore.game.Particle;
-import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
+import de.demoncore.gameObjects.Particle;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.Gui;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
 @SuppressWarnings("serial")
@@ -25,12 +27,15 @@ public class Draw extends JPanel {
 	
 	ArrayList<GameObject> gameObjectsInScene; // Alle Objekte, die sich in dem Level befinden
 
+	public float mouseAlpha;
+	public Vector3 mouseLastPosition = Vector3.one();
+	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
-		gameObjectsInScene = SceneManager.GetActiveScene().GetSceneObjects();
+		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
-
+		
 		AffineTransform oldTransform = g2d.getTransform();
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
@@ -56,6 +61,17 @@ public class Draw extends JPanel {
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
+			if(!(currentGameObj instanceof GUIObject)){				
+				Rectangle r = currentGameObj.GetBoundingBox();
+				if(currentGameObj.collisionEnabled)
+					g2d.setColor(Color.green);
+				else
+					g2d.setColor(new Color(1, 0, 0, 0.25f));
+				
+				g2d.setStroke(new BasicStroke(2));
+				g2d.draw(r);
+			}
+			
 			if(currentGameObj.renderSpecial == true) {
 				
 				if(currentGameObj instanceof ParticleSystem) {
@@ -67,7 +83,10 @@ public class Draw extends JPanel {
 						
 						Vector3 worldPos = GetWorldPoint(p.position);
 						g.setColor(p.color);
+
+					    g2d.rotate(Math.toRadians(p.rotation), p.position.x, p.position.y);
 						g.fillRect((int)worldPos.x + (int)(p.size.x / 4), (int)worldPos.y + (int)(p.size.y / 4), (int)p.size.x, (int)p.size.y);
+						g2d.rotate(Math.toRadians(-p.rotation), p.position.x, p.position.y);
 					}
 				}
 				
@@ -88,16 +107,32 @@ public class Draw extends JPanel {
 			}
 		}
 		
-		// Mouse
+		// Mauszeiger
 		
-		g2d.setColor(new Color(1, 1, 1, 1f));
+		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
+		
+		if(MouseInfo.getPointerInfo().getLocation().getX() != mouseLastPosition.x ||
+				MouseInfo.getPointerInfo().getLocation().getY() != mouseLastPosition.y)
+		{
+			mouseAlpha = 15f;
+		}else
+		{
+			mouseAlpha = GameMath.Lerp(mouseAlpha, 0f, 0.0015f);
+		}
+	
+		// Mauszeiger anzeigen
+		
+		g2d.setColor(new Color(1, 1, 1, GameMath.Clamp(mouseAlpha, 0, 1)));
 		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x),
-						(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y),
+						(int)(MouseInfo.getPointerInfo().getLocation().getY() - Gui.GetScreenLocation().y),
 						11, 11);
-		g2d.setColor(new Color(0, 0, 0, 1f));
+		g2d.setColor(new Color(0, 0, 0, GameMath.Clamp(mouseAlpha, 0, 1)));
 		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x + 3),
 						(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y + 3),
 						5, 5);
+
+		mouseLastPosition.x = (float) MouseInfo.getPointerInfo().getLocation().getX();
+		mouseLastPosition.y = (float) MouseInfo.getPointerInfo().getLocation().getY();
 		
 		repaint();
 	}

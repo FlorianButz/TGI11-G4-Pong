@@ -3,13 +3,14 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
-import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIText;
 import de.demoncore.main.Main;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class MainMenu extends BaseScene {
@@ -31,7 +32,7 @@ public class MainMenu extends BaseScene {
 		bgSys.Init();
 		AddObject(bgSys);
 		
-		GUIText title = new GUIText(0, 125, "Pong auf Crack", Main.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
+		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		AddObject(title);
 		
 		GUIButtonClickEvent localMultiplayerEvent = new GUIButtonClickEvent() {
@@ -51,15 +52,15 @@ public class MainMenu extends BaseScene {
 			}
 		};
 		
-		GUIButton singleplayer = new GUIButton(0, 0, 800, 75, "Singleplayer", Main.uiFont.deriveFont(35F), localMultiplayerEvent);
-		singleplayer.alignment = GUIAlignment.Center;
+		//GUIButton singleplayer = new GUIButton(0, 0, 800, 75, "Singleplayer", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
+		//singleplayer.alignment = GUIAlignment.Center;
 		//AddObject(singleplayer);
 		
-		GUIButton localMultiplayer = new GUIButton(0, 100, 800, 75, "Local Multiplayer", Main.uiFont.deriveFont(35F), localMultiplayerEvent);
+		GUIButton localMultiplayer = new GUIButton(0, 100, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
 		localMultiplayer.alignment = GUIAlignment.Center;
 		AddObject(localMultiplayer);
 		
-		GUIButton quit = new GUIButton(0, 200, 800, 75, "Quit", Main.uiFont.deriveFont(35F), quitEvent);
+		GUIButton quit = new GUIButton(0, 200, 800, 75, "Verlassen", Resources.uiFont.deriveFont(35F), quitEvent);
 		quit.alignment = GUIAlignment.Center;
 		AddObject(quit);
 	}

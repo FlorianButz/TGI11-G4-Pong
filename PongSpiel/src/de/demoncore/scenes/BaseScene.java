@@ -1,13 +1,11 @@
 package de.demoncore.scenes;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
-import de.demoncore.game.SceneManager;
+import de.demoncore.gui.GUIObject;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
@@ -28,7 +26,26 @@ public class BaseScene {
 		try {
 			for(GameObject gameObject : sceneObjects){
 				gameObject.Update();
-			}			
+			}
+		}catch(Exception e) {
+		}
+	}
+	
+	public void UpdatePhysics() {
+		try {
+			for(GameObject base : sceneObjects){
+				for(GameObject colTest : sceneObjects){
+
+					if(!base.collisionEnabled || !colTest.collisionEnabled) continue;
+					if(base == colTest) continue;
+
+					Rectangle baseBounds = base.GetBoundingBox();
+					Rectangle colTestBounds = colTest.GetBoundingBox();
+					
+					if(baseBounds.intersects(colTestBounds))
+						System.out.println("Collision: " + base.getClass() + " " + colTest.getClass());
+				}
+			}
 		}catch(Exception e) {
 		}
 	}
@@ -43,7 +60,8 @@ public class BaseScene {
 	}
 	
 	public ArrayList<GameObject> GetSceneObjects(){
-		return sceneObjects;
+		ArrayList<GameObject> objectsCopy = new ArrayList<GameObject>(sceneObjects);
+		return objectsCopy;
 	}
 	
 	public void ShakeCamera(float magnitude, float roughness, int duration) {

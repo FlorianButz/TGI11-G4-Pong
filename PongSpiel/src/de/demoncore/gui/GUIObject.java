@@ -1,5 +1,6 @@
 package de.demoncore.gui;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
@@ -20,6 +21,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 		this.renderSpecial = true;
 
 		KeyHandler.listeners.add(this);
+		collisionEnabled = false;
 	}
 	
 	@Override
@@ -62,7 +64,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 	
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);
-		//g2d.fillRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
+		//g2d.drawRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 	}
 
 	protected boolean isHovering = false;
@@ -75,15 +77,17 @@ public class GUIObject extends GameObject implements GameActionListener {
 	}
 	
 	public void OnMouseClickUIObject(MouseEvent e) {
-		
+		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
 	}
 	
 	public void OnMouseHoverOverUIObject() {
 		isHovering = true;
+		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
 	}
 	
 	public void OnMouseStopHoverOverUIObject() {
 		isHovering = false;
+		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
 	}
 	
 	public boolean CheckIntersection(int x, int y) {

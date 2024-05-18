@@ -5,12 +5,13 @@ import java.awt.Font;
 
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
-import de.demoncore.game.ParticleSystem;
 import de.demoncore.gameObjects.BeweglichesRechteck;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIText;
 import de.demoncore.main.Main;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class TwoPlayerPong extends BaseScene {
@@ -26,7 +27,7 @@ public class TwoPlayerPong extends BaseScene {
 		AddObject(beispielObjekt1);
 		beispielObjekt1.richtung = 0; // Startrichtung
 		
-		AddObject(new GameObject(0, 0, 100, 100));
+		AddObject(new GameObject(-200, 0, 25, 500));
 		
 		player1 = new PongPlayer(0, 0);
 		AddObject(player1);
@@ -59,12 +60,9 @@ public class TwoPlayerPong extends BaseScene {
 		p.Init();
 		AddObject(p);
 		
-		t = new GUIText(0, 150, "Hello, World!", Main.dialogFont.deriveFont(Font.PLAIN, 65F), Color.WHITE);
+		t = new GUIText(0, 150, "Hello, World!", Resources.dialogFont.deriveFont(Font.PLAIN, 65F), Color.WHITE);
 		t.SetText("2dq2");
 		AddObject(t);
-		
-		//GUIButton a = new GUIButton(0, 50, 200, 75, "Test", Main.uiFont.deriveFont(35F), Color.white);
-		//AddObject(a);
 	}
 	
 	GUIText t;
@@ -77,9 +75,6 @@ public class TwoPlayerPong extends BaseScene {
 		beispielObjekt1.automatischeKreisbewegung();
 		
 		t.SetText((int)GameLogic.GetInstance().GetGameTime() + "");
-		
-		//this.cameraZRotation = (float) (Math.sin(GameLogic.GetInstance().GetGameTime() * 0.5f) * 15);
-		//this.cameraPosition = Vector3.one().multiply((float)Math.sin(GameLogic.GetInstance().GetGameTime() * 0.1f) * 25f);
 	}
 
 }

@@ -1,6 +1,9 @@
 package de.demoncore.game;
 
-import de.demoncore.scenes.*;
+import java.util.ArrayList;
+
+import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.MainMenu;
 
 public class SceneManager {
 
@@ -24,9 +27,16 @@ public class SceneManager {
 	public static void UpdateScenes() {
 		CheckForInit();
 		activeScene.UpdateScene();
+		activeScene.UpdatePhysics();
 	}
 	
 	public static void LoadScene(BaseScene scene) {
+		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(GetActiveScene().GetSceneObjects());
+		
+		for(GameObject o : objectsInCurrentScene) {
+			GetActiveScene().DestroyObject(o);
+		}
+		
 		activeScene = scene;
 	}
 }

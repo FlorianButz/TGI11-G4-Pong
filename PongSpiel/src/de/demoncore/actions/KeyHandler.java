@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.ParticleSystem;
 import de.demoncore.game.SceneManager;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.utils.Vector3;
 
 public class KeyHandler implements KeyListener, MouseListener {
@@ -62,7 +62,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for(GameActionListener g : listeners) {
+		ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
+		for(GameActionListener g : l) {
 			g.OnMouseDown(e);
 		}
 	}
