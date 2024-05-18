@@ -72,12 +72,23 @@ public class GUIObject extends GameObject implements GameActionListener {
 	@Override
 	public void OnMouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
-			OnMouseClickUIObject(e);
+			OnMouseDownUIObject(e);
 		}
 	}
 	
-	public void OnMouseClickUIObject(MouseEvent e) {
-		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
+	@Override
+	public void OnMouseUp(MouseEvent e) {
+		if(CheckIntersection(e.getX(), e.getY())) {
+			OnMouseUpUIObject(e);
+		}
+	}
+	
+	public void OnMouseDownUIObject(MouseEvent e) {
+		
+	}
+	
+	public void OnMouseUpUIObject(MouseEvent e) {
+		
 	}
 	
 	public void OnMouseHoverOverUIObject() {

@@ -13,7 +13,7 @@ public class RigidBody extends GameObject {
 	public Vector3 velocity = Vector3.zero();
 	Vector3 lastPosition;
 	
-	public float friction = 0.92f;
+	public float friction = 0.92f; // Wie viel geschwindigkeit jede iteration entnommen wird
 	
 	public RigidBody(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
@@ -46,6 +46,24 @@ public class RigidBody extends GameObject {
 		}
 	}
 	
+	boolean CheckIntersect() {
+		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
+		
+		for(GameObject g : objs) {
+			if(g.collisionEnabled && g != this) {
+
+				Rectangle thisObj = GetBoundingBox();
+				Rectangle otherObj = g.GetBoundingBox();
+				
+				if(thisObj.intersects(otherObj)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public void Update() {
 		super.Update();
@@ -59,6 +77,10 @@ public class RigidBody extends GameObject {
 	}
 	
 	public void AddForce(Vector3 force) {
-		velocity = velocity.add(force);
+		position = position.add(velocity);
+		if(!CheckIntersect())
+			velocity = velocity.add(force);		
+
+		position = position.subtract(velocity);
 	}
 }

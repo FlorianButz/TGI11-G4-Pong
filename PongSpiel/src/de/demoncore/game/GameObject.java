@@ -41,7 +41,7 @@ public class GameObject {
 	}
 	
 	public boolean collisionEnabled = true; // Ob das Objekt Kollisionen hat
-	public float boundingMargin = 5f;
+	public float boundingMargin = 0f;
 	
 	public Rectangle GetBoundingBox() {
 		Rectangle r = new Rectangle();

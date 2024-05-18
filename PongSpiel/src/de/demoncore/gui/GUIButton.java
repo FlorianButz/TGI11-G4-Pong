@@ -76,20 +76,33 @@ public class GUIButton extends GUIObject {
 	}
 	
 	@Override
-	public void OnMouseClickUIObject(MouseEvent e) {
-		super.OnMouseClickUIObject(e);
+	public void OnMouseUpUIObject(MouseEvent e) {
+		super.OnMouseDownUIObject(e);
+
+		event.isMouseDown = false;
+		event.ButtonUp();
+	}
+
+	@Override
+	public void OnMouseDownUIObject(MouseEvent e) {
+		super.OnMouseDownUIObject(e);
 
 		currentColor = normalColor;
 		currentTextColor = normalTextColor;
 		
 		SceneManager.GetActiveScene().ShakeCamera(60, 2, 45);
 		event.ButtonClick();
+		
+		event.isMouseDown = true;
+		event.ButtonDown();
 	}
 	
 	@Override
 	public void Update() {
 		super.Update();
 
+		event.UpdateEvent();
+		
 		if(this.isHovering) {
 			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing);
 			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing);

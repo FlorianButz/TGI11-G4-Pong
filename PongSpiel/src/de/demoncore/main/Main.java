@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.Resources;
 
@@ -17,6 +18,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Resources.LoadResources();
+		Settings.LoadAllSettings();
 		
 		GameLogic gl = new GameLogic();
 		new Gui(gl);	

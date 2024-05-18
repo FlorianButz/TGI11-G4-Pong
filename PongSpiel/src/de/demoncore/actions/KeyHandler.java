@@ -74,6 +74,10 @@ public class KeyHandler implements KeyListener, MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
 		ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
 		for(GameActionListener g : l) {
 			g.OnMouseDown(e);
@@ -81,15 +85,11 @@ public class KeyHandler implements KeyListener, MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
+		for(GameActionListener g : l) {
+			g.OnMouseUp(e);
+		}
 	}
 
 	@Override

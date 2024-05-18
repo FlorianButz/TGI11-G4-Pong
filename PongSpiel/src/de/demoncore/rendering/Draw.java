@@ -1,11 +1,9 @@
 package de.demoncore.rendering;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -19,7 +17,9 @@ import de.demoncore.gameObjects.Particle;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.Gui;
+import de.demoncore.main.Main;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 @SuppressWarnings("serial")
@@ -29,14 +29,18 @@ public class Draw extends JPanel {
 
 	public float mouseAlpha;
 	public Vector3 mouseLastPosition = Vector3.one();
+
+	double lastTime;
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+	
+		double fps = 1000000000.0 / (System.nanoTime() - lastTime);
+		
+		lastTime = System.nanoTime();
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
-		
-		AffineTransform originalTransform = (AffineTransform) g2d.getTransform().clone();
 		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
@@ -44,17 +48,6 @@ public class Draw extends JPanel {
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
-
-		
-		// Groesse an das Fenster anpassen
-		AffineTransform scale = new AffineTransform();
-		scale.translate(screenwidth/2, screenheight/2);
-		
-		float scaleMain =  (( (float)screenwidth / 1920f + (float)screenheight / 1080f ) / 2f);
-		scale.scale(scaleMain, scaleMain);
-		scale.translate(-screenwidth/2, -screenheight/2);
-		
-		g2d.transform(scale);
 		
 		AffineTransform oldTransform = g2d.getTransform();
 		
@@ -75,6 +68,7 @@ public class Draw extends JPanel {
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
+			/*
 			if(!(currentGameObj instanceof GUIObject)){				
 				Rectangle r = currentGameObj.GetBoundingBox();
 				if(currentGameObj.collisionEnabled)
@@ -85,6 +79,7 @@ public class Draw extends JPanel {
 				g2d.setStroke(new BasicStroke(2));
 				g2d.draw(r);
 			}
+			*/ //Debug, Nicht Entfernen oder Unkommentieren
 			
 			if(currentGameObj.renderSpecial == true) {
 				
@@ -123,8 +118,6 @@ public class Draw extends JPanel {
 		
 		// Mauszeiger
 		
-		//g2d.setTransform(originalTransform);
-		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
 		
 		if(MouseInfo.getPointerInfo().getLocation().getX() != mouseLastPosition.x ||
@@ -149,6 +142,11 @@ public class Draw extends JPanel {
 
 		mouseLastPosition.x = (float) MouseInfo.getPointerInfo().getLocation().getX();
 		mouseLastPosition.y = (float) MouseInfo.getPointerInfo().getLocation().getY();
+		
+		g2d.setFont(Resources.uiFont.deriveFont(15F));
+		g2d.setColor(new Color(1, 1, 1, 0.25f));
+		g2d.drawString("Version -> " + Main.version, 15, 25);
+		g2d.drawString("FPS -> " + (int)fps, 15, 45);
 		
 		repaint();
 	}

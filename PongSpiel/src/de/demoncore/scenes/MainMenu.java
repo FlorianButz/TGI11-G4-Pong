@@ -20,8 +20,8 @@ public class MainMenu extends BaseScene {
 		ParticleSystem bgSys = new ParticleSystem(0, 0);
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
 		bgSys.emitLoop = true;
-		bgSys.particleColorFirst = new Color(1, 1, 1, 0.1f);
-		bgSys.particleColorSecond = new Color(1, 1, 1, 0.06f);
+		bgSys.particleColorFirst = new Color(1, 1, 1, 0.085f);
+		bgSys.particleColorSecond = new Color(1, 1, 1, 0.04f);
 		bgSys.emitPause = 10;
 		bgSys.initialParticleSize = 15;
 		bgSys.particleLifetime += 2500;
@@ -43,6 +43,13 @@ public class MainMenu extends BaseScene {
 			}
 		};
 		
+		GUIButtonClickEvent settingsEvent = new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new SettingsMenu());
+			}
+		};		
 		
 		GUIButtonClickEvent quitEvent = new GUIButtonClickEvent() {
 			@Override
@@ -56,9 +63,13 @@ public class MainMenu extends BaseScene {
 		//singleplayer.alignment = GUIAlignment.Center;
 		//AddObject(singleplayer);
 		
-		GUIButton localMultiplayer = new GUIButton(0, 100, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
+		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
 		localMultiplayer.alignment = GUIAlignment.Center;
 		AddObject(localMultiplayer);
+		
+		GUIButton settings = new GUIButton(0, 100, 800, 75, "Einstellungen", Resources.uiFont.deriveFont(35F), settingsEvent);
+		settings.alignment = GUIAlignment.Center;
+		AddObject(settings);
 		
 		GUIButton quit = new GUIButton(0, 200, 800, 75, "Verlassen", Resources.uiFont.deriveFont(35F), quitEvent);
 		quit.alignment = GUIAlignment.Center;
