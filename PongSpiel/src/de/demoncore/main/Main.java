@@ -14,7 +14,7 @@ public class Main {
 		Resources.LoadResources();
 		Settings.LoadAllSettings();
 		
-		//AudioManager.PlaySound("fuchs", true);
+		//AudioManager.PlaySound("/music/G4Pong_DarkSong1", true);
 		
 		GameLogic gl = new GameLogic();
 		new Gui(gl);	
