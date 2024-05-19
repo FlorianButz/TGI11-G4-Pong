@@ -2,6 +2,8 @@ package de.demoncore.gui;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.Settings;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.Vector3;
 
@@ -45,15 +48,14 @@ public class Gui {
 		
 		frame.setExtendedState(frame.MAXIMIZED_BOTH);
 		
+		// Aktiviere fullscreen nach einstellung
+		Gui.Fullscreen(Settings.GetFullscreen());
+		
 		// Kein Maus Cursor
 		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 		    cursorImg, new Point(0, 0), "blank cursor");
 		frame.getContentPane().setCursor(blankCursor);
-		
-		// FULLSCREEN
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.setUndecorated(true);
 		
 		draw = new Draw();
 		
@@ -78,5 +80,19 @@ public class Gui {
 	
 	public static Vector3 GetScreenLocation() {
 		return new Vector3(frame.getLocationOnScreen().x, frame.getLocationOnScreen().y);
+	}
+	
+	public static void Fullscreen(boolean isEnabled) {
+		if(isEnabled) {
+
+			frame.setExtendedState(frame.MAXIMIZED_BOTH);
+			frame.setUndecorated(true);
+			
+		}else {
+			
+			frame.setExtendedState(frame.MAXIMIZED_BOTH);
+			frame.setUndecorated(false);
+			
+		}
 	}
 }

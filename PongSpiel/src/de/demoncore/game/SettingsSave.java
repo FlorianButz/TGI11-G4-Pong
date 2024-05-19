@@ -6,5 +6,6 @@ public class SettingsSave implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public int masterVolume = 100;
+	public boolean fullscreen = false;
 	
 }

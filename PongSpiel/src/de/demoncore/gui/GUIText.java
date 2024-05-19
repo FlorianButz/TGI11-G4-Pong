@@ -5,11 +5,15 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
+import de.demoncore.utils.Vector3;
+
 
 public class GUIText extends GUIObject {
 	
 	String text = "";
 	Font font;
+	
+	public boolean centerText = true;
 	
 	public GUIText(int posX, int posY, String text, Font font, Color fontColor) {
 		super(posX, posY, 250, 250);
@@ -38,5 +42,20 @@ public class GUIText extends GUIObject {
 	
 	public void SetText(String text) {
 		this.text = text;
+	}
+	
+	@Override
+	public Vector3 GetPosition() {
+		if(centerText) {
+			return position.subtract(new Vector3(
+					size.x * anchorPoint.x,
+					size.y * anchorPoint.y
+					));
+		}
+		
+		return position.subtract(new Vector3(
+				0,
+				size.y * anchorPoint.y
+				));
 	}
 }

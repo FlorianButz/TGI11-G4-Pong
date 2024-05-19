@@ -53,6 +53,10 @@ public class GUIButton extends GUIObject {
 		event = e;
 	}
 	
+	public void SetText(String text) {
+		this.text = text;
+	}
+	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.Draw(g2d, screenWidth, screenHeight);

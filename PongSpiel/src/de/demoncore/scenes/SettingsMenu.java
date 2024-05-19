@@ -10,6 +10,7 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIText;
+import de.demoncore.gui.Gui;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -36,8 +37,9 @@ public class SettingsMenu extends BaseScene {
 		AddObject(title);
 		
 		
-		GUIText volumeText = new GUIText(-250, -100, "Lautstaerke: ", Resources.uiFont.deriveFont(50F), Color.white);
+		GUIText volumeText = new GUIText(-450, -100, "Lautstaerke: ", Resources.uiFont.deriveFont(50F), Color.white);
 		volumeText.alignment = GUIAlignment.Center;
+		volumeText.centerText = false;
 		AddObject(volumeText);
 
 		GUIText volumeDisplay = new GUIText(40, -100, ""+(int)Settings.GetVolume() + "%", Resources.uiFont.deriveFont(65F), Color.white);
@@ -104,6 +106,24 @@ public class SettingsMenu extends BaseScene {
 		volumeUp.alignment = GUIAlignment.Center;
 		AddObject(volumeUp);
 		
+		GUIText fullscreenText = new GUIText(-450, 0, "Vollbild (Neustart): ", Resources.uiFont.deriveFont(50F), Color.white);
+		fullscreenText.alignment = GUIAlignment.Center;
+		fullscreenText.centerText = false;
+		AddObject(fullscreenText);
+		
+		String toggleFullscreenText = "Aus";
+		if(Settings.GetFullscreen())
+			toggleFullscreenText = "An";
+		toggleFullscreen = new GUIButton(325, 0, 275, 75, toggleFullscreenText, Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				ToggleFullscreen();
+			}
+		});
+		toggleFullscreen.alignment = GUIAlignment.Center;
+		AddObject(toggleFullscreen);
+		
 		GUIButton back = new GUIButton(0, -125, 800, 75, "Save & Back", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -114,6 +134,18 @@ public class SettingsMenu extends BaseScene {
 		});
 		back.alignment = GUIAlignment.DownMiddle;
 		AddObject(back);
+	}
+	
+	GUIButton toggleFullscreen;
+	
+	void ToggleFullscreen() {
+		Settings.SetFullscreen(!Settings.GetFullscreen());
+		String toggleFullscreenTextNew = "Aus";
+		
+		if(Settings.GetFullscreen()) 
+			toggleFullscreenTextNew = "An";
+		
+		toggleFullscreen.SetText(toggleFullscreenTextNew);
 	}
 	
 }
