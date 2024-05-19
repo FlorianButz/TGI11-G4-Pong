@@ -3,8 +3,10 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
-import de.demoncore.game.Animator;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.animator.Vector3Animator;
+import de.demoncore.game.animator.AnimatorOnCompleteEvent;
+import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -16,8 +18,6 @@ import de.demoncore.utils.Vector3;
 public class MainMenu extends BaseScene {
 	
 	public MainMenu() {
-		
-		Animator anim = new Animator(1, 1, 1, 5, false);
 		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
@@ -37,6 +37,21 @@ public class MainMenu extends BaseScene {
 		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		AddObject(title);
 		
+		/*
+		Vector3Animator anim = new Vector3Animator(Vector3.zero(), Vector3.one().multiply(100), 5, true,
+				new AnimatorUpdateEvent() {
+			@Override
+			public void OnUpdate(Vector3 value) {
+				super.OnUpdate(value);
+				title.SetPosition(title.GetPosition());
+				System.out.println("Test");
+			}
+		},
+				new AnimatorOnCompleteEvent() {
+		
+		});
+		*/
+
 		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
