@@ -3,19 +3,21 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
+import de.demoncore.game.Animator;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIText;
-import de.demoncore.main.Main;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class MainMenu extends BaseScene {
 	
 	public MainMenu() {
+		
+		Animator anim = new Animator(1, 1, 1, 5, false);
 		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
