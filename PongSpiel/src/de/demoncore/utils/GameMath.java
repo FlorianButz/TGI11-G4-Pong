@@ -56,4 +56,8 @@ public class GameMath {
 		float randomNumber = random.nextFloat(max - min) + min;
 		return randomNumber;
 	}
+	
+	public static float RemapValue(float value, float oldLow, float oldHigh, float newLow, float newHigh) {
+	    return newLow + (newHigh - newLow) * (value - oldLow) / (oldHigh - oldLow);
+	}
 }

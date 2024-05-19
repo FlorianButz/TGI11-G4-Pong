@@ -10,6 +10,8 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIText;
+import de.demoncore.gui.GUITheme;
+import de.demoncore.gui.GUITheme.Theme;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -33,7 +35,7 @@ public class SettingsMenu extends BaseScene {
 		bgSys.Init();
 		AddObject(bgSys);
 
-		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
+		GUIText title = new GUIText(0, 175, "Einstellungen", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		AddObject(title);
 		
 		
@@ -124,6 +126,24 @@ public class SettingsMenu extends BaseScene {
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		AddObject(toggleFullscreen);
 		
+		GUIText debugModeText = new GUIText(-450, 100, "Debug Modus: ", Resources.uiFont.deriveFont(50F), Color.white);
+		debugModeText.alignment = GUIAlignment.Center;
+		debugModeText.centerText = false;
+		AddObject(debugModeText);
+		
+		String toggleDebugModeText = "Aus";
+		if(Settings.GetDebugMode())
+			toggleDebugModeText = "An";
+		toggleDebugMode = new GUIButton(325, 100, 275, 75, toggleDebugModeText, Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				ToggleDebug();
+			}
+		});
+		toggleDebugMode.alignment = GUIAlignment.Center;
+		AddObject(toggleDebugMode);
+		
 		GUIButton back = new GUIButton(0, -125, 800, 75, "Save & Back", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -134,9 +154,20 @@ public class SettingsMenu extends BaseScene {
 		});
 		back.alignment = GUIAlignment.DownMiddle;
 		AddObject(back);
+
+		GUITheme.LoadTextTheme(debugModeText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(volumeDisplay, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(volumeText, Theme.TextSecondary);
+
+		GUITheme.LoadButtonTheme(volumeDown, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(volumeUp, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleDebugMode, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleFullscreen, Theme.ButtonSecondary);
 	}
 	
 	GUIButton toggleFullscreen;
+	GUIButton toggleDebugMode;
 	
 	void ToggleFullscreen() {
 		Settings.SetFullscreen(!Settings.GetFullscreen());
@@ -146,6 +177,16 @@ public class SettingsMenu extends BaseScene {
 			toggleFullscreenTextNew = "An";
 		
 		toggleFullscreen.SetText(toggleFullscreenTextNew);
+	}
+	
+	void ToggleDebug() {
+		Settings.SetDebugMode(!Settings.GetDebugMode());
+		String toggleDebugModeTextNew = "Aus";
+		
+		if(Settings.GetDebugMode()) 
+			toggleDebugModeTextNew  = "An";
+		
+		toggleDebugMode.SetText(toggleDebugModeTextNew );
 	}
 	
 }

@@ -35,43 +35,43 @@ public class MainMenu extends BaseScene {
 		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		AddObject(title);
 		
-		GUIButtonClickEvent localMultiplayerEvent = new GUIButtonClickEvent() {
+		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
 				SceneManager.LoadScene(new TwoPlayerPong());
 			}
-		};
+		});
+		localMultiplayer.alignment = GUIAlignment.Center;
+		AddObject(localMultiplayer);
 		
-		GUIButtonClickEvent settingsEvent = new GUIButtonClickEvent() {
+		GUIButton storymode = new GUIButton(0, 100, 800, 75, "Storymode", Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(null);
+			}
+		});
+		storymode.alignment = GUIAlignment.Center;
+		AddObject(storymode);
+		
+		GUIButton settings = new GUIButton(0, 200, 800, 75, "Einstellungen", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
 				SceneManager.LoadScene(new SettingsMenu());
 			}
-		};		
+		});
+		settings.alignment = GUIAlignment.Center;
+		AddObject(settings);
 		
-		GUIButtonClickEvent quitEvent = new GUIButtonClickEvent() {
+		GUIButton quit = new GUIButton(0, 300, 800, 75, "Verlassen", Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
 				System.exit(0);
 			}
-		};
-		
-		//GUIButton singleplayer = new GUIButton(0, 0, 800, 75, "Singleplayer", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
-		//singleplayer.alignment = GUIAlignment.Center;
-		//AddObject(singleplayer);
-		
-		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), localMultiplayerEvent);
-		localMultiplayer.alignment = GUIAlignment.Center;
-		AddObject(localMultiplayer);
-		
-		GUIButton settings = new GUIButton(0, 100, 800, 75, "Einstellungen", Resources.uiFont.deriveFont(35F), settingsEvent);
-		settings.alignment = GUIAlignment.Center;
-		AddObject(settings);
-		
-		GUIButton quit = new GUIButton(0, 200, 800, 75, "Verlassen", Resources.uiFont.deriveFont(35F), quitEvent);
+		});
 		quit.alignment = GUIAlignment.Center;
 		AddObject(quit);
 	}

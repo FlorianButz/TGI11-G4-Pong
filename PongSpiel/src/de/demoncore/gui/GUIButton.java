@@ -7,8 +7,10 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
+import de.demoncore.audio.AudioManager;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Resources;
 
 public class GUIButton extends GUIObject {
 
@@ -49,6 +51,9 @@ public class GUIButton extends GUIObject {
 		
 		normalButtonWidth = width;
 		currentButtonWidth = normalButtonWidth;
+		
+		currentColor = normalColor;
+		currentTextColor = normalTextColor;
 		
 		event = e;
 	}
@@ -99,6 +104,15 @@ public class GUIButton extends GUIObject {
 		
 		event.isMouseDown = true;
 		event.ButtonDown();
+		
+		AudioManager.PlaySound(Resources.buttonClick);
+	}
+	
+	@Override
+	public void OnMouseHoverOverUIObject() {
+		super.OnMouseHoverOverUIObject();
+
+		AudioManager.PlaySound(Resources.buttonHover);
 	}
 	
 	@Override

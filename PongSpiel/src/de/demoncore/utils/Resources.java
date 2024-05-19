@@ -3,6 +3,9 @@ package de.demoncore.utils;
 import java.awt.Font;
 import java.io.InputStream;
 
+import javax.sound.sampled.AudioInputStream;
+
+import de.demoncore.audio.AudioManager;
 import de.demoncore.main.Main;
 
 public class Resources {
@@ -11,6 +14,11 @@ public class Resources {
 	
 	public static Font uiFont;
 	public static Font dialogFont;
+	
+	// Audio dateien
+
+	public static String buttonClick = "Button_Click";
+	public static String buttonHover = "Button_Hover";
 	
 	public static void LoadResources() {
 		
@@ -23,8 +31,7 @@ public class Resources {
 			dialogFont = Font.createFont(Font.TRUETYPE_FONT, is);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}	
 		
 	}
 	

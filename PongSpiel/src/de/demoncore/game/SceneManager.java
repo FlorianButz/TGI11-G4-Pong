@@ -3,6 +3,7 @@ package de.demoncore.game;
 import java.util.ArrayList;
 
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.DefaultScene;
 import de.demoncore.scenes.MainMenu;
 
 public class SceneManager {
@@ -36,6 +37,9 @@ public class SceneManager {
 			GetActiveScene().DestroyObject(o);
 		}
 		
-		activeScene = scene;
+		if(scene != null)
+			activeScene = scene;
+		else
+			activeScene = new DefaultScene();
 	}
 }

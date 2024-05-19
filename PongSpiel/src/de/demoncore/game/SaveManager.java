@@ -13,7 +13,7 @@ public class SaveManager {
 
 		T deserializedObj = null;
 
-		try (FileInputStream fileIn = new FileInputStream(fileName);
+		try (FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA") + "\\" + fileName);
 				ObjectInputStream in = new ObjectInputStream(fileIn)) {
 				deserializedObj = (T) in.readObject();
 				
@@ -31,7 +31,7 @@ public class SaveManager {
 	public static <T> void SaveToFile(String fileName, T toSave) {
 		// Speicherdatei erstellen
 		
-		try (FileOutputStream fileOut = new FileOutputStream(fileName);
+		try (FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\" + fileName);
 				ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 				out.writeObject(toSave);
 		} catch (IOException i) {

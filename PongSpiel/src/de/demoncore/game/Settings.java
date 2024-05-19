@@ -1,5 +1,6 @@
 package de.demoncore.game;
 
+import de.demoncore.audio.AudioManager;
 import de.demoncore.utils.GameMath;
 
 public class Settings {
@@ -15,6 +16,7 @@ public class Settings {
 		
 		masterVolume = deserializedSettings.masterVolume;
 		fullscreen = deserializedSettings.fullscreen;
+		debugMode = deserializedSettings.debugMode;
 	}
 
 	public static void SaveAllSettings() {
@@ -23,6 +25,7 @@ public class Settings {
 
 		classToSave.masterVolume = (int) masterVolume;
 		classToSave.fullscreen = fullscreen;
+		classToSave.debugMode = debugMode;
 
 		// Speicherdatei erstellen
 		
@@ -34,6 +37,8 @@ public class Settings {
 	private static float masterVolume = 85;
 	private static boolean fullscreen = false;
 	
+	private static boolean debugMode = false;
+	
 	// SET / GET METHODEN
 	
 	public static float GetVolume() {
@@ -42,6 +47,7 @@ public class Settings {
 
 	public static void SetVolume(float newVolume) {
 		masterVolume = GameMath.Clamp(newVolume, 0, 100);
+		AudioManager.ChangeMasterVolume(masterVolume);
 	}
 	
 	public static boolean GetFullscreen() {
@@ -50,5 +56,13 @@ public class Settings {
 
 	public static void SetFullscreen(boolean isOn) {
 		fullscreen = isOn;
+	}
+	
+	public static boolean GetDebugMode() {
+		return debugMode;
+	}
+
+	public static void SetDebugMode(boolean isOn) {
+		debugMode = isOn;
 	}
 }

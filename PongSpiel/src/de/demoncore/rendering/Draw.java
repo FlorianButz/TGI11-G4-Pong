@@ -1,9 +1,11 @@
 package de.demoncore.rendering;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.Particle;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gui.GUIObject;
@@ -68,8 +71,7 @@ public class Draw extends JPanel {
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
-			/*
-			if(!(currentGameObj instanceof GUIObject)){				
+			if(!(currentGameObj instanceof GUIObject) && Settings.GetDebugMode()){				
 				Rectangle r = currentGameObj.GetBoundingBox();
 				if(currentGameObj.collisionEnabled)
 					g2d.setColor(Color.green);
@@ -78,8 +80,12 @@ public class Draw extends JPanel {
 				
 				g2d.setStroke(new BasicStroke(2));
 				g2d.draw(r);
+				
+				g2d.setColor(new Color(g2d.getColor().getRed(), g2d.getColor().getGreen(), g2d.getColor().getBlue(), 100));
+				
+				g2d.setFont(g2d.getFont().deriveFont(10F));
+				g2d.drawString(currentGameObj.getClass().getSimpleName(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 10);
 			}
-			*/ //Debug, Nicht Entfernen oder Unkommentieren
 			
 			if(currentGameObj.renderSpecial == true) {
 				
@@ -143,10 +149,12 @@ public class Draw extends JPanel {
 		mouseLastPosition.x = (float) MouseInfo.getPointerInfo().getLocation().getX();
 		mouseLastPosition.y = (float) MouseInfo.getPointerInfo().getLocation().getY();
 		
-		g2d.setFont(Resources.uiFont.deriveFont(15F));
-		g2d.setColor(new Color(1, 1, 1, 0.25f));
-		g2d.drawString("Version -> " + Main.version, 15, 25);
-		g2d.drawString("FPS -> " + (int)fps, 15, 45);
+		if(Settings.GetDebugMode()) {			
+			g2d.setFont(Resources.uiFont.deriveFont(15F));
+			g2d.setColor(new Color(1, 1, 1, 0.25f));
+			g2d.drawString("Version -> " + Main.version, 15, 25);
+			g2d.drawString("FPS -> " + (int)fps, 15, 45);
+		}
 		
 		repaint();
 	}
