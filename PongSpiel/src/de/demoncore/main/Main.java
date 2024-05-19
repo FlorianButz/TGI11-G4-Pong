@@ -8,7 +8,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "0.0.25a";
+	public static String version = "0.0.26a";
 	
 	public static void main(String[] args) {
 		Resources.LoadResources();
