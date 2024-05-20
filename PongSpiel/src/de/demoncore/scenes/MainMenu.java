@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.animator.Vector3Animator;
+import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.gameObjects.ParticleSystem;
@@ -19,12 +20,13 @@ public class MainMenu extends BaseScene {
 	
 	public MainMenu() {
 		
-		ParticleSystem bgSys = new ParticleSystem(0, 0);
+		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
 		bgSys.emitLoop = true;
 		bgSys.particleColorFirst = new Color(1, 1, 1, 0.085f);
 		bgSys.particleColorSecond = new Color(1, 1, 1, 0.04f);
-		bgSys.emitPause = 10;
+		bgSys.emitPause = 45;
+		bgSys.emitChunk = 20;
 		bgSys.initialParticleSize = 15;
 		bgSys.particleLifetime += 2500;
 		bgSys.initialParticleSpeedMax = new Vector3(0.25f, 0.25f);
@@ -32,25 +34,43 @@ public class MainMenu extends BaseScene {
 		bgSys.particleGravity = 0;
 		bgSys.endParticleSize = 0;
 		bgSys.Init();
-		AddObject(bgSys);
+		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
 		
-		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
+		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
 		AddObject(title);
 		
-		/*
-		Vector3Animator anim = new Vector3Animator(Vector3.zero(), Vector3.one().multiply(100), 5, true,
-				new AnimatorUpdateEvent() {
+		Vector3Animator anim = new Vector3Animator(Vector3.one().multiply(150), Vector3.one().multiply(160), 5, EasingType.Linear); // Erstelle neue animation für den Titel text
+		anim.SetOnUpdate(new AnimatorUpdateEvent() {
 			@Override
 			public void OnUpdate(Vector3 value) {
 				super.OnUpdate(value);
-				title.SetPosition(title.GetPosition());
-				System.out.println("Test");
+				title.SetFont(title.GetFont().deriveFont(value.x));	// Ändere die größe vom text in der animation
 			}
-		},
-				new AnimatorOnCompleteEvent() {
-		
 		});
-		*/
+		anim.SetOnComplete(new AnimatorOnCompleteEvent() {
+			@Override
+			public void OnComplete() {
+				super.OnComplete();
+				
+				Vector3Animator anim2 = new Vector3Animator(Vector3.one().multiply(160), Vector3.one().multiply(150), 5, EasingType.Linear); // Erstelle zweite animation für den Titel text
+				anim2.SetOnUpdate(new AnimatorUpdateEvent() {
+					@Override
+					public void OnUpdate(Vector3 value) {
+						super.OnUpdate(value);
+						title.SetFont(title.GetFont().deriveFont(value.x));	// Ändere die größe vom text in der animation
+					}
+				});
+				anim2.SetOnComplete(new AnimatorOnCompleteEvent() {
+					@Override
+					public void OnComplete() {
+						super.OnComplete();
+						anim.Play();	// Spiele animation 1 wenn animation 2 fertig ist
+					}
+				});
+				anim2.Play();	// Spiele animation 2 wenn animation 1 fertig ist
+			}
+		});
+		anim.Play(); // Spiele animation 1
 
 		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override

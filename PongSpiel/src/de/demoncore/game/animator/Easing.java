@@ -1,6 +1,9 @@
 package de.demoncore.game.animator;
 
 public class Easing {
+	
+	public enum EasingType { Linear, OutExponential, InOutQuint }
+	
 	public static float EaseOutExpo(float x) {
 		return (float) (x == 1 ? 1 : 1 - Math.pow(2, -10 * x));
 	}

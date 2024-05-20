@@ -8,6 +8,10 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.animator.Easing.EasingType;
+import de.demoncore.game.animator.AnimatorOnCompleteEvent;
+import de.demoncore.game.animator.AnimatorUpdateEvent;
+import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
@@ -16,6 +20,7 @@ import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
 import de.demoncore.scenes.MainMenu;
 import de.demoncore.utils.Resources;
+import de.demoncore.utils.Vector3;
 
 public class PauseMenuHolder extends GameObject implements GameActionListener {
 
@@ -89,14 +94,55 @@ public class PauseMenuHolder extends GameObject implements GameActionListener {
 		backToMainMenuButton.alignment = GUIAlignment.Center;
 		SceneManager.GetActiveScene().AddObject(backToMainMenuButton);
 		
+		ChangePos();
+
+		if(outAnim != null) outAnim.Stop();
+		inAnim = new Vector3Animator(new Vector3(0, 1500, 0), new Vector3(0, 0, 0), 1, EasingType.OutExponential);
+		inAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+			@Override
+			public void OnUpdate(Vector3 value) {
+				super.OnUpdate(value);
+				menuYPos = (int) value.y;
+				ChangePos();
+			}
+		});
+		inAnim.Play();
+	}
+	
+	int menuYPos = 0;
+	Vector3Animator inAnim;
+	Vector3Animator outAnim;
+	
+	void ChangePos() {
+		pausedText.SetPosition(new Vector3(0, 175 + menuYPos));
+		returnToGameButton.SetPosition(new Vector3(0, 100 + menuYPos));
+		backToMainMenuButton.SetPosition(new Vector3(0, 225 + menuYPos));
 	}
 	
 	void HideMenu() {
 		GameLogic.isGamePaused = false;
-
 		SceneManager.GetActiveScene().DestroyObject(background);
-		SceneManager.GetActiveScene().DestroyObject(pausedText);
-		SceneManager.GetActiveScene().DestroyObject(returnToGameButton);
-		SceneManager.GetActiveScene().DestroyObject(backToMainMenuButton);
+		
+		inAnim.Stop();
+		outAnim = new Vector3Animator(new Vector3(0, menuYPos, 0), new Vector3(0, 1500, 0), 0.5f, EasingType.InOutQuint);
+		outAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+			@Override
+			public void OnUpdate(Vector3 value) {
+				super.OnUpdate(value);
+				menuYPos = (int) value.y;
+				ChangePos();
+			}
+		});
+		outAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+			@Override
+			public void OnComplete() {
+				super.OnComplete();
+				
+				SceneManager.GetActiveScene().DestroyObject(pausedText);
+				SceneManager.GetActiveScene().DestroyObject(returnToGameButton);
+				SceneManager.GetActiveScene().DestroyObject(backToMainMenuButton);
+			}
+		});
+		outAnim.Play();		
 	}
 }

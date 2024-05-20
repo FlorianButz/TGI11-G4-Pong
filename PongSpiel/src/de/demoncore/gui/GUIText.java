@@ -39,6 +39,13 @@ public class GUIText extends GUIObject {
 		g2d.drawString(text, GetUIPosition(screenWidth, screenHeight).x, (float) (GetUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));
 	}
 	
+	public void SetFont(Font font) {
+		this.font = font;
+	}
+	
+	public Font GetFont() {
+		return this.font;
+	}
 	
 	public void SetText(String text) {
 		this.text = text;

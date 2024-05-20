@@ -36,6 +36,14 @@ public class GameObject {
 		this.position = position;
 	}
 	
+	public void SetScale(Vector3 scale) {
+		this.size = scale;
+	}
+	
+	public Vector3 GetScale() {
+		return size;
+	}
+	
 	public void OnDestroy() {
 		
 	}
