@@ -3,6 +3,7 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
+import de.demoncore.audio.AudioManager;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.ParticleSystem;
@@ -68,6 +69,13 @@ public class SettingsMenu extends BaseScene {
 			}
 			
 			@Override
+			public void ButtonUp() {
+				super.ButtonUp();
+			
+				AudioManager.ChangeMasterVolume(Settings.GetVolume());
+			}
+			
+			@Override
 			public void UpdateEvent() {
 				super.UpdateEvent();
 				
@@ -95,6 +103,13 @@ public class SettingsMenu extends BaseScene {
 
 				Settings.SetVolume((float)Settings.GetVolume() + 1);
 				volumeDisplay.SetText("" + (int)Settings.GetVolume() + "%");
+			}
+			
+			@Override
+			public void ButtonUp() {
+				super.ButtonUp();
+				
+				AudioManager.ChangeMasterVolume(Settings.GetVolume());
 			}
 			
 			@Override
@@ -137,6 +152,13 @@ public class SettingsMenu extends BaseScene {
 			}
 			
 			@Override
+			public void ButtonUp() {
+				super.ButtonUp();
+				
+				AudioManager.ChangeMasterVolume(Settings.GetMusicVolume());
+			}
+			
+			@Override
 			public void UpdateEvent() {
 				super.UpdateEvent();
 				
@@ -164,6 +186,13 @@ public class SettingsMenu extends BaseScene {
 
 				Settings.SetMusicVolume((float)Settings.GetMusicVolume() + 1);
 				musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+			}
+			
+			@Override
+			public void ButtonUp() {
+				super.ButtonUp();
+				
+				AudioManager.ChangeMasterVolume(Settings.GetMusicVolume());
 			}
 			
 			@Override

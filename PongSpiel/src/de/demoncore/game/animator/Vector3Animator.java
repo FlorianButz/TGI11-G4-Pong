@@ -5,7 +5,7 @@ import de.demoncore.utils.Vector3;
 
 public class Vector3Animator {
 
-	int fps = 30; // Frames per second
+	int fps = 60; // Frames per second
     int frameDuration = 1000 / fps; // Länge jedes frames
 	
     Vector3 fromValue;	// Animiere von diesem wert
@@ -32,7 +32,10 @@ public class Vector3Animator {
 	}
 	
 	public void Stop() {
-		animationThread.interrupt();;
+		animationThread.interrupt();
+        
+		if(onCompleteEvent != null)
+        	onCompleteEvent.OnComplete();
 	}
 	
 	Thread animationThread;

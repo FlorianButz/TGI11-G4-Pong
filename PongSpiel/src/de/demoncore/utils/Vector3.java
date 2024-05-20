@@ -46,5 +46,13 @@ public class Vector3 {
 	
 	public float Magnitude() {
 		return (x + y + z) / 3;
-	}	
+	}
+	
+	public Vector3 Normalized() {
+        float length = (float) Math.sqrt(x * x + y * y + z * z);
+        if (length == 0) {
+            return Vector3.zero(); // Nullvektor zurueck geben wenn laenge = 0
+        }
+        return new Vector3(x / length, y / length, z / length);
+    }
 }

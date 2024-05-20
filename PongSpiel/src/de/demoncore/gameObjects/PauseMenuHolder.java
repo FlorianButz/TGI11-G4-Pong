@@ -8,9 +8,10 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
-import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
+import de.demoncore.game.animator.ColorAnimator;
+import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -65,10 +66,13 @@ public class PauseMenuHolder extends GameObject implements GameActionListener {
 
 	void ShowMenu() {
 		GameLogic.isGamePaused = true;
+
+		if(outAnim != null) outAnim.Stop();
+		if(bgOutAnim != null) bgOutAnim.Stop();
 		
-		background = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0.8f));
+		background = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0f));
 		background.alignment = GUIAlignment.Center;
-		SceneManager.GetActiveScene().AddObject(background);	
+		SceneManager.GetActiveScene().AddObject(background);
 		
 		pausedText = new GUIText(0, 175, "Spiel Pausiert", Resources.dialogFont.deriveFont(125F), Color.white);
 		pausedText.alignment = GUIAlignment.TopMiddle;
@@ -96,7 +100,16 @@ public class PauseMenuHolder extends GameObject implements GameActionListener {
 		
 		ChangePos();
 
-		if(outAnim != null) outAnim.Stop();
+		bgInAnim = new ColorAnimator(background.color, new Color(0f, 0f, 0f, 0.9f), 1, EasingType.OutExponential);
+		bgInAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		@Override
+		public void OnUpdate(Color value) {
+			super.OnUpdate(value);
+			background.color = value;
+		}
+		});
+		bgInAnim.Play();
+		
 		inAnim = new Vector3Animator(new Vector3(0, 1500, 0), new Vector3(0, 0, 0), 1, EasingType.OutExponential);
 		inAnim.SetOnUpdate(new AnimatorUpdateEvent() {
 			@Override
@@ -112,6 +125,8 @@ public class PauseMenuHolder extends GameObject implements GameActionListener {
 	int menuYPos = 0;
 	Vector3Animator inAnim;
 	Vector3Animator outAnim;
+	ColorAnimator bgInAnim;
+	ColorAnimator bgOutAnim;
 	
 	void ChangePos() {
 		pausedText.SetPosition(new Vector3(0, 175 + menuYPos));
@@ -121,7 +136,24 @@ public class PauseMenuHolder extends GameObject implements GameActionListener {
 	
 	void HideMenu() {
 		GameLogic.isGamePaused = false;
-		SceneManager.GetActiveScene().DestroyObject(background);
+		
+		bgInAnim.Stop();
+		bgOutAnim = new ColorAnimator(background.color, new Color(0f, 0f, 0f, 0f), 1, EasingType.InOutQuint);
+		bgOutAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		@Override
+		public void OnUpdate(Color value) {
+			super.OnUpdate(value);
+			background.color = value;
+		}
+		});
+		bgOutAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+			@Override
+			public void OnComplete() {
+				super.OnComplete();			
+				SceneManager.GetActiveScene().DestroyObject(background);
+			}
+		});
+		bgOutAnim.Play();
 		
 		inAnim.Stop();
 		outAnim = new Vector3Animator(new Vector3(0, menuYPos, 0), new Vector3(0, 1500, 0), 0.5f, EasingType.InOutQuint);

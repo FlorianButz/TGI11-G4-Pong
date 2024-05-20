@@ -18,6 +18,7 @@ import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.Particle;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.Gui;
 import de.demoncore.main.Main;
@@ -71,7 +72,7 @@ public class Draw extends JPanel {
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
-			if(!(currentGameObj instanceof GUIObject) && Settings.GetDebugMode()){				
+			if(!(currentGameObj instanceof GUIObject) && Settings.GetDebugMode()){
 				Rectangle r = currentGameObj.GetBoundingBox();
 				if(currentGameObj.collisionEnabled)
 					g2d.setColor(Color.green);
@@ -85,6 +86,12 @@ public class Draw extends JPanel {
 				
 				g2d.setFont(g2d.getFont().deriveFont(10F));
 				g2d.drawString(currentGameObj.getClass().getSimpleName(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 10);
+
+				g2d.drawString("Pos: " + currentGameObj.GetPosition().ToString(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 20);
+				
+				if(currentGameObj instanceof RigidBody) {
+					g2d.drawString("Vel: " + ((RigidBody)currentGameObj).velocity.ToString(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 30);
+				}
 			}
 			
 			if(currentGameObj.renderSpecial == true) {

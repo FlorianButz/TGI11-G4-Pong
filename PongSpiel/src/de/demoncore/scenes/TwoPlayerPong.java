@@ -31,8 +31,8 @@ public class TwoPlayerPong extends BaseScene {
 		player1 = new PongPlayer(0, 0);
 		AddObject(player1);
 		
-		player2 = new PongPlayer(150, 350);
-		AddObject(player2);
+		//player2 = new PongPlayer(150, 350);
+		//AddObject(player2);
 		
 		ParticleSystem p = new ParticleSystem(0, 0);
 
@@ -76,6 +76,8 @@ public class TwoPlayerPong extends BaseScene {
 		beispielObjekt1.automatischeKreisbewegung();
 		
 		t.SetText((int)GameLogic.GetInstance().GetGameTime() + "");
+		
+		//cameraPosition = Vector3.Lerp(cameraPosition, player1.GetPosition().multiply(-1), 0.025f);
 	}
 
 }
