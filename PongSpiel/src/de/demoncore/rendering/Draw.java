@@ -40,7 +40,6 @@ public class Draw extends JPanel {
 		super.paintComponent(g);
 	
 		double fps = 1000000000.0 / (System.nanoTime() - lastTime);
-		
 		lastTime = System.nanoTime();
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
@@ -53,10 +52,13 @@ public class Draw extends JPanel {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
 		
+		// Speichern von altem transform
 		AffineTransform oldTransform = g2d.getTransform();
 		
+		// Anti aliasing
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		// Neuen transform erstellen
 		AffineTransform transformation = new AffineTransform();
 		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
 				SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
@@ -68,10 +70,12 @@ public class Draw extends JPanel {
 		g2d.transform(transformation);
 		
 		// Zeichne alle Spielobjekte
+		
 		g.setColor(Color.WHITE);
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
+			// Debug modus
 			if(!(currentGameObj instanceof GUIObject) && Settings.GetDebugMode()){
 				Rectangle r = currentGameObj.GetBoundingBox();
 				if(currentGameObj.collisionEnabled)
@@ -94,37 +98,13 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			if(currentGameObj.renderSpecial == true) {
-				
-				if(currentGameObj instanceof ParticleSystem) {
-					ParticleSystem system = (ParticleSystem) currentGameObj;
-
-					List<Particle> ps = new ArrayList<Particle>(system.particles);
-					for (Particle p : ps){
-						if(p == null) continue;
-						
-						Vector3 worldPos = GetWorldPoint(p.position);
-
-						if(Settings.GetDebugMode()) {
-							g2d.setColor(Color.white);
-							g2d.drawString("P" + ps.indexOf(p), worldPos.x + 2, worldPos.y - 5);
-						}
-						
-						g.setColor(p.color);
-					    g2d.rotate(Math.toRadians(p.rotation), p.position.x, p.position.y);
-						g.fillRect((int)worldPos.x + (int)(p.size.x / 4), (int)worldPos.y + (int)(p.size.y / 4), (int)p.size.x, (int)p.size.y);
-						g2d.rotate(Math.toRadians(-p.rotation), p.position.x, p.position.y);
-					}
-				}
-				
-			}else {
-				Vector3 worldPos = GetWorldPoint(currentGameObj.GetPosition());
-				g.setColor(currentGameObj.color);
-				g.fillRect((int)worldPos.x, (int)worldPos.y, (int)currentGameObj.size.x, (int)currentGameObj.size.y);
+			if(currentGameObj.enableRendering) {
+				if(!(currentGameObj instanceof GUIObject))	// Gucken ob es GUI objekt ist, weil die müssen als letztes auf den Bildschirm
+					currentGameObj.Draw(g2d, screenwidth, screenheight);
 			}
 		}
 		
-		g2d.setTransform(oldTransform);
+		g2d.setTransform(oldTransform);	// Alten transform wiederherstellen
 		
 		// Zeichne GUI
 		for(int guiObj = 0; guiObj < gameObjectsInScene.size(); guiObj++) {
@@ -134,10 +114,7 @@ public class Draw extends JPanel {
 			}
 		}
 		
-		// Mauszeiger
-		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
-		
 		if(MouseInfo.getPointerInfo().getLocation().getX() != mouseLastPosition.x ||
 				MouseInfo.getPointerInfo().getLocation().getY() != mouseLastPosition.y)
 		{
@@ -148,7 +125,6 @@ public class Draw extends JPanel {
 		}
 	
 		// Mauszeiger anzeigen
-		
 		g2d.setColor(new Color(1, 1, 1, GameMath.Clamp(mouseAlpha, 0, 1)));
 		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x),
 						(int)(MouseInfo.getPointerInfo().getLocation().getY() - Gui.GetScreenLocation().y),
@@ -161,6 +137,7 @@ public class Draw extends JPanel {
 		mouseLastPosition.x = (float) MouseInfo.getPointerInfo().getLocation().getX();
 		mouseLastPosition.y = (float) MouseInfo.getPointerInfo().getLocation().getY();
 		
+		// Debug modus
 		if(Settings.GetDebugMode()) {			
 			g2d.setFont(Resources.uiFont.deriveFont(15F));
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
@@ -169,10 +146,6 @@ public class Draw extends JPanel {
 		}
 		
 		repaint();
-	}
-	
-	public Vector3 GetWorldPoint(Vector3 vec) {
-		return vec;
 	}
 	
 }

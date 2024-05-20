@@ -1,11 +1,15 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicPasswordFieldUI;
+
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
+import de.demoncore.game.Settings;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
@@ -51,8 +55,6 @@ public class ParticleSystem extends GameObject {
 	public ParticleSystem(int x, int y) {
 		super(x, y, 5, 5);
 
-		renderSpecial = true;
-		
 		this.anchorPoint = Vector3.one().multiply(0.5f);
 		collisionEnabled = false;
 	}
@@ -138,5 +140,26 @@ public class ParticleSystem extends GameObject {
 		}
 
 		particles.removeAll(removeParticles);
+	}
+	
+	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		for (Particle p : new ArrayList<Particle>(particles)){
+			if(p == null) continue;
+			
+			Vector3 worldPos = p.position;
+			worldPos.x += p.size.x / 4;
+			worldPos.y += p.size.y / 4;
+			
+			if(Settings.GetDebugMode()) {
+				g2d.setColor(Color.white);
+				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
+			}
+			
+			g2d.setColor(p.color);
+		    g2d.rotate(Math.toRadians(p.rotation), worldPos.x, worldPos.y);
+			g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)p.size.x, (int)p.size.y);
+			g2d.rotate(Math.toRadians(-p.rotation), worldPos.x, worldPos.y);
+		}
 	}
 }

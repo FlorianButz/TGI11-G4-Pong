@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -19,79 +20,81 @@ import de.demoncore.utils.GameMath;
 
 public class AudioManager {
 	
-	static List<Clip> activeClips = new ArrayList<Clip>();
-	
-	public static Clip PlaySound(String audioName, boolean isLooping) {
-		float clipVolume = Settings.GetVolume();
-		
-		if(clipVolume == 0) return null;		
-		
-		CleanupClipList();
-		
-		try {
-			
-			InputStream audioSrc = AudioManager.class.getResourceAsStream("/resources/audio/" + audioName + ".wav");
-			InputStream bufferedIn = new BufferedInputStream(audioSrc);
-			
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(bufferedIn);
-			
-			Clip clip;
-			clip = AudioSystem.getClip();
-			clip.open(inputStream);
-			
-			FloatControl gainControl = 
-				    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(GameMath.RemapValue(clipVolume, 0, 100, gainControl.getMinimum(), 1f));
-			
-			if(isLooping) clip.loop(clip.LOOP_CONTINUOUSLY);
-				
-			clip.start();
+	static List<Clip> activeClips = new CopyOnWriteArrayList<Clip>();
 
-			activeClips.add(clip);
-			
-			return clip;
+    private static final int DEFAULT_BUFFER_SIZE = 24;
 
-		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public static Clip PlaySound(String audioName, boolean isLooping) {
+        return PlaySound(audioName, isLooping, DEFAULT_BUFFER_SIZE);
+    }
 
-		return null;
-	}
-	
-	public static Clip PlaySound(String audioName) {
-		return PlaySound(audioName, false);
-	}
-	
-	@SuppressWarnings("unlikely-arg-type")
-	static void CleanupClipList() {
-		List<Clip> clipsToRemove = new ArrayList<Clip>();
-		
-		for(Clip c : new ArrayList<Clip>(activeClips)) {
-			if(!c.isRunning()) clipsToRemove.add(c);
-		}
-		
-		activeClips.remove(clipsToRemove);
-	}
-	
-	public static void ChangeMasterVolume(float volume) {		
-		for(Clip c : new ArrayList<Clip>(activeClips)) {
-			if(c == null) continue;			
-			FloatControl gainControl = 
-				    (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(GameMath.RemapValue(volume, 0, 100, gainControl.getMinimum(), 1f));
-				
-		}
-		
-	}
-	
-	public static void ChangeMusicVolume(float volume) {		
-		System.out.println("MUSIK LAUTSTÄRKE ÄNDERUNG NOCH NICHT IMPLEMENTIERT");		
-	}
+    public static Clip PlaySound(String audioName, boolean isLooping, int bufferSize) {
+        float clipVolume = Settings.GetVolume();
+
+        if (clipVolume == 0) return null;
+
+        CleanupClipList();
+
+        try {
+            InputStream audioSrc = AudioManager.class.getResourceAsStream("/resources/audio/" + audioName + ".wav");
+            InputStream bufferedIn = new BufferedInputStream(audioSrc, bufferSize);
+
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+            Clip clip = AudioSystem.getClip();
+            clip.open(inputStream);
+
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(GameMath.RemapValue(clipVolume, 0, 100, gainControl.getMinimum(), 1f));
+
+            if (isLooping) clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+            clip.start();
+
+            activeClips.add(clip);
+
+            return clip;
+
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static Clip PlaySound(String audioName) {
+        return PlaySound(audioName, false);
+    }
+
+    @SuppressWarnings("unlikely-arg-type")
+    static void CleanupClipList() {
+        List<Clip> clipsToRemove = new ArrayList<>();
+
+        for (Clip c : new ArrayList<>(activeClips)) {
+            if (!c.isRunning()) clipsToRemove.add(c);
+        }
+
+        activeClips.removeAll(clipsToRemove);
+    }
+
+    public static void ChangeMasterVolume(float volume) {
+        float minGain = -50f;
+        float maxGain = 6.0f; // Typical value for the upper bound of the gain control, you might need to adjust this.
+        float newGain = GameMath.RemapValue(volume, 0, 100, minGain, maxGain);
+
+        for (Clip c : activeClips) {
+            if (c == null) continue;
+            try {
+                FloatControl gainControl = (FloatControl) c.getControl(FloatControl.Type.VOLUME);
+                gainControl.setValue(newGain);
+            } catch (Exception e) {
+                // Handle exception if the control is not supported or other issues
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void ChangeMusicVolume(float volume) {
+        System.out.println("MUSIC VOLUME CHANGE NOT IMPLEMENTED YET");
+    }
 }
-	
-	
-	
-	
-	
-	

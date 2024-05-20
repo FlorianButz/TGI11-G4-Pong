@@ -14,6 +14,10 @@ public class Main {
 		Resources.LoadResources();
 		Settings.LoadAllSettings();
 		
+		System.setProperty("sun.java2d.opengl", "false"); // Setze es auf true nachher
+		
+		// VolatileImage class benutzen anstatt buffered image !!!!!!
+		
 		AudioManager.PlaySound("/music/G4Pong_DarkSong1", true);
 		
 		GameLogic gl = new GameLogic();

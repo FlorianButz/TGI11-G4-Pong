@@ -17,8 +17,6 @@ public class GUIObject extends GameObject implements GameActionListener {
 	
 	public GUIObject(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
-	
-		this.renderSpecial = true;
 
 		KeyHandler.listeners.add(this);
 		collisionEnabled = false;
@@ -60,11 +58,6 @@ public class GUIObject extends GameObject implements GameActionListener {
 		}
 		
 		return Vector3.zero();
-	}
-	
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		g2d.setColor(color);
-		//g2d.drawRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 	}
 
 	protected boolean isHovering = false;
@@ -129,6 +122,11 @@ public class GUIObject extends GameObject implements GameActionListener {
 		}
 		else if(isHovering)
 			OnMouseStopHoverOverUIObject();
+	}
+
+	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		g2d.setColor(color);
 	}
 
 	@Override
