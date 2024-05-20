@@ -130,6 +130,12 @@ public class GUIObject extends GameObject implements GameActionListener {
 		else if(isHovering)
 			OnMouseStopHoverOverUIObject();
 	}
+
+	@Override
+	public void OnEscapePressed() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 

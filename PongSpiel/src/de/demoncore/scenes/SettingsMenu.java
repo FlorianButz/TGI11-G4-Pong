@@ -38,17 +38,21 @@ public class SettingsMenu extends BaseScene {
 		GUIText title = new GUIText(0, 175, "Einstellungen", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		AddObject(title);
 		
+		float settingsTextSize = 25F;
+		int buttonHeight = 50;
+		int spacing = 15;
+		int startPos = 0;
 		
-		GUIText volumeText = new GUIText(-450, -100, "Lautstaerke: ", Resources.uiFont.deriveFont(50F), Color.white);
+		GUIText volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, "Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		volumeText.alignment = GUIAlignment.Center;
 		volumeText.centerText = false;
 		AddObject(volumeText);
 
-		GUIText volumeDisplay = new GUIText(40, -100, ""+(int)Settings.GetVolume() + "%", Resources.uiFont.deriveFont(65F), Color.white);
+		GUIText volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, ""+(int)Settings.GetVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		volumeDisplay.alignment = GUIAlignment.Center;
 		AddObject(volumeDisplay);
 		
-		GUIButton volumeDown = new GUIButton(250, -100, 125, 75, "\\/", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float startSpeed = 0.025f;
 			float speed = 0f;
@@ -78,7 +82,7 @@ public class SettingsMenu extends BaseScene {
 		volumeDown.alignment = GUIAlignment.Center;
 		AddObject(volumeDown);
 		
-		GUIButton volumeUp = new GUIButton(400, -100, 125, 75, "/\\", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float startSpeed = 0.025f;
 			float speed = 0f;
@@ -107,8 +111,78 @@ public class SettingsMenu extends BaseScene {
 		});
 		volumeUp.alignment = GUIAlignment.Center;
 		AddObject(volumeUp);
+
+		GUIText musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, "Musik Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		musicVolumeText.alignment = GUIAlignment.Center;
+		musicVolumeText.centerText = false;
+		AddObject(musicVolumeText);
+
+		GUIText musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, ""+(int)Settings.GetMusicVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		musicVolumeDisplay.alignment = GUIAlignment.Center;
+		AddObject(musicVolumeDisplay);
 		
-		GUIText fullscreenText = new GUIText(-450, 0, "Vollbild (Neustart): ", Resources.uiFont.deriveFont(50F), Color.white);
+		GUIButton musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+			
+			float startSpeed = 0.025f;
+			float speed = 0f;
+			float speedIncrement = 0.0005f;
+			
+			@Override
+			public void ButtonDown() {
+				super.ButtonDown();
+				speed = startSpeed;
+
+				Settings.SetMusicVolume((float)Settings.GetMusicVolume() - 1);
+				musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+			}
+			
+			@Override
+			public void UpdateEvent() {
+				super.UpdateEvent();
+				
+				speed += speedIncrement;
+				
+				if(isMouseDown) {
+					Settings.SetMusicVolume((float)Settings.GetMusicVolume() - speed);
+					musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+				}
+			}
+		});
+		musicVolumeDown.alignment = GUIAlignment.Center;
+		AddObject(musicVolumeDown);
+		
+		GUIButton musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+			
+			float startSpeed = 0.025f;
+			float speed = 0f;
+			float speedIncrement = 0.0005f;
+			
+			@Override
+			public void ButtonDown() {
+				super.ButtonDown();
+				speed = startSpeed;
+
+				Settings.SetMusicVolume((float)Settings.GetMusicVolume() + 1);
+				musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+			}
+			
+			@Override
+			public void UpdateEvent() {
+				super.UpdateEvent();
+				
+				speed += speedIncrement;
+				
+				if(isMouseDown) {
+					Settings.SetMusicVolume((float)Settings.GetMusicVolume() + speed);
+					musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+				}
+			}
+		});
+		musicVolumeUp.alignment = GUIAlignment.Center;
+		AddObject(musicVolumeUp);
+		
+		
+		GUIText fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, "Vollbild (Neustart): ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		fullscreenText.alignment = GUIAlignment.Center;
 		fullscreenText.centerText = false;
 		AddObject(fullscreenText);
@@ -116,7 +190,7 @@ public class SettingsMenu extends BaseScene {
 		String toggleFullscreenText = "Aus";
 		if(Settings.GetFullscreen())
 			toggleFullscreenText = "An";
-		toggleFullscreen = new GUIButton(325, 0, 275, 75, toggleFullscreenText, Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		toggleFullscreen = new GUIButton(325, buttonHeight * -1 + spacing * 3 + startPos, 275, buttonHeight, toggleFullscreenText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -126,7 +200,7 @@ public class SettingsMenu extends BaseScene {
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		AddObject(toggleFullscreen);
 		
-		GUIText debugModeText = new GUIText(-450, 100, "Debug Modus: ", Resources.uiFont.deriveFont(50F), Color.white);
+		GUIText debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, "Debug Modus: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		debugModeText.alignment = GUIAlignment.Center;
 		debugModeText.centerText = false;
 		AddObject(debugModeText);
@@ -134,7 +208,7 @@ public class SettingsMenu extends BaseScene {
 		String toggleDebugModeText = "Aus";
 		if(Settings.GetDebugMode())
 			toggleDebugModeText = "An";
-		toggleDebugMode = new GUIButton(325, 100, 275, 75, toggleDebugModeText, Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		toggleDebugMode = new GUIButton(325, buttonHeight * -0 + spacing * 4 + startPos, 275, buttonHeight, toggleDebugModeText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -144,7 +218,26 @@ public class SettingsMenu extends BaseScene {
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		AddObject(toggleDebugMode);
 		
-		GUIButton back = new GUIButton(0, -125, 800, 75, "Save & Back", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIText languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, "Sprache: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		languageText.alignment = GUIAlignment.Center;
+		languageText.centerText = false;
+		AddObject(languageText);
+		
+		String languageButtonText = "Deutsch"; // Ersetzen mit enum von Settings
+		//if(Settings.GetDebugMode())
+		//	toggleDebugModeText = "An";
+		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, languageButtonText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+			}
+		});
+		toggleLanguage.alignment = GUIAlignment.Center;
+		AddObject(toggleLanguage);
+		
+		
+		GUIButton back = new GUIButton(0, -125, 800, buttonHeight, "Save & Back", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -159,15 +252,22 @@ public class SettingsMenu extends BaseScene {
 		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeDisplay, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(musicVolumeDisplay, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(musicVolumeText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(languageText, Theme.TextSecondary);
 
 		GUITheme.LoadButtonTheme(volumeDown, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(volumeUp, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(musicVolumeDown, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(musicVolumeUp, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleDebugMode, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleFullscreen, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleLanguage, Theme.ButtonSecondary);
 	}
 	
 	GUIButton toggleFullscreen;
 	GUIButton toggleDebugMode;
+	GUIButton toggleLanguage;
 	
 	void ToggleFullscreen() {
 		Settings.SetFullscreen(!Settings.GetFullscreen());

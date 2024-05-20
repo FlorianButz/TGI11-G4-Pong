@@ -37,6 +37,11 @@ public class KeyHandler implements KeyListener, MouseListener {
 		if(pressedKeys.contains(e.getKeyCode())) return; // Sperrt die Tastatur wenn gespammt wird
 		pressedKeys.add(e.getKeyCode()); // Sperre
 		
+		for(GameActionListener listener : new ArrayList<GameActionListener>(listeners)) {
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+				listener.OnEscapePressed();
+		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			playerInput = playerInput.subtract(new Vector3(1, 0, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {

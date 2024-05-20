@@ -7,10 +7,9 @@ import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.gameObjects.PauseMenuHolder;
 import de.demoncore.gameObjects.PongPlayer;
-import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIText;
-import de.demoncore.main.Main;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -63,6 +62,8 @@ public class TwoPlayerPong extends BaseScene {
 		t = new GUIText(0, 150, "Hello, World!", Resources.dialogFont.deriveFont(Font.PLAIN, 65F), Color.WHITE);
 		t.SetText("2dq2");
 		AddObject(t);
+		
+		AddObject(new PauseMenuHolder());
 	}
 	
 	GUIText t;

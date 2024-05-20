@@ -103,6 +103,8 @@ public class ParticleSystem extends GameObject {
 	public void Update() {
 		super.Update();
 		
+		if(GameLogic.isGamePaused) return;
+		
 		if(hasInitialized == false) return;
 		
 		particleSystemTime = GameLogic.GetInstance().gameTime - particleSystemTimeStart;

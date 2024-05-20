@@ -1,5 +1,6 @@
 package de.demoncore.gameObjects;
 
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 
 public class BeweglichesRechteck extends GameObject {
@@ -14,6 +15,9 @@ public class BeweglichesRechteck extends GameObject {
 	
 	
 	public void automatischeKreisbewegung() {
+
+		if(GameLogic.isGamePaused) return;
+		
 		if(richtung == 0) {
 			position.x += 1;
 		} else if (richtung == 1) {

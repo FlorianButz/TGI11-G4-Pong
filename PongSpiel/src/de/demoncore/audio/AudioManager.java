@@ -41,7 +41,7 @@ public class AudioManager {
 			
 			FloatControl gainControl = 
 				    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(GameMath.RemapValue(clipVolume, 0, 100, gainControl.getMinimum() / 1.2f, -5f));
+				gainControl.setValue(GameMath.RemapValue(clipVolume, 0, 100, gainControl.getMinimum(), 1f));
 			
 			if(isLooping) clip.loop(clip.LOOP_CONTINUOUSLY);
 				
@@ -79,9 +79,14 @@ public class AudioManager {
 			if(c == null) continue;			
 			FloatControl gainControl = 
 				    (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(GameMath.RemapValue(volume, 0, 100, gainControl.getMinimum(), 2f));
+				gainControl.setValue(GameMath.RemapValue(volume, 0, 100, gainControl.getMinimum(), 1f));
 				
 		}
+		
+	}
+	
+	public static void ChangeMusicVolume(float volume) {		
+		System.out.println("MUSIK LAUTSTÄRKE ÄNDERUNG NOCH NICHT IMPLEMENTIERT");		
 	}
 }
 	

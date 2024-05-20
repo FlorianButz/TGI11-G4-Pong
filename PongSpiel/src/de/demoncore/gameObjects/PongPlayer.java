@@ -22,6 +22,8 @@ public class PongPlayer extends RigidBody {
 	@Override
 	public void Update() {
 		
+		if(GameLogic.isGamePaused) return;
+		
 		// Partikel effekt fuer den spieler
 		if(trail == null) {
 			trail = new ParticleSystem((int)this.position.x, (int)this.position.y);
@@ -54,9 +56,6 @@ public class PongPlayer extends RigidBody {
 		//this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
 		
 		AddForce(KeyHandler.playerInput.multiply(playerAcceleration));
-
-		System.out.println(KeyHandler.playerInput.ToString());
-		System.out.println(velocity.ToString());
 		
 		trail.SetPosition(this.position);
 		this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(velocity.Magnitude()) / 10);

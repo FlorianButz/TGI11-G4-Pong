@@ -14,9 +14,10 @@ public class Settings {
 		SettingsSave deserializedSettings = SaveManager.LoadSave("settings.g4pong");
 		if(deserializedSettings == null) deserializedSettings = new SettingsSave();
 		
-		masterVolume = deserializedSettings.masterVolume;
-		fullscreen = deserializedSettings.fullscreen;
-		debugMode = deserializedSettings.debugMode;
+		SetMusicVolume(deserializedSettings.musicVolume);
+		SetVolume(deserializedSettings.masterVolume);
+		SetFullscreen(deserializedSettings.fullscreen);
+		SetDebugMode(deserializedSettings.debugMode);
 	}
 
 	public static void SaveAllSettings() {
@@ -24,6 +25,7 @@ public class Settings {
 		SettingsSave classToSave = new SettingsSave();
 
 		classToSave.masterVolume = (int) masterVolume;
+		classToSave.musicVolume = (int) musicVolume;
 		classToSave.fullscreen = fullscreen;
 		classToSave.debugMode = debugMode;
 
@@ -33,11 +35,12 @@ public class Settings {
 	}
 
 	// EINSTELLUNGEN
+
+	private static float masterVolume;
+	private static float musicVolume;
+	private static boolean fullscreen;
 	
-	private static float masterVolume = 85;
-	private static boolean fullscreen = false;
-	
-	private static boolean debugMode = false;
+	private static boolean debugMode;
 	
 	// SET / GET METHODEN
 	
@@ -48,6 +51,15 @@ public class Settings {
 	public static void SetVolume(float newVolume) {
 		masterVolume = GameMath.Clamp(newVolume, 0, 100);
 		AudioManager.ChangeMasterVolume(masterVolume);
+	}
+	
+	public static float GetMusicVolume() {
+		return musicVolume;
+	}
+
+	public static void SetMusicVolume(float newVolume) {
+		musicVolume = GameMath.Clamp(newVolume, 0, 100);
+		AudioManager.ChangeMusicVolume(musicVolume);
 	}
 	
 	public static boolean GetFullscreen() {

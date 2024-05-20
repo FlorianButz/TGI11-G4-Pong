@@ -9,6 +9,8 @@ public class GameLogic {
 	
 	private static GameLogic _instance;
 	
+	public static boolean isGamePaused = false;
+	
 	public static GameLogic GetInstance() {
 		return _instance;
 	}

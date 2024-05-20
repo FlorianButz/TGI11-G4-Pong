@@ -97,8 +97,13 @@ public class Draw extends JPanel {
 						if(p == null) continue;
 						
 						Vector3 worldPos = GetWorldPoint(p.position);
-						g.setColor(p.color);
 
+						if(Settings.GetDebugMode()) {
+							g2d.setColor(Color.white);
+							g2d.drawString("P" + ps.indexOf(p), worldPos.x + 2, worldPos.y - 5);
+						}
+						
+						g.setColor(p.color);
 					    g2d.rotate(Math.toRadians(p.rotation), p.position.x, p.position.y);
 						g.fillRect((int)worldPos.x + (int)(p.size.x / 4), (int)worldPos.y + (int)(p.size.y / 4), (int)p.size.x, (int)p.size.y);
 						g2d.rotate(Math.toRadians(-p.rotation), p.position.x, p.position.y);
@@ -132,7 +137,7 @@ public class Draw extends JPanel {
 			mouseAlpha = 15f;
 		}else
 		{
-			mouseAlpha = GameMath.Lerp(mouseAlpha, 0f, 0.0015f);
+			mouseAlpha = GameMath.Lerp(mouseAlpha, 0f, 0.75f / (float)fps);
 		}
 	
 		// Mauszeiger anzeigen

@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
@@ -68,6 +69,8 @@ public class RigidBody extends GameObject {
 	public void Update() {
 		super.Update();
 
+		if(GameLogic.isGamePaused) return;
+		
 		CheckCollision();
 		
 		position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);

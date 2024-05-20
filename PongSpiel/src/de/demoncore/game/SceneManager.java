@@ -37,6 +37,8 @@ public class SceneManager {
 			GetActiveScene().DestroyObject(o);
 		}
 		
+		GameLogic.isGamePaused = false;
+		
 		if(scene != null)
 			activeScene = scene;
 		else
