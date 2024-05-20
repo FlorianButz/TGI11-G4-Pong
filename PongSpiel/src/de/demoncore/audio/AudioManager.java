@@ -20,9 +20,9 @@ import de.demoncore.utils.GameMath;
 
 public class AudioManager {
 	
-	static List<Clip> activeClips = new CopyOnWriteArrayList<Clip>();
+	static List<Clip> activeClips = new ArrayList<Clip>();
 
-    private static final int DEFAULT_BUFFER_SIZE = 24;
+    private static final int DEFAULT_BUFFER_SIZE = 1024;
 
     public static Clip PlaySound(String audioName, boolean isLooping) {
         return PlaySound(audioName, isLooping, DEFAULT_BUFFER_SIZE);
@@ -82,10 +82,10 @@ public class AudioManager {
         float maxGain = 6.0f; // Typical value for the upper bound of the gain control, you might need to adjust this.
         float newGain = GameMath.RemapValue(volume, 0, 100, minGain, maxGain);
 
-        for (Clip c : activeClips) {
+        for (Clip c : new ArrayList<Clip>(activeClips)) {
             if (c == null) continue;
             try {
-                FloatControl gainControl = (FloatControl) c.getControl(FloatControl.Type.VOLUME);
+                FloatControl gainControl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
                 gainControl.setValue(newGain);
             } catch (Exception e) {
                 // Handle exception if the control is not supported or other issues

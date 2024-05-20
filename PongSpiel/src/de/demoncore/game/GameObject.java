@@ -12,6 +12,7 @@ public class GameObject {
 	
 	public Vector3 size;	// Größe
 	protected Vector3 position;	// Position
+	protected Vector3 localPosition;	// Lokale Position
 	
 	public Color color = Color.white;	// Farbe vom GameObject
 	
@@ -22,6 +23,7 @@ public class GameObject {
 	
 	public GameObject(int posX, int posY, int width, int height) {
 		position = new Vector3(posX, posY);
+		localPosition = Vector3.zero();
 		size = new Vector3(width, height);
 	}
 	
@@ -29,13 +31,21 @@ public class GameObject {
 	
 	public Vector3 GetPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position.subtract(new Vector3(
-				size.x * anchorPoint.x,
-				size.y * anchorPoint.y
+				size.x * anchorPoint.x + localPosition.x,
+				size.y * anchorPoint.y + localPosition.y
 				));
 	}
 	
 	public void SetPosition(Vector3 position) {
 		this.position = position;
+	}
+	
+	public Vector3 GetLocalPosition() {	// Gibt die Lokale Position vom GameObject zurück
+		return localPosition;
+	}
+	
+	public void SetLocalPosition(Vector3 position) {
+		this.localPosition = position;
 	}
 	
 	public void SetScale(Vector3 scale) {

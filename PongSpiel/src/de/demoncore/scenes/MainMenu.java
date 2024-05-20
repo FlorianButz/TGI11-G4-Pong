@@ -4,14 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 
 import de.demoncore.game.SceneManager;
-import de.demoncore.game.animator.Vector3Animator;
-import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
+import de.demoncore.game.animator.Easing.EasingType;
+import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.gameObjects.SettingsMenu;
+import de.demoncore.gameObjects.TestMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -96,7 +99,9 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new SettingsMenu());
+				GUIMenu s = new SettingsMenu();
+				AddObject(s);
+				s.ShowMenu();
 			}
 		});
 		settings.alignment = GUIAlignment.Center;

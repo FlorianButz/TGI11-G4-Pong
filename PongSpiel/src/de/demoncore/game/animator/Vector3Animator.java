@@ -31,14 +31,13 @@ public class Vector3Animator {
 		this.updateEvent = event;
 	}
 	
+	boolean isAnimationCancled = false;
+	
 	public void Stop() {
-		animationThread.interrupt();
-        
-		if(onCompleteEvent != null)
-        	onCompleteEvent.OnComplete();
+		isAnimationCancled = true;
 	}
 	
-	Thread animationThread;
+	public Thread animationThread;
 	
 	public Vector3Animator Play() {
 		
@@ -49,14 +48,17 @@ public class Vector3Animator {
 			public void run() {
                 try {
                 	
-                    int totalFrames = (int) (duration * fps); // total number of frames to run
+                    int totalFrames = (int) (duration * fps); // Anzahl frames
                     for (int i = 0; i < totalFrames; i++) {
                     	
-                    	if(animationThread.isInterrupted()) return;
+                    	if(isAnimationCancled) {
+                    		isAnimationCancled = false;
+                    		return;
+                    	}
                     	
-                        long startTime = System.currentTimeMillis();
+                        long startTime = System.currentTimeMillis(); // Start zeit
 
-                        float time = (float)i / (float)totalFrames;
+                        float time = (float)i / (float)totalFrames; // Animationszeit jetzt zwischen 0 und 1
                         
                         switch(easeType) {
                         case OutExponential:
@@ -70,7 +72,7 @@ public class Vector3Animator {
                         }
                         
                         value = Vector3.Lerp(fromValue, toValue, time);
-                        if(updateEvent != null)
+                        if(updateEvent != null && !isAnimationCancled)
                         	updateEvent.OnUpdate(value);
                         
                         long endTime = System.currentTimeMillis();
@@ -81,7 +83,7 @@ public class Vector3Animator {
                         
                     }
                     
-                    if(onCompleteEvent != null)
+                    if(onCompleteEvent != null && !isAnimationCancled)
                     	onCompleteEvent.OnComplete();
                     
                 } catch (InterruptedException v) {

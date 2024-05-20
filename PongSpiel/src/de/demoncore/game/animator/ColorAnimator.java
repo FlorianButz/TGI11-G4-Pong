@@ -34,14 +34,14 @@ public class ColorAnimator {
 		this.updateEvent = event;
 	}
 	
+	boolean isAnimationCancled = false;
+	
 	public void Stop() {
-		animationThread.interrupt();
-        
-		if(onCompleteEvent != null)
-        	onCompleteEvent.OnComplete();
+		isAnimationCancled = true;
 	}
 	
-	Thread animationThread;
+	
+	public Thread animationThread;
 	
 	public ColorAnimator Play() {
 		
@@ -52,10 +52,13 @@ public class ColorAnimator {
 			public void run() {
                 try {
                 	
-                    int totalFrames = (int) (duration * fps); // total number of frames to run
+                    int totalFrames = (int) (duration * fps);
                     for (int i = 0; i < totalFrames; i++) {
                     	
-                    	if(animationThread.isInterrupted()) return;
+                    	if(isAnimationCancled) {
+                    		isAnimationCancled = false;
+                    		return;
+                    	}
                     	
                         long startTime = System.currentTimeMillis();
 
@@ -73,7 +76,7 @@ public class ColorAnimator {
                         }
                         
                         value = GameMath.LerpColor(fromValue, toValue, time);
-                        if(updateEvent != null)
+                        if(updateEvent != null && !isAnimationCancled)
                         	updateEvent.OnUpdate(value);
                         
                         long endTime = System.currentTimeMillis();
@@ -84,7 +87,7 @@ public class ColorAnimator {
                         
                     }
                     
-                    if(onCompleteEvent != null)
+                    if(onCompleteEvent != null && !isAnimationCancled)
                     	onCompleteEvent.OnComplete();
                     
                 } catch (InterruptedException v) {

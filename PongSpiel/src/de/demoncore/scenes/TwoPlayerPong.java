@@ -2,12 +2,15 @@ package de.demoncore.scenes;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 
+import de.demoncore.actions.GameActionListener;
+import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.ParticleSystem;
-import de.demoncore.gameObjects.PauseMenuHolder;
+import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIText;
 import de.demoncore.utils.Resources;
@@ -63,10 +66,12 @@ public class TwoPlayerPong extends BaseScene {
 		t.SetText("2dq2");
 		AddObject(t);
 		
-		AddObject(new PauseMenuHolder());
+		pauseMenu = new PauseMenu();
+		AddObject(pauseMenu);
 	}
 	
 	GUIText t;
+	PauseMenu pauseMenu;
 	
 	@Override
 	public void UpdateScene() {

@@ -14,7 +14,7 @@ public class Main {
 		Resources.LoadResources();
 		Settings.LoadAllSettings();
 		
-		System.setProperty("sun.java2d.opengl", "false"); // Setze es auf true nachher
+		System.setProperty("sun.java2d.opengl", "true"); // Setze es auf true nachher
 		
 		// VolatileImage class benutzen anstatt buffered image !!!!!!
 		

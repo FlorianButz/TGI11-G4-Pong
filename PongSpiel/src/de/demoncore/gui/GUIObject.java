@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
 
 public class GUIObject extends GameObject implements GameActionListener {
@@ -65,6 +66,16 @@ public class GUIObject extends GameObject implements GameActionListener {
 	@Override
 	public void OnMouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
+			
+			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+				if(o instanceof GUIObject) {
+					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
+						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o))
+							if(o.enableRendering) return;
+					}
+				}
+			}
+			
 			OnMouseDownUIObject(e);
 		}
 	}
@@ -72,6 +83,17 @@ public class GUIObject extends GameObject implements GameActionListener {
 	@Override
 	public void OnMouseUp(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
+			
+			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+				if(o instanceof GUIObject) {
+					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
+						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o)) {
+							if(o.enableRendering) return;
+						}
+					}
+				}
+			}
+			
 			OnMouseUpUIObject(e);
 		}
 	}
@@ -114,16 +136,37 @@ public class GUIObject extends GameObject implements GameActionListener {
 	public void Update() {
 		super.Update();
 		
+		CheckHover();
+	}
+
+	void CheckHover() {
 		if(CheckIntersection(
 				(int)(MouseInfo.getPointerInfo().getLocation().getX() - Gui.GetScreenLocation().x),
 				(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y))) {
-			if(!isHovering)
+			
+			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+				if(o instanceof GUIObject) {
+					if(((GUIObject)o).CheckIntersection(
+							(int)MouseInfo.getPointerInfo().getLocation().getX(),
+							(int)MouseInfo.getPointerInfo().getLocation().getY())) {
+						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o)) {
+							if(o.enableRendering) {
+								OnMouseStopHoverOverUIObject();
+								return;
+							}
+						}
+					}
+				}
+			}
+			
+			if(!isHovering) {				
 				OnMouseHoverOverUIObject();
+			}
 		}
 		else if(isHovering)
 			OnMouseStopHoverOverUIObject();
 	}
-
+	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);

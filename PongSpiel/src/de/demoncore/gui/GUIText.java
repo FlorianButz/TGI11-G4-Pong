@@ -55,14 +55,14 @@ public class GUIText extends GUIObject {
 	public Vector3 GetPosition() {
 		if(centerText) {
 			return position.subtract(new Vector3(
-					size.x * anchorPoint.x,
-					size.y * anchorPoint.y
+					size.x * anchorPoint.x + localPosition.x,
+					size.y * anchorPoint.y + localPosition.y
 					));
 		}
 		
 		return position.subtract(new Vector3(
-				0,
-				size.y * anchorPoint.y
+				0 + localPosition.x,
+				size.y * anchorPoint.y + localPosition.y
 				));
 	}
 }

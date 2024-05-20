@@ -148,8 +148,6 @@ public class ParticleSystem extends GameObject {
 			if(p == null) continue;
 			
 			Vector3 worldPos = p.position;
-			worldPos.x += p.size.x / 4;
-			worldPos.y += p.size.y / 4;
 			
 			if(Settings.GetDebugMode()) {
 				g2d.setColor(Color.white);
@@ -158,8 +156,15 @@ public class ParticleSystem extends GameObject {
 			
 			g2d.setColor(p.color);
 		    g2d.rotate(Math.toRadians(p.rotation), worldPos.x, worldPos.y);
-			g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)p.size.x, (int)p.size.y);
+			g2d.fillRect((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
 			g2d.rotate(Math.toRadians(-p.rotation), worldPos.x, worldPos.y);
 		}
+	}
+	
+	@Override
+	public void OnDestroy() {
+		super.OnDestroy();
+		
+		particles = null;
 	}
 }
