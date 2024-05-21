@@ -2,6 +2,7 @@ package de.demoncore.gameObjects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class ParticleSystem extends GameObject {
 	public float particleSystemTime = 0;
 	float particleSystemTimeStart = 0;
 
+	boolean isStoppedByCull = false;
+	
 	boolean hasInitialized = false;
 	
 	public ParticleSystem(int x, int y) {
@@ -105,13 +108,11 @@ public class ParticleSystem extends GameObject {
 	public void Update() {
 		super.Update();
 		
-		if(GameLogic.isGamePaused) return;
-		
-		if(hasInitialized == false) return;
+		if(GameLogic.isGamePaused || hasInitialized == false) return;
 		
 		particleSystemTime = GameLogic.GetInstance().gameTime - particleSystemTimeStart;
 
-		if(emitLoop) {
+		if(emitLoop && !isStoppedByCull) {
 			if(emitTime >= emitPause) {
 				for(int s = 0; s < emitChunk; s++) {
 					AddParticle();
@@ -145,12 +146,13 @@ public class ParticleSystem extends GameObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		for (Particle p : new ArrayList<Particle>(particles)){
+			if(particles == null) return;
 			if(p == null) continue;
 			
 			Vector3 worldPos = p.position;
 			
 			if(Settings.GetDebugMode()) {
-				g2d.setColor(Color.white);
+				g2d.setColor(GameMath.LerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
 				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
 			}
 			
@@ -166,5 +168,27 @@ public class ParticleSystem extends GameObject {
 		super.OnDestroy();
 		
 		particles = null;
+	}
+	
+	@Override
+	public boolean CheckDistanceCulled(Rectangle viewport) {
+		for (Particle p : particles){
+			Vector3 worldPos = p.position.add(this.position);
+			Rectangle pBounds = new Rectangle((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
+			if(!viewport.intersects(pBounds)) {
+				particles.remove(p);
+			}else {
+			}
+		}
+		
+		if(particles.size() == 0) {
+			if(!GetBoundingBox().intersects(viewport)) {
+				isStoppedByCull = true;
+				return false;
+			}else{
+				isStoppedByCull = false;
+			}
+		}
+		return true;
 	}
 }

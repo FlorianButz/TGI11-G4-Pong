@@ -24,8 +24,8 @@ public class GUIButton extends GUIObject {
 	
 	public Color currentTextColor = normalTextColor;
 
-	public float colorTransitionSmoothing = 0.055f;
-	public float sizeTransitionSmoothing = 0.075f;
+	public float colorTransitionSmoothing = 5f;
+	public float sizeTransitionSmoothing = 2f;
 
 	public float normalButtonWidth;
 	public float hoverButtonWidth = 25;
@@ -121,22 +121,24 @@ public class GUIButton extends GUIObject {
 
 		event.UpdateEvent();
 		
-		if(this.isHovering) {
-			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing);
-			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing);
+		float fps = de.demoncore.rendering.Draw.GetFramesPerSecond();
 		
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize + textHoverSize, sizeTransitionSmoothing);
+		if(this.isHovering) {
+			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
+		
+			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize + textHoverSize, sizeTransitionSmoothing / fps);
 
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing);
+			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing / fps);
 		}
 		else {
 			
-			currentColor = GameMath.LerpColor(currentColor, normalColor, colorTransitionSmoothing);
-			currentTextColor = GameMath.LerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing);
+			currentColor = GameMath.LerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.LerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
 	
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing);
+			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps);
 
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing);
+			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps);
 		}
 	
 	}

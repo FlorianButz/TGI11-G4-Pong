@@ -75,7 +75,17 @@ public class MainMenu extends BaseScene {
 		});
 		anim.Play(); // Spiele animation 1
 
-		GUIButton localMultiplayer = new GUIButton(0, 0, 800, 75, "Zweispieler Modus", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, "1 Spieler", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new TwoPlayerPong());
+			}
+		});
+		singleplayer.alignment = GUIAlignment.Center;
+		AddObject(singleplayer);
+		
+		GUIButton localMultiplayer = new GUIButton(220, 0, 360, 75, "2 Spieler", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

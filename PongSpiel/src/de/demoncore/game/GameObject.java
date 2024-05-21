@@ -19,6 +19,7 @@ public class GameObject {
 	public Vector3 anchorPoint = new Vector3(0.5f, 0.5f);	// Der "Mittelpunkt" vom GameObject
 
 	public boolean distanceCulling = true;	// Ob das GameObject nicht gerendert werden soll, sobalt es zu weit weg ist
+	public boolean isDistanceCulled = true;	// Ob das GameObject zu weit weg ist von der kamera
 	public boolean enableRendering = true;	// Ob das GameObject gerendert werden soll
 	
 	public GameObject(int posX, int posY, int width, int height) {
@@ -81,5 +82,9 @@ public class GameObject {
 		Vector3 worldPos = GetPosition();
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
-	}	
+	}
+	
+	public boolean CheckDistanceCulled(Rectangle viewport) {
+		return GetBoundingBox().intersects(viewport);
+	}
 }

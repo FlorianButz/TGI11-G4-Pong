@@ -34,12 +34,13 @@ public class Draw extends JPanel {
 	public float mouseAlpha;
 	public Vector3 mouseLastPosition = Vector3.one();
 
-	double lastTime;
+	static double lastTime = 0;
+	static double fps = 0;
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 	
-		double fps = 1000000000.0 / (System.nanoTime() - lastTime);
+		fps = 1000000000.0 / (System.nanoTime() - lastTime);
 		lastTime = System.nanoTime();
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
@@ -56,8 +57,11 @@ public class Draw extends JPanel {
 		AffineTransform oldTransform = g2d.getTransform();
 		
 		// Anti aliasing
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	// Anti aliasing - sehr wichtig
+		g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);	// Dithering / Ist nicht so wichtig
+		g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);	// Schalte akkurate text anzeige an
+		g2d.setRenderingHint( RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB ); // Text Anti aliasing - sehr wichtig
+		
 		// Neuen transform erstellen
 		AffineTransform transformation = new AffineTransform();
 		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
@@ -71,7 +75,7 @@ public class Draw extends JPanel {
 		
 		// Zeichne alle Spielobjekte
 		
-		g.setColor(Color.WHITE);
+		g2d.setColor(Color.WHITE);
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
@@ -98,10 +102,19 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			if(currentGameObj.enableRendering) {
+			if(currentGameObj.enableRendering && !currentGameObj.isDistanceCulled) {
 				if(!(currentGameObj instanceof GUIObject))	// Gucken ob es GUI objekt ist, weil die müssen als letztes auf den Bildschirm
 					currentGameObj.Draw(g2d, screenwidth, screenheight);
 			}
+		}
+		
+		if(Settings.GetDebugMode()) {
+			Rectangle viewport = SceneManager.GetActiveScene().GetCameraViewport();
+			g2d.setStroke(new BasicStroke(5));
+			g2d.setColor(new Color(1, 1, 0, 0.75f));
+			g2d.drawString("Camera viewport", viewport.x + 10, (int)viewport.getMaxY() - 15);
+			g2d.setColor(new Color(1, 1, 0, 0.25f));
+			g2d.draw(viewport);
 		}
 		
 		g2d.setTransform(oldTransform);	// Alten transform wiederherstellen
@@ -146,6 +159,10 @@ public class Draw extends JPanel {
 		}
 		
 		repaint();
+	}
+	
+	public static float GetFramesPerSecond() {
+		return (float) fps;
 	}
 	
 }

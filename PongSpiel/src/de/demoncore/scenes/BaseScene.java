@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
 import de.demoncore.gui.GUIObject;
+import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
@@ -17,15 +19,44 @@ public class BaseScene {
 	public float cameraZRotation = 0;
 	
 	protected ArrayList<GameObject> sceneObjects; // Alle objekte in dem Level
+	Rectangle cameraViewport;
+	
+	float cameraViewportShrink = 15f;
 	
 	public BaseScene() {
 		sceneObjects = new ArrayList<GameObject>();
 	}
 	
+	public Rectangle GetCameraViewport() {
+		if(cameraViewport == null){
+			this.cameraViewport = CalcViewport();
+		}
+			
+		return cameraViewport;
+	}
+	
+	private Rectangle CalcViewport() {
+		return cameraViewport = new Rectangle(
+				(int)((-cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
+				(int)((-cameraPosition.y -Gui.GetScreenDimensions().y/2) + cameraViewportShrink),
+				(int)((Gui.GetScreenDimensions().x) - cameraViewportShrink * 2),
+				(int)((Gui.GetScreenDimensions().y) - cameraViewportShrink * 2)
+				);
+	}
+	
 	public void UpdateScene() {
 		try {
+			cameraViewport = CalcViewport();
+			
 			for(GameObject gameObject : sceneObjects){
 				gameObject.Update();
+
+				if(gameObject.CheckDistanceCulled(cameraViewport)) {
+					gameObject.isDistanceCulled = false;
+				}else {
+					gameObject.isDistanceCulled = true;
+				}
+
 			}
 		}catch(Exception e) {
 		}

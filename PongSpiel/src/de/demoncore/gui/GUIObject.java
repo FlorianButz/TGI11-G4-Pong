@@ -177,6 +177,11 @@ public class GUIObject extends GameObject implements GameActionListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public boolean CheckDistanceCulled(Rectangle viewport) {
+		return false;
+	}
 }
 
 

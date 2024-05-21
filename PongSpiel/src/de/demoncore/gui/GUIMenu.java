@@ -38,12 +38,12 @@ public class GUIMenu extends GameObject implements GameActionListener {
 	protected EasingType inAnimationEasingTypeBackground = EasingType.OutExponential;
 	protected EasingType outAnimationEasingTypeBackground = EasingType.InOutQuint;
 
-	protected float inAnimationTimePosition = 0.5f;
-	protected float inAnimationTimeBackground = 1f;
-	protected float outAnimationTimePosition = 0.5f;
+	protected float inAnimationTimePosition = 0.75f;
+	protected float inAnimationTimeBackground = 0.5f;
+	protected float outAnimationTimePosition = 0.75f;
 	protected float outAnimationTimeBackground = 1f;
 	
-	public Color backgroundColor = new Color(0f, 0f, 0f, 0.9f);
+	public Color backgroundColor = new Color(0f, 0f, 0f, 0.95f);
 	
 	protected boolean isMenuVisible = false;
 	private boolean hasMenuBeenCreated = false;
@@ -114,10 +114,6 @@ public class GUIMenu extends GameObject implements GameActionListener {
 		if(!hasMenuBeenCreated) 
 			CreateMenu();
 		
-		for(GUIObject o : menuContent) {
-			o.enableRendering = true;
-		}
-		
 		if(outAnim != null) outAnim.Stop();
 		if(bgOutAnim != null) bgOutAnim.Stop();
 		
@@ -137,6 +133,13 @@ public class GUIMenu extends GameObject implements GameActionListener {
 			@Override
 			public void OnUpdate(Vector3 value) {
 				super.OnUpdate(value);
+				
+				if(!background.enableRendering) {
+					for(GUIObject o : menuContent) {
+						o.enableRendering = true;
+					}
+				}
+				
 				menuYPos = (int) value.y;
 				ChangePos();
 			}
