@@ -25,8 +25,8 @@ public class GUIButton extends GUIObject {
 	
 	public Color currentTextColor = normalTextColor;
 
-	public float colorTransitionSmoothing = 10f;
-	public float sizeTransitionSmoothing = 9f;
+	public float colorTransitionSmoothing = 12f;
+	public float sizeTransitionSmoothing = 10f;
 
 	public float normalButtonWidth;
 	public float hoverButtonWidth = 25;

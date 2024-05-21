@@ -44,14 +44,6 @@ public class GameLogic {
 				
 				gameTime += 0.1f;
 				
-				System.out.println("Number of threads " + Thread.activeCount());
-				
-				Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-				System.out.println("------------------------------");
-				for(Thread t : threadSet) {
-					System.out.println(t.getName());
-				}
-				
 				SceneManager.UpdateScenes();
 			}
 		};

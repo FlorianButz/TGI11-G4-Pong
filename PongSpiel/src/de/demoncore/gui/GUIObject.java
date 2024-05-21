@@ -108,12 +108,10 @@ public class GUIObject extends GameObject implements GameActionListener {
 	
 	public void OnMouseHoverOverUIObject() {
 		isHovering = true;
-		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
 	}
 	
 	public void OnMouseStopHoverOverUIObject() {
 		isHovering = false;
-		//System.out.println("test" + this.getClass().descriptorString()); // Debug Line
 	}
 	
 	public boolean CheckIntersection(int x, int y) {
@@ -135,8 +133,6 @@ public class GUIObject extends GameObject implements GameActionListener {
 	@Override
 	public void Update() {
 		super.Update();
-		
-		CheckHover();
 	}
 
 	void CheckHover() {
@@ -149,6 +145,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 					if(((GUIObject)o).CheckIntersection(
 							(int)MouseInfo.getPointerInfo().getLocation().getX(),
 							(int)MouseInfo.getPointerInfo().getLocation().getY())) {
+						
 						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o)) {
 							if(o.enableRendering) {
 								OnMouseStopHoverOverUIObject();
@@ -159,7 +156,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 				}
 			}
 			
-			if(!isHovering) {				
+			if(!isHovering) {
 				OnMouseHoverOverUIObject();
 			}
 		}
@@ -170,12 +167,13 @@ public class GUIObject extends GameObject implements GameActionListener {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);
+
+		CheckHover();
 	}
 
 	@Override
 	public void OnEscapePressed() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

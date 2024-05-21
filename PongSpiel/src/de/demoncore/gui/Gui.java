@@ -2,10 +2,9 @@ package de.demoncore.gui;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.GroupLayout;
@@ -94,5 +93,13 @@ public class Gui {
 			frame.setUndecorated(false);
 			
 		}
+	}
+	
+	public static void AddOnApplicationClose(WindowListener event) {
+		frame.addWindowListener(event);
+	}
+	
+	public static void RemoveOnApplicationClose(WindowListener event) {
+		frame.removeWindowListener(event);
 	}
 }
