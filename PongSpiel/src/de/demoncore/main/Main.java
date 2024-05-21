@@ -18,6 +18,7 @@ public class Main {
 		
 		// VolatileImage class benutzen anstatt buffered image !!!!!!
 		
+		// Musik
 		AudioManager.PlaySound("/music/G4Pong_DarkSong1_Ambience", true);
 		
 		GameLogic gl = new GameLogic();
