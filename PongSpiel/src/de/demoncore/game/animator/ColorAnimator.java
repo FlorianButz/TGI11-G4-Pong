@@ -45,7 +45,7 @@ public class ColorAnimator {
 	
 	public ColorAnimator Play() {
 		
-		animationThread = new Thread() {
+		animationThread = new Thread("coloranimator.animation") {
 			
 			Color value = fromValue;
             

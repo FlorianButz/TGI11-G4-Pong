@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -33,14 +34,12 @@ public class AudioManager {
 
         if (clipVolume == 0) return null;
 
-        CleanupClipList();
-
         try {
             InputStream audioSrc = AudioManager.class.getResourceAsStream("/resources/audio/" + audioName + ".wav");
             InputStream bufferedIn = new BufferedInputStream(audioSrc, bufferSize);
 
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(bufferedIn);
-
+            
             Clip clip = AudioSystem.getClip();
             clip.open(inputStream);
 
@@ -53,6 +52,16 @@ public class AudioManager {
 
             activeClips.add(clip);
 
+            clip.addLineListener(new LineListener() {
+                public void update(LineEvent myLineEvent) {
+                  if (myLineEvent.getType() == LineEvent.Type.STOP) {
+                	  clip.stop();
+                	  activeClips.remove(clip);
+                	  clip.equals(null);
+                  }
+                }
+              });
+            
             return clip;
 
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
@@ -64,17 +73,6 @@ public class AudioManager {
 
     public static Clip PlaySound(String audioName) {
         return PlaySound(audioName, false);
-    }
-
-    @SuppressWarnings("unlikely-arg-type")
-    static void CleanupClipList() {
-        List<Clip> clipsToRemove = new ArrayList<>();
-
-        for (Clip c : new ArrayList<>(activeClips)) {
-            if (!c.isRunning()) clipsToRemove.add(c);
-        }
-
-        activeClips.removeAll(clipsToRemove);
     }
 
     public static void ChangeMasterVolume(float volume) {

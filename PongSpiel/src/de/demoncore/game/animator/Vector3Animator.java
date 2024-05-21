@@ -41,7 +41,7 @@ public class Vector3Animator {
 	
 	public Vector3Animator Play() {
 		
-		animationThread = new Thread() {
+		animationThread = new Thread("vector3animator.animation") {
 			
 			Vector3 value = fromValue;
             

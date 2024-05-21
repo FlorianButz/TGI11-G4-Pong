@@ -144,7 +144,7 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {		
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(particles == null) return;
 			if(p == null) continue;
@@ -173,8 +173,8 @@ public class ParticleSystem extends GameObject {
 	@Override
 	public boolean CheckDistanceCulled(Rectangle viewport) {
 		for (Particle p : particles){
-			Vector3 worldPos = p.position.add(this.position);
-			Rectangle pBounds = new Rectangle((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
+			Vector3 particleWorldPosition = p.position;
+			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
 			if(!viewport.intersects(pBounds)) {
 				particles.remove(p);
 			}else {

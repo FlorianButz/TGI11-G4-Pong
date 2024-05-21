@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
@@ -36,12 +37,21 @@ public class Draw extends JPanel {
 
 	static double lastTime = 0;
 	static double fps = 0;
+	static double countedFps = 0;
+	
+	public Draw() {
+		lastTime = System.currentTimeMillis();
+	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 	
-		fps = 1000000000.0 / (System.nanoTime() - lastTime);
-		lastTime = System.nanoTime();
+		countedFps++;
+		if((System.currentTimeMillis() - lastTime) > 1000) {
+			fps = countedFps;
+			countedFps = 0;
+			lastTime = System.currentTimeMillis();
+		}
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
@@ -155,7 +165,8 @@ public class Draw extends JPanel {
 			g2d.setFont(Resources.uiFont.deriveFont(15F));
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.drawString("Version -> " + Main.version, 15, 25);
-			g2d.drawString("FPS -> " + (int)fps, 15, 45);
+			g2d.drawString("FPS -> " + fps + " / Inf", 15, 45);
+			g2d.drawString("TPS -> " + GameLogic.GetInstance().GetTps() + " / 63.0", 15, 65);
 		}
 		
 		repaint();
