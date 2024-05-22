@@ -12,10 +12,13 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.system.MemoryUtil;
 
+import de.demoncore.utils.Vector3;
+
 public class AudioMaster {
 
 	private static List<Integer> buffers = new ArrayList<Integer>();
-
+	private static List<OnVolumeChangeListener> onVolumeChangeListeners = new ArrayList<OnVolumeChangeListener>();
+	
 	private static long context;
 	private static long device;
 	private static ALCCapabilities alcCapabilities;
@@ -32,12 +35,12 @@ public class AudioMaster {
 		alCapabilities = AL.createCapabilities(alcCapabilities);
 	}
 	
-	public static void SetListener() {
-		AL10.alListener3f(AL10.AL_POSITION, 0, 0, 0);
+	public static void SetListener(Vector3 position) {
+		AL10.alListener3f(AL10.AL_POSITION, position.x, 0, position.y);
 		AL10.alListener3f(AL10.AL_VELOCITY, 0, 0, 0);
 	}
 	
-	public static int LoadSound(String file) {
+	public static AudioClip LoadSound(String file) {
 		int buffer = AL10.alGenBuffers();
 		buffers.add(buffer);
 
@@ -45,7 +48,25 @@ public class AudioMaster {
 		AL10.alBufferData(buffer, data.format, data.data, data.samplerate);
 		data.dispose();
 		
-		return buffer;
+		return new AudioClip(buffer);
+	}
+	
+	public static void AddOnVolumeChangeListener(OnVolumeChangeListener listener) {
+		onVolumeChangeListeners.add(listener);
+	}
+	
+	public static void RemoveOnVolumeChangeListener(OnVolumeChangeListener listener) {
+		onVolumeChangeListeners.remove(listener);
+	}
+	
+	public static void SetMasterVolume(float volume) {
+		for(OnVolumeChangeListener l : onVolumeChangeListeners) {
+			l.OnVolumeChange(volume);
+		}
+	}
+	
+	public static void SetMusicVolume(float volume) {
+		System.err.println("Music volume not implemented yet");
 	}
 	
 	public static void DestroyOpenAL() {

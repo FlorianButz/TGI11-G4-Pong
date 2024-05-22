@@ -17,7 +17,6 @@ import de.demoncore.scenes.MainMenu;
 public class SceneManager {
 
 	private static BaseScene activeScene;
-	private static BaseScene gameStartScene = (BaseScene) new MainMenu();
 	
 	private static boolean isInitialized = false;
 	
@@ -30,12 +29,20 @@ public class SceneManager {
 		if(isInitialized == true) return;
 		isInitialized = true;
 		
-		activeScene = gameStartScene;
+		PLoadScene(new MainMenu());
 	}
 	
 	public static void UpdateScenes() {
 		CheckForInit();
-		activeScene.UpdateScene();
+		
+		if(activeScene.IsInitialized())
+			activeScene.UpdateScene();
+	}
+	
+	private static void PLoadScene(BaseScene scene) {
+		activeScene = scene;
+		scene.InitializeScene();
+		scene.SetInitializedComplete();
 	}
 	
 	public static void LoadScene(BaseScene scene) {
@@ -76,10 +83,12 @@ public class SceneManager {
 			
 			GameLogic.isGamePaused = false;
 		
-			if(scene != null)
-				activeScene = scene;
-			else
-				activeScene = new DefaultScene();
+			if(scene != null) {
+				PLoadScene(scene);
+			}
+			else {
+				PLoadScene(new DefaultScene());
+			}
 			
 			GetActiveScene().AddObject(blackScreen);
 			

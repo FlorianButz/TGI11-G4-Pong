@@ -3,9 +3,8 @@ package de.demoncore.utils;
 import java.awt.Font;
 import java.io.InputStream;
 
-import javax.sound.sampled.AudioInputStream;
-
-import de.demoncore.audio.AudioManager;
+import de.demoncore.audio.AudioClip;
+import de.demoncore.audio.AudioMaster;
 import de.demoncore.main.Main;
 
 public class Resources {
@@ -17,8 +16,10 @@ public class Resources {
 	
 	// Audio dateien
 
-	public static String buttonClick = "Button_Click";
-	public static String buttonHover = "Button_Hover";
+	public static AudioClip buttonClick;
+	public static AudioClip buttonHover;
+
+	public static AudioClip pongPowerup;
 	
 	public static void LoadResources() {
 		
@@ -32,6 +33,12 @@ public class Resources {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
+		
+		// Audio
+
+		buttonClick = AudioMaster.LoadSound("/resources/audio/Button_Click.wav");
+		buttonHover = AudioMaster.LoadSound("/resources/audio/Button_Hover.wav");
+		pongPowerup = AudioMaster.LoadSound("/resources/audio/Pong_Powerup.wav");
 		
 	}
 	

@@ -21,6 +21,7 @@ public class GameObject {
 	public boolean distanceCulling = true;	// Ob das GameObject nicht gerendert werden soll, sobalt es zu weit weg ist
 	public boolean isDistanceCulled = true;	// Ob das GameObject zu weit weg ist von der kamera
 	public boolean enableRendering = true;	// Ob das GameObject gerendert werden soll
+	protected boolean isInScene = false; // Ob das GameObject in der Szene ist
 	
 	public GameObject(int posX, int posY, int width, int height) {
 		position = new Vector3(posX, posY);
@@ -29,6 +30,10 @@ public class GameObject {
 	}
 	
 	public void Update() {}
+	
+	public void OnAddToScene() {
+		isInScene = true;
+	}
 	
 	public Vector3 GetPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position.subtract(new Vector3(
@@ -58,7 +63,7 @@ public class GameObject {
 	}
 	
 	public void OnDestroy() {
-		
+		isInScene = false;
 	}
 	
 	public boolean collisionEnabled = true; // Ob das Objekt Kollisionen hat

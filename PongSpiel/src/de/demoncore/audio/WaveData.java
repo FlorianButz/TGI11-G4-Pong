@@ -62,7 +62,7 @@ public class WaveData {
 
 
 	public static WaveData create(String file){
-		InputStream stream = Main.class.getResourceAsStream("/"+file);
+		InputStream stream = Main.class.getResourceAsStream(file);
 		if(stream==null){
 			System.err.println("Couldn't find file: "+file);
 			return null;

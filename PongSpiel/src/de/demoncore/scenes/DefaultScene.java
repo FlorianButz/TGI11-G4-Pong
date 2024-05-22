@@ -13,8 +13,10 @@ import de.demoncore.utils.Resources;
 
 public class DefaultScene extends BaseScene {
 
-	public DefaultScene() {
-		
+	@Override
+	public void InitializeScene() {
+		super.InitializeScene();
+	
 		GUIText t = new GUIText(0, -75, "Etwas ist schief gelaufen...", Resources.uiFont.deriveFont(70F), Color.white);
 		t.alignment = GUIAlignment.Center;
 		t.color = Color.red;

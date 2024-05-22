@@ -75,11 +75,11 @@ public class Draw extends JPanel {
 		// Neuen transform erstellen
 		AffineTransform transformation = new AffineTransform();
 		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
-				SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
-				SceneManager.GetActiveScene().cameraPosition.y + screenheight / 2);
+				-SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
+				-SceneManager.GetActiveScene().cameraPosition.y + screenheight / 2);
 		transformation.translate(
-				SceneManager.GetActiveScene().cameraPosition.x + SceneManager.GetActiveScene().localCameraPosition.x + Gui.GetScreenDimensions().x / 2,
-				SceneManager.GetActiveScene().cameraPosition.y + SceneManager.GetActiveScene().localCameraPosition.y + Gui.GetScreenDimensions().y / 2);
+				-SceneManager.GetActiveScene().cameraPosition.x + SceneManager.GetActiveScene().localCameraPosition.x + Gui.GetScreenDimensions().x / 2,
+				-SceneManager.GetActiveScene().cameraPosition.y + SceneManager.GetActiveScene().localCameraPosition.y + Gui.GetScreenDimensions().y / 2);
 		
 		g2d.transform(transformation);
 		
@@ -167,6 +167,7 @@ public class Draw extends JPanel {
 			g2d.drawString("Version -> " + Main.version, 15, 25);
 			g2d.drawString("FPS -> " + fps + " / Inf", 15, 45);
 			g2d.drawString("TPS -> " + GameLogic.GetInstance().GetTps() + " / 63.0", 15, 65);
+			g2d.drawString("Aktive Threads -> " + Thread.activeCount(), 15, 85);
 		}
 		
 		repaint();

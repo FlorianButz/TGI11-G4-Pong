@@ -6,12 +6,13 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicPasswordFieldUI;
-
+import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class ParticleSystem extends GameObject {
@@ -62,6 +63,11 @@ public class ParticleSystem extends GameObject {
 		collisionEnabled = false;
 	}
 
+	@Override
+	public void OnAddToScene() {
+		super.OnAddToScene();
+	}
+	
 	public void Init() {
 		int pCount = initialParticleEmitCount + GameMath.RandomRange(0, initialParticleEmitCountRandom);
 		particles = new ArrayList<Particle>(pCount);

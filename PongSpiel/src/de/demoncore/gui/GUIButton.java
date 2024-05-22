@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
-import de.demoncore.audio.AudioManager;
+import de.demoncore.audio.AudioSource;
 import de.demoncore.game.SceneManager;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.GameMath;
@@ -36,6 +36,8 @@ public class GUIButton extends GUIObject {
 	public float textHoverSize = 5F;
 	public float textCurrentSize;
 	
+	public AudioSource source;
+	
 	String text = "";
 	Font font;
 	
@@ -57,6 +59,14 @@ public class GUIButton extends GUIObject {
 		currentTextColor = normalTextColor;
 		
 		event = e;
+	}
+	
+	@Override
+	public void OnAddToScene() {
+		super.OnAddToScene();
+
+		source = new AudioSource(this).SetSpacial(false);
+		SceneManager.GetActiveScene().AddObject(source);
 	}
 	
 	public void SetText(String text) {
@@ -126,14 +136,20 @@ public class GUIButton extends GUIObject {
 		event.isMouseDown = true;
 		event.ButtonDown();
 		
-		AudioManager.PlaySound(Resources.buttonClick);
+		source.Play(Resources.buttonClick);
+	}
+	
+	@Override
+	public void OnDestroy() {
+		super.OnDestroy();
+		SceneManager.GetActiveScene().DestroyObject(source);
 	}
 	
 	@Override
 	public void OnMouseHoverOverUIObject() {
 		super.OnMouseHoverOverUIObject();
 
-		AudioManager.PlaySound(Resources.buttonHover);
+		source.Play(Resources.buttonHover);
 	}
 	
 	@Override

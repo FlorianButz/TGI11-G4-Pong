@@ -2,11 +2,10 @@ package de.demoncore.scenes;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
-import de.demoncore.game.SceneManager;
-import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
@@ -18,6 +17,8 @@ public class BaseScene {
 	
 	public float cameraZRotation = 0;
 	
+	private boolean isInitialized = false;
+	
 	protected ArrayList<GameObject> sceneObjects; // Alle objekte in dem Level
 	Rectangle cameraViewport;
 	
@@ -25,6 +26,17 @@ public class BaseScene {
 	
 	public BaseScene() {
 		sceneObjects = new ArrayList<GameObject>();
+	}
+	
+	public void InitializeScene() {
+	}
+	
+	public boolean IsInitialized() {
+		return this.isInitialized;
+	}
+	
+	public void SetInitializedComplete() {
+		this.isInitialized = true;
 	}
 	
 	public Rectangle GetCameraViewport() {
@@ -37,8 +49,8 @@ public class BaseScene {
 	
 	private Rectangle CalcViewport() {
 		return cameraViewport = new Rectangle(
-				(int)((-cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
-				(int)((-cameraPosition.y -Gui.GetScreenDimensions().y/2) + cameraViewportShrink),
+				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
+				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2) + cameraViewportShrink),
 				(int)((Gui.GetScreenDimensions().x) - cameraViewportShrink * 2),
 				(int)((Gui.GetScreenDimensions().y) - cameraViewportShrink * 2)
 				);
@@ -64,6 +76,7 @@ public class BaseScene {
 	
 	public void AddObject(GameObject g) {
 		sceneObjects.add(g);
+		g.OnAddToScene();
 	}
 	
 	public void DestroyObject(GameObject g) {
@@ -71,8 +84,8 @@ public class BaseScene {
 		sceneObjects.remove(g);
 	}
 	
-	public ArrayList<GameObject> GetSceneObjects(){
-		ArrayList<GameObject> objectsCopy = new ArrayList<GameObject>(sceneObjects);
+	public List<GameObject> GetSceneObjects(){
+		List<GameObject> objectsCopy = new ArrayList<GameObject>(sceneObjects);
 		return objectsCopy;
 	}
 	

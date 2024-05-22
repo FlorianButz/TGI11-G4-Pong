@@ -21,7 +21,9 @@ import de.demoncore.utils.Vector3;
 
 public class MainMenu extends BaseScene {
 	
-	public MainMenu() {
+	@Override
+	public void InitializeScene() {
+		super.InitializeScene();
 		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);

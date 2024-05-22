@@ -1,6 +1,6 @@
 package de.demoncore.game;
 
-import de.demoncore.audio.AudioManager;
+import de.demoncore.audio.AudioMaster;
 import de.demoncore.utils.GameMath;
 
 public class Settings {
@@ -19,8 +19,8 @@ public class Settings {
 		SetFullscreen(deserializedSettings.fullscreen);
 		SetDebugMode(deserializedSettings.debugMode);
 		
-		AudioManager.ChangeMasterVolume(masterVolume);
-		AudioManager.ChangeMusicVolume(musicVolume);
+		AudioMaster.SetMasterVolume(masterVolume);
+		AudioMaster.SetMusicVolume(musicVolume);
 	}
 
 	public static void SaveAllSettings() {
@@ -53,6 +53,7 @@ public class Settings {
 
 	public static void SetVolume(float newVolume) {
 		masterVolume = GameMath.Clamp(newVolume, 0, 100);
+		AudioMaster.SetMasterVolume(newVolume / 100f);
 	}
 	
 	public static float GetMusicVolume() {
@@ -61,6 +62,7 @@ public class Settings {
 
 	public static void SetMusicVolume(float newVolume) {
 		musicVolume = GameMath.Clamp(newVolume, 0, 100);
+		AudioMaster.SetMasterVolume(newVolume / 100f);
 	}
 	
 	public static boolean GetFullscreen() {

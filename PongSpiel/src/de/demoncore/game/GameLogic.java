@@ -1,11 +1,9 @@
 package de.demoncore.game;
 
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.demoncore.audio.AudioManager;
-import de.demoncore.gui.Gui;
+import de.demoncore.audio.AudioMaster;
 
 public class GameLogic {
 	
@@ -34,6 +32,9 @@ public class GameLogic {
 			@Override
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
+				
+				if(SceneManager.GetActiveScene() != null) 
+					AudioMaster.SetListener(SceneManager.GetActiveScene().cameraPosition);
 				
 				if((System.currentTimeMillis() - lastTime) > 1000) {
 					tps = countedTps;
