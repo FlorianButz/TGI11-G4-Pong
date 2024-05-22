@@ -10,9 +10,11 @@ import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIRectangle;
 import de.demoncore.gui.Gui;
+import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.scenes.DefaultScene;
 import de.demoncore.scenes.MainMenu;
+import de.demoncore.utils.GameMath;
 
 public class SceneManager {
 
@@ -60,6 +62,7 @@ public class SceneManager {
 		public void OnUpdate(Color value) {
 			super.OnUpdate(value);
 			blackScreen.color = value;
+			Draw.screenScale = GameMath.RemapValue((float)value.getAlpha() / 255, 0, 1, 1, 0);
 		}
 		});
 		
@@ -68,6 +71,7 @@ public class SceneManager {
 			public void OnUpdate(Color value) {
 				super.OnUpdate(value);
 				blackScreen.color = value;
+				Draw.screenScale = GameMath.RemapValue((float)value.getAlpha() / 255, 0, 1, 1, 0);
 			}
 		});
 		
@@ -81,7 +85,7 @@ public class SceneManager {
 				GetActiveScene().DestroyObject(o);
 			}
 			
-			GameLogic.isGamePaused = false;
+			GameLogic.SetGamePaused(false);
 		
 			if(scene != null) {
 				PLoadScene(scene);

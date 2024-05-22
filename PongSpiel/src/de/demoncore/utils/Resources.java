@@ -6,6 +6,7 @@ import java.io.InputStream;
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.main.Main;
+import de.demoncore.sprites.Sprite;
 
 public class Resources {
 	
@@ -20,8 +21,13 @@ public class Resources {
 	public static AudioClip buttonHover;
 
 	public static AudioClip pongPowerup;
+
+	public static AudioClip ambienceMusic1;
+	public static AudioClip ambienceMusic2;
 	
-	public static void LoadResources() {
+	public static Sprite test;
+	
+	public static void LoadFonts() {
 		
 		// Schriftarten
 		
@@ -34,12 +40,28 @@ public class Resources {
 			e.printStackTrace();
 		}	
 		
+	}
+	
+	public static void LoadAudio() {
+		
 		// Audio
 
-		buttonClick = AudioMaster.LoadSound("/resources/audio/Button_Click.wav");
-		buttonHover = AudioMaster.LoadSound("/resources/audio/Button_Hover.wav");
-		pongPowerup = AudioMaster.LoadSound("/resources/audio/Pong_Powerup.wav");
+		buttonClick = AudioMaster.LoadSoundWav("/resources/audio/Button_Click.wav");
+		buttonHover = AudioMaster.LoadSoundWav("/resources/audio/Button_Hover.wav");
+		
+		pongPowerup = AudioMaster.LoadSoundWav("/resources/audio/Pong_Powerup.wav");
+		
+		// Musik
+
+		ambienceMusic1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_DarkSong1.mp3"));
+		ambienceMusic2 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_DarkSong2.mp3"));
 		
 	}
 	
+	public static void LoadSprites() {
+
+		// Textures
+		
+		test = new Sprite("src/resources/textures/test.jpg").Load();
+	}
 }

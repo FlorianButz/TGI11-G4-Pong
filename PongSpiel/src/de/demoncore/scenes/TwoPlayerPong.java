@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
+import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.BeweglichesRechteck;
@@ -26,6 +27,8 @@ public class TwoPlayerPong extends BaseScene {
 	public void InitializeScene() {
 		super.InitializeScene();
 
+		MusicManager.PlayMusic(Resources.ambienceMusic2);
+		
 		// Objekte im Spiel:
 		beispielObjekt1 = new BeweglichesRechteck(50, 100, 20, 20);
 		AddObject(beispielObjekt1);
@@ -41,9 +44,8 @@ public class TwoPlayerPong extends BaseScene {
 
 		ParticleSystem p = new ParticleSystem(0, 0);
 
-		p.initialParticleSpeedMax = new Vector3(5, -10);
-		p.initialParticleSpeedMin = new Vector3(-5, 0);
-		p.particleGravity = 0.05f;
+		p.initialParticleSpeedMax = new Vector3(10, -40);
+		p.initialParticleSpeedMin = new Vector3(-10, 0);
 
 		p.initialParticleSize = 20;
 		p.initialParticleSizeRandom = 10;
@@ -84,7 +86,7 @@ public class TwoPlayerPong extends BaseScene {
 
 		t.SetText((int)GameLogic.GetInstance().GetGameTime() + "");
 
-		cameraPosition = Vector3.Lerp(cameraPosition, player1.GetPosition(), 0.025f);
+		cameraPosition = Vector3.Lerp(cameraPosition, player1.GetPosition(), 0.065f);
 	}
 
 }

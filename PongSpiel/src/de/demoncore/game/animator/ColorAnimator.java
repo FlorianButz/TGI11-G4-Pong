@@ -73,6 +73,8 @@ public class ColorAnimator {
                         	break;
                         case Linear:
                         	break;
+                        case InOutSine:
+                        	time = Easing.EaseInOutSine(time);
                         }
                         
                         value = GameMath.LerpColor(fromValue, toValue, time);

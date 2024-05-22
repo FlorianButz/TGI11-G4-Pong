@@ -62,7 +62,7 @@ public class BaseScene {
 			
 			for(GameObject gameObject : sceneObjects){
 				gameObject.Update();
-
+				
 				if(gameObject.CheckDistanceCulled(cameraViewport)) {
 					gameObject.isDistanceCulled = false;
 				}else {

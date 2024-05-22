@@ -11,7 +11,7 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayer extends RigidBody {
 
-	public float playerAcceleration = 2.75f; // Die Geschwindigkeitszunahme vom Spieler
+	public float playerAcceleration = 15.75f; // Die Geschwindigkeitszunahme vom Spieler
 	
 	ParticleSystem trail;
 	
@@ -22,7 +22,7 @@ public class PongPlayer extends RigidBody {
 	@Override
 	public void Update() {
 		
-		if(GameLogic.isGamePaused) return;
+		if(GameLogic.IsGamePaused()) return;
 		
 		// Partikel effekt fuer den spieler
 		if(trail == null) {
@@ -58,7 +58,7 @@ public class PongPlayer extends RigidBody {
 		AddForce(KeyHandler.playerInput.Normalized().multiply(playerAcceleration));
 		
 		trail.SetPosition(this.position);
-		this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(velocity.Magnitude()) / 10);
+		//this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(velocity.Magnitude()) / 10);
 		
 		super.Update();
 	}

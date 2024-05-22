@@ -16,7 +16,7 @@ public class BeweglichesRechteck extends GameObject {
 	
 	public void automatischeKreisbewegung() {
 
-		if(GameLogic.isGamePaused) return;
+		if(GameLogic.IsGamePaused()) return;
 		
 		if(richtung == 0) {
 			position.x += 1;

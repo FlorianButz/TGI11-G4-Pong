@@ -44,6 +44,9 @@ public class SettingsMenu extends GUIMenu {
 		backgroundColor = new Color(0, 0, 0, 0.975f);
 	}
 	
+	float startSpeed = 0.025f;
+	float speedIncrement = 0.0065f;
+	
 	@Override
 	public List<GUIObject> AddMenuContent() {
 		
@@ -68,9 +71,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
-			float startSpeed = 0.025f;
 			float speed = 0f;
-			float speedIncrement = 0.0005f;
 			
 			@Override
 			public void ButtonDown() {
@@ -98,9 +99,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
-			float startSpeed = 0.025f;
 			float speed = 0f;
-			float speedIncrement = 0.0005f;
 			
 			@Override
 			public void ButtonDown() {
@@ -137,9 +136,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
-			float startSpeed = 0.025f;
 			float speed = 0f;
-			float speedIncrement = 0.0005f;
 			
 			@Override
 			public void ButtonDown() {
@@ -167,9 +164,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
-			float startSpeed = 0.025f;
 			float speed = 0f;
-			float speedIncrement = 0.0005f;
 			
 			@Override
 			public void ButtonDown() {

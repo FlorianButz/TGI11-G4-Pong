@@ -155,7 +155,7 @@ public class GUIButton extends GUIObject {
 	@Override
 	public void Update() {
 		super.Update();
-
+		
 		event.UpdateEvent();	
 	}
 }

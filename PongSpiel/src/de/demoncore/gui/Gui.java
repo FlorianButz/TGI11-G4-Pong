@@ -2,6 +2,7 @@ package de.demoncore.gui;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowListener;
@@ -14,6 +15,7 @@ import javax.swing.JFrame;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.Settings;
+import de.demoncore.main.Main;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.Vector3;
 
@@ -27,7 +29,7 @@ public class Gui {
 	
 		frame = new JFrame();
 		frame.setSize(1200, 900);
-		frame.setTitle("Pong Auf Crack");
+		frame.setTitle(Main.gameName);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 
@@ -101,5 +103,9 @@ public class Gui {
 	
 	public static void RemoveOnApplicationClose(WindowListener event) {
 		frame.removeWindowListener(event);
+	}
+	
+	public static GraphicsConfiguration GetGraphicsConfig() {
+		return frame.getGraphicsConfiguration();
 	}
 }

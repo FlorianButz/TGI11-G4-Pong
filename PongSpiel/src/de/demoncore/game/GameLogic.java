@@ -9,7 +9,7 @@ public class GameLogic {
 	
 	private static GameLogic _instance;
 	
-	public static boolean isGamePaused = false;
+	private static boolean isGamePaused = false;
 	
 	public static GameLogic GetInstance() {
 		return _instance;
@@ -21,10 +21,15 @@ public class GameLogic {
 	public double countedTps;
 	public double tps;
 	public double lastTime;
+	public double accurateTps;
+	public double accurateLastTime;
 	
 	public GameLogic() {
-		gameTimer = new Timer();
 		_instance = this;
+	}
+	
+	public void Start() {
+		gameTimer = new Timer();
 		
 		lastTime = System.currentTimeMillis();
 		
@@ -35,6 +40,9 @@ public class GameLogic {
 				
 				if(SceneManager.GetActiveScene() != null) 
 					AudioMaster.SetListener(SceneManager.GetActiveScene().cameraPosition);
+				
+				accurateTps = 1000000000.0 / (System.nanoTime() - accurateLastTime);
+				accurateLastTime = System.nanoTime();
 				
 				if((System.currentTimeMillis() - lastTime) > 1000) {
 					tps = countedTps;
@@ -49,7 +57,16 @@ public class GameLogic {
 			}
 		};
 		
-		gameTimer.scheduleAtFixedRate(gameLogicTask, 0, 16);
+		gameTimer.scheduleAtFixedRate(gameLogicTask, 0, 16);	
+	}	
+	
+	public static void SetGamePaused(boolean isPaused) {
+		isGamePaused = isPaused;
+		AudioMaster.SetAllPaused(isPaused);
+	}
+	
+	public static boolean IsGamePaused() {
+		return isGamePaused;
 	}
 	
 	public float GetGameTime() {
@@ -57,6 +74,10 @@ public class GameLogic {
 	}
 	
 	public double GetTps() {
+		return accurateTps;
+	}
+	
+	public double GetAverageTps() {
 		return tps;
 	}
 }

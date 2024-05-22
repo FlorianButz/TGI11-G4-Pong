@@ -19,8 +19,8 @@ public class Settings {
 		SetFullscreen(deserializedSettings.fullscreen);
 		SetDebugMode(deserializedSettings.debugMode);
 		
-		AudioMaster.SetMasterVolume(masterVolume);
-		AudioMaster.SetMusicVolume(musicVolume);
+		AudioMaster.SetMasterVolume(masterVolume / 100f);
+		AudioMaster.SetMusicVolume(musicVolume / 100f);
 	}
 
 	public static void SaveAllSettings() {
@@ -62,7 +62,7 @@ public class Settings {
 
 	public static void SetMusicVolume(float newVolume) {
 		musicVolume = GameMath.Clamp(newVolume, 0, 100);
-		AudioMaster.SetMasterVolume(newVolume / 100f);
+		AudioMaster.SetMusicVolume(newVolume / 100f);
 	}
 	
 	public static boolean GetFullscreen() {

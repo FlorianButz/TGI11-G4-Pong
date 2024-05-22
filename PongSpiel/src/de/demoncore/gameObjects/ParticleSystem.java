@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameLogic;
@@ -27,13 +29,13 @@ public class ParticleSystem extends GameObject {
 	public Vector3 initialParticleSpeedMax = new Vector3(0, 0, 0);
 	public Vector3 initialParticleSpeedMin = new Vector3(0, 0, 0);
 
-	public float particleSpeedMultiplier = 0.5f;
+	public float particleSpeedMultiplier = 1f;
 
 	public float initialParticleSize = 5;
 	public float initialParticleSizeRandom = 2;
 	public float endParticleSize = 0;
 
-	public float particleGravity = 0.01f ;
+	public float particleGravity = 1f ;
 
 	public float particleDamping = 0.99f; // Nur werte zwischen 0 und 1!
 
@@ -109,20 +111,22 @@ public class ParticleSystem extends GameObject {
 		
 		particles.add(p);
 	}
-
+	
+	int updateTimer = 0;
+	
 	@Override
 	public void Update() {
 		super.Update();
 		
-		if(GameLogic.isGamePaused || hasInitialized == false) return;
-		
+		if(GameLogic.IsGamePaused() || hasInitialized == false) return;
 		particleSystemTime = GameLogic.GetInstance().gameTime - particleSystemTimeStart;
 
-		if(emitLoop && !isStoppedByCull) {
+		if(emitLoop && !isStoppedByCull) {			
 			if(emitTime >= emitPause) {
 				for(int s = 0; s < emitChunk; s++) {
 					AddParticle();
 				}
+				
 				emitTime = 0;
 			}
 			else
@@ -131,15 +135,18 @@ public class ParticleSystem extends GameObject {
 
 		List<Particle> removeParticles = new ArrayList<Particle>();
 		for(Particle p : particles) {
-			p.position.x += p.velocity.x;
-			p.position.y += p.velocity.y;
+			Vector3 vel = p.velocity;
+			p.position.x += vel.x;
+			p.position.y += vel.y;
 
-			p.velocity = p.velocity.multiply(particleDamping);
-			p.velocity.y += particleGravity;
+			vel = vel.multiply(particleDamping);
+			vel.y += particleGravity;
 
+			p.velocity = vel;
+			
 			p.color = GameMath.LerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
 			p.size = Vector3.one().multiply(GameMath.Lerp(initialParticleSize, endParticleSize, (float)p.currentLifetime / (float)p.maxLifetime));
-			
+
 			if(p.currentLifetime >= p.maxLifetime) {
 				removeParticles.add(p);
 			}
@@ -150,7 +157,8 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {		
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		if(particles == null) return;
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(particles == null) return;
 			if(p == null) continue;

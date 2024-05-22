@@ -103,13 +103,13 @@ public class PauseMenu extends GUIMenu {
 	public void ShowMenu() {
 		super.ShowMenu();
 
-		GameLogic.isGamePaused = true;
+		GameLogic.SetGamePaused(true);
 	}
 	
 	@Override
 	public void HideMenu() {
 		super.HideMenu();
 
-		GameLogic.isGamePaused = false;
+		GameLogic.SetGamePaused(false);
 	}
 }

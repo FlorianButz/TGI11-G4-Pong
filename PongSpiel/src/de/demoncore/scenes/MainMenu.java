@@ -3,6 +3,7 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
+import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
@@ -10,12 +11,13 @@ import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.SettingsMenu;
-import de.demoncore.gameObjects.TestMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
+import de.demoncore.main.Main;
+import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -25,13 +27,18 @@ public class MainMenu extends BaseScene {
 	public void InitializeScene() {
 		super.InitializeScene();
 		
+		MusicManager.PlayMusic(Resources.ambienceMusic1);
+		
+		SpriteObject s = new SpriteObject(0, 0, 100, 100, Resources.test);
+		AddObject(s);
+		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
 		bgSys.emitLoop = true;
 		bgSys.particleColorFirst = new Color(1, 1, 1, 0.085f);
 		bgSys.particleColorSecond = new Color(1, 1, 1, 0.04f);
-		bgSys.emitPause = 45;
-		bgSys.emitChunk = 20;
+		bgSys.emitPause = 15;
+		bgSys.emitChunk = 2;
 		bgSys.initialParticleSize = 15;
 		bgSys.particleLifetime += 2500;
 		bgSys.initialParticleSpeedMax = new Vector3(0.25f, 0.25f);
@@ -41,7 +48,7 @@ public class MainMenu extends BaseScene {
 		bgSys.Init();
 		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
 		
-		GUIText title = new GUIText(0, 175, "Pong auf Crack", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
+		GUIText title = new GUIText(0, 175, Main.gameName, Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
 		AddObject(title);
 		
 		Vector3Animator anim = new Vector3Animator(Vector3.one().multiply(150), Vector3.one().multiply(160), 5, EasingType.Linear); // Erstelle neue animation für den Titel text

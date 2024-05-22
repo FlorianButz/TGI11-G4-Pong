@@ -69,6 +69,8 @@ public class Vector3Animator {
                         	break;
                         case Linear:
                         	break;
+                        case InOutSine:
+                        	time = Easing.EaseInOutSine(time);
                         }
                         
                         value = Vector3.Lerp(fromValue, toValue, time);

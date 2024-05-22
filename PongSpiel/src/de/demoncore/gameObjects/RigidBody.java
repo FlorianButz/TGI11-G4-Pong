@@ -14,7 +14,7 @@ public class RigidBody extends GameObject {
 	public Vector3 velocity = Vector3.zero();
 	Vector3 lastPosition;
 	
-	public float friction = 0.92f; // Wie viel geschwindigkeit jede iteration entnommen wird
+	public float friction = 0.875f; // Wie viel geschwindigkeit jede iteration entnommen wird
 	
 	public RigidBody(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
@@ -39,7 +39,7 @@ public class RigidBody extends GameObject {
 					positionAdd.x = (this.position.x - intersectionMiddle.x);
 					positionAdd.y = (this.position.y - intersectionMiddle.y);
 					
-					velocity = positionAdd.multiply(0.05f);
+					velocity = velocity.multiply(0f);
 					
 					this.position = this.position.add(positionAdd.multiply(0.5f));
 				}
@@ -65,25 +65,92 @@ public class RigidBody extends GameObject {
 		return false;
 	}
 	
+	void CheckValidVelocity() {
+		
+		{
+			Vector3 velocityX = new Vector3(velocity.x, 0, 0);
+			
+			boolean isIntersecting = false;
+			int iteration = 0;
+
+			do {
+				iteration++;
+
+				if(iteration >= 4) {
+					break;
+				}
+				position = position.add(velocityX.multiply(1f / (float)iteration));
+				isIntersecting = CheckIntersect();
+				if(!isIntersecting)
+					velocity.x = velocityX.multiply(1f / (float)iteration).x;
+
+				position = position.subtract(velocityX.multiply(1f / (float)iteration));
+			}while(isIntersecting);
+		}
+		
+		{
+			Vector3 velocityY = new Vector3(0, velocity.y, 0);
+			
+			boolean isIntersecting = false;
+			int iteration = 0;
+
+			do {
+				
+				iteration++;
+
+				if(iteration >= 4) {
+					break;
+				}
+
+				position = position.add(velocityY.multiply(1f / (float)iteration));
+				isIntersecting = CheckIntersect();
+				if(!isIntersecting) {
+					velocity.y = velocityY.multiply(1f / (float)iteration).y;
+				}
+
+				position = position.subtract(velocityY.multiply(1f / (float)iteration));
+			}while(isIntersecting);
+		}
+		
+	}
+	
+	
 	@Override
 	public void Update() {
 		super.Update();
 
-		if(GameLogic.isGamePaused) return;
+		if(GameLogic.IsGamePaused()) return;
 		
 		CheckCollision();
+		CheckValidVelocity();
 		
 		position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
 		velocity = velocity.multiply(friction);
 
+		CheckCollision();
+		CheckValidVelocity();
+		
 		lastPosition = position;
 	}
 	
 	public void AddForce(Vector3 force) {
-		position = position.add(velocity);
-		if(!CheckIntersect())
-			velocity = velocity.add(force);		
-
-		position = position.subtract(velocity);
+//		boolean isIntersecting = false;
+//		int iteration = 0;
+//
+//		do {
+//			iteration++;
+//
+//			if(iteration >= 4) {
+				velocity = velocity.add(force.multiply(1f));
+//				return;
+//			}
+//
+//			position = position.add(force.multiply(1f / (float)iteration));
+//			isIntersecting = CheckIntersect();
+//			if(!isIntersecting)
+//				velocity = velocity.add(force.multiply(1f / (float)iteration));
+//
+//			position = position.subtract(force.multiply(1f / (float)iteration));
+//		}while(isIntersecting);
 	}
 }
