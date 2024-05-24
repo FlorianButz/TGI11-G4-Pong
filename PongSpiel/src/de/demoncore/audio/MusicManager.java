@@ -25,6 +25,8 @@ public class MusicManager {
 		AL10.alSource3f(sourceId, AL10.AL_POSITION, 0, 0, 0);
 		SetVolume(1f);
 		
+		AL10.alSourcei(sourceId, AL10.AL_LOOPING, 1);
+		
 		AudioMaster.AddOnMusicVolumeChangeListener(new OnMusicVolumeChangeListener() {
 			@Override
 			public void OnMusicVolumeChange(float volume) {

@@ -27,7 +27,7 @@ public class MainMenu extends BaseScene {
 	public void InitializeScene() {
 		super.InitializeScene();
 		
-		MusicManager.PlayMusic(Resources.ambienceMusic1);
+		MusicManager.PlayMusic(Resources.ambienceFast1);
 		
 		SpriteObject s = new SpriteObject(0, 0, 100, 100, Resources.test);
 		AddObject(s);

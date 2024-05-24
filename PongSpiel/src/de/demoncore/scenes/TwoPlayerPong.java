@@ -27,7 +27,7 @@ public class TwoPlayerPong extends BaseScene {
 	public void InitializeScene() {
 		super.InitializeScene();
 
-		MusicManager.PlayMusic(Resources.ambienceMusic2);
+		MusicManager.PlayMusic(Resources.ambienceDark2);
 		
 		// Objekte im Spiel:
 		beispielObjekt1 = new BeweglichesRechteck(50, 100, 20, 20);

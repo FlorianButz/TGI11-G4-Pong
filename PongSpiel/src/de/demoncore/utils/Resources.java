@@ -22,8 +22,11 @@ public class Resources {
 
 	public static AudioClip pongPowerup;
 
-	public static AudioClip ambienceMusic1;
-	public static AudioClip ambienceMusic2;
+	public static AudioClip ambienceDark1;
+	public static AudioClip ambienceDark2;
+	public static AudioClip ambienceHappy1;
+	public static AudioClip ambienceMysterious1;
+	public static AudioClip ambienceFast1;
 	
 	public static Sprite test;
 	
@@ -53,8 +56,11 @@ public class Resources {
 		
 		// Musik
 
-		ambienceMusic1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_DarkSong1.mp3"));
-		ambienceMusic2 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_DarkSong2.mp3"));
+		ambienceDark1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/Gone.mp3"));
+		ambienceDark2 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/TheLastLight.mp3"));
+		ambienceFast1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/NearTheEnd.mp3"));
+		ambienceHappy1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_HappyOrchestra.mp3"));
+		ambienceMysterious1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/FarAway.mp3"));
 		
 	}
 	
