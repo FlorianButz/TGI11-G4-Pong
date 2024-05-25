@@ -32,21 +32,9 @@ public class PauseMenu extends GUIMenu {
 	public void OnDestroy() {
 		super.OnDestroy();
 	}
-
+	
 	@Override
-	public void OnMouseDown(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void OnMouseUp(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void OnEscapePressed() {
+	public void OnEscape() {
 		if(!isMenuVisible)
 			ShowMenu();
 		else if(isMenuFocused && isMenuVisible)
@@ -101,8 +89,12 @@ public class PauseMenu extends GUIMenu {
 	
 	@Override
 	public void ShowMenu() {
+		for(GUIObject o : menuContent) {
+			SceneManager.GetActiveScene().OnTop(o);
+		}
+		
 		super.ShowMenu();
-
+		
 		GameLogic.SetGamePaused(true);
 	}
 	

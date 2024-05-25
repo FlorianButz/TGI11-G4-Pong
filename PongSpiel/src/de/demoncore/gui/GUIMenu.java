@@ -17,11 +17,11 @@ import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
-public class GUIMenu extends GameObject implements GameActionListener {
+public class GUIMenu extends GameObject {
 
-	private List<GUIObject> menuContent = new ArrayList<GUIObject>();
+	protected List<GUIObject> menuContent = new ArrayList<GUIObject>();
 	
-	GUIRectangle background;
+	GUIObject background;
 	GUIButton back;
 
 	int menuYPos = 0;
@@ -51,6 +51,8 @@ public class GUIMenu extends GameObject implements GameActionListener {
 	
 	protected boolean canCloseWithEscape = true;
 	
+	GameActionListener l;
+	
 	public GUIMenu() {
 		super(0, 0, 0, 0);
 
@@ -58,7 +60,15 @@ public class GUIMenu extends GameObject implements GameActionListener {
 		this.collisionEnabled = false;
 		this.color = new Color(0, 0, 0, 0);
 		
-		KeyHandler.listeners.add(this);
+		l = new GameActionListener() {
+			@Override
+			public void OnEscapePressed() {
+				super.OnEscapePressed();
+				OnEscape();
+			}
+		};
+		
+		KeyHandler.listeners.add(l);
 	}
 
 	protected GUIButton CreateBackButton() {
@@ -78,11 +88,16 @@ public class GUIMenu extends GameObject implements GameActionListener {
 		return new ArrayList<GUIObject>();
 	}
 	
+	protected GUIObject CreateBackground() {
+		GUIRectangle bg = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0f));
+		bg.alignment = GUIAlignment.Center;
+		return bg;
+	}
+	
 	private void CreateMenu() {
 		hasMenuBeenCreated = true;
 		
-		background = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0f));
-		background.alignment = GUIAlignment.Center;
+		background = CreateBackground();
 		
 		back = CreateBackButton();
 		
@@ -219,20 +234,7 @@ public class GUIMenu extends GameObject implements GameActionListener {
 		return true;
 	}
 
-	@Override
-	public void OnMouseDown(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void OnMouseUp(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void OnEscapePressed() {
+	public void OnEscape() {
 		if(isMenuVisible && isMenuFocused) HideMenu();
 	}
 	
@@ -240,7 +242,7 @@ public class GUIMenu extends GameObject implements GameActionListener {
 	public void OnDestroy() {
 		super.OnDestroy();
 		
-		KeyHandler.listeners.remove(this);
+		KeyHandler.listeners.remove(l);
 		
 		for(GUIObject o : menuContent) {
 			SceneManager.GetActiveScene().DestroyObject(o);

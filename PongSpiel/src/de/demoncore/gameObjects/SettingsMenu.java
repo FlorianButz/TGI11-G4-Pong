@@ -1,10 +1,12 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -295,6 +297,5 @@ public class SettingsMenu extends GUIMenu {
 			toggleDebugModeTextNew  = "An";
 		
 		toggleDebugMode.SetText(toggleDebugModeTextNew );
-	}
-	
+	}	
 }

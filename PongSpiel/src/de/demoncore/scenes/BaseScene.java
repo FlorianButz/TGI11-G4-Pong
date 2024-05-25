@@ -22,7 +22,7 @@ public class BaseScene {
 	protected ArrayList<GameObject> sceneObjects; // Alle objekte in dem Level
 	Rectangle cameraViewport;
 	
-	float cameraViewportShrink = 15f;
+	float cameraViewportShrink = -35f;
 	
 	public BaseScene() {
 		sceneObjects = new ArrayList<GameObject>();
@@ -33,6 +33,11 @@ public class BaseScene {
 	
 	public boolean IsInitialized() {
 		return this.isInitialized;
+	}
+	
+	public void OnTop(GameObject obj) {
+		sceneObjects.remove(obj);
+		sceneObjects.add(obj);
 	}
 	
 	public void SetInitializedComplete() {

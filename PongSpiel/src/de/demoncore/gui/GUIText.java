@@ -65,4 +65,9 @@ public class GUIText extends GUIObject {
 				size.y * anchorPoint.y + localPosition.y
 				));
 	}
+	
+	@Override
+	public Vector3 GetScale() {		
+		return size;
+	}
 }

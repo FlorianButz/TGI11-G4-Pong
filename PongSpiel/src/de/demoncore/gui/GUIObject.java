@@ -12,21 +12,43 @@ import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Vector3;
 
-public class GUIObject extends GameObject implements GameActionListener {
+public class GUIObject extends GameObject {
 
 	public GUIAlignment alignment = GUIAlignment.TopMiddle;
+	
+	GameActionListener l;
 	
 	public GUIObject(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
 
-		KeyHandler.listeners.add(this);
+		l = new GameActionListener() {
+			@Override
+			public void OnMouseDown(MouseEvent e) {
+				super.OnMouseDown(e);
+				MouseDown(e);
+			}
+			
+			@Override
+			public void OnMouseUp(MouseEvent e) {
+				super.OnMouseUp(e);
+				MouseUp(e);
+			}
+			
+			@Override
+			public void OnEscapePressed() {
+				super.OnEscapePressed();
+				EscapePressed();
+			}
+		};
+		
+		KeyHandler.listeners.add(l);
 		collisionEnabled = false;
 	}
 	
 	@Override
 	public void OnDestroy() {
 		super.OnDestroy();
-		KeyHandler.listeners.remove(this);
+		KeyHandler.listeners.remove(l);
 	}
 	
 	public Vector3 GetUIPosition(int screenWidth, int screenHeight) {
@@ -63,8 +85,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 
 	protected boolean isHovering = false;
 
-	@Override
-	public void OnMouseDown(MouseEvent e) {
+	public void MouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
 			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
@@ -80,8 +101,7 @@ public class GUIObject extends GameObject implements GameActionListener {
 		}
 	}
 	
-	@Override
-	public void OnMouseUp(MouseEvent e) {
+	public void MouseUp(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
 			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
@@ -96,6 +116,10 @@ public class GUIObject extends GameObject implements GameActionListener {
 			
 			OnMouseUpUIObject(e);
 		}
+	}
+	
+	protected void EscapePressed() {
+		
 	}
 	
 	public void OnMouseDownUIObject(MouseEvent e) {
@@ -169,11 +193,6 @@ public class GUIObject extends GameObject implements GameActionListener {
 		g2d.setColor(color);
 
 		CheckHover();
-	}
-
-	@Override
-	public void OnEscapePressed() {
-		// TODO Auto-generated method stub
 	}
 	
 	@Override

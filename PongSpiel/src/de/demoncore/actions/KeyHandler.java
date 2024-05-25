@@ -40,6 +40,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 		for(GameActionListener listener : new ArrayList<GameActionListener>(listeners)) {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
 				listener.OnEscapePressed();
+			if(e.getKeyCode() == KeyEvent.VK_E)
+				listener.OnInteractionKeyPressed();
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {

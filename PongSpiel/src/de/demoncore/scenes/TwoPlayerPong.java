@@ -14,6 +14,7 @@ import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIText;
+import de.demoncore.gui.dialogue.Dialogue;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -23,6 +24,8 @@ public class TwoPlayerPong extends BaseScene {
 	PongPlayer player1;
 	PongPlayer player2;
 
+	GameActionListener listener;
+	
 	@Override
 	public void InitializeScene() {
 		super.InitializeScene();
@@ -72,11 +75,25 @@ public class TwoPlayerPong extends BaseScene {
 
 		pauseMenu = new PauseMenu();
 		AddObject(pauseMenu);
+		
+		listener = new GameActionListener() {
+			@Override
+			public void OnInteractionKeyPressed() {
+				super.OnInteractionKeyPressed();
+				PlayerInteract();
+			}
+		};
+		KeyHandler.listeners.add(listener);
 	}
 
 	GUIText t;
 	PauseMenu pauseMenu;
 
+	void PlayerInteract() {
+		Dialogue d = new Dialogue();
+		AddObject(d);
+	}
+	
 	@Override
 	public void UpdateScene() {
 		super.UpdateScene();
