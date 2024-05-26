@@ -1,13 +1,13 @@
 package de.demoncore.gui.dialogue;
 
-public class DialogueLine {
+public class DialogLine {
 
 	private String name;
 	private String line;
 	
-	private DialogueLine nextLine;
+	private DialogLine nextLine;
 	
-	public DialogueLine(String name, String line, DialogueLine nextLine) {
+	public DialogLine(String name, String line, DialogLine nextLine) {
 		this.name = name;
 		this.line = line;
 		this.nextLine = nextLine;
@@ -21,7 +21,7 @@ public class DialogueLine {
 		return line;
 	}
 	
-	public DialogueLine GetNextLine() {
+	public DialogLine GetNextLine() {
 		return nextLine;
 	}
 }

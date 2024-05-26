@@ -21,6 +21,7 @@ public class Main {
 		Resources.LoadSprites();
 		Resources.LoadFonts();
 		Resources.LoadAudio();
+		Resources.LoadDialog();
 		
 		Settings.LoadAllSettings();
 		

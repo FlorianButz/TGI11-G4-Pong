@@ -16,6 +16,7 @@ import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.GUITheme;
 import de.demoncore.gui.GUITheme.Theme;
+import de.demoncore.gui.TextAlignment;
 import de.demoncore.utils.Resources;
 
 public class SettingsMenu extends GUIMenu {
@@ -64,7 +65,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, "Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		volumeText.alignment = GUIAlignment.Center;
-		volumeText.centerText = false;
+		volumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(volumeText);
 		
 		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, ""+(int)Settings.GetVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
@@ -129,7 +130,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, "Musik Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		musicVolumeText.alignment = GUIAlignment.Center;
-		musicVolumeText.centerText = false;
+		musicVolumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(musicVolumeText);
 		
 		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, ""+(int)Settings.GetMusicVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
@@ -194,7 +195,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, "Vollbild (Neustart): ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		fullscreenText.alignment = GUIAlignment.Center;
-		fullscreenText.centerText = false;
+		fullscreenText.SetTextAlignment(TextAlignment.Left);
 		content.add(fullscreenText);
 		
 		String toggleFullscreenText = "Aus";
@@ -212,7 +213,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, "Debug Modus: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		debugModeText.alignment = GUIAlignment.Center;
-		debugModeText.centerText = false;
+		debugModeText.SetTextAlignment(TextAlignment.Left);
 		content.add(debugModeText);
 		
 		String toggleDebugModeText = "Aus";
@@ -230,7 +231,7 @@ public class SettingsMenu extends GUIMenu {
 		
 		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, "Sprache: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		languageText.alignment = GUIAlignment.Center;
-		languageText.centerText = false;
+		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
 		
 		String languageButtonText = "Deutsch"; // Ersetzen mit enum von Settings

@@ -13,7 +13,7 @@ public class GUIText extends GUIObject {
 	String text = "";
 	Font font;
 	
-	public boolean centerText = true;
+	private TextAlignment textAlignment = TextAlignment.Center;
 	
 	public GUIText(int posX, int posY, String text, Font font, Color fontColor) {
 		super(posX, posY, 250, 250);
@@ -53,17 +53,26 @@ public class GUIText extends GUIObject {
 	
 	@Override
 	public Vector3 GetPosition() {
-		if(centerText) {
-			return position.subtract(new Vector3(
-					size.x * anchorPoint.x + localPosition.x,
-					size.y * anchorPoint.y + localPosition.y
-					));
-		}
-		
 		return position.subtract(new Vector3(
-				0 + localPosition.x,
+				size.x * anchorPoint.x + localPosition.x,
 				size.y * anchorPoint.y + localPosition.y
 				));
+	}
+	
+	public void SetTextAlignment(TextAlignment alignment) {
+		textAlignment = alignment;
+		
+		switch(alignment) {
+		case Center:
+			anchorPoint = new Vector3(0.5f, 0.5f);
+			return;
+		case Left:
+			anchorPoint = new Vector3(0f, 0.5f);
+			return;
+		case Right:
+			anchorPoint = new Vector3(1f, 0.5f);
+			return;
+		}
 	}
 	
 	@Override

@@ -8,4 +8,5 @@ public class GameActionListener {
 
 	public void OnEscapePressed() {}
 	public void OnInteractionKeyPressed() {}
+	public void OnSpaceKeyPressed() {}
 }

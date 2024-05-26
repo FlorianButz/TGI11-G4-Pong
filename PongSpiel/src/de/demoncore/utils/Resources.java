@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
+import de.demoncore.gui.dialogue.DialogLine;
 import de.demoncore.main.Main;
 import de.demoncore.sprites.Sprite;
 
@@ -21,6 +22,8 @@ public class Resources {
 	public static AudioClip buttonHover;
 
 	public static AudioClip pongPowerup;
+	
+	public static AudioClip dialogTalk;
 
 	public static AudioClip ambienceDark1;
 	public static AudioClip ambienceDark2;
@@ -29,6 +32,8 @@ public class Resources {
 	public static AudioClip ambienceFast1;
 	
 	public static Sprite test;
+	
+	public static DialogLine testLine;
 	
 	public static void LoadFonts() {
 		
@@ -41,8 +46,7 @@ public class Resources {
 			dialogFont = Font.createFont(Font.TRUETYPE_FONT, is);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
 	}
 	
 	public static void LoadAudio() {
@@ -51,8 +55,10 @@ public class Resources {
 
 		buttonClick = AudioMaster.LoadSoundWav("/resources/audio/Button_Click.wav");
 		buttonHover = AudioMaster.LoadSoundWav("/resources/audio/Button_Hover.wav");
-		
+
 		pongPowerup = AudioMaster.LoadSoundWav("/resources/audio/Pong_Powerup.wav");
+		
+		dialogTalk = AudioMaster.LoadSoundWav("/resources/audio/Dialog_Talk.wav");
 		
 		// Musik
 
@@ -61,7 +67,6 @@ public class Resources {
 		ambienceFast1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/NearTheEnd.mp3"));
 		ambienceHappy1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/G4Pong_HappyOrchestra.mp3"));
 		ambienceMysterious1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/resources/audio/music/FarAway.mp3"));
-		
 	}
 	
 	public static void LoadSprites() {
@@ -69,5 +74,12 @@ public class Resources {
 		// Textures
 		
 		test = new Sprite("src/resources/textures/test.jpg").Load();
+	}
+	
+	public static void LoadDialog() {
+		
+		// Dialog
+		
+		testLine = new DialogLine("Wise Old Man", "Hello, this is a test!", null);
 	}
 }

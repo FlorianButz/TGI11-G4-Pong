@@ -14,7 +14,7 @@ import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.dialogue.Dialogue;
+import de.demoncore.gui.dialogue.Dialog;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -90,8 +90,9 @@ public class TwoPlayerPong extends BaseScene {
 	PauseMenu pauseMenu;
 
 	void PlayerInteract() {
-		Dialogue d = new Dialogue();
+		Dialog d = new Dialog(Resources.testLine);
 		AddObject(d);
+		d.ShowDialog();
 	}
 	
 	@Override

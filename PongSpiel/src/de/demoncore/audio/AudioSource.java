@@ -1,7 +1,5 @@
 package de.demoncore.audio;
 
-import java.nio.IntBuffer;
-
 import org.lwjgl.openal.AL10;
 
 import de.demoncore.game.GameObject;
@@ -51,6 +49,8 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 			System.err.println("Versucht Audio zu spielen bevor die Source in der Scene ist. " + this.parentObject.getClass().getName());
 		}
 
+		AL10.alSourceStop(sourceId);
+		
 		AL10.alSourcef(sourceId, AL10.AL_GAIN, this.volume);
 		AL10.alSourcei(sourceId, AL10.AL_BUFFER, audioClip.GetBuffer());
 		AL10.alSourcePlay(sourceId);

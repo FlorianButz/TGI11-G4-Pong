@@ -28,7 +28,7 @@ public class GUITextArea extends GUIText {
 		String newText = AddLinebreaks(text, maxLetterInOneLine);
 
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
-
+		
 		int counter = 0;
 	    for (String line : newText.split("\n")) {
 	    	g2d.drawString(line, GetUIPosition(screenWidth, screenHeight).x,
@@ -43,7 +43,7 @@ public class GUITextArea extends GUIText {
 	    int lineLen = 0;
 	    while (tok.hasMoreTokens()) {
 	        String word = tok.nextToken();
-
+	        output.append(" ");
 	        if (lineLen + word.length() > maxLineLength) {
 	            output.append("\n");
 	            lineLen = 0;

@@ -42,6 +42,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 				listener.OnEscapePressed();
 			if(e.getKeyCode() == KeyEvent.VK_E)
 				listener.OnInteractionKeyPressed();
+			if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				listener.OnSpaceKeyPressed();
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
