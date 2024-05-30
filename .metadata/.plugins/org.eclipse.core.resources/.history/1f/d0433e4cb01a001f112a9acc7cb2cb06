@@ -1,0 +1,32 @@
+package de.demoncore.gui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+
+public class GUITextArea extends GUIText {
+
+	public int maxLetterInOneLine = 200;
+	
+	public GUITextArea(int posX, int posY, String text, Font font, Color fontColor) {
+		super(posX, posY, text, font, fontColor);
+	}
+
+	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		g2d.setFont(font);
+		
+		size.x = g2d.getFontMetrics().stringWidth(text);
+		size.y = g2d.getFontMetrics().getMaxAscent() +
+				g2d.getFontMetrics().getMaxDescent() +
+				g2d.getFontMetrics().getMaxAdvance() / 2;
+		
+		super.Draw(g2d, screenWidth, screenHeight);
+	
+		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
+		g2d.drawString(text, GetUIPosition(screenWidth, screenHeight).x, (float) (GetUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));
+		
+	}
+	
+}

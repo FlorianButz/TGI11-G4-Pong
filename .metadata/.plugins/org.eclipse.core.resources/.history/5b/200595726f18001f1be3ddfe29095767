@@ -1,0 +1,19 @@
+package de.demoncore.sprites;
+
+import java.awt.Graphics2D;
+
+import de.demoncore.game.GameObject;
+
+public class SpriteObject extends GameObject {
+
+	public SpriteObject(int posX, int posY, int width, int height) {
+		super(posX, posY, width, height);
+	}
+	
+	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		super.Draw(g2d, screenWidth, screenHeight);
+		
+		
+	}
+}

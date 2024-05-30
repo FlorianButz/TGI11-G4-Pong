@@ -1,0 +1,5 @@
+package de.demoncore.gameObjects.dialogue;
+
+public class Dialogue {
+
+}

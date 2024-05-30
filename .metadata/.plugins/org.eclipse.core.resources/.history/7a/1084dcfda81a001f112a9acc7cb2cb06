@@ -1,0 +1,7 @@
+package de.demoncore.gameObjects.dialogue;
+
+import de.demoncore.gui.GUIMenu;
+
+public class Dialogue extends GUIMenu {
+
+}

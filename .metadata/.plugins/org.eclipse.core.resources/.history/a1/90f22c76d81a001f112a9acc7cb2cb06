@@ -1,0 +1,5 @@
+package de.demoncore.gui.dialogue;
+
+public class DialogueLine {
+
+}
