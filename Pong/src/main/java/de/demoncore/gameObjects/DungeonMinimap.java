@@ -27,7 +27,7 @@ public class DungeonMinimap extends GUIObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 
-		g2d.setColor(new Color(1, 1, 1, 0.15f));
+		g2d.setColor(new Color(0.25f, 0.25f, 0.25f, 0.25f));
 		
 		Rectangle viewRect = new Rectangle(
 				(int)GetUIPosition(screenWidth, screenHeight).x - (250) / 2,
@@ -54,19 +54,19 @@ public class DungeonMinimap extends GUIObject {
 				g2d.setColor(Color.white);
 				
 				g2d.drawRect(
-						(int)GetUIPosition(screenWidth, screenHeight).x + (int)((gObj.GetPosition().x + viewOffX) / (float)dungeonSettings.dungeonSize) * 25,
-						(int)GetUIPosition(screenWidth, screenHeight).y + (int)((gObj.GetPosition().y + viewOffY) / (float)dungeonSettings.dungeonSize) * 25,
-						20,
-						20);
+						(int)GetUIPosition(screenWidth, screenHeight).x + (int)(((gObj.GetPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)GetUIPosition(screenWidth, screenHeight).y + (int)(((gObj.GetPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
+						40,
+						40);
 
 				g2d.setColor(new Color(1, 1, 1,
-					GameMath.Clamp(GameMath.RemapValue(Vector3.Distance(gObj.GetPosition().add(gObj.size.multiply(0.5f)), player.GetPosition()), 0, 1250, 1, 0), 0, 1)));
+					GameMath.Clamp(GameMath.RemapValue(Vector3.Distance(gObj.GetPosition().add(gObj.size.multiply(0.5f)), player.GetPosition()), 0, 1500, 1, 0), 0, 1)));
 				
 				g2d.fillRect(
-						(int)GetUIPosition(screenWidth, screenHeight).x + (int)((gObj.GetPosition().x + viewOffX) / (float)dungeonSettings.dungeonSize) * 25,
-						(int)GetUIPosition(screenWidth, screenHeight).y + (int)((gObj.GetPosition().y + viewOffY) / (float)dungeonSettings.dungeonSize) * 25,
-						20,
-						20);
+						(int)GetUIPosition(screenWidth, screenHeight).x + (int)(((gObj.GetPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)GetUIPosition(screenWidth, screenHeight).y + (int)(((gObj.GetPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
+						40,
+						40);
 			}	
 		}
 	}
