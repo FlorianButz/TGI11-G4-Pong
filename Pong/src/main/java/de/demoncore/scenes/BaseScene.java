@@ -40,6 +40,11 @@ public class BaseScene {
 		sceneObjects.add(obj);
 	}
 	
+	public void OnBottom(GameObject obj) {
+		sceneObjects.remove(obj);
+		sceneObjects.add(0, obj);
+	}
+	
 	public void SetInitializedComplete() {
 		this.isInitialized = true;
 	}
