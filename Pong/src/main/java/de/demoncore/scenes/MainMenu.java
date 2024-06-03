@@ -17,6 +17,7 @@ import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
 import de.demoncore.main.Main;
+import de.demoncore.scenes.storymode.DungeonTest;
 import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -108,7 +109,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(null);
+				SceneManager.LoadScene(new DungeonTest());
 			}
 		});
 		storymode.alignment = GUIAlignment.Center;
