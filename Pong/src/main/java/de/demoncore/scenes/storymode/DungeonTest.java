@@ -1,6 +1,8 @@
 package de.demoncore.scenes.storymode;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
@@ -8,10 +10,7 @@ import de.demoncore.gameObjects.DungeonMinimap;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIAlignment;
-import de.demoncore.gui.GUIButton;
-import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.scenes.BaseScene;
-import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class DungeonTest extends BaseScene {
@@ -33,15 +32,6 @@ public class DungeonTest extends BaseScene {
 		minimap.alignment = GUIAlignment.TopRight;
 		AddObject(minimap);
 		
-		GUIButton btn = new GUIButton(0, 35, 100, 25, "Regenerate", Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
-		@Override
-		public void ButtonClick() {
-			super.ButtonClick();
-			GenerateDungeon();
-		}
-		});
-		AddObject(btn);
-		
 		GenerateDungeon();
 	}
 
@@ -56,14 +46,15 @@ public class DungeonTest extends BaseScene {
 	public Random rng;
 
 	public int dungeonSizeXY = 25;
-	public int dungeonSpacing = 125;
+	public int dungeonSpacing = 225;
 	public int dungeonSize = 1250;
 
 	public int maxRooms = 25;
 	private int roomsCount = 0;
 	
 	public GameObject[][] dungeonRoom;
-
+	public List<GameObject> hallways = new ArrayList<GameObject>();
+	
 	Thread gen;
 	
 	void GenerateDungeon() {
@@ -75,6 +66,11 @@ public class DungeonTest extends BaseScene {
 			for(GameObject go : g) {
 				if(go != null) DestroyObject(go);
 			}
+		}
+		
+		for(GameObject go : hallways) {
+			DestroyObject(go);
+			hallways.remove(go);
 		}
 		
 		dungeonRoom = new GameObject[dungeonSizeXY][dungeonSizeXY];
@@ -93,6 +89,13 @@ public class DungeonTest extends BaseScene {
 				AddRoom((int)(dungeonSizeXY / 2), (int)(dungeonSizeXY / 2));
 			
 				minimap.dungeon = dungeonRoom;
+				
+				GameObject randomRoom;
+				
+				do {
+					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeXY)][rng.nextInt(0, dungeonSizeXY)];
+				}while(randomRoom == null);
+				player.SetPosition(randomRoom.GetPosition());
 			}
 		};
 		gen.start();
@@ -125,6 +128,7 @@ public class DungeonTest extends BaseScene {
 			hallway.color = Color.darkGray;
 			hallway.collisionEnabled = false;
 			AddObject(hallway);
+			hallways.add(hallway);
 			
 			OnBottom(hallway);
 		}

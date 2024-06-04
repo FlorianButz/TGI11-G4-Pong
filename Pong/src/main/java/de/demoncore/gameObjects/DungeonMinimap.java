@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.gui.GUIObject;
@@ -27,6 +28,8 @@ public class DungeonMinimap extends GUIObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 
+		Shape s = g2d.getClip();
+		
 		g2d.setColor(new Color(0.25f, 0.25f, 0.25f, 0.25f));
 		
 		Rectangle viewRect = new Rectangle(
@@ -67,7 +70,17 @@ public class DungeonMinimap extends GUIObject {
 						(int)GetUIPosition(screenWidth, screenHeight).y + (int)(((gObj.GetPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
 						40,
 						40);
-			}	
+			}
 		}
+		
+		g2d.setColor(Color.yellow);
+		
+		g2d.fillOval(
+				(int)GetUIPosition(screenWidth, screenHeight).x - (5) / 2,
+				(int)GetUIPosition(screenWidth, screenHeight).y - (5) / 2,
+				5,
+				5);
+		
+		g2d.setClip(s);
 	}
 }
