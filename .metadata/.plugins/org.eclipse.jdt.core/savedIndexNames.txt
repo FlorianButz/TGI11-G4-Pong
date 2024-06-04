@@ -1,11 +1,4 @@
-INDEX VERSION 1.134+C:\Users\Schule\Documents\GitHub\TGI11-G4-Pong\.metadata\.plugins\org.eclipse.jdt.core
-2326977810.index
-2616190138.index
-3828936382.index
-378075610.index
-2711967449.index
-3413725848.index
-4128177532.index
-1650823170.index
+INDEX VERSION 1.134+C:\Users\phil1\OneDrive\Dokumente\GitHub\TGI11-G4-Pong\.metadata\.plugins\org.eclipse.jdt.core
 1865797976.index
-2374407182.index
+1810537579.index
+2616190138.index
