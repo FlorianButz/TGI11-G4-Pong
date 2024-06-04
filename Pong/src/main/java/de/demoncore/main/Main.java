@@ -35,8 +35,7 @@ public class Main {
 		GameLogic gl = new GameLogic();
 		gl.Start();
 		new Gui(gl);
-		
-		// Kommentar
+	
 		
 		Gui.AddOnApplicationClose(new java.awt.event.WindowAdapter() {
 		    @Override
