@@ -18,6 +18,8 @@ public class Main {
 			
 		AudioMaster.InitializeOpenAL();		//initialisiere Audio 
 
+		// Initialisiere Assets
+
 		Resources.LoadSprites();
 		Resources.LoadFonts();
 		Resources.LoadAudio();
