@@ -47,7 +47,7 @@ public class Settings {
 	
 	private static boolean debugMode;
 	
-	private static Language language;
+	private static Language language = Language.Deutsch;
 	
 	// SET / GET METHODEN
 	
@@ -56,6 +56,7 @@ public class Settings {
 	}
 
 	public static void SetLang(Language lang) {
+		if(lang == null) return;
 		language = lang;
 		Translation.activeLanguage = language;
 	}

@@ -6,6 +6,7 @@ import de.demoncore.audio.AudioMaster;
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.Settings;
+import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.Resources;
 
@@ -26,6 +27,8 @@ public class Main {
 		Resources.LoadDialog();
 		
 		Settings.LoadAllSettings();
+		
+		Translation.InitializeTranslation();
 		
 		MusicManager.InitializeMusicManager();
 		

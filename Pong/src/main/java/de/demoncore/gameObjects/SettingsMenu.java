@@ -6,8 +6,10 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.demoncore.game.Language;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
+import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
@@ -60,10 +62,10 @@ public class SettingsMenu extends GUIMenu {
 		int spacing = 15;
 		int startPos = 0;
 		
-		title = new GUIText(0, 175, "Einstellungen", Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
+		title = new GUIText(0, 175, Translation.Get("settings.settings"), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		content.add(title);
 		
-		volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, "Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, Translation.Get("settings.sfxVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		volumeText.alignment = GUIAlignment.Center;
 		volumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(volumeText);
@@ -128,7 +130,7 @@ public class SettingsMenu extends GUIMenu {
 		volumeUp.alignment = GUIAlignment.Center;
 		content.add(volumeUp);
 		
-		musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, "Musik Lautstaerke: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, Translation.Get("settings.musicVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		musicVolumeText.alignment = GUIAlignment.Center;
 		musicVolumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(musicVolumeText);
@@ -193,14 +195,14 @@ public class SettingsMenu extends GUIMenu {
 		musicVolumeUp.alignment = GUIAlignment.Center;
 		content.add(musicVolumeUp);
 		
-		fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, "Vollbild (Neustart): ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, Translation.Get("settings.fullscreen"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		fullscreenText.alignment = GUIAlignment.Center;
 		fullscreenText.SetTextAlignment(TextAlignment.Left);
 		content.add(fullscreenText);
 		
-		String toggleFullscreenText = "Aus";
+		String toggleFullscreenText = Translation.Get("settings.off");
 		if(Settings.GetFullscreen())
-			toggleFullscreenText = "An";
+			toggleFullscreenText = Translation.Get("settings.on");
 		toggleFullscreen = new GUIButton(325, buttonHeight * -1 + spacing * 3 + startPos, 275, buttonHeight, toggleFullscreenText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -211,14 +213,14 @@ public class SettingsMenu extends GUIMenu {
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		content.add(toggleFullscreen);
 		
-		debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, "Debug Modus: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, Translation.Get("settings.debug"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		debugModeText.alignment = GUIAlignment.Center;
 		debugModeText.SetTextAlignment(TextAlignment.Left);
 		content.add(debugModeText);
 		
-		String toggleDebugModeText = "Aus";
+		String toggleDebugModeText = Translation.Get("settings.off");
 		if(Settings.GetDebugMode())
-			toggleDebugModeText = "An";
+			toggleDebugModeText = Translation.Get("settings.on");
 		toggleDebugMode = new GUIButton(325, buttonHeight * -0 + spacing * 4 + startPos, 275, buttonHeight, toggleDebugModeText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -229,7 +231,7 @@ public class SettingsMenu extends GUIMenu {
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		content.add(toggleDebugMode);
 		
-		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, "Sprache: ", Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, Translation.Get("settings.lang"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		languageText.alignment = GUIAlignment.Center;
 		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
@@ -242,6 +244,7 @@ public class SettingsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 				
+				SwitchLanguage();
 			}
 		});
 		toggleLanguage.alignment = GUIAlignment.Center;
@@ -266,9 +269,17 @@ public class SettingsMenu extends GUIMenu {
 		return content;
 	}
 
+	void SwitchLanguage() {
+
+		if(Settings.GetLang() == Language.Deutsch) Settings.SetLang(Language.English);
+		else if(Settings.GetLang() == Language.English) Settings.SetLang(Language.Deutsch);
+		
+		toggleLanguage.SetText(Settings.GetLang().toString());
+	}
+	
 	@Override
 	protected GUIButton CreateBackButton() {
-		GUIButton back = new GUIButton(0, -125, 800, 50, "Save & Back", Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.Get("settings.saveandback"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -282,20 +293,20 @@ public class SettingsMenu extends GUIMenu {
 	
 	void ToggleFullscreen() {
 		Settings.SetFullscreen(!Settings.GetFullscreen());
-		String toggleFullscreenTextNew = "Aus";
+		String toggleFullscreenTextNew = Translation.Get("settings.off");
 		
 		if(Settings.GetFullscreen()) 
-			toggleFullscreenTextNew = "An";
+			toggleFullscreenTextNew = Translation.Get("settings.on");
 		
 		toggleFullscreen.SetText(toggleFullscreenTextNew);
 	}
 	
 	void ToggleDebug() {
 		Settings.SetDebugMode(!Settings.GetDebugMode());
-		String toggleDebugModeTextNew = "Aus";
+		String toggleDebugModeTextNew = Translation.Get("settings.off");
 		
 		if(Settings.GetDebugMode()) 
-			toggleDebugModeTextNew  = "An";
+			toggleDebugModeTextNew  = Translation.Get("settings.on");
 		
 		toggleDebugMode.SetText(toggleDebugModeTextNew );
 	}	

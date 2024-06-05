@@ -75,7 +75,8 @@ public class Draw extends JPanel {
 		screenSize = Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f);
 		
 		g2d.translate((float)screenwidth / 2, (float)screenheight / 2);
-		g2d.scale(screenScale * screenSize, screenScale * screenSize);
+		//g2d.scale(screenScale * screenSize, screenScale * screenSize);
+		g2d.scale(screenScale, screenScale);
 		g2d.translate((float)-screenwidth / 2, (float)-screenheight / 2);
 		
 		// Speichern von altem transform

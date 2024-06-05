@@ -52,9 +52,12 @@ public class InteractableObject extends GameObject {
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
 			g2d.drawString("[E] Interagieren", GetPosition().x + 15, GetPosition().y - 15);
 		}
+	}
+
+	@Override
+	public void Update() {
+		super.Update();
 
 		textColor = GameMath.LerpColor(textColor, defTextCol, 0.1f);
 	}
-
-
 }

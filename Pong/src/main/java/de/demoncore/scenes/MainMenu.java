@@ -16,6 +16,7 @@ import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
+import de.demoncore.gui.GUIToggle;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.storymode.DungeonTest;
 import de.demoncore.sprites.SpriteObject;
@@ -45,6 +46,16 @@ public class MainMenu extends BaseScene {
 		bgSys.endParticleSize = 0;
 		bgSys.Init();
 		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
+		
+		GUIToggle tg = new GUIToggle(0, 450, 200, 100, new GUIButtonClickEvent() {
+		@Override
+		public void ButtonClick() {
+			super.ButtonClick();
+			
+		}
+		});
+		tg.alignment = GUIAlignment.Center;
+		AddObject(tg);
 		
 		GUIText title = new GUIText(0, 175, Main.gameName, Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
 		AddObject(title);
