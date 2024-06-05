@@ -23,6 +23,19 @@ public class GUITheme {
 		}
 	}
 	
+	public static void LoadButtonTheme(GUIToggle button, Theme theme) {
+		switch(theme) {
+		case ButtonSecondary:
+			
+			button.normalColor = new Color(0.5f, 0.5f, 0.5f);
+			button.hoverColor = Color.black;
+			button.hoverCheckmarkColor = new Color(0.5f, 0.5f, 0.5f);
+			button.normalCheckmarkColor = Color.black;
+			
+			break;
+		}
+	}
+	
 	public static void LoadTextTheme(GUIText text, Theme theme) {
 		switch(theme) {
 		case TextSecondary:

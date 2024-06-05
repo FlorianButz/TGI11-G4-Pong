@@ -2,13 +2,13 @@ package de.demoncore.gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
@@ -66,6 +66,9 @@ public class GUIToggle extends GUIObject {
 		SceneManager.GetActiveScene().AddObject(source);
 	}
 	
+	float checkDownscaleFactor = 2.5f;
+	float checkmarkPosX = (int)(size.x / checkDownscaleFactor);
+	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.Draw(g2d, screenWidth, screenHeight);
@@ -76,16 +79,24 @@ public class GUIToggle extends GUIObject {
 		g2d.setStroke(new BasicStroke(4));
 		g2d.setColor(normalColor);
 		g2d.drawRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
-		
-		float checkDownscaleFactor = 2.25f;
 
 		int sX = (int)(size.x / checkDownscaleFactor);
-		int sY = (int)(size.y / (checkDownscaleFactor / 1.5f));
+		int sY = (int)(size.y / (checkDownscaleFactor / 2));
+		int pX = (int)(GetUIPosition(screenWidth, screenHeight).x + size.x - sX * 1.1f);
+		if(!isOn) pX = (int)(GetUIPosition(screenWidth, screenHeight).x + sX * 0.1f);
+		int pY = (int)(GetUIPosition(screenWidth, screenHeight).y + (size.y / 2) - sY / 2);
+		
+		checkmarkPosX = GameMath.Lerp(checkmarkPosX, pX, 6f / Draw.GetFramesPerSecond());
+		
+		g2d.setFont(Resources.uiFont.deriveFont(0.75F * size.y));
+		Rectangle2D bounds = g2d.getFontMetrics(g2d.getFont()).getStringBounds("String", g2d);
+		if(isOn) g2d.drawString(Translation.Get("settings.on"), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+		else g2d.drawString(Translation.Get("settings.off"), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
 		
 		g2d.setColor(currentCheckmarkColor);
 		g2d.fillRect(
-				(int)GetUIPosition(screenWidth, screenHeight).x + (int)size.multiply(0.5f).x,
-				(int)GetUIPosition(screenWidth, screenHeight).y + sY / 2,
+				(int)checkmarkPosX,
+				pY,
 				sX,
 				sY);
 		
@@ -127,6 +138,8 @@ public class GUIToggle extends GUIObject {
 		
 		event.isMouseDown = true;
 		event.ButtonDown();
+		
+		SetIsOn(!isOn);
 		
 		source.Play(Resources.buttonClick);
 	}

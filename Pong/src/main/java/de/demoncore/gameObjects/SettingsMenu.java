@@ -1,13 +1,11 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.Language;
-import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
@@ -18,8 +16,10 @@ import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.GUITheme;
 import de.demoncore.gui.GUITheme.Theme;
+import de.demoncore.gui.GUIToggle;
 import de.demoncore.gui.TextAlignment;
 import de.demoncore.utils.Resources;
+import de.demoncore.utils.Vector3;
 
 public class SettingsMenu extends GUIMenu {
 
@@ -37,10 +37,10 @@ public class SettingsMenu extends GUIMenu {
 	GUIButton musicVolumeUp;
 	
 	GUIText fullscreenText;
-	GUIButton toggleFullscreen;
+	GUIToggle toggleFullscreen;
 
 	GUIText debugModeText;
-	GUIButton toggleDebugMode;
+	GUIToggle toggleDebugMode;
 	
 	GUIText languageText;
 	GUIButton toggleLanguage;
@@ -200,16 +200,15 @@ public class SettingsMenu extends GUIMenu {
 		fullscreenText.SetTextAlignment(TextAlignment.Left);
 		content.add(fullscreenText);
 		
-		String toggleFullscreenText = Translation.Get("settings.off");
-		if(Settings.GetFullscreen())
-			toggleFullscreenText = Translation.Get("settings.on");
-		toggleFullscreen = new GUIButton(325, buttonHeight * -1 + spacing * 3 + startPos, 275, buttonHeight, toggleFullscreenText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		toggleFullscreen = new GUIToggle(250, buttonHeight * -1 + spacing * 3 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				ToggleFullscreen();
+
+				Settings.SetFullscreen(!Settings.GetFullscreen());
 			}
 		});
+		toggleFullscreen.SetIsOn(Settings.GetFullscreen());
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		content.add(toggleFullscreen);
 		
@@ -218,16 +217,15 @@ public class SettingsMenu extends GUIMenu {
 		debugModeText.SetTextAlignment(TextAlignment.Left);
 		content.add(debugModeText);
 		
-		String toggleDebugModeText = Translation.Get("settings.off");
-		if(Settings.GetDebugMode())
-			toggleDebugModeText = Translation.Get("settings.on");
-		toggleDebugMode = new GUIButton(325, buttonHeight * -0 + spacing * 4 + startPos, 275, buttonHeight, toggleDebugModeText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		toggleDebugMode = new GUIToggle(250, buttonHeight * -0 + spacing * 4 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				ToggleDebug();
+
+				Settings.SetDebugMode(!Settings.GetDebugMode());
 			}
 		});
+		toggleDebugMode.SetIsOn(Settings.GetDebugMode());
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		content.add(toggleDebugMode);
 		
@@ -290,24 +288,4 @@ public class SettingsMenu extends GUIMenu {
 		back.alignment = GUIAlignment.DownMiddle;
 		return back;
 	}
-	
-	void ToggleFullscreen() {
-		Settings.SetFullscreen(!Settings.GetFullscreen());
-		String toggleFullscreenTextNew = Translation.Get("settings.off");
-		
-		if(Settings.GetFullscreen()) 
-			toggleFullscreenTextNew = Translation.Get("settings.on");
-		
-		toggleFullscreen.SetText(toggleFullscreenTextNew);
-	}
-	
-	void ToggleDebug() {
-		Settings.SetDebugMode(!Settings.GetDebugMode());
-		String toggleDebugModeTextNew = Translation.Get("settings.off");
-		
-		if(Settings.GetDebugMode()) 
-			toggleDebugModeTextNew  = Translation.Get("settings.on");
-		
-		toggleDebugMode.SetText(toggleDebugModeTextNew );
-	}	
 }

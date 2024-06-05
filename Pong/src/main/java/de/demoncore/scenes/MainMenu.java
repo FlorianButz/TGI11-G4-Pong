@@ -47,7 +47,7 @@ public class MainMenu extends BaseScene {
 		bgSys.Init();
 		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
 		
-		GUIToggle tg = new GUIToggle(0, 450, 200, 100, new GUIButtonClickEvent() {
+		GUIToggle tg = new GUIToggle(0, 450, 100, 50, new GUIButtonClickEvent() {
 		@Override
 		public void ButtonClick() {
 			super.ButtonClick();
