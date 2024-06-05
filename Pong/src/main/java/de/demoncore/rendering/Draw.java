@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -39,8 +38,9 @@ public class Draw extends JPanel {
 	static double fps = 0;
 	static double accurateFps = 0;
 	static double countedFps = 0;
-	
+
 	public static float screenScale = 1f;
+	public static float screenSize = 1f;
 	
 	public Draw() {
 		lastTime = System.currentTimeMillis();
@@ -61,6 +61,9 @@ public class Draw extends JPanel {
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
+		AffineTransform ogTransform = g2d.getTransform();
+		
+		Shape clip = g2d.getClip();
 		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
@@ -69,8 +72,10 @@ public class Draw extends JPanel {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
 		
+		screenSize = Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f);
+		
 		g2d.translate((float)screenwidth / 2, (float)screenheight / 2);
-		g2d.scale(screenScale, screenScale);
+		g2d.scale(screenScale * screenSize, screenScale * screenSize);
 		g2d.translate((float)-screenwidth / 2, (float)-screenheight / 2);
 		
 		// Speichern von altem transform
@@ -163,19 +168,7 @@ public class Draw extends JPanel {
 		{
 			mouseAlpha = GameMath.Lerp(mouseAlpha, 0f, 0.75f / (float)fps);
 		}
-	
-		// Mauszeiger anzeigen
-		g2d.setColor(new Color(1, 1, 1, GameMath.Clamp(mouseAlpha, 0, 1)));
-		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x),
-						(int)(MouseInfo.getPointerInfo().getLocation().getY() - Gui.GetScreenLocation().y),
-						11, 11);
-		g2d.setColor(new Color(0, 0, 0, GameMath.Clamp(mouseAlpha, 0, 1)));
-		g2d.fillOval((int)(MouseInfo.getPointerInfo().getLocation().getX()  - Gui.GetScreenLocation().x + 3),
-						(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y + 3),
-						5, 5);
 
-		mouseLastPosition.x = (float) MouseInfo.getPointerInfo().getLocation().getX();
-		mouseLastPosition.y = (float) MouseInfo.getPointerInfo().getLocation().getY();
 		
 		// Debug modus
 		if(Settings.GetDebugMode()) {			
@@ -186,6 +179,21 @@ public class Draw extends JPanel {
 			g2d.drawString("TPS -> " + GameLogic.GetInstance().GetAverageTps() + " / 63.0", 15, 65);
 			g2d.drawString("Aktive Threads -> " + Thread.activeCount(), 15, 85);
 		}
+
+		g2d.setTransform(ogTransform);
+		g2d.setClip(clip);
+		
+		// Mauszeiger anzeigen
+		g2d.setColor(new Color(1, 1, 1, GameMath.Clamp(mouseAlpha, 0, 1)));
+		g2d.fillOval((int)(GetMousePos().x  - Gui.GetScreenLocation().x),
+						(int)(GetMousePos().y - Gui.GetScreenLocation().y),
+						11, 11);
+		g2d.setColor(new Color(0, 0, 0, GameMath.Clamp(mouseAlpha, 0, 1)));
+		g2d.fillOval((int)(GetMousePos().x  - Gui.GetScreenLocation().x + 3),
+						(int)(GetMousePos().y  - Gui.GetScreenLocation().y + 3),
+						5, 5);
+
+		mouseLastPosition = GetMousePos();
 		
 		repaint();
 	}
@@ -194,4 +202,9 @@ public class Draw extends JPanel {
 		return (float) accurateFps;
 	}
 	
+	public static Vector3 GetMousePos() {
+		return new Vector3(
+				(((float)MouseInfo.getPointerInfo().getLocation().getX())),
+				(((float)MouseInfo.getPointerInfo().getLocation().getY())));
+	}
 }

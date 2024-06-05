@@ -11,7 +11,7 @@ import de.demoncore.utils.Vector3;
 
 public class StorymodePlayer extends RigidBody {
 
-	public float playerAcceleration = 15.75f; // Die Geschwindigkeitszunahme vom Spieler
+	public float playerAcceleration = 7.75f; // Die Geschwindigkeitszunahme vom Spieler
 	
 	ParticleSystem trail;
 	
@@ -52,13 +52,9 @@ public class StorymodePlayer extends RigidBody {
 		if(Math.abs(velocity.Magnitude()) >= 0.1) trail.emitLoop = true;
 		else trail.emitLoop = false;
 		
-		//playerVelocity = GameMath.Lerp(playerVelocity, KeyHandler.playerInput.multiply(playerSpeed).x, 0.035f); // Berechnen der geschwindigkeit
-		//this.position.x += playerVelocity; // Fuege die geschwindigkeit zum spieler hinzu
-		
 		AddForce(KeyHandler.playerInput.Normalized().multiply(playerAcceleration));
 		
 		trail.SetPosition(this.position);
-		//this.size = Vector3.Lerp(Vector3.one().multiply(20), Vector3.one().multiply(10), Math.abs(velocity.Magnitude()) / 10);
 		
 		super.Update();
 	}

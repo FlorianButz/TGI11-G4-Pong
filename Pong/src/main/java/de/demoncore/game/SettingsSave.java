@@ -11,4 +11,6 @@ public class SettingsSave implements Serializable {
 	
 	public boolean debugMode = false;
 	
+	public Language language;
+	
 }

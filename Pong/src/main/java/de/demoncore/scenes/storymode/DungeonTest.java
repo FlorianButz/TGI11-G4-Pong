@@ -7,6 +7,7 @@ import java.util.Random;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.DungeonMinimap;
+import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
@@ -31,6 +32,8 @@ public class DungeonTest extends BaseScene {
 		minimap = new DungeonMinimap(-150, 150, dungeonRoom, player, this);
 		minimap.alignment = GUIAlignment.TopRight;
 		AddObject(minimap);
+		
+		AddObject(new InteractableObject(25, 25, 75, 75, player));
 		
 		GenerateDungeon();
 	}

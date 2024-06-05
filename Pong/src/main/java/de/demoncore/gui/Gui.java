@@ -76,7 +76,7 @@ public class Gui {
 	}
 
 	public static Vector3 GetScreenDimensions() {
-		return new Vector3(draw.getWidth(), draw.getHeight());
+		return new Vector3(frame.getContentPane().getWidth(), frame.getContentPane().getHeight());
 	}
 	
 	public static Vector3 GetScreenLocation() {

@@ -18,6 +18,7 @@ public class Settings {
 		SetVolume(deserializedSettings.masterVolume);
 		SetFullscreen(deserializedSettings.fullscreen);
 		SetDebugMode(deserializedSettings.debugMode);
+		SetLang(deserializedSettings.language);
 		
 		AudioMaster.SetMasterVolume(masterVolume / 100f);
 		AudioMaster.SetMusicVolume(musicVolume / 100f);
@@ -31,6 +32,7 @@ public class Settings {
 		classToSave.musicVolume = (int) musicVolume;
 		classToSave.fullscreen = fullscreen;
 		classToSave.debugMode = debugMode;
+		classToSave.language = language;
 
 		// Speicherdatei erstellen
 		
@@ -45,12 +47,23 @@ public class Settings {
 	
 	private static boolean debugMode;
 	
+	private static Language language;
+	
 	// SET / GET METHODEN
 	
 	public static float GetVolume() {
 		return masterVolume;
 	}
 
+	public static void SetLang(Language lang) {
+		language = lang;
+		Translation.activeLanguage = language;
+	}
+	
+	public static Language GetLang() {
+		return language;
+	}
+	
 	public static void SetVolume(float newVolume) {
 		masterVolume = GameMath.Clamp(newVolume, 0, 100);
 		AudioMaster.SetMasterVolume(newVolume / 100f);

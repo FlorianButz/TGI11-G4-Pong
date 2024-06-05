@@ -30,9 +30,6 @@ public class MainMenu extends BaseScene {
 		
 		MusicManager.PlayMusic(Resources.sneakySnitch);
 		
-		SpriteObject s = new SpriteObject(0, 0, 100, 100, Resources.test);
-		AddObject(s);
-		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);
 		bgSys.emitLoop = true;

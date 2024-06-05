@@ -89,7 +89,7 @@ public class GUIMenu extends GameObject {
 	}
 	
 	protected GUIObject CreateBackground() {
-		GUIRectangle bg = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0f));
+		GUIRectangle bg = new GUIRectangle(-25, -25, (int)Gui.GetScreenDimensions().x + 25, (int)Gui.GetScreenDimensions().y + 25, new Color(0, 0, 0, 0f));
 		bg.alignment = GUIAlignment.Center;
 		return bg;
 	}

@@ -234,7 +234,7 @@ public class SettingsMenu extends GUIMenu {
 		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
 		
-		String languageButtonText = "Deutsch"; // Ersetzen mit enum von Settings
+		String languageButtonText = Settings.GetLang().toString(); // Ersetzen mit enum von Settings
 		//if(Settings.GetDebugMode())
 		//	toggleDebugModeText = "An";
 		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, languageButtonText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
