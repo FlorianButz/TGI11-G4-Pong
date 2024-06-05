@@ -6,7 +6,7 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gameObjects.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
@@ -15,14 +15,14 @@ import de.demoncore.utils.Vector3;
 
 public class TestSzene extends BaseScene {
 
-	PongPlayer player;
+	StorymodePlayer player;
 	
 	@Override
 	public void InitializeScene() {		
 		
 		AddObject(new PauseMenu());
 		
-		player = new PongPlayer(25, -50);
+		player = new StorymodePlayer(25, -50);
 		AddObject(player);
 		
 		GameObject rotesObjekt = new GameObject(0, 0, 25, 25);

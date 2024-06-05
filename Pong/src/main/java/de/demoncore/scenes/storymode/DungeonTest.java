@@ -8,14 +8,14 @@ import java.util.Random;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.DungeonMinimap;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gameObjects.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.Vector3;
 
 public class DungeonTest extends BaseScene {
 
-	PongPlayer player;
+	StorymodePlayer player;
 	
 	DungeonMinimap minimap;
 	
@@ -25,7 +25,7 @@ public class DungeonTest extends BaseScene {
 
 		AddObject(new PauseMenu());
 		
-		player = new PongPlayer(0, 0);
+		player = new StorymodePlayer(0, 0);
 		AddObject(player);
 		
 		minimap = new DungeonMinimap(-150, 150, dungeonRoom, player, this);

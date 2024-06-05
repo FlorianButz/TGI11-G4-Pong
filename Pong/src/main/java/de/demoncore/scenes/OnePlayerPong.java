@@ -2,10 +2,11 @@ package de.demoncore.scenes;
 
 import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gameObjects.StorymodePlayer;
 
 public class OnePlayerPong extends BaseScene{
 
+<<<<<<< Updated upstream
 	PongPlayer Player_One;
 	BeweglichesRechteck Wand_Links;
 	BeweglichesRechteck Wand_Rechts;
@@ -15,6 +16,10 @@ public class OnePlayerPong extends BaseScene{
 	;
 	
 	
+=======
+	StorymodePlayer Player_One;
+	BeweglichesRechteck Wand;
+>>>>>>> Stashed changes
 	
 	@Override
 	public void InitializeScene() {
@@ -23,7 +28,7 @@ public class OnePlayerPong extends BaseScene{
 		
 		AddObject(new PauseMenu());
 	
-		Player_One = new PongPlayer(0, 0);
+		Player_One = new StorymodePlayer(0, 0);
 		AddObject(Player_One);
 	
 		Wand_Links = new BeweglichesRechteck(-960, 0, 25, 1150); // x, y, breite ,läne

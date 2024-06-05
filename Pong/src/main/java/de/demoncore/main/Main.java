@@ -16,7 +16,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 			
-		AudioMaster.InitializeOpenAL();		//initialisiere Audio 
+		AudioMaster.InitializeOpenAL();		// Initialisiere Audio 
 
 		// Initialisiere Assets
 
