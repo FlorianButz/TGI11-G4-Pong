@@ -16,7 +16,9 @@ public class Main {
 	
 	public static void main(String[] args) {
 			
-		AudioMaster.InitializeOpenAL();
+		AudioMaster.InitializeOpenAL();		//initialisiere Audio 
+
+		// Initialisiere Assets
 
 		Resources.LoadSprites();
 		Resources.LoadFonts();
@@ -33,7 +35,7 @@ public class Main {
 		GameLogic gl = new GameLogic();
 		gl.Start();
 		new Gui(gl);
-		
+	
 		
 		Gui.AddOnApplicationClose(new java.awt.event.WindowAdapter() {
 		    @Override
