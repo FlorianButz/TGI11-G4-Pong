@@ -7,22 +7,37 @@ import de.demoncore.gameObjects.PongPlayer;
 public class OnePlayerPong extends BaseScene{
 
 	PongPlayer Player_One;
-	BeweglichesRechteck Wand;
+	BeweglichesRechteck Wand_Links;
+	BeweglichesRechteck Wand_Rechts;
+	BeweglichesRechteck Wand_Oben;
+	BeweglichesRechteck Wand_Unten;
 	
 	@Override
 	public void InitializeScene() {
 		super.InitializeScene();
+		
 		
 		AddObject(new PauseMenu());
 	
 		Player_One = new PongPlayer(0, 0);
 		AddObject(Player_One);
 	
-		Wand = new BeweglichesRechteck(200, 500, 2, 1000); // x, y, z ,größe
-		AddObject(Wand);
-		Wand.richtung = 0;
+		Wand_Links = new BeweglichesRechteck(-960, 0, 25, 1100); // x, y, breite ,läne
+		AddObject(Wand_Links);
+		
 	
-	
+		Wand_Rechts = new BeweglichesRechteck(960, 0, 25, 1100); // x, y, breite ,läne
+		AddObject(Wand_Rechts);
+		
+		
+		Wand_Oben = new BeweglichesRechteck(0, 560, 1800, 25); // x, y, breite ,läne
+		AddObject(Wand_Oben);
+		
+		
+		Wand_Unten = new BeweglichesRechteck(0, -560, 1800, 25); // x, y, breite ,läne
+		AddObject(Wand_Unten);
+			
+
 	}
 	
 	
