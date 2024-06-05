@@ -158,4 +158,8 @@ public class GUIButton extends GUIObject {
 		
 		event.UpdateEvent();	
 	}
+
+	public void SetButtonEvent(GUIButtonClickEvent event) {
+		this.event = event;
+	}
 }
