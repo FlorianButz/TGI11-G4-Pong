@@ -45,7 +45,7 @@ public class DungeonTest extends BaseScene {
 	public long seed;
 	public Random rng;
 
-	public int dungeonSizeXY = 25;
+	public int dungeonSizeArray = 25;
 	public int dungeonSpacing = 225;
 	public int dungeonSize = 1250;
 
@@ -60,7 +60,7 @@ public class DungeonTest extends BaseScene {
 	void GenerateDungeon() {
 		
 		if(dungeonRoom == null)
-			dungeonRoom = new GameObject[dungeonSizeXY][dungeonSizeXY];
+			dungeonRoom = new GameObject[dungeonSizeArray][dungeonSizeArray];
 		
 		for(GameObject[] g : dungeonRoom) {
 			for(GameObject go : g) {
@@ -73,7 +73,7 @@ public class DungeonTest extends BaseScene {
 			hallways.remove(go);
 		}
 		
-		dungeonRoom = new GameObject[dungeonSizeXY][dungeonSizeXY];
+		dungeonRoom = new GameObject[dungeonSizeArray][dungeonSizeArray];
 		
 		seed = new Random().nextLong();
 		rng = new Random(seed);
@@ -86,14 +86,14 @@ public class DungeonTest extends BaseScene {
 			public void run() {
 				super.run();
 				
-				AddRoom((int)(dungeonSizeXY / 2), (int)(dungeonSizeXY / 2));
+				AddRoom((int)(dungeonSizeArray / 2), (int)(dungeonSizeArray / 2));
 			
 				minimap.dungeon = dungeonRoom;
 				
 				GameObject randomRoom;
 				
 				do {
-					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeXY)][rng.nextInt(0, dungeonSizeXY)];
+					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
 				player.SetPosition(randomRoom.GetPosition());
 			}
@@ -177,8 +177,8 @@ public class DungeonTest extends BaseScene {
 	}
 
 	Vector3 GetRoomPosition(int x, int y) {
-		float xP = (dungeonSpacing * x + dungeonSize * x) - (dungeonSpacing * dungeonSizeXY + dungeonSize * dungeonSizeXY) / 2;
-		float yP = (dungeonSpacing * y + dungeonSize * y) - (dungeonSpacing * dungeonSizeXY + dungeonSize * dungeonSizeXY) / 2;
+		float xP = (dungeonSpacing * x + dungeonSize * x) - (dungeonSpacing * dungeonSizeArray + dungeonSize * dungeonSizeArray) / 2;
+		float yP = (dungeonSpacing * y + dungeonSize * y) - (dungeonSpacing * dungeonSizeArray + dungeonSize * dungeonSizeArray) / 2;
 
 		Vector3 pos = new Vector3(xP, yP);
 		return pos;
