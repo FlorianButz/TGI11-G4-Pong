@@ -43,9 +43,7 @@ public class translation {
 		activeLanguage = language;
 		
 		
-
 	}
-	
 	
 	
 }
