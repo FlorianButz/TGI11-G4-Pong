@@ -12,6 +12,10 @@ public class OnePlayerPong extends BaseScene{
 	BeweglichesRechteck Wand_Oben;
 	BeweglichesRechteck Wand_Unten;
 	
+	;
+	
+	
+	
 	@Override
 	public void InitializeScene() {
 		super.InitializeScene();
@@ -37,7 +41,14 @@ public class OnePlayerPong extends BaseScene{
 		Wand_Unten = new BeweglichesRechteck(0, -560, 1900, 25); // x, y, breite ,läne
 		AddObject(Wand_Unten);
 			
-
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	
