@@ -8,7 +8,7 @@ import java.awt.Shape;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.gui.GUIObject;
-import de.demoncore.scenes.storymode.DungeonTest;
+import de.demoncore.scenes.storymode.Dungeon;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
@@ -16,9 +16,9 @@ public class DungeonMinimap extends GUIObject {
 
 	public GameObject[][] dungeon;
 	public StorymodePlayer player;
-	public DungeonTest dungeonSettings;
+	public Dungeon dungeonSettings;
 
-	public DungeonMinimap(int posX, int posY, GameObject[][] dungeon, StorymodePlayer player, DungeonTest dungeonSettings) {
+	public DungeonMinimap(int posX, int posY, GameObject[][] dungeon, StorymodePlayer player, Dungeon dungeonSettings) {
 		super(posX, posY, 0, 0);
 		this.dungeon = dungeon;
 		this.player = player;

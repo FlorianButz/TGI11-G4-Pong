@@ -90,6 +90,10 @@ public class Translation {
 
 		germanTranslation.put("defscene.return", "Zurueck zum Start");
 		englishTranslation.put("defscene.return", "Back to start");
+		
+		
+		germanTranslation.put("interactable.interact", "[E] Interagieren");
+		englishTranslation.put("interactable.interact", "[E] Interact");
 	}
 
 	public static TranslationComponent Get(String translationID) {

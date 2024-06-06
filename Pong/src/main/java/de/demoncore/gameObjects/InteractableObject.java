@@ -7,6 +7,7 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -50,7 +51,7 @@ public class InteractableObject extends GameObject {
 		if(player.GetBoundingBox().intersects(GetBoundingBox())) {
 			g2d.setColor(textColor);
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
-			g2d.drawString("[E] Interagieren", GetPosition().x + 15, GetPosition().y - 15);
+			g2d.drawString(Translation.Get("interactable.interact").Get(), GetPosition().x + 15, GetPosition().y - 15);
 		}
 	}
 

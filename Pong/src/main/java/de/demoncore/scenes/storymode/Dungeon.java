@@ -14,10 +14,9 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.Vector3;
 
-public class DungeonTest extends BaseScene {
+public class Dungeon extends BaseScene {
 
 	StorymodePlayer player;
-	
 	DungeonMinimap minimap;
 	
 	@Override
@@ -92,13 +91,12 @@ public class DungeonTest extends BaseScene {
 				AddRoom((int)(dungeonSizeArray / 2), (int)(dungeonSizeArray / 2));
 			
 				minimap.dungeon = dungeonRoom;
-				
 				GameObject randomRoom;
 				
 				do {
 					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
-				player.SetPosition(randomRoom.GetPosition());
+				player.SetPosition(Vector3.zero().subtract(Vector3.one().multiply(dungeonSize * 2).subtract(Vector3.one().multiply(15))));
 			}
 		};
 		gen.start();
