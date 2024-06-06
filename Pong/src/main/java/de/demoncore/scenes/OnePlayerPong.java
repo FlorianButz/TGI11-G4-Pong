@@ -5,12 +5,13 @@ import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gameObjects.PongPlayerTest;
 import de.demoncore.gameObjects.RigidBody;
 
 public class OnePlayerPong extends BaseScene {
 
 	PongBall Ball;
-	PongPlayer Player_One;
+	PongPlayerTest Player_One;
 	PongPlayer botGegner;
 	GameObject Wand_Links;
 	GameObject Wand_Rechts;
@@ -26,7 +27,7 @@ public class OnePlayerPong extends BaseScene {
 		Ball = new PongBall(0, 0);
 		AddObject(Ball);
 
-		Player_One = new PongPlayer(-900, 0);
+		Player_One = new PongPlayerTest(-900, 0);
 		AddObject(Player_One);
 	
 		botGegner = new PongPlayer(900, 0);
