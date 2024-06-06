@@ -11,6 +11,7 @@ public class OnePlayerPong extends BaseScene {
 
 	PongBall Ball;
 	PongPlayer Player_One;
+	PongPlayer BotPlayer;
 	GameObject Wand_Links;
 	GameObject Wand_Rechts;
 	GameObject Wand_Oben;
@@ -25,23 +26,25 @@ public class OnePlayerPong extends BaseScene {
 		Ball = new PongBall(0, 0);
 		AddObject(Ball);
 
-		Player_One = new PongPlayer(0, 0);
+		Player_One = new PongPlayer(-900, 0);
 		AddObject(Player_One);
 	
-		Wand_Links = new GameObject(-960, 0, 25, 1150); // x, y, breite ,läne
-
+		BotPlayer = new PongPlayer(900, 0);
+		AddObject(BotPlayer);
+		
+		Wand_Links = new GameObject(-960, 0, 25, 1150); // x, y, breite ,länge
 		AddObject(Wand_Links);
 		
 	
-		Wand_Rechts = new GameObject(960, 0, 25, 1150); // x, y, breite ,läne
+		Wand_Rechts = new GameObject(960, 0, 25, 1150); // x, y, breite ,länge
 		AddObject(Wand_Rechts);
 		
 		
-		Wand_Oben = new GameObject(0, 560, 1900, 25); // x, y, breite ,läne
+		Wand_Oben = new GameObject(0, 560, 1900, 25); // x, y, breite ,länge
 		AddObject(Wand_Oben);
 		
 		
-		Wand_Unten = new GameObject(0, -560, 1900, 25); // x, y, breite ,läne
+		Wand_Unten = new GameObject(0, -560, 1900, 25); // x, y, breite ,länge
 		AddObject(Wand_Unten);
 	}
 }
