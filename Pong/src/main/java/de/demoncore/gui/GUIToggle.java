@@ -90,8 +90,8 @@ public class GUIToggle extends GUIObject {
 		
 		g2d.setFont(Resources.uiFont.deriveFont(0.75F * size.y));
 		Rectangle2D bounds = g2d.getFontMetrics(g2d.getFont()).getStringBounds("String", g2d);
-		if(isOn) g2d.drawString(Translation.Get("settings.on"), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
-		else g2d.drawString(Translation.Get("settings.off"), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+		if(isOn) g2d.drawString(Translation.Get("settings.on").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+		else g2d.drawString(Translation.Get("settings.off").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
 		
 		g2d.setColor(currentCheckmarkColor);
 		g2d.fillRect(

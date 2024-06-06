@@ -42,25 +42,6 @@ public class TestSzene extends BaseScene {
 				rotesObjekt.enableRendering = !rotesObjekt.enableRendering;
 			}
 		});
-		
-		
-		GUIButton btn = new GUIButton(0, 0, 250, 50, "Test Button: 0", Resources.uiFont.deriveFont(25F), null);
-		btn.SetButtonEvent(new GUIButtonClickEvent() {
-			int counter = 0;
-		@Override
-		public void ButtonClick() {
-			super.ButtonClick();
-		
-			counter++;
-			btn.SetText("Test Button: + " + counter);
-			
-			rotesObjekt.SetPosition(rotesObjekt.GetPosition().add(Vector3.one()));
-			ShakeCamera(50, 2, 2);
-		}
-		});
-		
-		btn.alignment = GUIAlignment.Center;
-		AddObject(btn);
 	}
 	
 	@Override

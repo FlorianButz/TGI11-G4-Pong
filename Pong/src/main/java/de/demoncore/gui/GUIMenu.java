@@ -9,6 +9,7 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.game.animator.ColorAnimator;
@@ -72,7 +73,7 @@ public class GUIMenu extends GameObject {
 	}
 
 	protected GUIButton CreateBackButton() {
-		GUIButton back = new GUIButton(-65, 65, 50, 50, "X", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(-65, 65, 50, 50, Translation.Literal("X"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 		@Override
 		public void ButtonClick() {
 			HideMenu();

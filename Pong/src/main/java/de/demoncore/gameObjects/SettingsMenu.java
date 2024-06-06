@@ -19,7 +19,6 @@ import de.demoncore.gui.GUITheme.Theme;
 import de.demoncore.gui.GUIToggle;
 import de.demoncore.gui.TextAlignment;
 import de.demoncore.utils.Resources;
-import de.demoncore.utils.Vector3;
 
 public class SettingsMenu extends GUIMenu {
 
@@ -70,11 +69,11 @@ public class SettingsMenu extends GUIMenu {
 		volumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(volumeText);
 		
-		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, ""+(int)Settings.GetVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, Translation.Literal(""+(int)Settings.GetVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		volumeDisplay.alignment = GUIAlignment.Center;
 		content.add(volumeDisplay);
 		
-		volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.Literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -84,7 +83,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetVolume((float)Settings.GetVolume() - 1);
-				volumeDisplay.SetText("" + (int)Settings.GetVolume() + "%");
+				volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
 			}
 			
 			@Override
@@ -95,14 +94,14 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetVolume((float)Settings.GetVolume() - speed);
-					volumeDisplay.SetText("" + (int)Settings.GetVolume() + "%");
+					volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
 				}
 			}
 		});
 		volumeDown.alignment = GUIAlignment.Center;
 		content.add(volumeDown);
 		
-		volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.Literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -112,7 +111,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetVolume((float)Settings.GetVolume() + 1);
-				volumeDisplay.SetText("" + (int)Settings.GetVolume() + "%");
+				volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
 			}
 			
 			@Override
@@ -123,7 +122,7 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetVolume((float)Settings.GetVolume() + speed);
-					volumeDisplay.SetText("" + (int)Settings.GetVolume() + "%");
+					volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
 				}
 			}
 		});
@@ -135,11 +134,11 @@ public class SettingsMenu extends GUIMenu {
 		musicVolumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(musicVolumeText);
 		
-		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, ""+(int)Settings.GetMusicVolume() + "%", Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, Translation.Literal(""+(int)Settings.GetMusicVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		musicVolumeDisplay.alignment = GUIAlignment.Center;
 		content.add(musicVolumeDisplay);
 		
-		musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "\\/", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.Literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -149,7 +148,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetMusicVolume((float)Settings.GetMusicVolume() - 1);
-				musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+				musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -160,14 +159,14 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetMusicVolume((float)Settings.GetMusicVolume() - speed);
-					musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+					musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
 				}
 			}
 		});
 		musicVolumeDown.alignment = GUIAlignment.Center;
 		content.add(musicVolumeDown);
 		
-		musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, "/\\", Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.Literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -177,7 +176,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetMusicVolume((float)Settings.GetMusicVolume() + 1);
-				musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+				musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -188,7 +187,7 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetMusicVolume((float)Settings.GetMusicVolume() + speed);
-					musicVolumeDisplay.SetText("" + (int)Settings.GetMusicVolume() + "%");
+					musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
 				}
 			}
 		});
@@ -237,7 +236,7 @@ public class SettingsMenu extends GUIMenu {
 		String languageButtonText = Settings.GetLang().toString(); // Ersetzen mit enum von Settings
 		//if(Settings.GetDebugMode())
 		//	toggleDebugModeText = "An";
-		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, languageButtonText, Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, Translation.Literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -272,7 +271,7 @@ public class SettingsMenu extends GUIMenu {
 		if(Settings.GetLang() == Language.Deutsch) Settings.SetLang(Language.English);
 		else if(Settings.GetLang() == Language.English) Settings.SetLang(Language.Deutsch);
 		
-		toggleLanguage.SetText(Settings.GetLang().toString());
+		toggleLanguage.SetText(Translation.Literal(Settings.GetLang().toString()));
 	}
 	
 	@Override

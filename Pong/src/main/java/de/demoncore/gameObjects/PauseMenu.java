@@ -1,36 +1,29 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.demoncore.actions.GameActionListener;
-import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.OnLanguageUpdateListener;
 import de.demoncore.game.SceneManager;
-import de.demoncore.game.animator.AnimatorOnCompleteEvent;
-import de.demoncore.game.animator.AnimatorUpdateEvent;
-import de.demoncore.game.animator.ColorAnimator;
-import de.demoncore.game.animator.Easing.EasingType;
-import de.demoncore.game.animator.Vector3Animator;
+import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIObject;
-import de.demoncore.gui.GUIRectangle;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.Gui;
 import de.demoncore.scenes.MainMenu;
 import de.demoncore.utils.Resources;
-import de.demoncore.utils.Vector3;
 
-public class PauseMenu extends GUIMenu {
-
+public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
+	
 	@Override
 	public void OnDestroy() {
 		super.OnDestroy();
+		
+		Translation.listeners.remove(this);
 	}
 	
 	@Override
@@ -45,11 +38,13 @@ public class PauseMenu extends GUIMenu {
 	protected List<GUIObject> AddMenuContent() {
 		List<GUIObject> content = new ArrayList<GUIObject>();
 		
-		GUIText pausedText = new GUIText(0, 175, "Spiel Pausiert", Resources.dialogFont.deriveFont(125F), Color.white);
+		Translation.listeners.add(this);
+		
+		GUIText pausedText = new GUIText(0, 175, Translation.Get("pausemenu.paused"), Resources.dialogFont.deriveFont(125F), Color.white);
 		pausedText.alignment = GUIAlignment.TopMiddle;
 		content.add(pausedText);
 		
-		GUIButton settingsButton = new GUIButton(0, 100, 750, 100, "Einstellungen", Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton settingsButton = new GUIButton(0, 100, 750, 100, Translation.Get("pausemenu.settings"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -61,7 +56,7 @@ public class PauseMenu extends GUIMenu {
 		settingsButton.alignment = GUIAlignment.Center;
 		content.add(settingsButton);
 		
-		GUIButton backToMainMenuButton = new GUIButton(0, 225, 750, 100, "Zurueck zum Hauptmenue", Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton backToMainMenuButton = new GUIButton(0, 225, 750, 100, Translation.Get("pausemenu.backtomainmenu"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -76,7 +71,7 @@ public class PauseMenu extends GUIMenu {
 	
 	@Override
 	protected GUIButton CreateBackButton() {
-		GUIButton returnToGameButton = new GUIButton(0, -25, 750, 100, "Spiel fortsetzen", Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton returnToGameButton = new GUIButton(0, -25, 750, 100, Translation.Get("pausemenu.returntogame"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -103,5 +98,10 @@ public class PauseMenu extends GUIMenu {
 		super.HideMenu();
 
 		GameLogic.SetGamePaused(false);
+	}
+
+	@Override
+	public void OnLanguageUpdate() {
+		
 	}
 }

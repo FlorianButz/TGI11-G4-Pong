@@ -6,12 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.StringTokenizer;
 
+import de.demoncore.game.TranslationComponent;
+
 public class GUITextArea extends GUIText {
 
 	public int maxLetterInOneLine = 200;
 	public int newLineSpacing = 20;
 	
-	public GUITextArea(int posX, int posY, String text, Font font, Color fontColor) {
+	public GUITextArea(int posX, int posY, TranslationComponent text, Font font, Color fontColor) {
 		super(posX, posY, text, font, fontColor);
 	}
 
@@ -20,14 +22,14 @@ public class GUITextArea extends GUIText {
 		g2d.setFont(font);
 		g2d.setColor(color);
 		
-		size.x = g2d.getFontMetrics().stringWidth(text);
+		size.x = g2d.getFontMetrics().stringWidth(text.Get());
 		size.y = g2d.getFontMetrics().getMaxAscent() +
 				g2d.getFontMetrics().getMaxDescent() +
 				g2d.getFontMetrics().getMaxAdvance() / 2;
 		
-		String newText = AddLinebreaks(text, maxLetterInOneLine);
+		String newText = AddLinebreaks(text.Get(), maxLetterInOneLine);
 
-		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
+		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
 		
 		int counter = 0;
 	    for (String line : newText.split("\n")) {

@@ -1,4 +1,4 @@
-package de.demoncore.gui.dialogue;
+package de.demoncore.gui.dialog;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
@@ -58,17 +60,17 @@ public class Dialog extends GameObject {
 		SceneManager.GetActiveScene().AddObject(sfxSource[0]);
 		SceneManager.GetActiveScene().AddObject(sfxSource[1]);
 		
-		name = new GUIText(25, -325, "", Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
+		name = new GUIText(25, -325, Translation.Literal(""), Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
 		name.alignment = GUIAlignment.DownLeft;
 		name.SetTextAlignment(TextAlignment.Left);
 		content.add(name);
 		
-		spaceText = new GUIText(-75 -125, -35, "Druecke 'Space' >", Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
+		spaceText = new GUIText(-75 -125, -35, Translation.Get("dialog.continue"), Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
 		spaceText.SetTextAlignment(TextAlignment.Right);
 		spaceText.alignment = GUIAlignment.DownRight;
 		content.add(spaceText);
 		
-		GUIButton skipBtn = new GUIButton(-100, -35, 150, 35, "Skip Dialog >", Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
+		GUIButton skipBtn = new GUIButton(-100, -35, 150, 35, Translation.Get("dialog.skip"), Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -79,7 +81,7 @@ public class Dialog extends GameObject {
 		GUITheme.LoadButtonTheme(skipBtn, Theme.ButtonSecondary);
 		content.add(skipBtn);
 		
-		dialogueText = new GUITextArea(25, -225, "",
+		dialogueText = new GUITextArea(25, -225, Translation.Literal(""),
 				Resources.uiFont.deriveFont(35F), new Color(1f, 1f, 1f, 1f));
 		dialogueText.alignment = GUIAlignment.DownLeft;
 		dialogueText.SetTextAlignment(TextAlignment.Left);
@@ -113,14 +115,14 @@ public class Dialog extends GameObject {
 			@Override
 			public void run() {
 
-				name.SetText(activeLine.GetName());
+				name.SetText(Translation.Literal(activeLine.GetName()));
 				
 				String displayText = "";
 				String dialogLineText = activeLine.GetLine();
 				
 				for(int c = 0; c < dialogLineText.length(); c++) {
 					displayText += dialogLineText.charAt(c);
-					dialogueText.SetText(displayText);
+					dialogueText.SetText(Translation.Literal(displayText));
 					
 					sfxSource[c % 2].Play(Resources.dialogTalk);
 					

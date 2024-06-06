@@ -1,4 +1,4 @@
-package de.demoncore.gui.dialogue;
+package de.demoncore.gui.dialog;
 
 public class DialogLine {
 

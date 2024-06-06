@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.game.animator.Easing.EasingType;
@@ -47,17 +48,7 @@ public class MainMenu extends BaseScene {
 		bgSys.Init();
 		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
 		
-		GUIToggle tg = new GUIToggle(0, 450, 100, 50, new GUIButtonClickEvent() {
-		@Override
-		public void ButtonClick() {
-			super.ButtonClick();
-			
-		}
-		});
-		tg.alignment = GUIAlignment.Center;
-		AddObject(tg);
-		
-		GUIText title = new GUIText(0, 175, Main.gameName, Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
+		GUIText title = new GUIText(0, 175, Translation.Literal(Main.gameName), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
 		AddObject(title);
 		
 		Vector3Animator anim = new Vector3Animator(Vector3.one().multiply(150), Vector3.one().multiply(160), 5, EasingType.Linear); // Erstelle neue animation für den Titel text
@@ -93,7 +84,7 @@ public class MainMenu extends BaseScene {
 		});
 		anim.Play(); // Spiele animation 1
 
-		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, "1 Spieler", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, Translation.Get("mainmenu.singleplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -103,7 +94,7 @@ public class MainMenu extends BaseScene {
 		singleplayer.alignment = GUIAlignment.Center;
 		AddObject(singleplayer);
 		
-		GUIButton localMultiplayer = new GUIButton(220, 0, 360, 75, "2 Spieler", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton localMultiplayer = new GUIButton(220, 0, 360, 75, Translation.Get("mainmenu.multiplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -113,7 +104,7 @@ public class MainMenu extends BaseScene {
 		localMultiplayer.alignment = GUIAlignment.Center;
 		AddObject(localMultiplayer);
 		
-		GUIButton storymode = new GUIButton(0, 100, 800, 75, "Storymode", Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
+		GUIButton storymode = new GUIButton(0, 100, 800, 75, Translation.Get("mainmenu.storymode"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -123,7 +114,7 @@ public class MainMenu extends BaseScene {
 		storymode.alignment = GUIAlignment.Center;
 		AddObject(storymode);
 		
-		GUIButton settings = new GUIButton(0, 200, 800, 75, "Einstellungen", Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton settings = new GUIButton(0, 200, 800, 75, Translation.Get("mainmenu.settings"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -135,7 +126,7 @@ public class MainMenu extends BaseScene {
 		settings.alignment = GUIAlignment.Center;
 		AddObject(settings);
 		
-		GUIButton quit = new GUIButton(0, 300, 800, 75, "Verlassen", Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
+		GUIButton quit = new GUIButton(0, 300, 800, 75, Translation.Get("mainmenu.quit"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

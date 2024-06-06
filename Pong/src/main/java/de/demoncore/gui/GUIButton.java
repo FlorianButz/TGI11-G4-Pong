@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
@@ -38,12 +39,12 @@ public class GUIButton extends GUIObject {
 	
 	public AudioSource source;
 	
-	String text = "";
+	TranslationComponent text;
 	Font font;
 	
 	GUIButtonClickEvent event;
 	
-	public GUIButton(int posX, int posY, int width, int height, String text, Font font, GUIButtonClickEvent e) {
+	public GUIButton(int posX, int posY, int width, int height, TranslationComponent text, Font font, GUIButtonClickEvent e) {
 		super(posX, posY, width, height);
 		
 		this.text = text;
@@ -69,7 +70,7 @@ public class GUIButton extends GUIObject {
 		SceneManager.GetActiveScene().AddObject(source);
 	}
 	
-	public void SetText(String text) {
+	public void SetText(TranslationComponent text) {
 		this.text = text;
 	}
 	
@@ -89,8 +90,8 @@ public class GUIButton extends GUIObject {
 		
 		this.size.x = currentButtonWidth;
 		
-		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
-		g2d.drawString(text, (int)(GetUIPosition(screenWidth, screenHeight).x + this.size.x / 2 - bounds.getWidth() / 2),
+		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
+		g2d.drawString(text.Get(), (int)(GetUIPosition(screenWidth, screenHeight).x + this.size.x / 2 - bounds.getWidth() / 2),
 				(int)(GetUIPosition(screenWidth, screenHeight).y + this.size.y / 2 +  textCurrentSize / 3)
 				);
 		

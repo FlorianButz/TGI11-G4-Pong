@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
-import de.demoncore.gui.dialogue.DialogLine;
+import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
 import de.demoncore.sprites.Sprite;
 
