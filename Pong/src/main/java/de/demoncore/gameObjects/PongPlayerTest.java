@@ -7,7 +7,7 @@ import de.demoncore.game.GameLogic;
 
 public class PongPlayerTest extends RigidBody {
 
-	public float playerAcceleration = 7.75f; // Die Geschwindigkeitszunahme vom Spieler
+	public float playerAcceleration = 7.75f; // 
 	
 	
 	public PongPlayerTest(int posX, int posY) {
