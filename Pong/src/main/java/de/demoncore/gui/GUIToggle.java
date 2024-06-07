@@ -67,7 +67,7 @@ public class GUIToggle extends GUIObject {
 	}
 	
 	float checkDownscaleFactor = 2.5f;
-	float checkmarkPosX = (int)(size.x / checkDownscaleFactor);
+	float checkmarkPosX = -1;
 	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
@@ -86,12 +86,15 @@ public class GUIToggle extends GUIObject {
 		if(!isOn) pX = (int)(GetUIPosition(screenWidth, screenHeight).x + sX * 0.1f);
 		int pY = (int)(GetUIPosition(screenWidth, screenHeight).y + (size.y / 2) - sY / 2);
 		
+		if(checkmarkPosX == -1) checkmarkPosX = pX;
 		checkmarkPosX = GameMath.Lerp(checkmarkPosX, pX, 6f / Draw.GetFramesPerSecond());
 		
 		g2d.setFont(Resources.uiFont.deriveFont(0.75F * size.y));
 		Rectangle2D bounds = g2d.getFontMetrics(g2d.getFont()).getStringBounds("String", g2d);
-		if(isOn) g2d.drawString(Translation.Get("settings.on").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
-		else g2d.drawString(Translation.Get("settings.off").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35, (float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+		if(isOn) g2d.drawString(Translation.Get("settings.on").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
+				(float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+		else g2d.drawString(Translation.Get("settings.off").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
+				(float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
 		
 		g2d.setColor(currentCheckmarkColor);
 		g2d.fillRect(

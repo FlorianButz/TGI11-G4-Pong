@@ -247,6 +247,23 @@ public class SettingsMenu extends GUIMenu {
 		toggleLanguage.alignment = GUIAlignment.Center;
 		content.add(toggleLanguage);
 		
+		GUIText cameraShakeText = new GUIText(-450, buttonHeight * 2 + spacing * 6 + startPos, Translation.Get("settings.camerashake"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		cameraShakeText.alignment = GUIAlignment.Center;
+		cameraShakeText.SetTextAlignment(TextAlignment.Left);
+		content.add(cameraShakeText);
+		
+		GUIToggle toggleCameraShake = new GUIToggle(250, buttonHeight * 2 + spacing * 6 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+
+				Settings.SetDebugMode(!Settings.GetDebugMode());
+			}
+		});
+		toggleCameraShake.SetIsOn(Settings.GetDebugMode());
+		toggleCameraShake.alignment = GUIAlignment.Center;
+		content.add(toggleCameraShake);
+		
 		GUITheme.LoadTextTheme(debugModeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeDisplay, Theme.TextSecondary);
@@ -254,6 +271,7 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadTextTheme(musicVolumeDisplay, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(musicVolumeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(languageText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(cameraShakeText, Theme.TextSecondary);
 
 		GUITheme.LoadButtonTheme(volumeDown, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(volumeUp, Theme.ButtonSecondary);
@@ -262,6 +280,7 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadButtonTheme(toggleDebugMode, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleFullscreen, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleLanguage, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleCameraShake, Theme.ButtonSecondary);
 		
 		return content;
 	}

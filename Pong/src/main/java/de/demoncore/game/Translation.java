@@ -111,11 +111,14 @@ public class Translation {
 		
 		switch (activeLanguage) {
 		case Deutsch:
-			return germanTranslation.get(comp.translationId);
+			if(germanTranslation.get(comp.translationId) == null) return comp.translationId;
+			else return germanTranslation.get(comp.translationId);
 		case English:
-			return englishTranslation.get(comp.translationId);
+			if(englishTranslation.get(comp.translationId) == null) return comp.translationId;
+			else return englishTranslation.get(comp.translationId);
 		default:
-			return englishTranslation.get(comp.translationId);
+			if(englishTranslation.get(comp.translationId) == null) return comp.translationId;
+			else return englishTranslation.get(comp.translationId);
 		}
 	}
 

@@ -133,7 +133,8 @@ public class Dialog extends GameObject {
 					}
 				}
 
-				SceneManager.GetActiveScene().AddObject(spaceText);
+				if(isInScene)
+					SceneManager.GetActiveScene().AddObject(spaceText);
 				
 				isLinePlaying = false;
 				

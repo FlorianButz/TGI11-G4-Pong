@@ -61,16 +61,22 @@ public class Draw extends JPanel {
 		
 		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
-		AffineTransform ogTransform = g2d.getTransform();
-		
-		Shape clip = g2d.getClip();
 		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
 		
+		float scale = (float)Math.pow(Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f), 2f);
+
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
+		
+		AffineTransform ogTransform = g2d.getTransform();
+		g2d.translate((int)(screenwidth / 2), (int)(screenheight / 2));
+		g2d.scale(scale, scale);
+		g2d.translate((int)-(screenwidth / 2), (int)-(screenheight / 2));
+		
+		Shape clip = g2d.getClip();
 		
 		screenSize = Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f);
 		

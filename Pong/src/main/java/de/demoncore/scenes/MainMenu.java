@@ -98,7 +98,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new TestSzene());
+				SceneManager.LoadScene(new TwoPlayerPong());
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;

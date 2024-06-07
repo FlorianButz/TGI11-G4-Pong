@@ -11,7 +11,7 @@ import de.demoncore.game.TranslationComponent;
 import de.demoncore.utils.Vector3;
 
 
-public class GUIText extends GUIObject  {
+public class GUIText extends GUIObject {
 	
 	TranslationComponent text;
 	Font font;
