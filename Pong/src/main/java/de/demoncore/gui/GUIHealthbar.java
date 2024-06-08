@@ -2,11 +2,8 @@ package de.demoncore.gui;
 
 import java.awt.Graphics2D;
 
-import de.demoncore.game.SceneManager;
-import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
-import de.demoncore.utils.Vector3;
 
 public class GUIHealthbar extends GUIObject {
 
