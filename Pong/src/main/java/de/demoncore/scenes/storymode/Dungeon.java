@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.gameObjects.Cake;
 import de.demoncore.gameObjects.DungeonMinimap;
 import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
@@ -39,7 +40,11 @@ public class Dungeon extends BaseScene {
 			player.health.Damage(1);
 		}
 		});
-				
+
+		AddObject(new Cake(250, 100));
+		AddObject(new Cake(100, 250));
+		AddObject(new Cake(250, 250));
+		
 		AddObject(interact);
 		
 		GenerateDungeon();

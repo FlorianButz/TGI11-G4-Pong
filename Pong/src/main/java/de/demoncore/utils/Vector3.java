@@ -45,7 +45,7 @@ public class Vector3 {
 	}
 	
 	public float Magnitude() {
-		return (x + y + z) / 3;
+		return (Math.abs(x) + Math.abs(y) + Math.abs(z)) / 3;
 	}
 	
 	public Vector3 Normalized() {

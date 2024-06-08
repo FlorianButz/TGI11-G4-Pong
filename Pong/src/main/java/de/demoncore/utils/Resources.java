@@ -35,6 +35,10 @@ public class Resources {
 	public static Sprite test;
 	public static Sprite fullHeart;
 	public static Sprite brokenHeart;
+	public static Sprite cake;
+	public static Sprite playerIdle;
+	public static Sprite playerWalk1;
+	public static Sprite playerWalk2;
 	
 	public static DialogLine testLine;
 	
@@ -80,6 +84,10 @@ public class Resources {
 		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).Load();
 		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).Load();
 		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).Load();
+		cake = new Sprite(Main.class.getResourceAsStream("/textures/Cake.png")).Load();
+		playerIdle = new Sprite(Main.class.getResourceAsStream("/textures/PlayerIdle.png")).Load();
+		playerWalk1 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk1.png")).Load();
+		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).Load();
 	}
 	
 	public static void LoadDialog() {

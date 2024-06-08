@@ -46,6 +46,10 @@ public class GUIHealthbar extends GUIObject {
 		return health;
 	}
 	
+	public void Heal(int healFactor) {
+		health = GameMath.Clamp(health + healFactor, 0, heartCount);
+	}
+	
 	public void Damage(int damage) {
 //		int healthBefore = health;
 		health = GameMath.Clamp(health - damage, 0, heartCount);

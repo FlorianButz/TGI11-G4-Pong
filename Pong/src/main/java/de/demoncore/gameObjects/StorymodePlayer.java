@@ -1,14 +1,19 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.animator.AnimatorOnCompleteEvent;
+import de.demoncore.game.animator.AnimatorUpdateEvent;
+import de.demoncore.game.animator.SpriteAnimator;
+import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
-import de.demoncore.utils.GameMath;
+import de.demoncore.sprites.Sprite;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class StorymodePlayer extends RigidBody {
@@ -16,16 +21,48 @@ public class StorymodePlayer extends RigidBody {
 	public float playerAcceleration = 7.75f; // Die Geschwindigkeitszunahme vom Spieler
 	
 	ParticleSystem trail;
+	SpriteAnimator walkAnim;
 	
 	public GUIHealthbar health;
 	
-	public StorymodePlayer(int x, int y) {
-		super(x, y, 20, 20);
+	private static StorymodePlayer instance;
 	
+	public static StorymodePlayer GetPlayerInstance() {
+		return instance;
+	}
+	
+	public StorymodePlayer(int x, int y) {
+		super(x, y, 30, 45);
+		instance = this;
+		
 		health = new GUIHealthbar(65, 85, 45, 6);
 		health.alignment = GUIAlignment.TopLeft;
 	
 		SceneManager.GetActiveScene().AddObject(health);
+	
+		activeImage = Resources.playerIdle;
+		
+		walkAnim = new SpriteAnimator(new Sprite[] {Resources.playerWalk1, Resources.playerIdle, Resources.playerWalk2, Resources.playerIdle}, 0.15f, EasingType.Linear);
+		walkAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		@Override
+		public void OnUpdate(Sprite value) {
+			activeImage = value;
+		}
+		});
+		walkAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+		@Override
+		public void OnComplete() {
+			activeImage = Resources.playerIdle;
+		}
+		});
+	}
+	
+	Sprite activeImage;
+	
+	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		if(activeImage != null)
+			g2d.drawImage(activeImage.GetTexture(), (int)GetPosition().x, (int)GetPosition().y, (int)GetScale().x, (int)GetScale().y, null);
 	}
 	
 	@Override
@@ -58,8 +95,14 @@ public class StorymodePlayer extends RigidBody {
 			SceneManager.GetActiveScene().AddObject(trail);
 		}
 		
-		if(Math.abs(velocity.Magnitude()) >= 0.1) trail.emitLoop = true;
-		else trail.emitLoop = false;
+		if(Math.abs(velocity.Magnitude()) >= 0.1) {
+			trail.emitLoop = true;
+			walkAnim.Play();
+		}
+		else {
+			trail.emitLoop = false;
+			walkAnim.Stop();
+		}
 		
 		AddForce(KeyHandler.playerInput.Normalized().multiply(playerAcceleration));
 		

@@ -8,6 +8,7 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -16,6 +17,8 @@ public class InteractableObject extends GameObject {
 
 	GameObject player;
 	InteractEvent event;
+
+	public String interactionString;
 
 	public InteractableObject(int posX, int posY, int width, int height, GameObject player, InteractEvent e) {
 		super(posX, posY, width, height);
@@ -34,12 +37,12 @@ public class InteractableObject extends GameObject {
 				}
 			}
 		});
-		
+
 		event = e;
 	}
 
 	void OnInteract() {
-		SceneManager.GetActiveScene().ShakeCamera(50, 2, 105);
+		//SceneManager.GetActiveScene().ShakeCamera(50, 2, 105);
 		if(event != null) event.OnInteract();
 	}
 
@@ -48,14 +51,21 @@ public class InteractableObject extends GameObject {
 
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		Vector3 worldPos = GetPosition();
-		g2d.setColor(new Color(1, 1, 1, 0.5f));
-		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
+		//Vector3 worldPos = GetPosition();
+		//g2d.setColor(new Color(1, 1, 1, 0.5f));
+		//g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
 		if(player.GetBoundingBox().intersects(GetBoundingBox())) {
 			g2d.setColor(textColor);
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
 			g2d.drawString(Translation.Get("interactable.interact").Get(), GetPosition().x + 15, GetPosition().y - 15);
+			g2d.setFont(Resources.uiFont.deriveFont(20F));
+
+			if(interactionString != null) {
+				TranslationComponent c = Translation.Get(interactionString);
+				c.isLiteral = true;
+				g2d.drawString(c.Get(), GetPosition().x + 15, GetPosition().y + 20);
+			}
 		}
 	}
 
