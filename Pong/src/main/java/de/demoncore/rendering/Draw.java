@@ -73,7 +73,7 @@ public class Draw extends JPanel {
 		
 		AffineTransform ogTransform = g2d.getTransform();
 		g2d.translate((int)(screenwidth / 2), (int)(screenheight / 2));
-		g2d.scale(scale, scale);
+		//g2d.scale(scale, scale);
 		g2d.translate((int)-(screenwidth / 2), (int)-(screenheight / 2));
 		
 		Shape clip = g2d.getClip();

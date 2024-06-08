@@ -6,6 +6,8 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.gui.GUIAlignment;
+import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
@@ -15,8 +17,15 @@ public class StorymodePlayer extends RigidBody {
 	
 	ParticleSystem trail;
 	
+	public GUIHealthbar health;
+	
 	public StorymodePlayer(int x, int y) {
 		super(x, y, 20, 20);
+	
+		health = new GUIHealthbar(65, 85, 45, 6);
+		health.alignment = GUIAlignment.TopLeft;
+	
+		SceneManager.GetActiveScene().AddObject(health);
 	}
 	
 	@Override

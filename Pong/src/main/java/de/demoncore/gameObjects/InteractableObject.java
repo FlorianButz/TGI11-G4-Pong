@@ -15,8 +15,9 @@ import de.demoncore.utils.Vector3;
 public class InteractableObject extends GameObject {
 
 	GameObject player;
+	InteractEvent event;
 
-	public InteractableObject(int posX, int posY, int width, int height, GameObject player) {
+	public InteractableObject(int posX, int posY, int width, int height, GameObject player, InteractEvent e) {
 		super(posX, posY, width, height);
 		this.player = player;
 
@@ -33,10 +34,13 @@ public class InteractableObject extends GameObject {
 				}
 			}
 		});
+		
+		event = e;
 	}
 
 	void OnInteract() {
 		SceneManager.GetActiveScene().ShakeCamera(50, 2, 105);
+		if(event != null) event.OnInteract();
 	}
 
 	Color defTextCol = new Color(0.5f, 0.5f, 0.5f, 1f);

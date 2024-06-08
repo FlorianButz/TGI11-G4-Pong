@@ -31,8 +31,10 @@ public class Resources {
 	public static AudioClip ambienceMysterious1;
 	public static AudioClip ambienceFast1;
 	public static AudioClip sneakySnitch;
-	
+
 	public static Sprite test;
+	public static Sprite fullHeart;
+	public static Sprite brokenHeart;
 	
 	public static DialogLine testLine;
 	
@@ -74,8 +76,10 @@ public class Resources {
 	public static void LoadSprites() {
 
 		// Texturen werden geladen
-		
+
 		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).Load();
+		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).Load();
+		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).Load();
 	}
 	
 	public static void LoadDialog() {

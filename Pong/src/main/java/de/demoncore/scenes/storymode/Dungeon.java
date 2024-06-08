@@ -7,6 +7,7 @@ import java.util.Random;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.DungeonMinimap;
+import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.StorymodePlayer;
@@ -32,7 +33,14 @@ public class Dungeon extends BaseScene {
 		minimap.alignment = GUIAlignment.TopRight;
 		AddObject(minimap);
 		
-		AddObject(new InteractableObject(25, 25, 75, 75, player));
+		InteractableObject interact = new InteractableObject(25, 25, 75, 75, player, new InteractEvent() {
+		@Override
+		public void OnInteract() {
+			player.health.Damage(1);
+		}
+		});
+				
+		AddObject(interact);
 		
 		GenerateDungeon();
 	}
