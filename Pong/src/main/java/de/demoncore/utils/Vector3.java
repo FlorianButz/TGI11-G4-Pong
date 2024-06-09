@@ -40,6 +40,21 @@ public class Vector3 {
 		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.y, end.y, value), GameMath.Lerp(start.z, end.z, value));
 	}
 	
+	public Vector3 reflect(Vector3 normal) {
+        float normLength = (float) Math.sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
+        float nx = normal.x / normLength;
+        float ny = normal.y / normLength;
+        float nz = normal.z / normLength;
+
+        float dotProduct = this.x * nx + this.y * ny + this.z * nz;
+
+        float reflectedX = this.x - 2 * dotProduct * nx;
+        float reflectedY = this.y - 2 * dotProduct * ny;
+        float reflectedZ = this.z - 2 * dotProduct * nz;
+
+        return new Vector3(reflectedX, reflectedY, reflectedZ);
+    }
+	
 	public String ToString() {
 		return "X: " + x + "; Y: " + y + " Z: " + z; 
 	}
