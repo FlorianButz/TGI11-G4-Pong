@@ -1,12 +1,9 @@
 package de.demoncore.scenes;
 
 import de.demoncore.game.GameObject;
-import de.demoncore.gameObjects.BeweglichesRechteck;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongPlayer;
-import de.demoncore.gameObjects.PongPlayer;
-import de.demoncore.gameObjects.RigidBody;
 
 public class OnePlayerPong extends BaseScene {
 
@@ -23,15 +20,15 @@ public class OnePlayerPong extends BaseScene {
 		super.InitializeScene();
 		
 		AddObject(new PauseMenu());
-	
-		Ball = new PongBall(0, 0, Player_One, botGegner);
-		AddObject(Ball);
 
 		Player_One = new PongPlayer(-900, 0);
 		AddObject(Player_One);
 	
 		botGegner = new PongPlayer(900, 0);
 		AddObject(botGegner);
+		
+		Ball = new PongBall(0, 0, Player_One, botGegner);
+		AddObject(Ball);
 		
 		Wand_Links = new GameObject(-960, 0, 25, 1150); // x, y, breite ,l�nge
 		AddObject(Wand_Links);
