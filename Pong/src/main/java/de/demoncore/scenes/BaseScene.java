@@ -24,6 +24,10 @@ public class BaseScene {
 	
 	float cameraViewportShrink = -35f;
 	
+	public float GetViewportShrink() {
+		return cameraViewportShrink;
+	}
+	
 	public BaseScene() {
 		sceneObjects = new ArrayList<GameObject>();
 	}
