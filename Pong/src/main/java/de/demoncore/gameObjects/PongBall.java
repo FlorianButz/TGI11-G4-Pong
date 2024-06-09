@@ -2,6 +2,8 @@ package de.demoncore.gameObjects;
 
 import java.awt.Rectangle;
 
+import javax.management.loading.PrivateClassLoader;
+
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gui.Gui;
@@ -32,7 +34,7 @@ public class PongBall extends GameObject {
 			velocity = velocity.reflect(getPlayerNormal());		
 		}
 		
-		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetCameraViewport())) {
+		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetRawCameraViewport())) {
 			velocity = velocity.reflect(getWallNormal());
 		}
 
@@ -65,29 +67,66 @@ public class PongBall extends GameObject {
 		Vector3 normal = new Vector3(0, 0);
 
 		// Check collision with the left wall
-		if (GetPosition().x - GetScale().x < -SceneManager.GetActiveScene().GetCameraViewport().width / 2) {
+		if (GetPosition().x - GetScale().x < -SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
 			normal.x = -1;
+			CollisonWithGoal(false);
 		}
 
 		// Check collision with the right wall
-		if (GetPosition().x + GetScale().x > SceneManager.GetActiveScene().GetCameraViewport().width / 2) {
+		if (GetPosition().x + GetScale().x > SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
 			normal.x = 1;
-			System.out.println("ojijiojio");
+			CollisonWithGoal(true);
 		}
 
 		// Check collision with the top wall
-		if (GetPosition().y - GetScale().y < -SceneManager.GetActiveScene().GetCameraViewport().height / 2) {
+		if (GetPosition().y - GetScale().y < -SceneManager.GetActiveScene().GetRawCameraViewport().height / 2) {
 			normal.y = 1;
 		}
 
 		// Check collision with the bottom wall
-		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().GetCameraViewport().height / 2) {
+		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().GetRawCameraViewport().height / 2) {
 			normal.y = -1;
 		}
+		
+		
 		
 		
 
 		return normal;
 	}
+	
+	
+	private void CollisonWithGoal(boolean isRightWall) {
+		if (isRightWall == true) {
+			System.out.println("Rechte Wand getroffen");
+		}
+			
+		else {
+			System.out.println("Linke wand getroffen");
+		}
+		
+		SetPosition(Vector3.zero());
+	}
+     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
