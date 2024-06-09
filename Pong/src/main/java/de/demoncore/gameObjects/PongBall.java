@@ -10,7 +10,7 @@ import de.demoncore.utils.Vector3;
 public class PongBall extends GameObject {
 
 	private PongPlayer player1, player2;
-	private Vector3 velocity = Vector3.one().multiply(15f);
+	private Vector3 velocity = Vector3.one().multiply(5f);
 
 	public PongBall(int posX, int posY, PongPlayer player1, PongPlayer player2) {
 		super(posX, posY, 25, 25);
@@ -30,6 +30,10 @@ public class PongBall extends GameObject {
 		if( player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
 			System.out.println("Inetrsektion erkannt"); 
 			velocity = velocity.reflect(getPlayerNormal());		
+		}
+		
+		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetCameraViewport())) {
+			velocity = velocity.reflect(getWallNormal());
 		}
 
 	}
@@ -80,6 +84,8 @@ public class PongBall extends GameObject {
 		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().GetCameraViewport().height / 2) {
 			normal.y = -1;
 		}
+		
+		
 
 		return normal;
 	}
