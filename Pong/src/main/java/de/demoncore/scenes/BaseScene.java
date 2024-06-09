@@ -61,6 +61,15 @@ public class BaseScene {
 		return cameraViewport;
 	}
 	
+	public Rectangle GetRawCameraViewport() {
+		return new Rectangle(
+				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2)),
+				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2)),
+				(int)((Gui.GetScreenDimensions().x)),
+				(int)((Gui.GetScreenDimensions().y))
+				);
+	}
+	
 	private Rectangle CalcViewport() {
 		return cameraViewport = new Rectangle(
 				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
