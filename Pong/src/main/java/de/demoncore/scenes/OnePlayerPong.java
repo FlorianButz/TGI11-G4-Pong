@@ -24,7 +24,7 @@ public class OnePlayerPong extends BaseScene {
 		
 		AddObject(new PauseMenu());
 	
-		Ball = new PongBall(0, 0);
+		Ball = new PongBall(0, 0, Player_One, botGegner);
 		AddObject(Ball);
 
 		Player_One = new PongPlayer(-900, 0);
