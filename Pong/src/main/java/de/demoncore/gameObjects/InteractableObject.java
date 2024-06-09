@@ -20,13 +20,15 @@ public class InteractableObject extends GameObject {
 
 	public String interactionString;
 
+	GameActionListener listener;
+	
 	public InteractableObject(int posX, int posY, int width, int height, GameObject player, InteractEvent e) {
 		super(posX, posY, width, height);
 		this.player = player;
 
 		collisionEnabled = false;
 
-		KeyHandler.listeners.add(new GameActionListener() {
+		listener = new GameActionListener() {
 			@Override
 			public void OnInteractionKeyPressed() {
 				super.OnInteractionKeyPressed();
@@ -36,11 +38,20 @@ public class InteractableObject extends GameObject {
 					OnInteract();
 				}
 			}
-		});
+		};
+		
+		KeyHandler.listeners.add(listener);
 
 		event = e;
 	}
 
+	@Override
+	public void OnDestroy() {
+		super.OnDestroy();
+		
+		KeyHandler.listeners.remove(listener);
+	}
+	
 	void OnInteract() {
 		//SceneManager.GetActiveScene().ShakeCamera(50, 2, 105);
 		if(event != null) event.OnInteract();
