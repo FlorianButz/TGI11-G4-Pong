@@ -19,6 +19,8 @@ public class TwoPlayerPong extends BaseScene {
 	public void InitializeScene() {
 		super.InitializeScene();
 
+		AddObject(new PauseMenu());
+		
 		MusicManager.PlayMusic(Resources.ambienceDark2);
 		
 		player1 = new PongPlayer(-100, 0);
