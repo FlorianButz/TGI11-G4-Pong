@@ -42,6 +42,10 @@ public class GameObject {
 				));
 	}
 	
+	public Vector3 GetRawPosition() {	// Gibt die korrekte Position vom GameObject zurück
+		return position;
+	}
+	
 	public void SetPosition(Vector3 position) {
 		this.position = position;
 	}

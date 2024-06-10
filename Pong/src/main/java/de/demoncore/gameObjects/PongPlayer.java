@@ -1,7 +1,6 @@
 package de.demoncore.gameObjects;
 
 
-import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 
 
@@ -15,13 +14,7 @@ public class PongPlayer extends RigidBody {
 	
 	@Override
 	public void Update() {
-		
 		if(GameLogic.IsGamePaused()) return;
-		
-		
-	
-		AddForce(KeyHandler.playerInput.Normalized().multiply(playerAcceleration));
-		
 		
 		super.Update();
 	}

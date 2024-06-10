@@ -12,7 +12,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "0.0.31a";
+	public static String version = "0.1.106a";
 	public static String gameName = "Pong auf Crack";
 	
 	public static void main(String[] args) {
@@ -38,7 +38,6 @@ public class Main {
 		GameLogic gl = new GameLogic();
 		gl.Start();
 		new Gui(gl);
-	
 		
 		Gui.AddOnApplicationClose(new java.awt.event.WindowAdapter() {
 		    @Override

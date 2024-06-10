@@ -1,12 +1,12 @@
 package de.demoncore.gameObjects;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 
-import javax.management.loading.PrivateClassLoader;
-
 import de.demoncore.game.GameObject;
+import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
-import de.demoncore.gui.Gui;
+import de.demoncore.scenes.OnePlayerPong;
 import de.demoncore.utils.Vector3;
 
 public class PongBall extends GameObject {
@@ -29,12 +29,13 @@ public class PongBall extends GameObject {
 
 		position = position.add(velocity);
 
-		if( player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
-			System.out.println("Inetrsektion erkannt"); 
+		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
+			Logger.logMessage("Intersektion Ball mit Spieler", this);
 			velocity = velocity.reflect(getPlayerNormal());		
 		}
 		
 		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetRawCameraViewport())) {
+			Logger.logMessage("Intersektion Ball mit Wand", this);
 			velocity = velocity.reflect(getWallNormal());
 		}
 
@@ -88,45 +89,44 @@ public class PongBall extends GameObject {
 			normal.y = -1;
 		}
 		
-		
-		
-		
-
 		return normal;
 	}
 	
 	
 	private void CollisonWithGoal(boolean isRightWall) {
 		if (isRightWall == true) {
-			System.out.println("Rechte Wand getroffen");
+			Logger.logMessage("Rechte Wand getroffen", this);
+			((OnePlayerPong)SceneManager.GetActiveScene()).addPlayerPoint(true);
+
+			spawnParticles();
 		}
 			
 		else {
-			System.out.println("Linke wand getroffen");
+			Logger.logMessage("Linke Wand getroffen", this);
+			((OnePlayerPong)SceneManager.GetActiveScene()).addPlayerPoint(false);
+
+			spawnParticles();
 		}
 		
 		SetPosition(Vector3.zero());
 	}
-     
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+	private void spawnParticles() {
+		ParticleSystem system = new ParticleSystem((int)GetPosition().x, (int)GetPosition().y);
+		system.emitLoop = false;
+		system.emitChunk = 450;
+		system.initialParticleSpeedMax = Vector3.one().add(new Vector3(0, -0.45f, 0));
+		system.initialParticleSpeedMin = Vector3.one().multiply(-1f).add(new Vector3(0, -0.45f, 0));
+		system.particleSpeedMultiplier = 35;
+		system.particleColorFirst = Color.white;
+		system.particleColorSecond = Color.white;
+		system.initialParticleSize = 5;
+		system.endParticleSize = 0;
+		system.particleLifetime = 5;
 
+		SceneManager.GetActiveScene().AddObject(system);
+		SceneManager.GetActiveScene().ShakeCamera(2, 3, 65);;
+		system.Init();
+	}
+	
 }
