@@ -4,6 +4,8 @@ package de.demoncore.gameObjects;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.Logger;
+import de.demoncore.gui.Gui;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
 
@@ -28,6 +30,8 @@ public class PongPlayer extends RigidBody {
 			geschwindigkeit = new Vector3(0,KeyHandler.playerInput2.y * playerAcceleration,0);
 		}
 		AddForce(geschwindigkeit);
+		
+		SetPosition (new Vector3 (0, GameMath.Clamp(GetPosition().y,-(Gui.GetScreenDimensions().y/2) + size.y,(Gui.GetScreenDimensions().y/2) - size.y), 0));
 		
 		super.Update();
 	}
