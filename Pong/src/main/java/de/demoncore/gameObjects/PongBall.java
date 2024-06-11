@@ -3,39 +3,56 @@ package de.demoncore.gameObjects;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
-import de.demoncore.scenes.OnePlayerPong;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
 public class PongBall extends GameObject {
 
 	private PongPlayer player1, player2;
-	private Vector3 velocity = Vector3.one().multiply(5f);
+	private Vector3 velocity = Vector3.one().multiply(10f);
 
+	private AudioSource sfxSource;
+	
 	public PongBall(int posX, int posY, PongPlayer player1, PongPlayer player2) {
 		super(posX, posY, 25, 25);
 
 		this.player1 = player1;
 		this.player2 = player2;
 		collisionEnabled = false;
+
+		sfxSource = new AudioSource(this).SetSpacial(false);
+		SceneManager.GetActiveScene().AddObject(sfxSource);
+		sfxSource.SetVolume(0.65f);
 	}
 
 	@Override
+	public void OnDestroy() {
+		super.OnDestroy();
+
+		SceneManager.GetActiveScene().DestroyObject(sfxSource);
+	}
+	
+	@Override
 	public void Update() {
-		// TODO Auto-generated method stub
 		super.Update();
 
 		position = position.add(velocity);
 
 		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
 			Logger.logMessage("Intersektion Ball mit Spieler", this);
-			velocity = velocity.reflect(getPlayerNormal());		
+			sfxSource.Play(Resources.pongPlayerHitPedal);
+			
+			velocity = velocity.reflect(getPlayerNormal());
 		}
 		
 		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetRawCameraViewport())) {
 			Logger.logMessage("Intersektion Ball mit Wand", this);
+			sfxSource.Play(Resources.pongPlayerHitWall);
+			
 			velocity = velocity.reflect(getWallNormal());
 		}
 
@@ -70,13 +87,13 @@ public class PongBall extends GameObject {
 		// Check collision with the left wall
 		if (GetPosition().x - GetScale().x < -SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
 			normal.x = -1;
-			CollisonWithGoal(false);
+			collisonWithGoal(false);
 		}
 
 		// Check collision with the right wall
 		if (GetPosition().x + GetScale().x > SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
 			normal.x = 1;
-			CollisonWithGoal(true);
+			collisonWithGoal(true);
 		}
 
 		// Check collision with the top wall
@@ -93,21 +110,21 @@ public class PongBall extends GameObject {
 	}
 	
 	
-	private void CollisonWithGoal(boolean isRightWall) {
+	private void collisonWithGoal(boolean isRightWall) {
 		if (isRightWall == true) {
 			Logger.logMessage("Rechte Wand getroffen", this);
-			((OnePlayerPong)SceneManager.GetActiveScene()).addPlayerPoint(true);
-
+			// Punkt hinzufuegen
+			
 			spawnParticles();
 		}
-			
 		else {
 			Logger.logMessage("Linke Wand getroffen", this);
-			((OnePlayerPong)SceneManager.GetActiveScene()).addPlayerPoint(false);
+			// Punkt hinzufuegen
 
 			spawnParticles();
 		}
 		
+		sfxSource.Play(Resources.pongGoal);
 		SetPosition(Vector3.zero());
 	}
     
@@ -120,12 +137,12 @@ public class PongBall extends GameObject {
 		system.particleSpeedMultiplier = 35;
 		system.particleColorFirst = Color.white;
 		system.particleColorSecond = Color.white;
-		system.initialParticleSize = 5;
+		system.initialParticleSize = 15;
 		system.endParticleSize = 0;
 		system.particleLifetime = 5;
 
 		SceneManager.GetActiveScene().AddObject(system);
-		SceneManager.GetActiveScene().ShakeCamera(2, 3, 65);;
+		SceneManager.GetActiveScene().ShakeCamera(35, 35, 35);
 		system.Init();
 	}
 	

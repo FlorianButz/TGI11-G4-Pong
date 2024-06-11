@@ -15,6 +15,8 @@ public class Translation {
 	
 	public static void InitializeTranslation() {
 
+		Logger.logInfo("Uebersetzungen werden geladen...");
+		
 		germanTranslation = new HashMap<String, String>();
 		englishTranslation = new HashMap<String, String>();
 

@@ -1,8 +1,6 @@
 package de.demoncore.audio;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -19,8 +17,7 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.system.MemoryUtil;
 
-import com.sun.tools.javac.Main;
-
+import de.demoncore.game.Logger;
 import de.demoncore.utils.Vector3;
 import javazoom.jl.decoder.Bitstream;
 import javazoom.jl.decoder.Decoder;
@@ -41,6 +38,9 @@ public class AudioMaster {
 	private static ALCapabilities alCapabilities;
 
 	public static void InitializeOpenAL() {
+		
+		Logger.logInfo("Initialisiere OpenAL Audio...");
+		
 		String defaultDeviceName = ALC10.alcGetString(0, ALC10.ALC_DEFAULT_DEVICE_SPECIFIER);
 		device = ALC10.alcOpenDevice(defaultDeviceName);
 		alcCapabilities = ALC.createCapabilities(device);
@@ -93,7 +93,8 @@ public class AudioMaster {
 	        decoder = null;
 	        
 		}catch(Exception e) {
-			System.err.println(e.getLocalizedMessage());
+
+			Logger.logError("Fehler beim laden einer Audiodatei. | " + e.getMessage() , e);
 		}
 		
         // Check for errors
@@ -107,8 +108,12 @@ public class AudioMaster {
 		buffers.add(buffer);
 
 		WaveData waveData = WaveData.create(file);
-		AL10.alBufferData(buffer, waveData.format, waveData.data, waveData.samplerate);
-		waveData.dispose();
+		try {			
+			AL10.alBufferData(buffer, waveData.format, waveData.data, waveData.samplerate);
+			waveData.dispose();
+		}catch(Exception e) {
+			Logger.logError("Konnte Audio nicht laden. " + e.getMessage(), e);
+		}
 
 		return new AudioClip(buffer);
 	}

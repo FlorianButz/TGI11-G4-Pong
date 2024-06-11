@@ -5,6 +5,7 @@ import java.io.InputStream;
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.Logger;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
@@ -35,6 +36,8 @@ public class Main {
 		System.setProperty("sun.java2d.opengl", "true");
         System.setProperty("sun.java2d.accthreshold", "0");
 		
+		Logger.logInfo("GUI wird erstellt...");
+        
 		GameLogic gl = new GameLogic();
 		gl.Start();
 		new Gui(gl);

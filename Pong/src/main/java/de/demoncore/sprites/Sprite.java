@@ -14,6 +14,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import de.demoncore.game.Logger;
 import de.demoncore.gui.Gui;
 
 public class Sprite {
@@ -59,8 +60,8 @@ public class Sprite {
 	        
 	        imageStream.close();
 	        
-		}catch(IOException e) {
-			System.err.println("Konnte Bilddatei nicht laden. " + e.getLocalizedMessage() + " : " + filepath);
+		}catch(Exception e) {
+			Logger.logError("Konnte Bilddatei nicht laden. " + e.getMessage() + " : " + filepath, e);
 		}
 		
 		return this;

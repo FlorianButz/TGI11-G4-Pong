@@ -13,6 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
 
+import de.demoncore.game.Logger;
 import de.demoncore.main.Main;
 
 public class WaveData {
@@ -55,7 +56,7 @@ public class WaveData {
 			data.flip();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("Couldn't read bytes from audio stream!");
+			Logger.logError("Fehler beim laden einer Audiodatei. Der Buffer konnte nicht geladen werden.", e);
 		}
 		return data;
 	}
@@ -73,8 +74,12 @@ public class WaveData {
 			audioStream = AudioSystem.getAudioInputStream(bufferedInput);
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
+			
+			Logger.logError("Fehler beim laden der Audiodatei: " + file + ". Datei wird nicht unterstuetzt.", e);
 		} catch (IOException e) {
 			e.printStackTrace();
+
+			Logger.logError("Fehler beim laden der Audiodatei: " + file + ". Datei wurde nicht gefunden.", e);
 		}
 		WaveData wavStream = new WaveData(audioStream);
 		return wavStream;

@@ -2,9 +2,11 @@ package de.demoncore.utils;
 
 import java.awt.Font;
 import java.io.InputStream;
+import java.lang.constant.ClassDesc;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
+import de.demoncore.game.Logger;
 import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
 import de.demoncore.sprites.Sprite;
@@ -22,6 +24,9 @@ public class Resources {
 	public static AudioClip buttonHover;
 
 	public static AudioClip pongPowerup;
+	public static AudioClip pongPlayerHitWall;
+	public static AudioClip pongPlayerHitPedal;
+	public static AudioClip pongGoal;
 	
 	public static AudioClip dialogTalk;
 
@@ -46,41 +51,71 @@ public class Resources {
 		
 		// Schriftarten werden geladen
 		
+		Logger.logInfo("Lade Ressourcen: Lade Schriftarten");
+		
 		try {
 			InputStream is = Main.class.getResourceAsStream("/fonts/PixeloidSans.ttf");
-			uiFont = Font.createFont(Font.TRUETYPE_FONT, is);
+			try {
+				uiFont = Font.createFont(Font.TRUETYPE_FONT, is);
+			}catch(Exception e) {
+				Logger.logError("Konnte Schriftart nicht erstellen. | " + e.getMessage(), e);		
+			}
+		
 			is = Main.class.getResourceAsStream("/fonts/OldEnglishGothicPixel.ttf");
-			dialogFont = Font.createFont(Font.TRUETYPE_FONT, is);
+			try {
+				dialogFont = Font.createFont(Font.TRUETYPE_FONT, is);
+			}catch(Exception e) {
+				Logger.logError("Konnte Schriftart nicht erstellen. | " + e.getMessage(), e);		
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			Logger.logError("Fehler beim laden der Schriftarten. | " + e.getMessage(), e);
+			return;
 		}
+		
+		Logger.logMessage("Laden der Schriftarten Erfolgreich!");
 	}
 	
 	public static void LoadAudio() {
 		
 		// Soundeffekte werden geladen
 
+		Logger.logInfo("Lade Ressourcen: Lade Audio");
+		
 		buttonClick = AudioMaster.LoadSoundWav("/audio/Button_Click.wav");
 		buttonHover = AudioMaster.LoadSoundWav("/audio/Button_Hover.wav");
 
 		pongPowerup = AudioMaster.LoadSoundWav("/audio/Pong_Powerup.wav");
+		pongPlayerHitPedal = AudioMaster.LoadSoundWav("/audio/Pong_PlayerHitPedal.wav");
+		pongPlayerHitWall = AudioMaster.LoadSoundWav("/audio/Pong_PlayerHitWall.wav");
+		pongGoal = AudioMaster.LoadSoundWav("/audio/Pong_Goal.wav");
 		
 		dialogTalk = AudioMaster.LoadSoundWav("/audio/Dialog_Talk.wav");
 		
+		Logger.logMessage("Laden der Soundeffekte Erfolgreich!");
+		
 		// Musik wird geladen
 
+		Logger.logInfo("Lade Ressourcen: Lade Musik");
+		
 		ambienceDark1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/Gone.mp3"));
 		ambienceDark2 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/TheLastLight.mp3"));
 		ambienceFast1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/NearTheEnd.mp3"));
 		ambienceHappy1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/G4Pong_HappyOrchestra.mp3"));
 		ambienceMysterious1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/FarAway.mp3"));
 		sneakySnitch = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/SneakySnitch.mp3"));
+		
+		Logger.logMessage("Laden der Musik Erfolgreich!");
 	}
 	
 	public static void LoadSprites() {
 
 		// Texturen werden geladen
 
+		Logger.logInfo("Lade Ressourcen: Lade Texturen");
+		
 		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).Load();
 		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).Load();
 		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).Load();
@@ -88,12 +123,18 @@ public class Resources {
 		playerIdle = new Sprite(Main.class.getResourceAsStream("/textures/PlayerIdle.png")).Load();
 		playerWalk1 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk1.png")).Load();
 		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).Load();
+		
+		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}
 	
 	public static void LoadDialog() {
 		
 		// Dialoge laden
 		
+		Logger.logInfo("Lade Ressourcen: Lade Dialoge...");
+		
 		testLine = new DialogLine("Wise Old Man", "Hello, this is a test!", null);
+
+		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}
 }

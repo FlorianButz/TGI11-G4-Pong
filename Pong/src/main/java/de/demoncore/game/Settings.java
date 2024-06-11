@@ -11,6 +11,8 @@ public class Settings {
 
 		// Gespeicherte datei Laden
 
+		Logger.logInfo("Einstellungen werden geladen...");
+		
 		SettingsSave deserializedSettings = SaveManager.LoadSave("settings.g4pong");
 		if(deserializedSettings == null) deserializedSettings = new SettingsSave();
 		

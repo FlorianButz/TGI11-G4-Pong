@@ -4,6 +4,7 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.openal.AL10;
 
+import de.demoncore.game.Logger;
 import de.demoncore.game.Settings;
 import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
@@ -19,8 +20,11 @@ public class MusicManager {
 	private static AudioClip activeMusic;
 	
 	public static void InitializeMusicManager() {
-		sourceId = AL10.alGenSources();
 
+		Logger.logInfo("Musikmanager wird Initialisiert...");
+		
+		sourceId = AL10.alGenSources();
+		
 		AL10.alSourcef(sourceId, AL10.AL_PITCH, 1f);
 		AL10.alSource3f(sourceId, AL10.AL_POSITION, 0, 0, 0);
 		SetVolume(1f);
