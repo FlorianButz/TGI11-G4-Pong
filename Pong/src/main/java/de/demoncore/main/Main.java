@@ -13,7 +13,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "0.1.106a";
+	public static String version = "0.2.110a";
 	public static String gameName = "Pong auf Crack";
 	
 	public static void main(String[] args) {
