@@ -38,12 +38,12 @@ public class SceneManager {
 		CheckForInit();
 		
 		if(activeScene.IsInitialized())
-			activeScene.UpdateScene();
+			activeScene.updateScene();
 	}
 	
 	private static void PLoadScene(BaseScene scene) {
 		activeScene = scene;
-		scene.InitializeScene();
+		scene.initializeScene();
 		scene.SetInitializedComplete();
 	}
 	

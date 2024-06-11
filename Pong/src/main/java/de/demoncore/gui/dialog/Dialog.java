@@ -45,43 +45,43 @@ public class Dialog extends GameObject {
 		
 		listener = new GameActionListener() {
 			@Override
-			public void OnSpaceKeyPressed() {
-				super.OnSpaceKeyPressed();
-				NextLine();
+			public void onSpaceKeyPressed() {
+				super.onSpaceKeyPressed();
+				nextLine();
 			}
 		};
 		KeyHandler.listeners.add(listener);
 
 		this.activeLine = startLine;
 		
-		content.add(CreateBackground());
+		content.add(createBackground());
 		
 		sfxSource = new AudioSource[] { new AudioSource(this).SetSpacial(false), new AudioSource(this).SetSpacial(false) };
 		SceneManager.GetActiveScene().AddObject(sfxSource[0]);
 		SceneManager.GetActiveScene().AddObject(sfxSource[1]);
 		
-		name = new GUIText(25, -325, Translation.Literal(""), Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
+		name = new GUIText(25, -325, Translation.literal(""), Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
 		name.alignment = GUIAlignment.DownLeft;
 		name.SetTextAlignment(TextAlignment.Left);
 		content.add(name);
 		
-		spaceText = new GUIText(-75 -125, -35, Translation.Get("dialog.continue"), Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
+		spaceText = new GUIText(-75 -125, -35, Translation.get("dialog.continue"), Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
 		spaceText.SetTextAlignment(TextAlignment.Right);
 		spaceText.alignment = GUIAlignment.DownRight;
 		content.add(spaceText);
 		
-		GUIButton skipBtn = new GUIButton(-100, -35, 150, 35, Translation.Get("dialog.skip"), Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
+		GUIButton skipBtn = new GUIButton(-100, -35, 150, 35, Translation.get("dialog.skip"), Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				DestroyDialog();
+				destroyDialog();
 			}
 		});
 		skipBtn.alignment = GUIAlignment.DownRight;
 		GUITheme.LoadButtonTheme(skipBtn, Theme.ButtonSecondary);
 		content.add(skipBtn);
 		
-		dialogueText = new GUITextArea(25, -225, Translation.Literal(""),
+		dialogueText = new GUITextArea(25, -225, Translation.literal(""),
 				Resources.uiFont.deriveFont(35F), new Color(1f, 1f, 1f, 1f));
 		dialogueText.alignment = GUIAlignment.DownLeft;
 		dialogueText.SetTextAlignment(TextAlignment.Left);
@@ -90,22 +90,22 @@ public class Dialog extends GameObject {
 		content.add(dialogueText);
 	}
 	
-	public void ShowDialog() {
+	public void showDialog() {
 		isActiveDialog = true;
 		
-		CreateDialog();
-		NextLine();
+		createDialog();
+		nextLine();
 	}
 	
 	boolean isLinePlaying = false;
 	
-	void NextLine() {
+	void nextLine() {
 		
 		if(isLinePlaying) return;
 		isLinePlaying = true;
 		
 		if(activeLine == null) {
-			DestroyDialog();
+			destroyDialog();
 			return;
 		}
 
@@ -115,14 +115,14 @@ public class Dialog extends GameObject {
 			@Override
 			public void run() {
 
-				name.SetText(Translation.Literal(activeLine.GetName()));
+				name.SetText(Translation.literal(activeLine.GetName()));
 				
 				String displayText = "";
 				String dialogLineText = activeLine.GetLine();
 				
 				for(int c = 0; c < dialogLineText.length(); c++) {
 					displayText += dialogLineText.charAt(c);
-					dialogueText.SetText(Translation.Literal(displayText));
+					dialogueText.SetText(Translation.literal(displayText));
 					
 					sfxSource[c % 2].Play(Resources.dialogTalk);
 					
@@ -150,13 +150,13 @@ public class Dialog extends GameObject {
 		characterThread.start();
 	}
 	
-	void CreateDialog() {
+	void createDialog() {
 		for(GUIObject o : content) {
 			SceneManager.GetActiveScene().AddObject(o);
 		}
 	}
 	
-	void DestroyDialog() {
+	void destroyDialog() {
 		SceneManager.GetActiveScene().DestroyObject(this);
 		
 		for(GUIObject o : content) {
@@ -167,15 +167,15 @@ public class Dialog extends GameObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 
 		KeyHandler.listeners.remove(listener);
 		SceneManager.GetActiveScene().DestroyObject(sfxSource[0]);
 		SceneManager.GetActiveScene().DestroyObject(sfxSource[1]);
 	}
 	
-	protected GUIObject CreateBackground() {
+	protected GUIObject createBackground() {
 		GUIRectangle bg = new GUIRectangle(0, -200, (int)Gui.GetScreenDimensions().x, (int)400, new Color(0.075f, 0.075f, 0.075f, 0.65f));
 		bg.alignment = GUIAlignment.DownMiddle;
 		return bg;

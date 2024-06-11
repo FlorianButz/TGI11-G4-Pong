@@ -62,11 +62,11 @@ public class StorymodePlayer extends RigidBody {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		if(activeImage != null)
-			g2d.drawImage(activeImage.GetTexture(), (int)GetPosition().x, (int)GetPosition().y, (int)GetScale().x, (int)GetScale().y, null);
+			g2d.drawImage(activeImage.getTexture(), (int)GetPosition().x, (int)GetPosition().y, (int)GetScale().x, (int)GetScale().y, null);
 	}
 	
 	@Override
-	public void Update() {
+	public void update() {
 		
 		if(GameLogic.IsGamePaused()) return;
 		
@@ -108,7 +108,7 @@ public class StorymodePlayer extends RigidBody {
 		
 		trail.SetPosition(this.position);
 		
-		super.Update();
+		super.update();
 	}
 	
 }

@@ -91,9 +91,9 @@ public class GUIToggle extends GUIObject {
 		
 		g2d.setFont(Resources.uiFont.deriveFont(0.75F * size.y));
 		Rectangle2D bounds = g2d.getFontMetrics(g2d.getFont()).getStringBounds("String", g2d);
-		if(isOn) g2d.drawString(Translation.Get("settings.on").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
+		if(isOn) g2d.drawString(Translation.get("settings.on").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
 				(float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
-		else g2d.drawString(Translation.Get("settings.off").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
+		else g2d.drawString(Translation.get("settings.off").Get(), GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
 				(float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
 		
 		g2d.setColor(currentCheckmarkColor);
@@ -148,8 +148,8 @@ public class GUIToggle extends GUIObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		SceneManager.GetActiveScene().DestroyObject(source);
 	}
 	
@@ -161,8 +161,8 @@ public class GUIToggle extends GUIObject {
 	}
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 		
 		event.UpdateEvent();	
 	}

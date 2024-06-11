@@ -25,13 +25,13 @@ public class GUIHealthbar extends GUIObject {
 		
 		for(int i = 0; i < heartCount; i++) {
 			if(i >= health) {
-				g2d.drawImage(Resources.brokenHeart.GetTexture(),
+				g2d.drawImage(Resources.brokenHeart.getTexture(),
 						(int)GetUIPosition(screenWidth, screenHeight).x - (int)size.y / 2 + (int)(size.y * i + spacing * i),
 						(int)GetUIPosition(screenWidth, screenHeight).y - (int)size.y / 2,
 						(int)size.y, (int)size.y, null);
 			}
 			else {
-				g2d.drawImage(Resources.fullHeart.GetTexture(),
+				g2d.drawImage(Resources.fullHeart.getTexture(),
 						(int)GetUIPosition(screenWidth, screenHeight).x - (int)size.y / 2 + (int)(size.y * i + spacing * i),
 						(int)GetUIPosition(screenWidth, screenHeight).y - (int)size.y / 2,
 						(int)size.y, (int)size.y, null);

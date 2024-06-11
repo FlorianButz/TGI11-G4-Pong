@@ -30,8 +30,8 @@ public class InteractableObject extends GameObject {
 
 		listener = new GameActionListener() {
 			@Override
-			public void OnInteractionKeyPressed() {
-				super.OnInteractionKeyPressed();
+			public void onInteractionKeyPressed() {
+				super.onInteractionKeyPressed();
 
 				if(player.GetBoundingBox().intersects(GetBoundingBox())) {
 					textColor = Color.white;
@@ -46,8 +46,8 @@ public class InteractableObject extends GameObject {
 	}
 
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		
 		KeyHandler.listeners.remove(listener);
 	}
@@ -69,11 +69,11 @@ public class InteractableObject extends GameObject {
 		if(player.GetBoundingBox().intersects(GetBoundingBox())) {
 			g2d.setColor(textColor);
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
-			g2d.drawString(Translation.Get("interactable.interact").Get(), GetPosition().x + 15, GetPosition().y - 15);
+			g2d.drawString(Translation.get("interactable.interact").Get(), GetPosition().x + 15, GetPosition().y - 15);
 			g2d.setFont(Resources.uiFont.deriveFont(20F));
 
 			if(interactionString != null) {
-				TranslationComponent c = Translation.Get(interactionString);
+				TranslationComponent c = Translation.get(interactionString);
 				c.isLiteral = true;
 				g2d.drawString(c.Get(), GetPosition().x + 15, GetPosition().y + 20);
 			}
@@ -81,8 +81,8 @@ public class InteractableObject extends GameObject {
 	}
 
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 
 		textColor = GameMath.LerpColor(textColor, defTextCol, 0.1f);
 	}

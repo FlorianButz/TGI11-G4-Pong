@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.demoncore.utils.Logger;
+
 public class Translation {
 
 	static Language activeLanguage = Language.Deutsch;
@@ -13,7 +15,7 @@ public class Translation {
 
 	public static List<OnLanguageUpdateListener> listeners = new ArrayList<OnLanguageUpdateListener>();
 	
-	public static void InitializeTranslation() {
+	public static void initializeTranslation() {
 
 		Logger.logInfo("Uebersetzungen werden geladen...");
 		
@@ -96,19 +98,30 @@ public class Translation {
 		
 		germanTranslation.put("interactable.interact", "[E] Interagieren");
 		englishTranslation.put("interactable.interact", "[E] Interact");
+	
+		
+		germanTranslation.put("pong.play_again", "Erneut spielen");
+		englishTranslation.put("pong.play_again", "Play again");
+
+		germanTranslation.put("pong.end_title", " hat das Spiel gewonnen!");
+		englishTranslation.put("pong.end_title", " won the game!");
+
+		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
+		englishTranslation.put("pong.back", "Back to Main Menu");
+	
 	}
 
-	public static TranslationComponent Get(String translationID) {
+	public static TranslationComponent get(String translationID) {
 		return new TranslationComponent(translationID);
 	}
 
-	public static TranslationComponent Literal(String text) {
+	public static TranslationComponent literal(String text) {
 		TranslationComponent t = new TranslationComponent(text);
 		t.isLiteral = true;
 		return t;
 	}
 	
-	public static String Get(TranslationComponent comp) {
+	public static String get(TranslationComponent comp) {
 		if(comp.isLiteral) return comp.translationId;
 		
 		switch (activeLanguage) {

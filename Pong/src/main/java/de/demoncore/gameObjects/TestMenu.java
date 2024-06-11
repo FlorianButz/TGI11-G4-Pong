@@ -21,7 +21,7 @@ public class TestMenu extends GUIMenu {
 	protected List<GUIObject> AddMenuContent() {
 		List<GUIObject> content = new ArrayList<GUIObject>();
 		
-		GUIText text = new GUIText(0, 0, Translation.Literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText text = new GUIText(0, 0, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
 		text.alignment = GUIAlignment.Center;
 		content.add(text);
 		

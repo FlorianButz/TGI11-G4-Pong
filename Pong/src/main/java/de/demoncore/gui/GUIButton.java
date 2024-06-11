@@ -141,8 +141,8 @@ public class GUIButton extends GUIObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		SceneManager.GetActiveScene().DestroyObject(source);
 	}
 	
@@ -154,8 +154,8 @@ public class GUIButton extends GUIObject {
 	}
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 		
 		event.UpdateEvent();	
 	}

@@ -3,9 +3,9 @@ package de.demoncore.audio;
 import org.lwjgl.openal.AL10;
 
 import de.demoncore.game.GameObject;
-import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class AudioSource extends GameObject implements OnVolumeChangeListener, OnPauseListener {
@@ -74,8 +74,8 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	}
 
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 		
 		if(parentObject != null)
 			position = parentObject.GetPosition();
@@ -89,8 +89,8 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	}
 
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		AL10.alDeleteSources(sourceId);
 		AudioMaster.RemoveOnVolumeChangeListener(this);
 		AudioMaster.RemoveOnPauseListener(this);

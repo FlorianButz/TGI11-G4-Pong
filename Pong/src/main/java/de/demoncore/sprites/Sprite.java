@@ -14,8 +14,8 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import de.demoncore.game.Logger;
 import de.demoncore.gui.Gui;
+import de.demoncore.utils.Logger;
 
 public class Sprite {
 	
@@ -28,7 +28,7 @@ public class Sprite {
 		this.imageStream = imageStream;
 	}
 	
-	public Sprite Load() {
+	public Sprite load() {
 
 		if(texture != null){
             texture.flush();
@@ -67,7 +67,7 @@ public class Sprite {
 		return this;
 	}
 	
-	public VolatileImage GetTexture() {
+	public VolatileImage getTexture() {
 		return texture;
 	}
 }

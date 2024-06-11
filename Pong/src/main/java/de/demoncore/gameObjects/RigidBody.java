@@ -116,8 +116,8 @@ public class RigidBody extends GameObject {
 	
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 
 		if(GameLogic.IsGamePaused()) return;
 		

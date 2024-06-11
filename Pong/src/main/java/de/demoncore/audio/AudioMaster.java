@@ -17,7 +17,7 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.system.MemoryUtil;
 
-import de.demoncore.game.Logger;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 import javazoom.jl.decoder.Bitstream;
 import javazoom.jl.decoder.Decoder;
@@ -56,7 +56,7 @@ public class AudioMaster {
 		AL10.alListener3f(AL10.AL_VELOCITY, 0, 0, 0);
 	}
 
-	public static AudioClip LoadSoundMp3(InputStream fis) {
+	public static AudioClip loadSoundMp3(InputStream fis) {
 		int buffer = AL10.alGenBuffers();
 		buffers.add(buffer);
 
@@ -103,7 +103,7 @@ public class AudioMaster {
 		return new AudioClip(buffer);
 	}
 
-	public static AudioClip LoadSoundWav(String file) {
+	public static AudioClip loadSoundWav(String file) {
 		int buffer = AL10.alGenBuffers();
 		buffers.add(buffer);
 

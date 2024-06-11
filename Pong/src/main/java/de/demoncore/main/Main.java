@@ -5,10 +5,10 @@ import java.io.InputStream;
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.Logger;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class Main {
@@ -16,20 +16,22 @@ public class Main {
 	public static String version = "0.2.110a";
 	public static String gameName = "Pong auf Crack";
 	
+	boolean quickLoad = true; // Nachher auf false setzten
+	
 	public static void main(String[] args) {
 			
 		AudioMaster.InitializeOpenAL();		// Initialisiere Audio 
 
 		// Initialisiere Assets
 
-		Resources.LoadSprites();
-		Resources.LoadFonts();
-		Resources.LoadAudio();
-		Resources.LoadDialog();
+		Resources.loadSprites();
+		Resources.loadFonts();
+		Resources.loadAudio();
+		Resources.loadDialog();
 		
 		Settings.LoadAllSettings();
 		
-		Translation.InitializeTranslation();
+		Translation.initializeTranslation();
 		
 		MusicManager.InitializeMusicManager();
 		

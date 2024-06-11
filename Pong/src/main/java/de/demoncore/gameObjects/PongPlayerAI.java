@@ -1,11 +1,14 @@
 package de.demoncore.gameObjects;
 
 import de.demoncore.game.GameLogic;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
 
 public class PongPlayerAI extends PongPlayer {
 
-	public float aiStupidity = 3.5f; // Je hoeher der wert, desto duemmer ist die AI
+	public float difficulty = 0.8f; // Nur werte zwischen 0 und 1
+	
+	private float aiStupidity = 3.5f; // Je hoeher der wert, desto duemmer ist die AI
 	
 	public PongPlayerAI(int posX, int posY) {
 		super(posX, posY);
@@ -13,6 +16,10 @@ public class PongPlayerAI extends PongPlayer {
 		playerControlsEnabled = false;
 		playerAcceleration = 15;
 		friction = 0.95f;
+	
+		aiStupidity = GameMath.Lerp(3, 0.2f, difficulty);
+		friction = GameMath.Lerp(0.999999999999995f, 0.92f, difficulty);
+		playerAcceleration = GameMath.Lerp(0.05f, 22f, difficulty);
 	}
 
 	Vector3 lastPongBallPos = Vector3.zero();
@@ -20,7 +27,7 @@ public class PongPlayerAI extends PongPlayer {
 	int counter = 0;
 	
 	@Override
-	public void Update() {
+	public void update() {
 		if(GameLogic.IsGamePaused()) return;
 
 		if(counter >= 35) {
@@ -46,11 +53,11 @@ public class PongPlayerAI extends PongPlayer {
 			AddForce(speed);
 		}else {
 			if(-75 > GetPosition().y + size.y / 2) {
-				speed = new Vector3(0, (playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
+				speed = new Vector3(0, (2 + playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
 				AddForce(speed);
 			}else if(75 < GetPosition().y + size.y / 2) {
-				speed = new Vector3(0, (-playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
+				speed = new Vector3(0, (-2 + -playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
 				AddForce(speed);				
 			}
@@ -58,7 +65,7 @@ public class PongPlayerAI extends PongPlayer {
 
 		lastPongBallPos = PongBall.getInstance().GetPosition();
 		
-		super.Update();
+		super.update();
 	}
 
 }

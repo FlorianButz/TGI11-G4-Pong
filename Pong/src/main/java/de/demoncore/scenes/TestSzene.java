@@ -18,7 +18,7 @@ public class TestSzene extends BaseScene {
 	StorymodePlayer player;
 	
 	@Override
-	public void InitializeScene() {		
+	public void initializeScene() {		
 		
 		AddObject(new PauseMenu());
 		
@@ -33,8 +33,8 @@ public class TestSzene extends BaseScene {
 
 		KeyHandler.listeners.add(new GameActionListener() {
 			@Override
-			public void OnInteractionKeyPressed() {
-				super.OnInteractionKeyPressed();
+			public void onInteractionKeyPressed() {
+				super.onInteractionKeyPressed();
 				
 				rotesObjekt.SetPosition(rotesObjekt.GetPosition().add(Vector3.one()));
 				ShakeCamera(50, 2, 2);
@@ -45,8 +45,8 @@ public class TestSzene extends BaseScene {
 	}
 	
 	@Override
-	public void UpdateScene() {
-		super.UpdateScene();
+	public void updateScene() {
+		super.updateScene();
 
 		cameraPosition = Vector3.Lerp(cameraPosition, player.GetPosition(), 0.035f);
 	}

@@ -10,10 +10,10 @@ import java.util.List;
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
-import de.demoncore.game.Logger;
 import de.demoncore.game.PointSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -27,6 +27,7 @@ public class PongBall extends GameObject {
 	private static PongBall instance;
 
 	boolean isIntersectionWithPlayer = false;
+	boolean isMoving = false;
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
 
@@ -46,6 +47,24 @@ public class PongBall extends GameObject {
 		sfxSource = new AudioSource(this).SetSpacial(false);
 		SceneManager.GetActiveScene().AddObject(sfxSource);
 		sfxSource.SetVolume(0.65f);
+
+		moveTimer();
+	}
+
+	void moveTimer() {
+		isMoving = false;
+
+		Thread timer = new Thread("ball.timer") {
+			public void run() {
+				try {
+					Thread.currentThread().sleep(1500);
+				} catch (InterruptedException e) {
+					Logger.logError("Ball sleep Fehler", e);
+				}
+				isMoving = true;
+			};
+		};
+		timer.start();
 	}
 
 	@Override
@@ -54,25 +73,27 @@ public class PongBall extends GameObject {
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
-		g2d.setColor(new Color(1, 1, 1, 0.25f));
-		g2d.fillRect((int)positions.get(2).x, (int)positions.get(2).y, (int)size.x, (int)size.y);
-		g2d.setColor(new Color(1, 1, 1, 0.05f));
-		g2d.fillRect((int)positions.get(4).x, (int)positions.get(4).y, (int)size.x, (int)size.y);
+		if(isMoving) {
+			g2d.setColor(new Color(1, 1, 1, 0.25f));
+			g2d.fillRect((int)positions.get(2).x, (int)positions.get(2).y, (int)size.x, (int)size.y);
+			g2d.setColor(new Color(1, 1, 1, 0.05f));
+			g2d.fillRect((int)positions.get(4).x, (int)positions.get(4).y, (int)size.x, (int)size.y);
+		}
 	}
 
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 
 		SceneManager.GetActiveScene().DestroyObject(sfxSource);
 	}
 
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 
-		if(GameLogic.IsGamePaused()) return;
-		
+		if(GameLogic.IsGamePaused() || !isMoving) return;
+
 		position = position.add(velocity);
 
 		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
@@ -167,8 +188,9 @@ public class PongBall extends GameObject {
 
 		sfxSource.Play(Resources.pongGoal);
 		SetPosition(Vector3.zero());
-
 		positions = new ArrayList<Vector3>(Collections.nCopies(50, Vector3.zero()));
+
+		moveTimer();		
 	}
 
 	private void spawnParticles() {

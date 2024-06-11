@@ -29,7 +29,7 @@ public class GameObject {
 		size = new Vector3(width, height);
 	}
 	
-	public void Update() {}
+	public void update() {}
 	
 	public void OnAddToScene() {
 		isInScene = true;
@@ -66,7 +66,7 @@ public class GameObject {
 		return size;
 	}
 	
-	public void OnDestroy() {
+	public void onDestroy() {
 		isInScene = false;
 	}
 	

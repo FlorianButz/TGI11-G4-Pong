@@ -32,7 +32,7 @@ public class BaseScene {
 		sceneObjects = new ArrayList<GameObject>();
 	}
 	
-	public void InitializeScene() {
+	public void initializeScene() {
 	}
 	
 	public boolean IsInitialized() {
@@ -79,12 +79,12 @@ public class BaseScene {
 				);
 	}
 	
-	public void UpdateScene() {
+	public void updateScene() {
 		try {
 			cameraViewport = CalcViewport();
 			
 			for(GameObject gameObject : sceneObjects){
-				gameObject.Update();
+				gameObject.update();
 				
 				if(gameObject.CheckDistanceCulled(cameraViewport)) {
 					gameObject.isDistanceCulled = false;
@@ -103,7 +103,7 @@ public class BaseScene {
 	}
 	
 	public void DestroyObject(GameObject g) {
-		g.OnDestroy();
+		g.onDestroy();
 		sceneObjects.remove(g);
 	}
 	

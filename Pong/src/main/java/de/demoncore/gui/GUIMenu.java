@@ -63,8 +63,8 @@ public class GUIMenu extends GameObject {
 		
 		l = new GameActionListener() {
 			@Override
-			public void OnEscapePressed() {
-				super.OnEscapePressed();
+			public void onEscapePressed() {
+				super.onEscapePressed();
 				OnEscape();
 			}
 		};
@@ -73,7 +73,7 @@ public class GUIMenu extends GameObject {
 	}
 
 	protected GUIButton CreateBackButton() {
-		GUIButton back = new GUIButton(-65, 65, 50, 50, Translation.Literal("X"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(-65, 65, 50, 50, Translation.literal("X"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 		@Override
 		public void ButtonClick() {
 			HideMenu();
@@ -213,8 +213,8 @@ public class GUIMenu extends GameObject {
 	}
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 		
 		if(isMenuVisible) {			
 			this.isMenuFocused = CheckIfFocused();
@@ -239,8 +239,8 @@ public class GUIMenu extends GameObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		
 		KeyHandler.listeners.remove(l);
 		

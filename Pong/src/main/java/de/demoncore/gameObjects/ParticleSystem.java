@@ -115,8 +115,8 @@ public class ParticleSystem extends GameObject {
 	int updateTimer = 0;
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 		
 		if(GameLogic.IsGamePaused() || hasInitialized == false) return;
 		particleSystemTime = GameLogic.GetInstance().gameTime - particleSystemTimeStart;
@@ -178,8 +178,8 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		
 		particles = null;
 	}

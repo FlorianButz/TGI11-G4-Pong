@@ -13,8 +13,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
 
-import de.demoncore.game.Logger;
 import de.demoncore.main.Main;
+import de.demoncore.utils.Logger;
 
 public class WaveData {
 

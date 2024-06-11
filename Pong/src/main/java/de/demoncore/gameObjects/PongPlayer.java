@@ -20,7 +20,7 @@ public class PongPlayer extends RigidBody {
 	}
 	
 	@Override
-	public void Update() {
+	public void update() {
 		if(GameLogic.IsGamePaused()) return;
 		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 		
@@ -34,7 +34,7 @@ public class PongPlayer extends RigidBody {
 			AddForce(geschwindigkeit);
 		}
 		
-		super.Update();
+		super.update();
 		
 		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 	}

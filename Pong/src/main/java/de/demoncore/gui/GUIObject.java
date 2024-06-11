@@ -23,20 +23,20 @@ public class GUIObject extends GameObject {
 
 		l = new GameActionListener() {
 			@Override
-			public void OnMouseDown(MouseEvent e) {
-				super.OnMouseDown(e);
+			public void onMouseDown(MouseEvent e) {
+				super.onMouseDown(e);
 				MouseDown(e);
 			}
 			
 			@Override
-			public void OnMouseUp(MouseEvent e) {
-				super.OnMouseUp(e);
+			public void onMouseUp(MouseEvent e) {
+				super.onMouseUp(e);
 				MouseUp(e);
 			}
 			
 			@Override
-			public void OnEscapePressed() {
-				super.OnEscapePressed();
+			public void onEscapePressed() {
+				super.onEscapePressed();
 				EscapePressed();
 			}
 		};
@@ -46,8 +46,8 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		KeyHandler.listeners.remove(l);
 	}
 	
@@ -155,8 +155,8 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
-	public void Update() {
-		super.Update();
+	public void update() {
+		super.update();
 	}
 
 	void CheckHover() {

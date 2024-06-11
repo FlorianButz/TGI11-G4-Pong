@@ -20,8 +20,8 @@ import de.demoncore.utils.Resources;
 public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	
 	@Override
-	public void OnDestroy() {
-		super.OnDestroy();
+	public void onDestroy() {
+		super.onDestroy();
 		
 		Translation.listeners.remove(this);
 	}
@@ -40,11 +40,11 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 		
 		Translation.listeners.add(this);
 		
-		GUIText pausedText = new GUIText(0, 175, Translation.Get("pausemenu.paused"), Resources.dialogFont.deriveFont(125F), Color.white);
+		GUIText pausedText = new GUIText(0, 175, Translation.get("pausemenu.paused"), Resources.dialogFont.deriveFont(125F), Color.white);
 		pausedText.alignment = GUIAlignment.TopMiddle;
 		content.add(pausedText);
 		
-		GUIButton settingsButton = new GUIButton(0, 100, 750, 100, Translation.Get("pausemenu.settings"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton settingsButton = new GUIButton(0, 100, 750, 100, Translation.get("pausemenu.settings"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -56,7 +56,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 		settingsButton.alignment = GUIAlignment.Center;
 		content.add(settingsButton);
 		
-		GUIButton backToMainMenuButton = new GUIButton(0, 225, 750, 100, Translation.Get("pausemenu.backtomainmenu"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton backToMainMenuButton = new GUIButton(0, 225, 750, 100, Translation.get("pausemenu.backtomainmenu"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -71,7 +71,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	
 	@Override
 	protected GUIButton CreateBackButton() {
-		GUIButton returnToGameButton = new GUIButton(0, -25, 750, 100, Translation.Get("pausemenu.returntogame"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
+		GUIButton returnToGameButton = new GUIButton(0, -25, 750, 100, Translation.get("pausemenu.returntogame"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

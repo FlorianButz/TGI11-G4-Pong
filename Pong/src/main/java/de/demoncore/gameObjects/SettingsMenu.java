@@ -61,19 +61,19 @@ public class SettingsMenu extends GUIMenu {
 		int spacing = 15;
 		int startPos = 0;
 		
-		title = new GUIText(0, 175, Translation.Get("settings.settings"), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
+		title = new GUIText(0, 175, Translation.get("settings.settings"), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		content.add(title);
 		
-		volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, Translation.Get("settings.sfxVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		volumeText = new GUIText(-450, buttonHeight * -3 + spacing + startPos, Translation.get("settings.sfxVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		volumeText.alignment = GUIAlignment.Center;
 		volumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(volumeText);
 		
-		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, Translation.Literal(""+(int)Settings.GetVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, Translation.literal(""+(int)Settings.GetVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		volumeDisplay.alignment = GUIAlignment.Center;
 		content.add(volumeDisplay);
 		
-		volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.Literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		volumeDown = new GUIButton(250, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -83,7 +83,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetVolume((float)Settings.GetVolume() - 1);
-				volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
+				volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
 			}
 			
 			@Override
@@ -94,14 +94,14 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetVolume((float)Settings.GetVolume() - speed);
-					volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
+					volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
 				}
 			}
 		});
 		volumeDown.alignment = GUIAlignment.Center;
 		content.add(volumeDown);
 		
-		volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.Literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		volumeUp = new GUIButton(400, buttonHeight * -3 + spacing + startPos, 125, buttonHeight, Translation.literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -111,7 +111,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetVolume((float)Settings.GetVolume() + 1);
-				volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
+				volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
 			}
 			
 			@Override
@@ -122,23 +122,23 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetVolume((float)Settings.GetVolume() + speed);
-					volumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetVolume() + "%"));
+					volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
 				}
 			}
 		});
 		volumeUp.alignment = GUIAlignment.Center;
 		content.add(volumeUp);
 		
-		musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, Translation.Get("settings.musicVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		musicVolumeText = new GUIText(-450, buttonHeight * -2 + spacing * 2 + startPos, Translation.get("settings.musicVol"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		musicVolumeText.alignment = GUIAlignment.Center;
 		musicVolumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(musicVolumeText);
 		
-		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, Translation.Literal(""+(int)Settings.GetMusicVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, Translation.literal(""+(int)Settings.GetMusicVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		musicVolumeDisplay.alignment = GUIAlignment.Center;
 		content.add(musicVolumeDisplay);
 		
-		musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.Literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		musicVolumeDown = new GUIButton(250, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.literal("\\/"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -148,7 +148,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetMusicVolume((float)Settings.GetMusicVolume() - 1);
-				musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
+				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -159,14 +159,14 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetMusicVolume((float)Settings.GetMusicVolume() - speed);
-					musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
+					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
 				}
 			}
 		});
 		musicVolumeDown.alignment = GUIAlignment.Center;
 		content.add(musicVolumeDown);
 		
-		musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.Literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		musicVolumeUp = new GUIButton(400, buttonHeight * -2 + spacing * 2 + startPos, 125, buttonHeight, Translation.literal("/\\"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			
 			float speed = 0f;
 			
@@ -176,7 +176,7 @@ public class SettingsMenu extends GUIMenu {
 				speed = startSpeed;
 
 				Settings.SetMusicVolume((float)Settings.GetMusicVolume() + 1);
-				musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
+				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -187,14 +187,14 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(isMouseDown) {
 					Settings.SetMusicVolume((float)Settings.GetMusicVolume() + speed);
-					musicVolumeDisplay.SetText(Translation.Literal("" + (int)Settings.GetMusicVolume() + "%"));
+					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
 				}
 			}
 		});
 		musicVolumeUp.alignment = GUIAlignment.Center;
 		content.add(musicVolumeUp);
 		
-		fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, Translation.Get("settings.fullscreen"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		fullscreenText = new GUIText(-450, buttonHeight * -1 + spacing * 3 + startPos, Translation.get("settings.fullscreen"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		fullscreenText.alignment = GUIAlignment.Center;
 		fullscreenText.SetTextAlignment(TextAlignment.Left);
 		content.add(fullscreenText);
@@ -211,7 +211,7 @@ public class SettingsMenu extends GUIMenu {
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		content.add(toggleFullscreen);
 		
-		debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, Translation.Get("settings.debug"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		debugModeText = new GUIText(-450, buttonHeight * -0 + spacing * 4 + startPos, Translation.get("settings.debug"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		debugModeText.alignment = GUIAlignment.Center;
 		debugModeText.SetTextAlignment(TextAlignment.Left);
 		content.add(debugModeText);
@@ -228,7 +228,7 @@ public class SettingsMenu extends GUIMenu {
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		content.add(toggleDebugMode);
 		
-		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, Translation.Get("settings.lang"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, Translation.get("settings.lang"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		languageText.alignment = GUIAlignment.Center;
 		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
@@ -236,7 +236,7 @@ public class SettingsMenu extends GUIMenu {
 		String languageButtonText = Settings.GetLang().toString(); // Ersetzen mit enum von Settings
 		//if(Settings.GetDebugMode())
 		//	toggleDebugModeText = "An";
-		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, Translation.Literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, Translation.literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -247,7 +247,7 @@ public class SettingsMenu extends GUIMenu {
 		toggleLanguage.alignment = GUIAlignment.Center;
 		content.add(toggleLanguage);
 		
-		GUIText cameraShakeText = new GUIText(-450, buttonHeight * 2 + spacing * 6 + startPos, Translation.Get("settings.camerashake"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		GUIText cameraShakeText = new GUIText(-450, buttonHeight * 2 + spacing * 6 + startPos, Translation.get("settings.camerashake"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		cameraShakeText.alignment = GUIAlignment.Center;
 		cameraShakeText.SetTextAlignment(TextAlignment.Left);
 		content.add(cameraShakeText);
@@ -290,12 +290,12 @@ public class SettingsMenu extends GUIMenu {
 		if(Settings.GetLang() == Language.Deutsch) Settings.SetLang(Language.English);
 		else if(Settings.GetLang() == Language.English) Settings.SetLang(Language.Deutsch);
 		
-		toggleLanguage.SetText(Translation.Literal(Settings.GetLang().toString()));
+		toggleLanguage.SetText(Translation.literal(Settings.GetLang().toString()));
 	}
 	
 	@Override
 	protected GUIButton CreateBackButton() {
-		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.Get("settings.saveandback"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

@@ -2,6 +2,7 @@ package de.demoncore.game;
 
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Logger;
 
 public class Settings {
 

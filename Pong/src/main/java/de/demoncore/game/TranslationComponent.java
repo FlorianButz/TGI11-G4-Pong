@@ -10,7 +10,7 @@ public class TranslationComponent {
 	}
 	
 	public String Get() {
-		return Translation.Get(this);
+		return Translation.get(this);
 	}
 	
 }

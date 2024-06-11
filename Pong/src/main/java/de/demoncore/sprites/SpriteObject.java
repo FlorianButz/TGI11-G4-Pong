@@ -18,7 +18,7 @@ public class SpriteObject extends GameObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		Vector3 worldPos = GetPosition();
-		g2d.drawImage(sprite.GetTexture(),
+		g2d.drawImage(sprite.getTexture(),
 				(int)worldPos.x,
 				(int)worldPos.y,
 				(int)size.x,

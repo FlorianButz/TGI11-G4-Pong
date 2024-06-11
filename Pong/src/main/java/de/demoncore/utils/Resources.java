@@ -6,7 +6,6 @@ import java.lang.constant.ClassDesc;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
-import de.demoncore.game.Logger;
 import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
 import de.demoncore.sprites.Sprite;
@@ -47,7 +46,7 @@ public class Resources {
 	
 	public static DialogLine testLine;
 	
-	public static void LoadFonts() {
+	public static void loadFonts() {
 		
 		// Schriftarten werden geladen
 		
@@ -78,21 +77,21 @@ public class Resources {
 		Logger.logMessage("Laden der Schriftarten Erfolgreich!");
 	}
 	
-	public static void LoadAudio() {
+	public static void loadAudio() {
 		
 		// Soundeffekte werden geladen
 
 		Logger.logInfo("Lade Ressourcen: Lade Audio");
 		
-		buttonClick = AudioMaster.LoadSoundWav("/audio/Button_Click.wav");
-		buttonHover = AudioMaster.LoadSoundWav("/audio/Button_Hover.wav");
+		buttonClick = AudioMaster.loadSoundWav("/audio/Button_Click.wav");
+		buttonHover = AudioMaster.loadSoundWav("/audio/Button_Hover.wav");
 
-		pongPowerup = AudioMaster.LoadSoundWav("/audio/Pong_Powerup.wav");
-		pongPlayerHitPedal = AudioMaster.LoadSoundWav("/audio/Pong_PlayerHitPedal.wav");
-		pongPlayerHitWall = AudioMaster.LoadSoundWav("/audio/Pong_PlayerHitWall.wav");
-		pongGoal = AudioMaster.LoadSoundWav("/audio/Pong_Goal.wav");
+		pongPowerup = AudioMaster.loadSoundWav("/audio/Pong_Powerup.wav");
+		pongPlayerHitPedal = AudioMaster.loadSoundWav("/audio/Pong_PlayerHitPedal.wav");
+		pongPlayerHitWall = AudioMaster.loadSoundWav("/audio/Pong_PlayerHitWall.wav");
+		pongGoal = AudioMaster.loadSoundWav("/audio/Pong_Goal.wav");
 		
-		dialogTalk = AudioMaster.LoadSoundWav("/audio/Dialog_Talk.wav");
+		dialogTalk = AudioMaster.loadSoundWav("/audio/Dialog_Talk.wav");
 		
 		Logger.logMessage("Laden der Soundeffekte Erfolgreich!");
 		
@@ -100,34 +99,34 @@ public class Resources {
 
 		Logger.logInfo("Lade Ressourcen: Lade Musik");
 		
-		ambienceDark1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/Gone.mp3"));
-		ambienceDark2 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/TheLastLight.mp3"));
-		ambienceFast1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/NearTheEnd.mp3"));
-		ambienceHappy1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/G4Pong_HappyOrchestra.mp3"));
-		ambienceMysterious1 = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/FarAway.mp3"));
-		sneakySnitch = AudioMaster.LoadSoundMp3(Main.class.getResourceAsStream("/audio/music/SneakySnitch.mp3"));
+		ambienceDark1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Gone.mp3"));
+		ambienceDark2 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/TheLastLight.mp3"));
+		ambienceFast1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/NearTheEnd.mp3"));
+		ambienceHappy1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/G4Pong_HappyOrchestra.mp3"));
+		ambienceMysterious1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/FarAway.mp3"));
+		sneakySnitch = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/SneakySnitch.mp3"));
 		
 		Logger.logMessage("Laden der Musik Erfolgreich!");
 	}
 	
-	public static void LoadSprites() {
+	public static void loadSprites() {
 
 		// Texturen werden geladen
 
 		Logger.logInfo("Lade Ressourcen: Lade Texturen");
 		
-		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).Load();
-		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).Load();
-		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).Load();
-		cake = new Sprite(Main.class.getResourceAsStream("/textures/Cake.png")).Load();
-		playerIdle = new Sprite(Main.class.getResourceAsStream("/textures/PlayerIdle.png")).Load();
-		playerWalk1 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk1.png")).Load();
-		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).Load();
+		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).load();
+		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).load();
+		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).load();
+		cake = new Sprite(Main.class.getResourceAsStream("/textures/Cake.png")).load();
+		playerIdle = new Sprite(Main.class.getResourceAsStream("/textures/PlayerIdle.png")).load();
+		playerWalk1 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk1.png")).load();
+		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}
 	
-	public static void LoadDialog() {
+	public static void loadDialog() {
 		
 		// Dialoge laden
 		

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class KeyHandler implements KeyListener, MouseListener {
@@ -41,11 +41,11 @@ public class KeyHandler implements KeyListener, MouseListener {
 		
 		for(GameActionListener listener : new ArrayList<GameActionListener>(listeners)) {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-				listener.OnEscapePressed();
+				listener.onEscapePressed();
 			if(e.getKeyCode() == KeyEvent.VK_E)
-				listener.OnInteractionKeyPressed();
+				listener.onInteractionKeyPressed();
 			if(e.getKeyCode() == KeyEvent.VK_SPACE)
-				listener.OnSpaceKeyPressed();
+				listener.onSpaceKeyPressed();
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -114,7 +114,7 @@ public class KeyHandler implements KeyListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
 		for(GameActionListener g : l) {
-			g.OnMouseDown(e);
+			g.onMouseDown(e);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class KeyHandler implements KeyListener, MouseListener {
 	public void mouseReleased(MouseEvent e) {
 		ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
 		for(GameActionListener g : l) {
-			g.OnMouseUp(e);
+			g.onMouseUp(e);
 		}
 	}
 

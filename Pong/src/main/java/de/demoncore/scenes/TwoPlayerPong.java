@@ -17,7 +17,7 @@ import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
-public class OnePlayerPong extends BaseScene {
+public class TwoPlayerPong extends BaseScene {
 
 	PongBall ball;
 
@@ -38,7 +38,7 @@ public class OnePlayerPong extends BaseScene {
 		player1 = new PongPlayer(0, 0);
 		AddObject(player1);
 
-		player2 = new PongPlayerAI(0, 0);
+		player2 = new PongPlayer(0, 0);
 		player2.isPlayer1 = false;
 		AddObject(player2);
 

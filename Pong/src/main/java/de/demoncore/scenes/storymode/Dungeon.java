@@ -22,8 +22,8 @@ public class Dungeon extends BaseScene {
 	DungeonMinimap minimap;
 	
 	@Override
-	public void InitializeScene() {
-		super.InitializeScene();
+	public void initializeScene() {
+		super.initializeScene();
 
 		AddObject(new PauseMenu());
 		
@@ -47,12 +47,12 @@ public class Dungeon extends BaseScene {
 		
 		AddObject(interact);
 		
-		GenerateDungeon();
+		generateDungeon();
 	}
 
 	@Override
-	public void UpdateScene() {
-		super.UpdateScene();
+	public void updateScene() {
+		super.updateScene();
 		
 		cameraPosition = Vector3.Lerp(cameraPosition, player.GetPosition(), 0.065f);
 	}
@@ -72,7 +72,7 @@ public class Dungeon extends BaseScene {
 	
 	Thread gen;
 	
-	void GenerateDungeon() {
+	void generateDungeon() {
 		
 		if(dungeonRoom == null)
 			dungeonRoom = new GameObject[dungeonSizeArray][dungeonSizeArray];
@@ -101,7 +101,7 @@ public class Dungeon extends BaseScene {
 			public void run() {
 				super.run();
 				
-				AddRoom((int)(dungeonSizeArray / 2), (int)(dungeonSizeArray / 2));
+				addRoom((int)(dungeonSizeArray / 2), (int)(dungeonSizeArray / 2));
 			
 				minimap.dungeon = dungeonRoom;
 				GameObject randomRoom;
@@ -115,13 +115,13 @@ public class Dungeon extends BaseScene {
 		gen.start();
 	}
 
-	void AddRoom(int x, int y) {
+	void addRoom(int x, int y) {
 		if(roomsCount >= maxRooms) return;
 		if(x < 0 || x >= dungeonRoom.length) return;
 		if(y < 0 || y >= dungeonRoom.length) return;
 		if(dungeonRoom[x][y] != null) return;
 		
-		GameObject go = new GameObject((int)GetRoomPosition(x, y).x, (int)GetRoomPosition(x, y).y, dungeonSize, dungeonSize);
+		GameObject go = new GameObject((int)getRoomPosition(x, y).x, (int)getRoomPosition(x, y).y, dungeonSize, dungeonSize);
 		go.color = Color.gray;
 		go.collisionEnabled = false;
 		dungeonRoom[x][y] = go;
@@ -132,11 +132,11 @@ public class Dungeon extends BaseScene {
 		roomsCount++;
 		
 		if(rng.nextDouble() > 0.4 * ((float)roomsCount / (float)maxRooms) * 5) {
-			AddRoom(x + 1, y);
+			addRoom(x + 1, y);
 			
 			GameObject hallway = new GameObject(
-					(int)((GetRoomPosition(x, y).x + GetRoomPosition(x + 1, y).x) / 2),
-					(int)GetRoomPosition(x, y).y,
+					(int)((getRoomPosition(x, y).x + getRoomPosition(x + 1, y).x) / 2),
+					(int)getRoomPosition(x, y).y,
 					dungeonSpacing,
 					dungeonSize / 3);
 			hallway.color = Color.darkGray;
@@ -147,11 +147,11 @@ public class Dungeon extends BaseScene {
 			OnBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.2 * ((float)roomsCount / (float)maxRooms) * 5) {
-			AddRoom(x - 1, y);
+			addRoom(x - 1, y);
 			
 			GameObject hallway = new GameObject(
-					(int)((GetRoomPosition(x, y).x + GetRoomPosition(x - 1, y).x) / 2),
-					(int)GetRoomPosition(x, y).y,
+					(int)((getRoomPosition(x, y).x + getRoomPosition(x - 1, y).x) / 2),
+					(int)getRoomPosition(x, y).y,
 					dungeonSpacing,
 					dungeonSize / 3);
 			hallway.color = Color.darkGray;
@@ -161,11 +161,11 @@ public class Dungeon extends BaseScene {
 			OnBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.4 * ((float)roomsCount / (float)maxRooms) * 5) {
-			AddRoom(x, y + 1);
+			addRoom(x, y + 1);
 			
 			GameObject hallway = new GameObject(
-					(int)GetRoomPosition(x, y).x,
-					(int)((GetRoomPosition(x, y).y + GetRoomPosition(x, y + 1).y) / 2),
+					(int)getRoomPosition(x, y).x,
+					(int)((getRoomPosition(x, y).y + getRoomPosition(x, y + 1).y) / 2),
 					dungeonSize / 3,
 					dungeonSpacing);
 			hallway.color = Color.darkGray;
@@ -175,11 +175,11 @@ public class Dungeon extends BaseScene {
 			OnBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.3 * ((float)roomsCount / (float)maxRooms) * 5) {
-			AddRoom(x, y - 1);
+			addRoom(x, y - 1);
 			
 			GameObject hallway = new GameObject(
-					(int)GetRoomPosition(x, y).x,
-					(int)((GetRoomPosition(x, y).y + GetRoomPosition(x, y - 1).y) / 2),
+					(int)getRoomPosition(x, y).x,
+					(int)((getRoomPosition(x, y).y + getRoomPosition(x, y - 1).y) / 2),
 					dungeonSize / 3,
 					dungeonSpacing);
 			hallway.color = Color.darkGray;
@@ -190,7 +190,7 @@ public class Dungeon extends BaseScene {
 		}
 	}
 
-	Vector3 GetRoomPosition(int x, int y) {
+	Vector3 getRoomPosition(int x, int y) {
 		float xP = (dungeonSpacing * x + dungeonSize * x) - (dungeonSpacing * dungeonSizeArray + dungeonSize * dungeonSizeArray) / 2;
 		float yP = (dungeonSpacing * y + dungeonSize * y) - (dungeonSpacing * dungeonSizeArray + dungeonSize * dungeonSizeArray) / 2;
 

@@ -15,20 +15,20 @@ import de.demoncore.utils.Resources;
 public class DefaultScene extends BaseScene {
 
 	@Override
-	public void InitializeScene() {
-		super.InitializeScene();
+	public void initializeScene() {
+		super.initializeScene();
 	
-		GUIText t = new GUIText(0, -75, Translation.Get("defscene.error"), Resources.uiFont.deriveFont(70F), Color.white);
+		GUIText t = new GUIText(0, -75, Translation.get("defscene.error"), Resources.uiFont.deriveFont(70F), Color.white);
 		t.alignment = GUIAlignment.Center;
 		t.color = Color.red;
 		AddObject(t);
 		
-		GUIText d = new GUIText(0, 0, Translation.Get("defscene.error2"), Resources.uiFont.deriveFont(30F), Color.white);
+		GUIText d = new GUIText(0, 0, Translation.get("defscene.error2"), Resources.uiFont.deriveFont(30F), Color.white);
 		d.alignment = GUIAlignment.Center;
 		GUITheme.LoadTextTheme(d, Theme.TextSecondary);
 		AddObject(d);
 		
-		GUIButton returnButton = new GUIButton(0, 100, 400, 65, Translation.Get("defscene.return"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
+		GUIButton returnButton = new GUIButton(0, 100, 400, 65, Translation.get("defscene.return"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
