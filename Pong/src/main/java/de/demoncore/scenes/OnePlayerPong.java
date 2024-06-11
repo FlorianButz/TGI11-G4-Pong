@@ -36,8 +36,6 @@ public class OnePlayerPong extends BaseScene {
 		Ball = new PongBall(0, 0, player1, player2);
 		AddObject(Ball);
 		
-		points = new GUIText(0, 115, Translation.Literal(0 + "   |   " + 0), Resources.uiFont.deriveFont(75F), Color.white);
-		AddObject(points);
 	}
 	
 	public void addPlayerPoint(boolean isFirstPlayer) {
