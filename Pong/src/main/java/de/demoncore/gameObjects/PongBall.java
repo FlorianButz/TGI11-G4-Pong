@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.Logger;
+import de.demoncore.game.PointSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -113,13 +114,13 @@ public class PongBall extends GameObject {
 	private void collisonWithGoal(boolean isRightWall) {
 		if (isRightWall == true) {
 			Logger.logMessage("Rechte Wand getroffen", this);
-			// Punkt hinzufuegen
+			PointSystem.addPlayer1Points(1);
 			
 			spawnParticles();
 		}
 		else {
 			Logger.logMessage("Linke Wand getroffen", this);
-			// Punkt hinzufuegen
+			PointSystem.addPlayer2Points(1);
 
 			spawnParticles();
 		}
