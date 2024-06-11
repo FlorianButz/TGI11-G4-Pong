@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.utils.Vector3;
@@ -21,7 +22,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 
 	public Vector3 mouse = Vector3.zero();
 	
-	public static Vector3 playerInput = Vector3.zero(); // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
+	public static Vector3 playerInput1 = Vector3.zero(); // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
+	public static Vector3 playerInput2 = Vector3.zero(); // Der Input von dem Spieler 2 (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
 	
 	public KeyHandler(GameLogic gameLogic) {
 		this.gameLogic = gameLogic;
@@ -47,16 +49,31 @@ public class KeyHandler implements KeyListener, MouseListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput = playerInput.subtract(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput = playerInput.add(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
 		}
 		
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			playerInput = playerInput.subtract(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			playerInput = playerInput.add(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
 		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
+		
+		} else if (e.getKeyCode() == KeyEvent.VK_D) {
+			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_W) {
+			playerInput2 = playerInput2.subtract(new Vector3(0, 1, 0));
+		} else if (e.getKeyCode() == KeyEvent.VK_S) {
+			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
+		}
+		
+		Logger.logInfo(playerInput1.ToString() + " -- " + playerInput2.ToString());
 	}
 
 	@Override
@@ -64,16 +81,29 @@ public class KeyHandler implements KeyListener, MouseListener {
 		if(pressedKeys.contains(e.getKeyCode())) { pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode())); } // Entfernt die Sperre
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput = playerInput.add(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
 		
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput = playerInput.subtract(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
 		}
 		
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			playerInput = playerInput.add(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			playerInput = playerInput.subtract(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
+		
+		} else if (e.getKeyCode() == KeyEvent.VK_D) {
+			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_W) {
+			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
+		} else if (e.getKeyCode() == KeyEvent.VK_S) {
+			playerInput2 = playerInput2.subtract(new Vector3(0, 1, 0));
 		}
 	}
 

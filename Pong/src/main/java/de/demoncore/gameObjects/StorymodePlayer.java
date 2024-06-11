@@ -104,7 +104,7 @@ public class StorymodePlayer extends RigidBody {
 			walkAnim.Stop();
 		}
 		
-		AddForce(KeyHandler.playerInput.Normalized().multiply(playerAcceleration));
+		AddForce(KeyHandler.playerInput1.Normalized().multiply(playerAcceleration));
 		
 		trail.SetPosition(this.position);
 		
