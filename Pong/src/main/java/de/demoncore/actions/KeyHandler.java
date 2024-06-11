@@ -49,31 +49,29 @@ public class KeyHandler implements KeyListener, MouseListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
-		}
-		
-		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
-		}
-		
-		if (e.getKeyCode() == KeyEvent.VK_A) {
 			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
-		
-		} else if (e.getKeyCode() == KeyEvent.VK_D) {
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
 		}
 		
-		else if (e.getKeyCode() == KeyEvent.VK_W) {
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			playerInput2 = playerInput2.subtract(new Vector3(0, 1, 0));
-		} else if (e.getKeyCode() == KeyEvent.VK_S) {
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
 		}
 		
-		Logger.logInfo(playerInput1.ToString() + " -- " + playerInput2.ToString());
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
+		
+		} else if (e.getKeyCode() == KeyEvent.VK_D) {
+			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_W) {
+			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
+		} else if (e.getKeyCode() == KeyEvent.VK_S) {
+			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
+		}
 	}
 
 	@Override
@@ -81,29 +79,29 @@ public class KeyHandler implements KeyListener, MouseListener {
 		if(pressedKeys.contains(e.getKeyCode())) { pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode())); } // Entfernt die Sperre
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
+			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
 		
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
+			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
 		}
 		
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
+			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
+			playerInput2 = playerInput2.subtract(new Vector3(0, 1, 0));
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_A) {
-			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
 		
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
-			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
 		}
 		
 		else if (e.getKeyCode() == KeyEvent.VK_W) {
 			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_S) {
-			playerInput2 = playerInput2.subtract(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
 		}
 	}
 

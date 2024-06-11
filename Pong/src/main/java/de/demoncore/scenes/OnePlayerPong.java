@@ -36,6 +36,7 @@ public class OnePlayerPong extends BaseScene {
 		AddObject(player1);
 
 		player2 = new PongPlayer(0, 0);
+		player2.isPlayer1 = false;
 		AddObject(player2);
 
 		Ball = new PongBall(0, 0, player1, player2);
