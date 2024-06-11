@@ -1,13 +1,19 @@
 package de.demoncore.gameObjects;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import de.demoncore.audio.AudioSource;
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.Logger;
 import de.demoncore.game.PointSystem;
 import de.demoncore.game.SceneManager;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -17,9 +23,21 @@ public class PongBall extends GameObject {
 	private Vector3 velocity = Vector3.one().multiply(10f);
 
 	private AudioSource sfxSource;
-	
+
+	private static PongBall instance;
+
+	boolean isIntersectionWithPlayer = false;
+
+	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
+
+	public static PongBall getInstance() {
+		return instance;
+	}
+
 	public PongBall(int posX, int posY, PongPlayer player1, PongPlayer player2) {
 		super(posX, posY, 25, 25);
+
+		instance = this;
 
 		this.player1 = player1;
 		this.player2 = player2;
@@ -31,32 +49,54 @@ public class PongBall extends GameObject {
 	}
 
 	@Override
+	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		Vector3 worldPos = GetPosition();
+		g2d.setColor(color);
+		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
+
+		g2d.setColor(new Color(1, 1, 1, 0.25f));
+		g2d.fillRect((int)positions.get(2).x, (int)positions.get(2).y, (int)size.x, (int)size.y);
+		g2d.setColor(new Color(1, 1, 1, 0.05f));
+		g2d.fillRect((int)positions.get(4).x, (int)positions.get(4).y, (int)size.x, (int)size.y);
+	}
+
+	@Override
 	public void OnDestroy() {
 		super.OnDestroy();
 
 		SceneManager.GetActiveScene().DestroyObject(sfxSource);
 	}
-	
+
 	@Override
 	public void Update() {
 		super.Update();
 
+		if(GameLogic.IsGamePaused()) return;
+		
 		position = position.add(velocity);
 
 		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
-			Logger.logMessage("Intersektion Ball mit Spieler", this);
-			sfxSource.Play(Resources.pongPlayerHitPedal);
-			
-			velocity = velocity.reflect(getPlayerNormal());
+			if(!isIntersectionWithPlayer) {
+				isIntersectionWithPlayer = true;
+
+				Logger.logMessage("Intersektion Ball mit Spieler", this);
+				sfxSource.Play(Resources.pongPlayerHitPedal);
+
+				velocity = velocity.reflect(getPlayerNormal());
+			}
+		}else {
+			isIntersectionWithPlayer = false;
 		}
-		
+
 		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetRawCameraViewport())) {
 			Logger.logMessage("Intersektion Ball mit Wand", this);
 			sfxSource.Play(Resources.pongPlayerHitWall);
-			
+
 			velocity = velocity.reflect(getWallNormal());
 		}
 
+		Vector3 worldPos = GetPosition();
+		positions.add(0, worldPos);
 	}
 
 	private Vector3 getPlayerNormal() {
@@ -106,16 +146,16 @@ public class PongBall extends GameObject {
 		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().GetRawCameraViewport().height / 2) {
 			normal.y = -1;
 		}
-		
+
 		return normal;
 	}
-	
-	
+
+
 	private void collisonWithGoal(boolean isRightWall) {
 		if (isRightWall == true) {
 			Logger.logMessage("Rechte Wand getroffen", this);
 			PointSystem.addPlayer1Points(1);
-			
+
 			spawnParticles();
 		}
 		else {
@@ -124,11 +164,13 @@ public class PongBall extends GameObject {
 
 			spawnParticles();
 		}
-		
+
 		sfxSource.Play(Resources.pongGoal);
 		SetPosition(Vector3.zero());
+
+		positions = new ArrayList<Vector3>(Collections.nCopies(50, Vector3.zero()));
 	}
-    
+
 	private void spawnParticles() {
 		ParticleSystem system = new ParticleSystem((int)GetPosition().x, (int)GetPosition().y);
 		system.emitLoop = false;
@@ -136,8 +178,9 @@ public class PongBall extends GameObject {
 		system.initialParticleSpeedMax = Vector3.one().add(new Vector3(0, -0.45f, 0));
 		system.initialParticleSpeedMin = Vector3.one().multiply(-1f).add(new Vector3(0, -0.45f, 0));
 		system.particleSpeedMultiplier = 35;
-		system.particleColorFirst = Color.white;
-		system.particleColorSecond = Color.white;
+		system.particleColorFirst = Color.lightGray;
+		system.particleColorSecond = Color.gray;
+		system.particleColorEnd = new Color(0, 0, 0, 0);
 		system.initialParticleSize = 15;
 		system.endParticleSize = 0;
 		system.particleLifetime = 5;
@@ -146,5 +189,5 @@ public class PongBall extends GameObject {
 		SceneManager.GetActiveScene().ShakeCamera(35, 35, 35);
 		system.Init();
 	}
-	
+
 }

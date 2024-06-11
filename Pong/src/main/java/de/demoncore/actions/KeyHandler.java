@@ -62,7 +62,6 @@ public class KeyHandler implements KeyListener, MouseListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
-		
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
 		}
@@ -80,7 +79,6 @@ public class KeyHandler implements KeyListener, MouseListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			playerInput2 = playerInput2.add(new Vector3(1, 0, 0));
-		
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			playerInput2 = playerInput2.subtract(new Vector3(1, 0, 0));
 		}
@@ -93,13 +91,12 @@ public class KeyHandler implements KeyListener, MouseListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			playerInput1 = playerInput1.add(new Vector3(1, 0, 0));
-		
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerInput1 = playerInput1.subtract(new Vector3(1, 0, 0));
 		}
 		
 		else if (e.getKeyCode() == KeyEvent.VK_W) {
-			playerInput2 = playerInput2.add(new Vector3(0, 1, 0));
+			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
 		} else if (e.getKeyCode() == KeyEvent.VK_S) {
 			playerInput1 = playerInput1.subtract(new Vector3(0, 1, 0));
 		}

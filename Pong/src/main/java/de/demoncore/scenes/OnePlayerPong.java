@@ -2,6 +2,7 @@ package de.demoncore.scenes;
 
 import java.awt.Color;
 
+import de.demoncore.game.Logger;
 import de.demoncore.game.PointListener;
 import de.demoncore.game.PointSystem;
 import de.demoncore.game.SceneManager;
@@ -9,6 +10,7 @@ import de.demoncore.game.Translation;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongPlayer;
+import de.demoncore.gameObjects.PongPlayerAI;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.Resources;
@@ -35,7 +37,7 @@ public class OnePlayerPong extends BaseScene {
 		player1 = new PongPlayer(0, 0);
 		AddObject(player1);
 
-		player2 = new PongPlayer(0, 0);
+		player2 = new PongPlayerAI(0, 0);
 		player2.isPlayer1 = false;
 		AddObject(player2);
 
@@ -56,6 +58,9 @@ public class OnePlayerPong extends BaseScene {
 
 	public void addPlayerPoint() {
 		points.SetText(Translation.Literal(PointSystem.getPlayer1Points() + "   |   " + PointSystem.getPlayer2Points()));
+
+		if(PointSystem.getPlayer1Points() >= 10) Logger.logWarning("Spieler 1 Gewinnt!");
+		else if(PointSystem.getPlayer2Points() >= 10) Logger.logWarning("Spieler 2 Gewinnt!");
 	}
 
 	@Override

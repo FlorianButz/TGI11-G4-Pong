@@ -3,7 +3,6 @@ package de.demoncore.gameObjects;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.Logger;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
@@ -11,9 +10,10 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayer extends RigidBody {
 
-	public float playerAcceleration = 7.75f; // Speed
-	
+	public float playerAcceleration = 15f; // Speed
+
 	public boolean isPlayer1 = true;
+	protected boolean playerControlsEnabled = true;
 	
 	public PongPlayer(int posX, int posY) {
 		super(posX, posY, 15, 135);
@@ -22,18 +22,21 @@ public class PongPlayer extends RigidBody {
 	@Override
 	public void Update() {
 		if(GameLogic.IsGamePaused()) return;
+		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 		
-		Vector3 geschwindigkeit = Vector3.zero();
-		if (isPlayer1) {
-			geschwindigkeit = new Vector3(0,KeyHandler.playerInput1.y * playerAcceleration,0);
-		} else {
-			geschwindigkeit = new Vector3(0,KeyHandler.playerInput2.y * playerAcceleration,0);
+		if(playerControlsEnabled) {			
+			Vector3 geschwindigkeit = Vector3.zero();
+			if (isPlayer1) {
+				geschwindigkeit = new Vector3(0,KeyHandler.playerInput1.y * playerAcceleration,0);
+			} else {
+				geschwindigkeit = new Vector3(0,KeyHandler.playerInput2.y * playerAcceleration,0);
+			}
+			AddForce(geschwindigkeit);
 		}
-		AddForce(geschwindigkeit);
-		
-		SetPosition (new Vector3 (0, GameMath.Clamp(GetPosition().y,-(Gui.GetScreenDimensions().y/2) + size.y,(Gui.GetScreenDimensions().y/2) - size.y), 0));
 		
 		super.Update();
+		
+		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 	}
 
 }

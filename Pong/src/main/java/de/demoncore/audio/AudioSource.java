@@ -3,6 +3,7 @@ package de.demoncore.audio;
 import org.lwjgl.openal.AL10;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.Logger;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.utils.Vector3;
@@ -46,7 +47,7 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 
 	public AudioSource Play(AudioClip audioClip) {
 		if(!isInScene) {
-			System.err.println("Versucht Audio zu spielen bevor die Source in der Scene ist. " + this.parentObject.getClass().getName());
+			Logger.logError("Versucht Audio zu spielen bevor die Source in der Scene ist. " + this.parentObject.getClass().getName(), this);
 		}
 
 		AL10.alSourceStop(sourceId);
