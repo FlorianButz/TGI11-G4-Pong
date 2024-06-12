@@ -31,8 +31,8 @@ public class GUIMenu extends GameObject {
 	ColorAnimator bgInAnim;
 	ColorAnimator bgOutAnim;
 
-	protected Vector3 inAnimationFromPosition = new Vector3(0, -1500, 0);
-	protected Vector3 outAnimationToPosition = new Vector3(0, -1500, 0);
+	protected Vector3 inAnimationFromPosition = new Vector3(0, -2500, 0);
+	protected Vector3 outAnimationToPosition = new Vector3(0, -2500, 0);
 
 	protected EasingType inAnimationEasingType = EasingType.OutExponential;
 	protected EasingType outAnimationEasingType = EasingType.InOutQuint;
@@ -92,6 +92,7 @@ public class GUIMenu extends GameObject {
 	protected GUIObject CreateBackground() {
 		GUIRectangle bg = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x + 1500, (int)Gui.GetScreenDimensions().y + 1500, new Color(0, 0, 0, 0f));
 		bg.alignment = GUIAlignment.Center;
+		bg.doUIScale = false;
 		return bg;
 	}
 	

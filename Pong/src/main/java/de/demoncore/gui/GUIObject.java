@@ -10,11 +10,13 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.utils.Vector3;
 
 public class GUIObject extends GameObject {
 
 	public GUIAlignment alignment = GUIAlignment.TopMiddle;
+	public boolean doUIScale = true;
 	
 	GameActionListener l;
 	
@@ -46,9 +48,22 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
+	public Vector3 GetScale() {
+		return size;
+	}
+	
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		KeyHandler.listeners.remove(l);
+	}
+	
+	@Override
+	public Vector3 GetPosition() {	// Gibt die korrekte Position vom GameObject zurück
+		return position.subtract(new Vector3(
+				GetScale().x * anchorPoint.x + localPosition.x,
+				GetScale().y * anchorPoint.y + localPosition.y
+				));
 	}
 	
 	public Vector3 GetUIPosition(int screenWidth, int screenHeight) {
@@ -57,26 +72,26 @@ public class GUIObject extends GameObject {
 		{
 		
 		case Center:
-			return GetPosition().add(new Vector3(screenWidth / 2, screenHeight / 2));
+			return new Vector3(screenWidth / 2, screenHeight / 2).add(GetPosition());
 			
 		case TopLeft:
-			return GetPosition().add(new Vector3(0, 0));
+			return new Vector3(0, 0).add(GetPosition());
 		case TopMiddle:
-			return GetPosition().add(new Vector3(screenWidth / 2, 0));
+			return new Vector3(screenWidth / 2, 0).add(GetPosition());
 		case TopRight:
-			return GetPosition().add(new Vector3(screenWidth, 0));
+			return new Vector3(screenWidth / 2, screenHeight / 2).add(GetPosition());
 			
 		case MiddleLeft:
-			return GetPosition().add(new Vector3(0, screenHeight / 2));
+			return new Vector3(0, screenHeight / 2).add(GetPosition());
 		case MiddleRight:
-			return GetPosition().add(new Vector3(screenWidth, screenHeight / 2));
+			return new Vector3(screenWidth, screenHeight / 2).add(GetPosition());
 			
 		case DownLeft:
-			return GetPosition().add(new Vector3(0, screenHeight));
+			return new Vector3(0, screenHeight).add(GetPosition());
 		case DownMiddle:
-			return GetPosition().add(new Vector3(screenWidth / 2, screenHeight));
+			return new Vector3(screenWidth / 2, screenHeight).add(GetPosition());
 		case DownRight:
-			return GetPosition().add(new Vector3(screenWidth, screenHeight));
+			return new Vector3(screenWidth, screenHeight).add(GetPosition());
 			
 		}
 		
@@ -138,17 +153,79 @@ public class GUIObject extends GameObject {
 		isHovering = false;
 	}
 	
+	Vector3 scaleUI(Vector3 vector) {
+		
+		Vector3 vec = vector;
+		
+		float sX = 0;
+		float sY = 0;
+		
+		switch(alignment) {
+		case TopLeft:
+			sX = 0;
+			sY = 0;
+			break;
+		case TopMiddle:
+			sX = Gui.GetScreenDimensions().x / 2;
+			sY = 0;
+			break;
+		case TopRight:
+			sX = Gui.GetScreenDimensions().x;
+			sY = 0;
+			break;
+			
+		case MiddleLeft:
+			sX = 0;
+			sY = Gui.GetScreenDimensions().y / 2;
+			break;
+		case Center:
+			sX = Gui.GetScreenDimensions().x / 2;
+			sY = Gui.GetScreenDimensions().y / 2;
+			break;
+		case MiddleRight:
+			sX = Gui.GetScreenDimensions().x;
+			sY = Gui.GetScreenDimensions().y / 2;
+			break;
+			
+		case DownLeft:
+			sX = 0;
+			sY = Gui.GetScreenDimensions().y;
+			break;
+		case DownMiddle:
+			sX = Gui.GetScreenDimensions().x / 2;
+			sY = Gui.GetScreenDimensions().y;
+			break;
+		case DownRight:
+			sX = Gui.GetScreenDimensions().x;
+			sY = Gui.GetScreenDimensions().y;
+			break;
+		}
+
+		vec.x = vec.x - sX;
+		vec.y = vec.y - sY;
+		
+		vec.x = vec.x * Settings.GetUIScale();
+		vec.y = vec.y * Settings.GetUIScale();
+		
+		vec.x = vec.x + sX;
+		vec.y = vec.y + sY;
+		
+		return vec;
+	}
+	
 	public boolean CheckIntersection(int x, int y) {
 		Vector3 screenPos = this.GetUIPosition(
 				(int)Gui.GetScreenDimensions().x,
 				(int)Gui.GetScreenDimensions().y
 				);
 		
+		screenPos = scaleUI(screenPos);
+		
 		Rectangle r1 = new Rectangle(
-				(int)screenPos.x,
-				(int) ((int) screenPos.y),
-				(int)this.size.x,
-				(int)this.size.y);
+				(int)(screenPos.x),
+				(int)(screenPos.y),
+				(int)(this.GetScale().x * Settings.GetUIScale()),
+				(int)(this.GetScale().y * Settings.GetUIScale()));
 		
 		Rectangle r2 = new Rectangle(x, y, 15, 15);
 		return r1.intersects(r2);

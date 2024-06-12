@@ -18,6 +18,7 @@ import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.RigidBody;
+import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.Gui;
 import de.demoncore.main.Main;
@@ -65,7 +66,7 @@ public class Draw extends JPanel {
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
 		
-		float scale = (float)Math.pow(Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f), 2f);
+		Settings.SetUIScale((float)Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f));
 
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
@@ -160,10 +161,141 @@ public class Draw extends JPanel {
 		
 		// Zeichne GUI
 		for(int guiObj = 0; guiObj < gameObjectsInScene.size(); guiObj++) {
+			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
-				guiObject.Draw(g2d, screenwidth, screenheight);
+
+				if(!guiObject.doUIScale) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+					continue;
+				}
 			}
+			
+			// Top Left
+			
+			scaleUI(g2d, 0, 0, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.TopLeft) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, 0, 0, 1f / Settings.GetUIScale());
+			
+			// Top Center
+			
+			scaleUI(g2d, screenwidth / 2, 0, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.TopMiddle) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth / 2, 0, 1f / Settings.GetUIScale());
+			
+			// Top Right
+			
+			scaleUI(g2d, screenwidth, 0, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.TopRight) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth, 0, 1 / Settings.GetUIScale());
+			
+			// Middle Left
+			
+			scaleUI(g2d, 0, screenheight / 2, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.MiddleLeft) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, 0, screenheight / 2, 1 / Settings.GetUIScale());
+			
+			// Middle Center
+			
+			scaleUI(g2d, screenwidth / 2, screenheight / 2, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.Center) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth / 2, screenheight / 2, 1 / Settings.GetUIScale());
+			
+			// Middle RIght
+			
+			scaleUI(g2d, screenwidth, screenheight / 2, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.MiddleRight) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth, screenheight / 2, 1 / Settings.GetUIScale());
+			
+			// Bottom Left
+			
+			scaleUI(g2d, 0, screenheight, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.DownLeft) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, 0, screenheight, 1 / Settings.GetUIScale());
+			
+			// Bottom Center
+			
+			scaleUI(g2d, screenwidth / 2, screenheight, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.DownMiddle) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth / 2, screenheight, 1 / Settings.GetUIScale());
+			
+			// Bottom Right
+			
+			scaleUI(g2d, screenwidth, screenheight, Settings.GetUIScale());
+			
+			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
+				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
+
+				if(guiObject.alignment == GUIAlignment.DownRight) {
+					guiObject.Draw(g2d, screenwidth, screenheight);
+				}
+			}
+			
+			scaleUI(g2d, screenwidth, screenheight, 1 / Settings.GetUIScale());
 		}
 		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
@@ -203,6 +335,12 @@ public class Draw extends JPanel {
 		mouseLastPosition = GetMousePos();
 		
 		repaint();
+	}
+	
+	void scaleUI(Graphics2D g2d, int posX, int posY, float scale) {
+		g2d.translate((int)(posX), (int)(posY));
+		g2d.scale(scale, scale);
+		g2d.translate((int)-(posX), (int)-(posY));
 	}
 	
 	public static float GetFramesPerSecond() {
