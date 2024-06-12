@@ -17,17 +17,7 @@ public class AdvencedShopScene extends BaseScene{
 		
 		
 		Background.color = Color.darkGray;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		super.initializeScene();
 	}
