@@ -40,6 +40,8 @@ public class PongBall extends GameObject {
 		super(posX, posY, 25, 25);
 
 		instance = this;
+		
+
 
 		this.player1 = player1;
 		this.player2 = player2;
@@ -92,10 +94,11 @@ public class PongBall extends GameObject {
 	@Override
 	public void update() {
 		super.update();
+		
+		color = GameMath.LerpColor(color.cyan, Color.green, (float) Math.sin(GameLogic.GetInstance().GetGameTime()));
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
-		
-		
+			
 
 		position = position.add(velocity.multiply(speed));
 
