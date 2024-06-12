@@ -1,4 +1,4 @@
-package de.demoncore.scenes;
+package de.demoncore.scenes.shop;
 
 public class Background extends AdvencedShopScene {
 

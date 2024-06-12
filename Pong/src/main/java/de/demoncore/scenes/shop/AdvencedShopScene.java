@@ -1,8 +1,9 @@
-package de.demoncore.scenes;
+package de.demoncore.scenes.shop;
 
 import java.awt.Color;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.scenes.BaseScene;
 
 public class AdvencedShopScene extends BaseScene{
 
@@ -13,7 +14,7 @@ public class AdvencedShopScene extends BaseScene{
 	public void initializeScene() {
 	
 		Background = new GameObject(500, 0, 1000, 2000);
-		AddObject(Background);
+		addObject(Background);
 		
 		
 		Background.color = Color.darkGray;

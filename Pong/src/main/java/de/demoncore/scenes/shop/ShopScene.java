@@ -9,7 +9,6 @@ import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
-import de.demoncore.scenes.Background;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.Resources;
 
