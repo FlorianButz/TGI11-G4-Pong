@@ -23,7 +23,7 @@ public class RigidBody extends GameObject {
 	}
 
 	void CheckCollision() {
-		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
+		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.GetActiveScene().getSceneObjects());
 		
 		for(GameObject g : objs) {
 			if(g.collisionEnabled && g != this) {
@@ -48,7 +48,7 @@ public class RigidBody extends GameObject {
 	}
 	
 	boolean CheckIntersect() {
-		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
+		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.GetActiveScene().getSceneObjects());
 		
 		for(GameObject g : objs) {
 			if(g.collisionEnabled && g != this) {

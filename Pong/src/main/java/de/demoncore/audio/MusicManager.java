@@ -82,7 +82,7 @@ public class MusicManager {
 	}
 	
 	public static void SetVolume(float pVolume) {
-		volume = pVolume * Settings.GetMusicVolume() / 100f;
+		volume = pVolume * Settings.getMusicVolume() / 100f;
 		AL10.alSourcef(sourceId, AL10.AL_GAIN, volume);
 	}
 

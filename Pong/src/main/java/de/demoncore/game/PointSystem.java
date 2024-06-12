@@ -28,14 +28,14 @@ public class PointSystem {
 	public static void addPlayer1Points(int amount) {
 		player1Points += amount;
 		for(PointListener listener : listeners) {
-			listener.OnPointAdded();
+			listener.onPointAdded();
 		}
 	}
 	
 	public static void addPlayer2Points(int amount) {
 		player2Points += amount;
 		for(PointListener listener : listeners) {
-			listener.OnPointAdded();
+			listener.onPointAdded();
 		}
 	}
 }

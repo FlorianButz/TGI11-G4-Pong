@@ -25,24 +25,24 @@ public class SpriteAnimator {
 		this.easeType = easeType;
 	}
 
-	public void SetOnComplete(AnimatorOnCompleteEvent event) {
+	public void setOnComplete(AnimatorOnCompleteEvent event) {
 		this.onCompleteEvent = event;
 	}
 	
-	public void SetOnUpdate(AnimatorUpdateEvent event) {
+	public void setOnUpdate(AnimatorUpdateEvent event) {
 		this.updateEvent = event;
 	}
 	
 	boolean isAnimationCancled = false;
 	
-	public void Stop() {
+	public void stop() {
 		isAnimationCancled = true;
 		isPlaying = false;
 	}
 	
 	public Thread animationThread;
 	
-	public SpriteAnimator Play() {
+	public SpriteAnimator play() {
 		
 		if(isPlaying) return this;
 		else isPlaying = true;

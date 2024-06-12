@@ -22,11 +22,11 @@ public class Cake extends SpriteObject {
 		});
 		interaction.interactionString = "Eat Cake";
 		
-		SceneManager.GetActiveScene().AddObject(interaction);
+		SceneManager.GetActiveScene().addObject(interaction);
 	}
 	
 	void Destroy() {
-		SceneManager.GetActiveScene().DestroyObject(this);
-		SceneManager.GetActiveScene().DestroyObject(interaction);
+		SceneManager.GetActiveScene().destroyObject(this);
+		SceneManager.GetActiveScene().destroyObject(interaction);
 	}
 }

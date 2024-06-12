@@ -3,6 +3,7 @@ package de.demoncore.gameObjects;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
@@ -23,6 +24,8 @@ public class PongPlayer extends RigidBody {
 	public void update() {
 		if(GameLogic.IsGamePaused()) return;
 		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
+		
+		playerAcceleration = Settings.isSlowPedals() ? 5.5f : 15f;
 		
 		if(playerControlsEnabled) {			
 			Vector3 geschwindigkeit = Vector3.zero();

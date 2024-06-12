@@ -17,10 +17,12 @@ import de.demoncore.gameObjects.SettingsMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.GUIToggle;
 import de.demoncore.main.Main;
+import de.demoncore.scenes.shop.ShopScene;
 import de.demoncore.scenes.storymode.Dungeon;
 import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.Resources;
@@ -48,10 +50,10 @@ public class MainMenu extends BaseScene {
 		bgSys.particleGravity = 0;
 		bgSys.endParticleSize = 0;
 		bgSys.Init();
-		AddObject(bgSys);	// Füge partikelsystem zum level hinzu
+		addObject(bgSys);	// Füge partikelsystem zum level hinzu
 		
 		GUIText title = new GUIText(0, 175, Translation.literal(Main.gameName), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);	// Titel text
-		AddObject(title);
+		addObject(title);
 		
 		Vector3Animator anim = new Vector3Animator(Vector3.one().multiply(150), Vector3.one().multiply(160), 5, EasingType.Linear); // Erstelle neue animation für den Titel text
 		anim.SetOnUpdate(new AnimatorUpdateEvent() {
@@ -94,7 +96,7 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		singleplayer.alignment = GUIAlignment.Center;
-		AddObject(singleplayer);
+		addObject(singleplayer);
 		
 		GUIButton localMultiplayer = new GUIButton(220, 0, 360, 75, Translation.get("mainmenu.multiplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
@@ -104,7 +106,7 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;
-		AddObject(localMultiplayer);
+		addObject(localMultiplayer);
 		
 		GUIButton storymode = new GUIButton(0, 100, 800, 75, Translation.get("mainmenu.storymode"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override
@@ -114,19 +116,19 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		storymode.alignment = GUIAlignment.Center;
-		AddObject(storymode);
+		addObject(storymode);
 		
 		GUIButton settings = new GUIButton(0, 200, 800, 75, Translation.get("mainmenu.settings"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
 				GUIMenu s = new SettingsMenu();
-				AddObject(s);
+				addObject(s);
 				s.ShowMenu();
 			}
 		});
 		settings.alignment = GUIAlignment.Center;
-		AddObject(settings);
+		addObject(settings);
 		
 		GUIButton quit = new GUIButton(0, 300, 800, 75, Translation.get("mainmenu.quit"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override
@@ -136,9 +138,11 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		quit.alignment = GUIAlignment.Center;
-		AddObject(quit);
+		addObject(quit);
 		
-		GUIButton shop = new GUIButton(0, 400, 800, 75, Translation.get("mainmenu.shop"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		
+		
+		GUIImageButton shop = new GUIImageButton(475, 0, 75, 75, Resources.shopIcon, Resources.shopHoverIcon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -146,6 +150,6 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		shop.alignment = GUIAlignment.Center;
-		AddObject(shop);
+		addObject(shop);
 	}
 }

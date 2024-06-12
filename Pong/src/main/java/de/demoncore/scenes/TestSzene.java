@@ -20,16 +20,16 @@ public class TestSzene extends BaseScene {
 	@Override
 	public void initializeScene() {		
 		
-		AddObject(new PauseMenu());
+		addObject(new PauseMenu());
 		
 		player = new StorymodePlayer(25, -50);
-		AddObject(player);
+		addObject(player);
 		
 		GameObject rotesObjekt = new GameObject(0, 0, 25, 25);
 		rotesObjekt.color = Color.red;
 		rotesObjekt.collisionEnabled = false;
 		
-		AddObject(rotesObjekt);
+		addObject(rotesObjekt);
 
 		KeyHandler.listeners.add(new GameActionListener() {
 			@Override

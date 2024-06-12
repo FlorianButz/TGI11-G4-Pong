@@ -60,7 +60,7 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	}
 
 	public void SetVolume(float volume) {
-		this.volume = volume * Settings.GetVolume() / 100f;
+		this.volume = volume * Settings.getVolume() / 100f;
 		AL10.alSourcef(sourceId, AL10.AL_GAIN, this.volume);
 	}
 

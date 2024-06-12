@@ -108,15 +108,15 @@ public class GUIMenu extends GameObject {
 		menuContent.add(back);
 		
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().AddObject(o);
+			SceneManager.GetActiveScene().addObject(o);
 		}
 		
 		boolean isInScene = false;
-		for(GameObject g : SceneManager.GetActiveScene().GetSceneObjects()) {
+		for(GameObject g : SceneManager.GetActiveScene().getSceneObjects()) {
 			if(g == this) isInScene = true;
 		}
 		
-		if(isInScene == false) SceneManager.GetActiveScene().AddObject(this);
+		if(isInScene == false) SceneManager.GetActiveScene().addObject(this);
 	}
 	
 	private void ChangePos() {
@@ -223,10 +223,10 @@ public class GUIMenu extends GameObject {
 	}
 	
 	private boolean CheckIfFocused() {
-		for(GameObject g : SceneManager.GetActiveScene().GetSceneObjects()) {
+		for(GameObject g : SceneManager.GetActiveScene().getSceneObjects()) {
 			if(g != this) {
 				if(g instanceof GUIMenu) {
-					if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(g) > SceneManager.GetActiveScene().GetSceneObjects().indexOf(this))
+					if(SceneManager.GetActiveScene().getSceneObjects().indexOf(g) > SceneManager.GetActiveScene().getSceneObjects().indexOf(this))
 						if(((GUIMenu)g).isMenuVisible)
 							return false;
 				}
@@ -246,7 +246,7 @@ public class GUIMenu extends GameObject {
 		KeyHandler.listeners.remove(l);
 		
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().DestroyObject(o);
+			SceneManager.GetActiveScene().destroyObject(o);
 		}
 	}
 }

@@ -49,7 +49,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 			public void ButtonClick() {
 				super.ButtonClick();
 				SettingsMenu settingsMenu = new SettingsMenu();
-				SceneManager.GetActiveScene().AddObject(settingsMenu);
+				SceneManager.GetActiveScene().addObject(settingsMenu);
 				settingsMenu.ShowMenu();
 			}
 		});
@@ -85,7 +85,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	@Override
 	public void ShowMenu() {
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().OnTop(o);
+			SceneManager.GetActiveScene().onTop(o);
 		}
 		
 		super.ShowMenu();

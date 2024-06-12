@@ -48,7 +48,7 @@ public class PongBall extends GameObject {
 		collisionEnabled = false;
 
 		sfxSource = new AudioSource(this).SetSpacial(false);
-		SceneManager.GetActiveScene().AddObject(sfxSource);
+		SceneManager.GetActiveScene().addObject(sfxSource);
 		sfxSource.SetVolume(0.65f);
 
 		moveTimer();
@@ -88,7 +88,7 @@ public class PongBall extends GameObject {
 	public void onDestroy() {
 		super.onDestroy();
 
-		SceneManager.GetActiveScene().DestroyObject(sfxSource);
+		SceneManager.GetActiveScene().destroyObject(sfxSource);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class PongBall extends GameObject {
 			isIntersectionWithPlayer = false;
 		}
 
-		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().GetRawCameraViewport())) {
+		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.GetActiveScene().getRawCameraViewport())) {
 			Logger.logMessage("Intersektion Ball mit Wand", this);
 			sfxSource.Play(Resources.pongPlayerHitWall);
 
@@ -153,24 +153,24 @@ public class PongBall extends GameObject {
 		Vector3 normal = new Vector3(0, 0);
 
 		// Check collision with the left wall
-		if (GetPosition().x - GetScale().x < -SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
+		if (GetPosition().x - GetScale().x < -SceneManager.GetActiveScene().getRawCameraViewport().width / 2) {
 			normal.x = -1;
 			collisonWithGoal(false);
 		}
 
 		// Check collision with the right wall
-		if (GetPosition().x + GetScale().x > SceneManager.GetActiveScene().GetRawCameraViewport().width / 2) {
+		if (GetPosition().x + GetScale().x > SceneManager.GetActiveScene().getRawCameraViewport().width / 2) {
 			normal.x = 1;
 			collisonWithGoal(true);
 		}
 
 		// Check collision with the top wall
-		if (GetPosition().y - GetScale().y < -SceneManager.GetActiveScene().GetRawCameraViewport().height / 2) {
+		if (GetPosition().y - GetScale().y < -SceneManager.GetActiveScene().getRawCameraViewport().height / 2) {
 			normal.y = 1;
 		}
 
 		// Check collision with the bottom wall
-		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().GetRawCameraViewport().height / 2) {
+		if (GetPosition().y + GetScale().y > SceneManager.GetActiveScene().getRawCameraViewport().height / 2) {
 			normal.y = -1;
 		}
 
@@ -213,7 +213,7 @@ public class PongBall extends GameObject {
 		system.endParticleSize = 0;
 		system.particleLifetime = 5;
 
-		SceneManager.GetActiveScene().AddObject(system);
+		SceneManager.GetActiveScene().addObject(system);
 		SceneManager.GetActiveScene().ShakeCamera(35, 35, 35);
 		system.Init();
 	}

@@ -84,6 +84,8 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	void AddParticle() {
+		if(!Settings.isParticleEffects()) return;
+		
 		Particle p = new Particle();
 
 		p.size = new Vector3(
@@ -158,14 +160,14 @@ public class ParticleSystem extends GameObject {
 	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		if(particles == null) return;
+		if(particles == null || !Settings.isParticleEffects()) return;
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(particles == null) return;
 			if(p == null) continue;
 			
 			Vector3 worldPos = p.position;
 			
-			if(Settings.GetDebugMode()) {
+			if(Settings.getDebugMode()) {
 				g2d.setColor(GameMath.LerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
 				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
 			}
@@ -186,7 +188,7 @@ public class ParticleSystem extends GameObject {
 	
 	@Override
 	public boolean CheckDistanceCulled(Rectangle viewport) {
-		for (Particle p : particles){
+		for (Particle p : new ArrayList<Particle>(particles)){
 			Vector3 particleWorldPosition = p.position;
 			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
 			if(!viewport.intersects(pBounds)) {

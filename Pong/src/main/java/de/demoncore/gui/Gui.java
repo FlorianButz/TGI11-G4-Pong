@@ -50,7 +50,7 @@ public class Gui {
 		frame.setExtendedState(frame.MAXIMIZED_BOTH);
 		
 		// Aktiviere fullscreen nach einstellung
-		Gui.Fullscreen(Settings.GetFullscreen());
+		Gui.Fullscreen(Settings.getFullscreen());
 		
 		// Kein Maus Cursor
 		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
@@ -76,6 +76,8 @@ public class Gui {
 	}
 
 	public static Vector3 GetScreenDimensions() {
+		if(frame == null) return Vector3.zero();
+		if(frame.getContentPane() == null) return Vector3.zero();
 		return new Vector3(frame.getContentPane().getWidth(), frame.getContentPane().getHeight());
 	}
 	

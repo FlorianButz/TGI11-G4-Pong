@@ -8,11 +8,11 @@ import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongBall;
+import de.demoncore.gameObjects.PongEndScreen;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gameObjects.PongPlayerAI;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
-import de.demoncore.gui.PongEndScreen;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -33,24 +33,24 @@ public class TwoPlayerPong extends BaseScene {
 
 		PointSystem.Initialize();
 
-		AddObject(new PauseMenu());
+		addObject(new PauseMenu());
 
 		player1 = new PongPlayer(0, 0);
-		AddObject(player1);
+		addObject(player1);
 
 		player2 = new PongPlayer(0, 0);
 		player2.isPlayer1 = false;
-		AddObject(player2);
+		addObject(player2);
 
 		ball = new PongBall(0, 0, player1, player2);
-		AddObject(ball);
+		addObject(ball);
 
 		points = new GUIText(0, 100, Translation.literal(PointSystem.getPlayer1Points() + "   |   " + PointSystem.getPlayer2Points()), Resources.uiFont.deriveFont(65F), Color.white);
-		AddObject(points);
+		addObject(points);
 
 		pointListener = new PointListener() {
 			@Override
-			public void OnPointAdded() {
+			public void onPointAdded() {
 				addPlayerPoint();
 			}
 		};
@@ -73,7 +73,7 @@ public class TwoPlayerPong extends BaseScene {
 	void endGame(boolean player1) {
 		new PongEndScreen(player1).ShowMenu();
 		
-		DestroyObject(ball);
+		destroyObject(ball);
 	}
 	
 	@Override

@@ -43,6 +43,8 @@ public class Resources {
 	public static Sprite playerIdle;
 	public static Sprite playerWalk1;
 	public static Sprite playerWalk2;
+	public static Sprite shopIcon;
+	public static Sprite shopHoverIcon;
 	
 	public static DialogLine testLine;
 	
@@ -122,6 +124,8 @@ public class Resources {
 		playerIdle = new Sprite(Main.class.getResourceAsStream("/textures/PlayerIdle.png")).load();
 		playerWalk1 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk1.png")).load();
 		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).load();
+		shopIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopIcon.png")).load();
+		shopHoverIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopHoverIcon.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

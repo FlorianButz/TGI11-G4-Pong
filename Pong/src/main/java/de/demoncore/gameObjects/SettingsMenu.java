@@ -18,6 +18,7 @@ import de.demoncore.gui.GUITheme;
 import de.demoncore.gui.GUITheme.Theme;
 import de.demoncore.gui.GUIToggle;
 import de.demoncore.gui.TextAlignment;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class SettingsMenu extends GUIMenu {
@@ -44,6 +45,8 @@ public class SettingsMenu extends GUIMenu {
 	GUIText languageText;
 	GUIButton toggleLanguage;
 	
+	GUIButton togglePedalSpeed;
+	
 	public SettingsMenu() {
 		backgroundColor = new Color(0, 0, 0, 0.975f);
 	}
@@ -59,7 +62,7 @@ public class SettingsMenu extends GUIMenu {
 		float settingsTextSize = 25F;
 		int buttonHeight = 50;
 		int spacing = 15;
-		int startPos = 0;
+		int startPos = -75;
 		
 		title = new GUIText(0, 175, Translation.get("settings.settings"), Resources.dialogFont.deriveFont(Font.PLAIN, 125F), Color.WHITE);
 		content.add(title);
@@ -69,7 +72,7 @@ public class SettingsMenu extends GUIMenu {
 		volumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(volumeText);
 		
-		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, Translation.literal(""+(int)Settings.GetVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		volumeDisplay = new GUIText(40, buttonHeight * -3 + spacing + startPos, Translation.literal(""+(int)Settings.getVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		volumeDisplay.alignment = GUIAlignment.Center;
 		content.add(volumeDisplay);
 		
@@ -82,8 +85,8 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonDown();
 				speed = startSpeed;
 
-				Settings.SetVolume((float)Settings.GetVolume() - 1);
-				volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
+				Settings.setVolume((float)Settings.getVolume() - 1);
+				volumeDisplay.SetText(Translation.literal("" + (int)Settings.getVolume() + "%"));
 			}
 			
 			@Override
@@ -93,8 +96,8 @@ public class SettingsMenu extends GUIMenu {
 				speed += speedIncrement;
 				
 				if(isMouseDown) {
-					Settings.SetVolume((float)Settings.GetVolume() - speed);
-					volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
+					Settings.setVolume((float)Settings.getVolume() - speed);
+					volumeDisplay.SetText(Translation.literal("" + (int)Settings.getVolume() + "%"));
 				}
 			}
 		});
@@ -110,8 +113,8 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonDown();
 				speed = startSpeed;
 
-				Settings.SetVolume((float)Settings.GetVolume() + 1);
-				volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
+				Settings.setVolume((float)Settings.getVolume() + 1);
+				volumeDisplay.SetText(Translation.literal("" + (int)Settings.getVolume() + "%"));
 			}
 			
 			@Override
@@ -121,8 +124,8 @@ public class SettingsMenu extends GUIMenu {
 				speed += speedIncrement;
 				
 				if(isMouseDown) {
-					Settings.SetVolume((float)Settings.GetVolume() + speed);
-					volumeDisplay.SetText(Translation.literal("" + (int)Settings.GetVolume() + "%"));
+					Settings.setVolume((float)Settings.getVolume() + speed);
+					volumeDisplay.SetText(Translation.literal("" + (int)Settings.getVolume() + "%"));
 				}
 			}
 		});
@@ -134,7 +137,7 @@ public class SettingsMenu extends GUIMenu {
 		musicVolumeText.SetTextAlignment(TextAlignment.Left);
 		content.add(musicVolumeText);
 		
-		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, Translation.literal(""+(int)Settings.GetMusicVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
+		musicVolumeDisplay = new GUIText(40, buttonHeight * -2 + spacing * 2 + startPos, Translation.literal(""+(int)Settings.getMusicVolume() + "%"), Resources.uiFont.deriveFont(settingsTextSize + 15F), Color.white);
 		musicVolumeDisplay.alignment = GUIAlignment.Center;
 		content.add(musicVolumeDisplay);
 		
@@ -147,8 +150,8 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonDown();
 				speed = startSpeed;
 
-				Settings.SetMusicVolume((float)Settings.GetMusicVolume() - 1);
-				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
+				Settings.setMusicVolume((float)Settings.getMusicVolume() - 1);
+				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.getMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -158,8 +161,8 @@ public class SettingsMenu extends GUIMenu {
 				speed += speedIncrement;
 				
 				if(isMouseDown) {
-					Settings.SetMusicVolume((float)Settings.GetMusicVolume() - speed);
-					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
+					Settings.setMusicVolume((float)Settings.getMusicVolume() - speed);
+					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.getMusicVolume() + "%"));
 				}
 			}
 		});
@@ -175,8 +178,8 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonDown();
 				speed = startSpeed;
 
-				Settings.SetMusicVolume((float)Settings.GetMusicVolume() + 1);
-				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
+				Settings.setMusicVolume((float)Settings.getMusicVolume() + 1);
+				musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.getMusicVolume() + "%"));
 			}
 			
 			@Override
@@ -186,8 +189,8 @@ public class SettingsMenu extends GUIMenu {
 				speed += speedIncrement;
 				
 				if(isMouseDown) {
-					Settings.SetMusicVolume((float)Settings.GetMusicVolume() + speed);
-					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.GetMusicVolume() + "%"));
+					Settings.setMusicVolume((float)Settings.getMusicVolume() + speed);
+					musicVolumeDisplay.SetText(Translation.literal("" + (int)Settings.getMusicVolume() + "%"));
 				}
 			}
 		});
@@ -204,10 +207,10 @@ public class SettingsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				Settings.SetFullscreen(!Settings.GetFullscreen());
+				Settings.setFullscreen(!Settings.getFullscreen());
 			}
 		});
-		toggleFullscreen.SetIsOn(Settings.GetFullscreen());
+		toggleFullscreen.SetIsOn(Settings.getFullscreen());
 		toggleFullscreen.alignment = GUIAlignment.Center;
 		content.add(toggleFullscreen);
 		
@@ -221,10 +224,10 @@ public class SettingsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				Settings.SetDebugMode(!Settings.GetDebugMode());
+				Settings.setDebugMode(!Settings.getDebugMode());
 			}
 		});
-		toggleDebugMode.SetIsOn(Settings.GetDebugMode());
+		toggleDebugMode.SetIsOn(Settings.getDebugMode());
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		content.add(toggleDebugMode);
 		
@@ -233,7 +236,7 @@ public class SettingsMenu extends GUIMenu {
 		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
 		
-		String languageButtonText = Settings.GetLang().toString(); // Ersetzen mit enum von Settings
+		String languageButtonText = Settings.getLang().toString(); // Ersetzen mit enum von Settings
 		//if(Settings.GetDebugMode())
 		//	toggleDebugModeText = "An";
 		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, Translation.literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
@@ -257,12 +260,49 @@ public class SettingsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				Settings.SetDebugMode(!Settings.GetDebugMode());
+				Logger.logInfo("" + Settings.isCameraShake());
+				Settings.setCameraShake(!Settings.isCameraShake());
+				Logger.logInfo("CS");
+				Logger.logInfo("" + Settings.isCameraShake());
 			}
 		});
-		toggleCameraShake.SetIsOn(Settings.GetDebugMode());
+		toggleCameraShake.SetIsOn(Settings.isCameraShake());
 		toggleCameraShake.alignment = GUIAlignment.Center;
 		content.add(toggleCameraShake);
+		
+		GUIText particleEffectsText = new GUIText(-450, buttonHeight * 3 + spacing * 7 + startPos, Translation.get("settings.particles"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		particleEffectsText.alignment = GUIAlignment.Center;
+		particleEffectsText.SetTextAlignment(TextAlignment.Left);
+		content.add(particleEffectsText);
+		
+		GUIToggle toggleParticleEffectsText = new GUIToggle(250, buttonHeight * 3 + spacing * 7 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+
+				Settings.setParticleEffects(!Settings.isParticleEffects());
+				Logger.logInfo("TP");
+			}
+		});
+		toggleParticleEffectsText.SetIsOn(Settings.isParticleEffects());
+		toggleParticleEffectsText.alignment = GUIAlignment.Center;
+		content.add(toggleParticleEffectsText);
+		
+		GUIText pedalSpeedText = new GUIText(-450, buttonHeight * 4 + spacing * 8 + startPos, Translation.get("settings.pedalspeed"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		pedalSpeedText.alignment = GUIAlignment.Center;
+		pedalSpeedText.SetTextAlignment(TextAlignment.Left);
+		content.add(pedalSpeedText);
+		
+		togglePedalSpeed = new GUIButton(325, buttonHeight * 4 + spacing * 8 + startPos, 275, buttonHeight, Settings.isSlowPedals() ? Translation.get("settings.pedals.slow") : Translation.get("settings.pedals.fast"), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				SwitchPedalSpeed();
+			}
+		});
+		togglePedalSpeed.alignment = GUIAlignment.Center;
+		content.add(togglePedalSpeed);
 		
 		GUITheme.LoadTextTheme(debugModeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
@@ -272,6 +312,8 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadTextTheme(musicVolumeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(languageText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(cameraShakeText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(particleEffectsText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(pedalSpeedText, Theme.TextSecondary);
 
 		GUITheme.LoadButtonTheme(volumeDown, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(volumeUp, Theme.ButtonSecondary);
@@ -281,16 +323,24 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadButtonTheme(toggleFullscreen, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleLanguage, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleCameraShake, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleParticleEffectsText, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(togglePedalSpeed, Theme.ButtonSecondary);
 		
 		return content;
 	}
 
 	void SwitchLanguage() {
 
-		if(Settings.GetLang() == Language.Deutsch) Settings.SetLang(Language.English);
-		else if(Settings.GetLang() == Language.English) Settings.SetLang(Language.Deutsch);
+		if(Settings.getLang() == Language.Deutsch) Settings.setLang(Language.English);
+		else if(Settings.getLang() == Language.English) Settings.setLang(Language.Deutsch);
 		
-		toggleLanguage.SetText(Translation.literal(Settings.GetLang().toString()));
+		toggleLanguage.SetText(Translation.literal(Settings.getLang().toString()));
+	}
+	
+	void SwitchPedalSpeed() {
+
+		Settings.setSlowPedals(!Settings.isSlowPedals());
+		togglePedalSpeed.SetText(Settings.isSlowPedals() ? Translation.get("settings.pedals.slow") : Translation.get("settings.pedals.fast"));
 	}
 	
 	@Override

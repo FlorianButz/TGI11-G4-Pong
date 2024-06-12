@@ -103,10 +103,10 @@ public class GUIObject extends GameObject {
 	public void MouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
-						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o))
+						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o))
 							if(o.enableRendering) return;
 					}
 				}
@@ -119,10 +119,10 @@ public class GUIObject extends GameObject {
 	public void MouseUp(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
-						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o)) {
+						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o)) {
 							if(o.enableRendering) return;
 						}
 					}
@@ -145,7 +145,7 @@ public class GUIObject extends GameObject {
 		
 	}
 	
-	public void OnMouseHoverOverUIObject() {
+	public void onMouseHoverOverUIObject() {
 		isHovering = true;
 	}
 	
@@ -204,8 +204,8 @@ public class GUIObject extends GameObject {
 		vec.x = vec.x - sX;
 		vec.y = vec.y - sY;
 		
-		vec.x = vec.x * Settings.GetUIScale();
-		vec.y = vec.y * Settings.GetUIScale();
+		vec.x = vec.x * Settings.getUIScale();
+		vec.y = vec.y * Settings.getUIScale();
 		
 		vec.x = vec.x + sX;
 		vec.y = vec.y + sY;
@@ -224,8 +224,8 @@ public class GUIObject extends GameObject {
 		Rectangle r1 = new Rectangle(
 				(int)(screenPos.x),
 				(int)(screenPos.y),
-				(int)(this.GetScale().x * Settings.GetUIScale()),
-				(int)(this.GetScale().y * Settings.GetUIScale()));
+				(int)(this.GetScale().x * Settings.getUIScale()),
+				(int)(this.GetScale().y * Settings.getUIScale()));
 		
 		Rectangle r2 = new Rectangle(x, y, 15, 15);
 		return r1.intersects(r2);
@@ -241,13 +241,13 @@ public class GUIObject extends GameObject {
 				(int)(MouseInfo.getPointerInfo().getLocation().getX() - Gui.GetScreenLocation().x),
 				(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y))) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().GetSceneObjects()) {
+			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(
 							(int)MouseInfo.getPointerInfo().getLocation().getX(),
 							(int)MouseInfo.getPointerInfo().getLocation().getY())) {
 						
-						if(SceneManager.GetActiveScene().GetSceneObjects().indexOf(this) < SceneManager.GetActiveScene().GetSceneObjects().indexOf(o)) {
+						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o)) {
 							if(o.enableRendering) {
 								OnMouseStopHoverOverUIObject();
 								return;
@@ -258,7 +258,7 @@ public class GUIObject extends GameObject {
 			}
 			
 			if(!isHovering) {
-				OnMouseHoverOverUIObject();
+				onMouseHoverOverUIObject();
 			}
 		}
 		else if(isHovering)

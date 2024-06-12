@@ -37,18 +37,18 @@ public class SceneManager {
 	public static void UpdateScenes() {
 		CheckForInit();
 		
-		if(activeScene.IsInitialized())
+		if(activeScene.isInitialized())
 			activeScene.updateScene();
 	}
 	
 	private static void PLoadScene(BaseScene scene) {
 		activeScene = scene;
 		scene.initializeScene();
-		scene.SetInitializedComplete();
+		scene.setInitializedComplete();
 	}
 	
 	public static void LoadScene(BaseScene scene) {
-		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(GetActiveScene().GetSceneObjects());
+		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(GetActiveScene().getSceneObjects());
 		
 		GUIRectangle blackScreen = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x * 2, (int)Gui.GetScreenDimensions().y * 2, new Color(0, 0, 0, 0f)); // Level uebergang
 		blackScreen.doUIScale = false;
@@ -56,7 +56,7 @@ public class SceneManager {
 		ColorAnimator fadeIn = new ColorAnimator(Color.black, blackScreen.color, 1f, EasingType.InOutQuint); // Uebergang ein
 		
 		blackScreen.alignment = GUIAlignment.Center;
-		GetActiveScene().AddObject(blackScreen);
+		GetActiveScene().addObject(blackScreen);
 		
 		fadeOut.SetOnUpdate(new AnimatorUpdateEvent() {
 		@Override
@@ -83,7 +83,7 @@ public class SceneManager {
 		
 			for(GameObject o : objectsInCurrentScene) {
 				if(o == blackScreen) continue;
-				GetActiveScene().DestroyObject(o);
+				GetActiveScene().destroyObject(o);
 			}
 			
 			GameLogic.SetGamePaused(false);
@@ -95,7 +95,7 @@ public class SceneManager {
 				PLoadScene(new DefaultScene());
 			}
 			
-			GetActiveScene().AddObject(blackScreen);
+			GetActiveScene().addObject(blackScreen);
 			
 			fadeIn.Play();
 		}
@@ -105,7 +105,7 @@ public class SceneManager {
 		@Override
 		public void OnComplete() {
 			super.OnComplete();
-			GetActiveScene().DestroyObject(blackScreen);
+			GetActiveScene().destroyObject(blackScreen);
 		}
 		});
 		

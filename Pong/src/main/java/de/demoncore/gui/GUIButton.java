@@ -68,7 +68,7 @@ public class GUIButton extends GUIObject {
 		super.OnAddToScene();
 
 		source = new AudioSource(this).SetSpacial(false);
-		SceneManager.GetActiveScene().AddObject(source);
+		SceneManager.GetActiveScene().addObject(source);
 	}
 	
 	public void SetText(TranslationComponent text) {
@@ -144,12 +144,12 @@ public class GUIButton extends GUIObject {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		SceneManager.GetActiveScene().DestroyObject(source);
+		SceneManager.GetActiveScene().destroyObject(source);
 	}
 	
 	@Override
-	public void OnMouseHoverOverUIObject() {
-		super.OnMouseHoverOverUIObject();
+	public void onMouseHoverOverUIObject() {
+		super.onMouseHoverOverUIObject();
 
 		source.Play(Resources.buttonHover);
 	}
@@ -161,7 +161,7 @@ public class GUIButton extends GUIObject {
 		event.UpdateEvent();	
 	}
 
-	public void SetButtonEvent(GUIButtonClickEvent event) {
+	public void setButtonEvent(GUIButtonClickEvent event) {
 		this.event = event;
 	}
 }

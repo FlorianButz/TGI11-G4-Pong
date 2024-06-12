@@ -28,7 +28,7 @@ public class Translation {
 		germanTranslation.put("settings.off", "Aus");
 		englishTranslation.put("settings.off", "Off");
 
-		germanTranslation.put("settings.saveandback", "Speichern & Zurrueck");
+		germanTranslation.put("settings.saveandback", "Speichern & Zurueck");
 		englishTranslation.put("settings.saveandback", "Save & Back");
 
 		germanTranslation.put("settings.lang", "Sprache:");
@@ -48,8 +48,23 @@ public class Translation {
 
 		germanTranslation.put("settings.settings", "Einstellungen");
 		englishTranslation.put("settings.settings", "Settings");
-		
 
+		germanTranslation.put("settings.camerashake", "Kamerawackeln");
+		englishTranslation.put("settings.camerashake", "Camera shake");
+		
+		germanTranslation.put("settings.particles", "Partikeleffekte");
+		englishTranslation.put("settings.particles", "Particle effects");
+
+		germanTranslation.put("settings.pedalspeed", "Pedal Geschwindigkeit");
+		englishTranslation.put("settings.pedalspeed", "Pedal speed");
+
+		germanTranslation.put("settings.pedals.slow", "Langsam");
+		englishTranslation.put("settings.pedals.slow", "Slow");
+
+		germanTranslation.put("settings.pedals.fast", "Schnell");
+		englishTranslation.put("settings.pedals.fast", "Fast");
+
+		
 		germanTranslation.put("mainmenu.singleplayer", "1 Spieler");
 		englishTranslation.put("mainmenu.singleplayer", "1 Player");
 

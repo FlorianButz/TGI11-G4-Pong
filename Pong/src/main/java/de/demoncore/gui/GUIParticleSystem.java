@@ -165,7 +165,7 @@ public class GUIParticleSystem extends GUIObject {
 			
 			Vector3 worldPos = p.position;
 			
-			if(Settings.GetDebugMode()) {
+			if(Settings.getDebugMode()) {
 				g2d.setColor(GameMath.LerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
 				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
 			}

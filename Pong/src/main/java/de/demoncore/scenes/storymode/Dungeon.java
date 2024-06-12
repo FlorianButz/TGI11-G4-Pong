@@ -25,14 +25,14 @@ public class Dungeon extends BaseScene {
 	public void initializeScene() {
 		super.initializeScene();
 
-		AddObject(new PauseMenu());
+		addObject(new PauseMenu());
 		
 		player = new StorymodePlayer(0, 0);
-		AddObject(player);
+		addObject(player);
 		
 		minimap = new DungeonMinimap(-150, 150, dungeonRoom, player, this);
 		minimap.alignment = GUIAlignment.TopRight;
-		AddObject(minimap);
+		addObject(minimap);
 		
 		InteractableObject interact = new InteractableObject(25, 25, 75, 75, player, new InteractEvent() {
 		@Override
@@ -41,11 +41,11 @@ public class Dungeon extends BaseScene {
 		}
 		});
 
-		AddObject(new Cake(250, 100));
-		AddObject(new Cake(100, 250));
-		AddObject(new Cake(250, 250));
+		addObject(new Cake(250, 100));
+		addObject(new Cake(100, 250));
+		addObject(new Cake(250, 250));
 		
-		AddObject(interact);
+		addObject(interact);
 		
 		generateDungeon();
 	}
@@ -79,12 +79,12 @@ public class Dungeon extends BaseScene {
 		
 		for(GameObject[] g : dungeonRoom) {
 			for(GameObject go : g) {
-				if(go != null) DestroyObject(go);
+				if(go != null) destroyObject(go);
 			}
 		}
 		
 		for(GameObject go : hallways) {
-			DestroyObject(go);
+			destroyObject(go);
 			hallways.remove(go);
 		}
 		
@@ -125,9 +125,9 @@ public class Dungeon extends BaseScene {
 		go.color = Color.gray;
 		go.collisionEnabled = false;
 		dungeonRoom[x][y] = go;
-		AddObject(dungeonRoom[x][y]);
+		addObject(dungeonRoom[x][y]);
 		
-		OnBottom(go);
+		onBottom(go);
 		
 		roomsCount++;
 		
@@ -141,10 +141,10 @@ public class Dungeon extends BaseScene {
 					dungeonSize / 3);
 			hallway.color = Color.darkGray;
 			hallway.collisionEnabled = false;
-			AddObject(hallway);
+			addObject(hallway);
 			hallways.add(hallway);
 			
-			OnBottom(hallway);
+			onBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.2 * ((float)roomsCount / (float)maxRooms) * 5) {
 			addRoom(x - 1, y);
@@ -156,9 +156,9 @@ public class Dungeon extends BaseScene {
 					dungeonSize / 3);
 			hallway.color = Color.darkGray;
 			hallway.collisionEnabled = false;
-			AddObject(hallway);
+			addObject(hallway);
 
-			OnBottom(hallway);
+			onBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.4 * ((float)roomsCount / (float)maxRooms) * 5) {
 			addRoom(x, y + 1);
@@ -170,9 +170,9 @@ public class Dungeon extends BaseScene {
 					dungeonSpacing);
 			hallway.color = Color.darkGray;
 			hallway.collisionEnabled = false;
-			AddObject(hallway);
+			addObject(hallway);
 
-			OnBottom(hallway);
+			onBottom(hallway);
 		}
 		if(rng.nextDouble() > 0.3 * ((float)roomsCount / (float)maxRooms) * 5) {
 			addRoom(x, y - 1);
@@ -184,9 +184,9 @@ public class Dungeon extends BaseScene {
 					dungeonSpacing);
 			hallway.color = Color.darkGray;
 			hallway.collisionEnabled = false;
-			AddObject(hallway);
+			addObject(hallway);
 
-			OnBottom(hallway);
+			onBottom(hallway);
 		}
 	}
 

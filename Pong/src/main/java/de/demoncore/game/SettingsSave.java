@@ -8,8 +8,11 @@ public class SettingsSave implements Serializable {
 	public int masterVolume = 85;
 	public int musicVolume = 85;
 	public boolean fullscreen = false;
-	
+
 	public boolean debugMode = false;
+	public boolean slowPedal = false;
+	public boolean particleEffects = true;
+	public boolean cameraShake = true;
 	
 	public Language language;
 	

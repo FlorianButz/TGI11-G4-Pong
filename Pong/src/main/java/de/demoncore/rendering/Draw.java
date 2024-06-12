@@ -60,13 +60,13 @@ public class Draw extends JPanel {
 			lastTime = System.currentTimeMillis();
 		}
 		
-		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().GetSceneObjects());
+		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().getSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
 		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
 		int screenheight = (int) Gui.GetScreenDimensions().y;
 		
-		Settings.SetUIScale((float)Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f));
+		Settings.setUIScale((float)Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f));
 
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
@@ -109,7 +109,7 @@ public class Draw extends JPanel {
 		// Maske erstellen
 		
 		if(SceneManager.GetActiveScene() != null) {
-			Rectangle viewport = SceneManager.GetActiveScene().GetCameraViewport();
+			Rectangle viewport = SceneManager.GetActiveScene().getCameraViewport();
 			g2d.setClip(viewport);
 		}
 		
@@ -119,8 +119,10 @@ public class Draw extends JPanel {
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
 			
+			Graphics2D g2dGobj = (Graphics2D) g2d.create();
+			
 			// Debug modus
-			if(!(currentGameObj instanceof GUIObject) && Settings.GetDebugMode()){
+			if(!(currentGameObj instanceof GUIObject) && Settings.getDebugMode()){
 				Rectangle r = currentGameObj.GetBoundingBox();
 				if(currentGameObj.collisionEnabled)
 					g2d.setColor(Color.green);
@@ -144,12 +146,12 @@ public class Draw extends JPanel {
 			
 			if(currentGameObj.enableRendering && !currentGameObj.isDistanceCulled) {
 				if(!(currentGameObj instanceof GUIObject))	// Gucken ob es GUI objekt ist, weil die müssen als letztes auf den Bildschirm
-					currentGameObj.Draw(g2d, screenwidth, screenheight);
+					currentGameObj.Draw(g2dGobj, screenwidth, screenheight);
 			}
 		}
 		
-		if(Settings.GetDebugMode()) {
-			Rectangle viewport = SceneManager.GetActiveScene().GetCameraViewport();
+		if(Settings.getDebugMode()) {
+			Rectangle viewport = SceneManager.GetActiveScene().getCameraViewport();
 			g2d.setStroke(new BasicStroke(5));
 			g2d.setColor(new Color(1, 1, 0, 0.75f));
 			g2d.drawString("Camera viewport", viewport.x + 10, (int)viewport.getMaxY() - 15);
@@ -162,18 +164,20 @@ public class Draw extends JPanel {
 		// Zeichne GUI
 		for(int guiObj = 0; guiObj < gameObjectsInScene.size(); guiObj++) {
 			
+			Graphics2D g2dGobj = (Graphics2D) g2d.create();
+			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(!guiObject.doUIScale) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.Draw(g2dGobj, screenwidth, screenheight);
 					continue;
 				}
 			}
 			
 			// Top Left
 			
-			scaleUI(g2d, 0, 0, Settings.GetUIScale());
+			scaleUI(g2d, 0, 0, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -183,11 +187,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, 0, 0, 1f / Settings.GetUIScale());
+			scaleUI(g2d, 0, 0, 1f / Settings.getUIScale());
 			
 			// Top Center
 			
-			scaleUI(g2d, screenwidth / 2, 0, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, 0, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -197,11 +201,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth / 2, 0, 1f / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, 0, 1f / Settings.getUIScale());
 			
 			// Top Right
 			
-			scaleUI(g2d, screenwidth, 0, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, 0, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -211,11 +215,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth, 0, 1 / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, 0, 1 / Settings.getUIScale());
 			
 			// Middle Left
 			
-			scaleUI(g2d, 0, screenheight / 2, Settings.GetUIScale());
+			scaleUI(g2d, 0, screenheight / 2, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -225,11 +229,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, 0, screenheight / 2, 1 / Settings.GetUIScale());
+			scaleUI(g2d, 0, screenheight / 2, 1 / Settings.getUIScale());
 			
 			// Middle Center
 			
-			scaleUI(g2d, screenwidth / 2, screenheight / 2, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, screenheight / 2, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -239,11 +243,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth / 2, screenheight / 2, 1 / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, screenheight / 2, 1 / Settings.getUIScale());
 			
 			// Middle RIght
 			
-			scaleUI(g2d, screenwidth, screenheight / 2, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, screenheight / 2, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -253,11 +257,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth, screenheight / 2, 1 / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, screenheight / 2, 1 / Settings.getUIScale());
 			
 			// Bottom Left
 			
-			scaleUI(g2d, 0, screenheight, Settings.GetUIScale());
+			scaleUI(g2d, 0, screenheight, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -267,11 +271,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, 0, screenheight, 1 / Settings.GetUIScale());
+			scaleUI(g2d, 0, screenheight, 1 / Settings.getUIScale());
 			
 			// Bottom Center
 			
-			scaleUI(g2d, screenwidth / 2, screenheight, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, screenheight, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -281,11 +285,11 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth / 2, screenheight, 1 / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth / 2, screenheight, 1 / Settings.getUIScale());
 			
 			// Bottom Right
 			
-			scaleUI(g2d, screenwidth, screenheight, Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, screenheight, Settings.getUIScale());
 			
 			if(gameObjectsInScene.get(guiObj) instanceof GUIObject) {				
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
@@ -295,7 +299,7 @@ public class Draw extends JPanel {
 				}
 			}
 			
-			scaleUI(g2d, screenwidth, screenheight, 1 / Settings.GetUIScale());
+			scaleUI(g2d, screenwidth, screenheight, 1 / Settings.getUIScale());
 		}
 		
 		// Mauszeiger langsam ausblenden wenn er sich nicht bewegt
@@ -310,7 +314,7 @@ public class Draw extends JPanel {
 
 		
 		// Debug modus
-		if(Settings.GetDebugMode()) {			
+		if(Settings.getDebugMode()) {			
 			g2d.setFont(Resources.uiFont.deriveFont(15F));
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.drawString("Version -> " + Main.version, 15, 25);

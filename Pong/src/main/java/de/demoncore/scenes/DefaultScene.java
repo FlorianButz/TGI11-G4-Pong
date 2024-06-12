@@ -21,12 +21,12 @@ public class DefaultScene extends BaseScene {
 		GUIText t = new GUIText(0, -75, Translation.get("defscene.error"), Resources.uiFont.deriveFont(70F), Color.white);
 		t.alignment = GUIAlignment.Center;
 		t.color = Color.red;
-		AddObject(t);
+		addObject(t);
 		
 		GUIText d = new GUIText(0, 0, Translation.get("defscene.error2"), Resources.uiFont.deriveFont(30F), Color.white);
 		d.alignment = GUIAlignment.Center;
 		GUITheme.LoadTextTheme(d, Theme.TextSecondary);
-		AddObject(d);
+		addObject(d);
 		
 		GUIButton returnButton = new GUIButton(0, 100, 400, 65, Translation.get("defscene.return"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
@@ -39,7 +39,7 @@ public class DefaultScene extends BaseScene {
 		returnButton.alignment = GUIAlignment.Center;
 		
 		GUITheme.LoadButtonTheme(returnButton, Theme.ButtonSecondary);
-		AddObject(returnButton);
+		addObject(returnButton);
 	}
 	
 }

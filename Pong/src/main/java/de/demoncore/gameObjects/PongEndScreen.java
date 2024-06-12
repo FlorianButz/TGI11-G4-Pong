@@ -1,4 +1,4 @@
-package de.demoncore.gui;
+package de.demoncore.gameObjects;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -6,6 +6,12 @@ import java.util.List;
 
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gui.GUIAlignment;
+import de.demoncore.gui.GUIButton;
+import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.gui.GUIMenu;
+import de.demoncore.gui.GUIObject;
+import de.demoncore.gui.GUIText;
 import de.demoncore.scenes.MainMenu;
 import de.demoncore.utils.Resources;
 
@@ -26,7 +32,7 @@ public class PongEndScreen extends GUIMenu {
 		title.alignment = GUIAlignment.Center;
 		content.add(title);
 		
-		GUIButton btn = new GUIButton(0, 150, 450, 75, Translation.get("pong.back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton btn = new GUIButton(0, 150, 650, 75, Translation.get("pong.back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				SceneManager.LoadScene(new MainMenu());
@@ -42,7 +48,7 @@ public class PongEndScreen extends GUIMenu {
 	@Override
 	protected GUIButton CreateBackButton() {
 		
-		GUIButton btn = new GUIButton(0, 250, 450, 75, Translation.get("pong.play_again"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton btn = new GUIButton(0, 250, 650, 75, Translation.get("pong.play_again"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				SceneManager.LoadScene(SceneManager.GetActiveScene());

@@ -53,7 +53,7 @@ public class Main {
 		
 	}
 	
-	public static InputStream GetResource(String path) {
+	public static InputStream getResource(String path) {
 		return Main.class.getClassLoader().getResourceAsStream(path);
 	}
 }

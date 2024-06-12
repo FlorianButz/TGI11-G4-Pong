@@ -57,8 +57,8 @@ public class Dialog extends GameObject {
 		content.add(createBackground());
 		
 		sfxSource = new AudioSource[] { new AudioSource(this).SetSpacial(false), new AudioSource(this).SetSpacial(false) };
-		SceneManager.GetActiveScene().AddObject(sfxSource[0]);
-		SceneManager.GetActiveScene().AddObject(sfxSource[1]);
+		SceneManager.GetActiveScene().addObject(sfxSource[0]);
+		SceneManager.GetActiveScene().addObject(sfxSource[1]);
 		
 		name = new GUIText(25, -325, Translation.literal(""), Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
 		name.alignment = GUIAlignment.DownLeft;
@@ -109,7 +109,7 @@ public class Dialog extends GameObject {
 			return;
 		}
 
-		SceneManager.GetActiveScene().DestroyObject(spaceText);
+		SceneManager.GetActiveScene().destroyObject(spaceText);
 		
 		Thread characterThread = new Thread("DialogAnimate") {
 			@Override
@@ -134,7 +134,7 @@ public class Dialog extends GameObject {
 				}
 
 				if(isInScene)
-					SceneManager.GetActiveScene().AddObject(spaceText);
+					SceneManager.GetActiveScene().addObject(spaceText);
 				
 				isLinePlaying = false;
 				
@@ -152,15 +152,15 @@ public class Dialog extends GameObject {
 	
 	void createDialog() {
 		for(GUIObject o : content) {
-			SceneManager.GetActiveScene().AddObject(o);
+			SceneManager.GetActiveScene().addObject(o);
 		}
 	}
 	
 	void destroyDialog() {
-		SceneManager.GetActiveScene().DestroyObject(this);
+		SceneManager.GetActiveScene().destroyObject(this);
 		
 		for(GUIObject o : content) {
-			SceneManager.GetActiveScene().DestroyObject(o);
+			SceneManager.GetActiveScene().destroyObject(o);
 		}
 		
 		isActiveDialog = false;
@@ -171,8 +171,8 @@ public class Dialog extends GameObject {
 		super.onDestroy();
 
 		KeyHandler.listeners.remove(listener);
-		SceneManager.GetActiveScene().DestroyObject(sfxSource[0]);
-		SceneManager.GetActiveScene().DestroyObject(sfxSource[1]);
+		SceneManager.GetActiveScene().destroyObject(sfxSource[0]);
+		SceneManager.GetActiveScene().destroyObject(sfxSource[1]);
 	}
 	
 	protected GUIObject createBackground() {

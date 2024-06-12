@@ -38,18 +38,18 @@ public class StorymodePlayer extends RigidBody {
 		health = new GUIHealthbar(65, 85, 45, 6);
 		health.alignment = GUIAlignment.TopLeft;
 	
-		SceneManager.GetActiveScene().AddObject(health);
+		SceneManager.GetActiveScene().addObject(health);
 	
 		activeImage = Resources.playerIdle;
 		
 		walkAnim = new SpriteAnimator(new Sprite[] {Resources.playerWalk1, Resources.playerIdle, Resources.playerWalk2, Resources.playerIdle}, 0.15f, EasingType.Linear);
-		walkAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		walkAnim.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
 		public void OnUpdate(Sprite value) {
 			activeImage = value;
 		}
 		});
-		walkAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+		walkAnim.setOnComplete(new AnimatorOnCompleteEvent() {
 		@Override
 		public void OnComplete() {
 			activeImage = Resources.playerIdle;
@@ -92,16 +92,16 @@ public class StorymodePlayer extends RigidBody {
 			
 			trail.particleLifetime = 25;
 			trail.Init();
-			SceneManager.GetActiveScene().AddObject(trail);
+			SceneManager.GetActiveScene().addObject(trail);
 		}
 		
 		if(Math.abs(velocity.Magnitude()) >= 0.1) {
 			trail.emitLoop = true;
-			walkAnim.Play();
+			walkAnim.play();
 		}
 		else {
 			trail.emitLoop = false;
-			walkAnim.Stop();
+			walkAnim.stop();
 		}
 		
 		AddForce(KeyHandler.playerInput1.Normalized().multiply(playerAcceleration));

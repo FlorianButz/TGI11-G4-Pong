@@ -1,4 +1,6 @@
-package de.demoncore.scenes;
+package de.demoncore.scenes.shop;
+
+import de.demoncore.scenes.BaseScene;
 
 public class PowerUps extends BaseScene{
 

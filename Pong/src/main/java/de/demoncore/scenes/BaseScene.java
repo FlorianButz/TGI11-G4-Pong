@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class BaseScene {
@@ -35,33 +37,33 @@ public class BaseScene {
 	public void initializeScene() {
 	}
 	
-	public boolean IsInitialized() {
+	public boolean isInitialized() {
 		return this.isInitialized;
 	}
 	
-	public void OnTop(GameObject obj) {
+	public void onTop(GameObject obj) {
 		sceneObjects.remove(obj);
 		sceneObjects.add(obj);
 	}
 	
-	public void OnBottom(GameObject obj) {
+	public void onBottom(GameObject obj) {
 		sceneObjects.remove(obj);
 		sceneObjects.add(0, obj);
 	}
 	
-	public void SetInitializedComplete() {
+	public void setInitializedComplete() {
 		this.isInitialized = true;
 	}
 	
-	public Rectangle GetCameraViewport() {
+	public Rectangle getCameraViewport() {
 		if(cameraViewport == null){
-			this.cameraViewport = CalcViewport();
+			this.cameraViewport = calcViewport();
 		}
 			
 		return cameraViewport;
 	}
 	
-	public Rectangle GetRawCameraViewport() {
+	public Rectangle getRawCameraViewport() {
 		return new Rectangle(
 				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2)),
 				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2)),
@@ -70,7 +72,7 @@ public class BaseScene {
 				);
 	}
 	
-	private Rectangle CalcViewport() {
+	private Rectangle calcViewport() {
 		return cameraViewport = new Rectangle(
 				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
 				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2) + cameraViewportShrink),
@@ -80,10 +82,9 @@ public class BaseScene {
 	}
 	
 	public void updateScene() {
-		try {
-			cameraViewport = CalcViewport();
+			cameraViewport = calcViewport();
 			
-			for(GameObject gameObject : sceneObjects){
+			for(GameObject gameObject : new ArrayList<GameObject>(sceneObjects)){
 				gameObject.update();
 				
 				if(gameObject.CheckDistanceCulled(cameraViewport)) {
@@ -93,26 +94,27 @@ public class BaseScene {
 				}
 
 			}
-		}catch(Exception e) {
-		}
+
 	}
 	
-	public void AddObject(GameObject g) {
+	public void addObject(GameObject g) {
 		sceneObjects.add(g);
 		g.OnAddToScene();
 	}
 	
-	public void DestroyObject(GameObject g) {
+	public void destroyObject(GameObject g) {
 		g.onDestroy();
 		sceneObjects.remove(g);
 	}
 	
-	public List<GameObject> GetSceneObjects(){
+	public List<GameObject> getSceneObjects(){
 		List<GameObject> objectsCopy = new ArrayList<GameObject>(sceneObjects);
 		return objectsCopy;
 	}
 	
 	public void ShakeCamera(float magnitude, float roughness, int duration) {
+		if(!Settings.isCameraShake()) return;
+		
 		Thread camShakeThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
