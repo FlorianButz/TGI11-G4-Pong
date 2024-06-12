@@ -1,6 +1,6 @@
 package de.demoncore.scenes;
 
-public class Background extends BaseScene {
+public class Background extends AdvencedShopScene {
 
 	
 	

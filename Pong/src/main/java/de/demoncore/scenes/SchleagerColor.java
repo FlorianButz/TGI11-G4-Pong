@@ -1,6 +1,6 @@
 package de.demoncore.scenes;
 
-public class SchleagerColor extends BaseScene {
+public class SchleagerColor extends AdvencedShopScene {
 
 	
 	
