@@ -1,7 +1,6 @@
 package de.demoncore.scenes;
 
 import de.demoncore.game.GameObject;
-import de.demoncore.gameObjects.PongBall;
 
 public class BallColors extends BaseScene {
 
@@ -14,7 +13,7 @@ public class BallColors extends BaseScene {
 	@Override
 	public void initializeScene() {
 		
-		ColorVorschau = new PongBall(-300, -300, null, null);
+		ColorVorschau = new GameObject(-300, 0, 50, 50);
 		AddObject(ColorVorschau);
 		
 		
