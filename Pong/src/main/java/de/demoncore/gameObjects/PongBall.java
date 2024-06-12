@@ -95,7 +95,7 @@ public class PongBall extends GameObject {
 	public void update() {
 		super.update();
 		
-		color = GameMath.LerpColor(color.cyan, Color.green, (float) Math.sin(GameLogic.GetInstance().GetGameTime()));
+		color = GameMath.LerpColor(GameMath.LerpColor(color.cyan, Color.red, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 4));
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
