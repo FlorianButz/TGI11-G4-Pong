@@ -132,7 +132,9 @@ public class BallColors extends AdvencedShopScene {
 		YELLOW.alignment = GUIAlignment.Center;
 		addObject(YELLOW);
 		
-		RED.normalColor = Color.red;
+		
+		//Buttons die Farbe geben
+		RED.normalColor = Color.red;				
 		YELLOW.normalColor = Color.yellow;
 		GREEN.normalColor = Color.green;
 		ORANGE.normalColor = Color.orange;
@@ -141,8 +143,9 @@ public class BallColors extends AdvencedShopScene {
 		PINK.normalColor = Color.pink;
 		MAGENTA.normalColor = Color.magenta;
 		
+		//Hover Farbe etwas verdunkeln
 		RED.hoverColor = Color.red.darker().darker();
-		YELLOW.hoverColor = Color.yellow.darker().darker();
+		YELLOW.hoverColor = Color.yellow.darker().darker(); //.darker() 2 mal damit es passt sonnst wärs zu hell
 		GREEN.hoverColor = Color.green.darker().darker();
 		BLUE.hoverColor = Color.blue.darker().darker();
 		ORANGE.hoverColor = Color.orange.darker().darker();
