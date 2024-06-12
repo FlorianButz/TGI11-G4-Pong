@@ -3,7 +3,13 @@ package de.demoncore.scenes;
 import java.awt.Color;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
 import de.demoncore.gameObjects.PauseMenu;
+import de.demoncore.gui.GUIAlignment;
+import de.demoncore.gui.GUIButton;
+import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.utils.Resources;
 
 
 public class ShopScene extends BaseScene {
@@ -56,6 +62,8 @@ public class ShopScene extends BaseScene {
 		Throne3.color = Color.lightGray;
 		Throne4.color = Color.LIGHT_GRAY;
 		
+		
+				
 		
 		
 		super.initializeScene();

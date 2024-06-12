@@ -100,7 +100,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new ShopScene());
+				SceneManager.LoadScene(new TwoPlayerPong());
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;
@@ -137,5 +137,15 @@ public class MainMenu extends BaseScene {
 		});
 		quit.alignment = GUIAlignment.Center;
 		AddObject(quit);
+		
+		GUIButton shop = new GUIButton(0, 400, 800, 75, Translation.get("mainmenu.shop"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new ShopScene());
+			}
+		});
+		shop.alignment = GUIAlignment.Center;
+		AddObject(shop);
 	}
 }
