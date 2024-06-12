@@ -20,7 +20,8 @@ import de.demoncore.utils.Vector3;
 public class PongBall extends GameObject {
 
 	private PongPlayer player1, player2;
-	private Vector3 velocity = Vector3.one().multiply(10f);
+	public float speed = 9f;
+	private Vector3 velocity = Vector3.one();
 
 	private AudioSource sfxSource;
 
@@ -93,8 +94,10 @@ public class PongBall extends GameObject {
 		super.update();
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
+		
+		
 
-		position = position.add(velocity);
+		position = position.add(velocity.multiply(speed));
 
 		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
 			if(!isIntersectionWithPlayer) {
