@@ -50,7 +50,8 @@ public class SceneManager {
 	public static void LoadScene(BaseScene scene) {
 		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(GetActiveScene().GetSceneObjects());
 		
-		GUIRectangle blackScreen = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x, (int)Gui.GetScreenDimensions().y, new Color(0, 0, 0, 0f)); // Level uebergang
+		GUIRectangle blackScreen = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x * 2, (int)Gui.GetScreenDimensions().y * 2, new Color(0, 0, 0, 0f)); // Level uebergang
+		blackScreen.doUIScale = false;
 		ColorAnimator fadeOut = new ColorAnimator(blackScreen.color, Color.black, 1f, EasingType.InOutQuint); // Uebergang aus
 		ColorAnimator fadeIn = new ColorAnimator(Color.black, blackScreen.color, 1f, EasingType.InOutQuint); // Uebergang ein
 		

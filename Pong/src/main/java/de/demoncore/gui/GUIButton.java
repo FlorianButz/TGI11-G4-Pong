@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 import de.demoncore.audio.AudioSource;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.game.TranslationComponent;
 import de.demoncore.rendering.Draw;
 import de.demoncore.utils.GameMath;
@@ -91,8 +92,8 @@ public class GUIButton extends GUIObject {
 		this.size.x = currentButtonWidth;
 		
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
-		g2d.drawString(text.Get(), (int)(GetUIPosition(screenWidth, screenHeight).x + this.size.x / 2 - bounds.getWidth() / 2),
-				(int)(GetUIPosition(screenWidth, screenHeight).y + this.size.y / 2 +  textCurrentSize / 3)
+		g2d.drawString(text.Get(), (int)(GetUIPosition(screenWidth, screenHeight).x + this.GetScale().x / 2 - bounds.getWidth() / 2),
+				(int)(GetUIPosition(screenWidth, screenHeight).y + this.GetScale().y / 2 +  textCurrentSize / 3)
 				);
 		
 		float fps = Draw.GetFramesPerSecond();

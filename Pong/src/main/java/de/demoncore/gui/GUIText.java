@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 import de.demoncore.game.OnLanguageUpdateListener;
+import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.game.TranslationComponent;
 import de.demoncore.utils.Vector3;
@@ -29,7 +30,7 @@ public class GUIText extends GUIObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		
-		g2d.setFont(font);
+		g2d.setFont(font.deriveFont(font.getSize()));
 		
 		size.x = g2d.getFontMetrics().stringWidth(text.Get());
 		size.y = g2d.getFontMetrics().getMaxAscent() +
@@ -57,8 +58,8 @@ public class GUIText extends GUIObject {
 	@Override
 	public Vector3 GetPosition() {
 		return position.subtract(new Vector3(
-				size.x * anchorPoint.x + localPosition.x,
-				size.y * anchorPoint.y + localPosition.y
+				GetScale().x * anchorPoint.x + localPosition.x,
+				GetScale().y * anchorPoint.y + localPosition.y
 				));
 	}
 	

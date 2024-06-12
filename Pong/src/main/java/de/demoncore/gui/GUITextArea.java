@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.StringTokenizer;
 
+import de.demoncore.game.Settings;
 import de.demoncore.game.TranslationComponent;
 
 public class GUITextArea extends GUIText {
@@ -19,7 +20,7 @@ public class GUITextArea extends GUIText {
 
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		g2d.setFont(font);
+		g2d.setFont(font.deriveFont(font.getSize()));
 		g2d.setColor(color);
 		
 		size.x = g2d.getFontMetrics().stringWidth(text.Get());

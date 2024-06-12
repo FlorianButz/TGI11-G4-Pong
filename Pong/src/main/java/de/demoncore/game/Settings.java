@@ -48,6 +48,8 @@ public class Settings {
 	private static float musicVolume;
 	private static boolean fullscreen;
 	
+	private static float uiScale = .5f;
+	
 	private static boolean debugMode;
 	
 	private static Language language = Language.Deutsch;
@@ -66,6 +68,14 @@ public class Settings {
 	
 	public static Language GetLang() {
 		return language;
+	}
+	
+	public static void SetUIScale(float scale) {
+		uiScale = scale;
+	}
+	
+	public static float GetUIScale() {
+		return uiScale;
 	}
 	
 	public static void SetVolume(float newVolume) {
