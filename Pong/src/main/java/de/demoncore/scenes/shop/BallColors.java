@@ -77,7 +77,7 @@ public class BallColors extends AdvencedShopScene {
 		CYAN.alignment = GUIAlignment.Center;
 		addObject(CYAN);
 		
-		GUIButton GREEN = new GUIButton(100, -300, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton GREEN = new GUIButton(100, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -88,7 +88,7 @@ public class BallColors extends AdvencedShopScene {
 		GREEN.alignment = GUIAlignment.Center;
 		addObject(GREEN);
 		
-		GUIButton MAGENTA = new GUIButton(300, -300, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton MAGENTA = new GUIButton(300, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -99,7 +99,7 @@ public class BallColors extends AdvencedShopScene {
 		MAGENTA.alignment = GUIAlignment.Center;
 		addObject(MAGENTA);
 		
-		GUIButton PINK = new GUIButton(500, -300, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton PINK = new GUIButton(500, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -121,7 +121,7 @@ public class BallColors extends AdvencedShopScene {
 		WHITE.alignment = GUIAlignment.Center;
 		addObject(WHITE);
 		
-		GUIButton YELLOW = new GUIButton(700, -300, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton YELLOW = new GUIButton(700, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -132,14 +132,23 @@ public class BallColors extends AdvencedShopScene {
 		YELLOW.alignment = GUIAlignment.Center;
 		addObject(YELLOW);
 		
+		RED.normalColor = Color.red;
+		YELLOW.normalColor = Color.yellow;
+		GREEN.normalColor = Color.green;
+		ORANGE.normalColor = Color.orange;
+		BLUE.normalColor = Color.blue;
+		CYAN.normalColor = Color.cyan;
+		PINK.normalColor = Color.pink;
+		MAGENTA.normalColor = Color.magenta;
 		
-		
-		
-		
-		
-		
-		
-	
+		RED.hoverColor = Color.red.darker().darker();
+		YELLOW.hoverColor = Color.yellow.darker().darker();
+		GREEN.hoverColor = Color.green.darker().darker();
+		BLUE.hoverColor = Color.blue.darker().darker();
+		ORANGE.hoverColor = Color.orange.darker().darker();
+		CYAN.hoverColor = Color.cyan.darker().darker();
+		PINK.hoverColor = Color.pink.darker().darker();
+		MAGENTA.hoverColor = Color.magenta.darker().darker();
 		
 		
 		super.initializeScene();
