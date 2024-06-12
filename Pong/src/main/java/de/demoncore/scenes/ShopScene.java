@@ -62,8 +62,46 @@ public class ShopScene extends BaseScene {
 		Throne3.color = Color.lightGray;
 		Throne4.color = Color.LIGHT_GRAY;
 		
-		
+		GUIButton BallColor = new GUIButton(-300, -250, 200, 75, Translation.get("mainmenu.BallColor"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new BallColors());
+			}
+		});
+		BallColor.alignment = GUIAlignment.Center;
+		AddObject(BallColor);
 				
+		GUIButton SchlaegerColor = new GUIButton(300, -250, 200, 75, Translation.get("mainmenu.Schläger"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new SchleagerColor());
+			}
+		});
+		SchlaegerColor.alignment = GUIAlignment.Center;
+		AddObject(SchlaegerColor);
+		
+		GUIButton PowerUps = new GUIButton(-300, 250, 200, 75, Translation.get("mainmenu.PowerUps"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new PowerUps());
+			}
+		});
+		PowerUps.alignment = GUIAlignment.Center;
+		AddObject(PowerUps);
+		
+		GUIButton Background = new GUIButton(300, 250, 200, 75, Translation.get("mainmenu.background"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new Background());
+			}
+		});
+		Background.alignment = GUIAlignment.Center;
+		AddObject(Background);
+		
 		
 		
 		super.initializeScene();
