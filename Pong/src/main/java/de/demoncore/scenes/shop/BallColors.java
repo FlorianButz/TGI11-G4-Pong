@@ -6,10 +6,10 @@ import de.demoncore.game.GameObject;
 import de.demoncore.scenes.BaseScene;
 
 
-public class BallColors extends BaseScene {
+public class BallColors extends AdvencedShopScene {
 
 	GameObject ColorVorschau;
-	GameObject Background;
+	
 
 	
 	
