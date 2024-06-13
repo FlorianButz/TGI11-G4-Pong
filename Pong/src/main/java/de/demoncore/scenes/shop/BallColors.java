@@ -18,19 +18,11 @@ public class BallColors extends AdvencedShopScene {
 	
 
 	
-	
-	
 	@Override
 	public void initializeScene() {
 		
 		ColorVorschau = new GameObject(-500, -300, 200, 200);
 		addObject(ColorVorschau);
-		
-		Background = new GameObject(500, 0, 1000, 2000);
-		addObject(Background);
-		
-		
-		Background.color = Color.darkGray;
 		
 		
 		GUIButton RED = new GUIButton(300, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
@@ -133,6 +125,9 @@ public class BallColors extends AdvencedShopScene {
 		addObject(YELLOW);
 		
 		
+		
+		
+		
 		//Buttons die Farbe geben
 		RED.normalColor = Color.red;				
 		YELLOW.normalColor = Color.yellow;
@@ -160,6 +155,16 @@ public class BallColors extends AdvencedShopScene {
 		super.initializeScene();
 	}
 	
+	public Color Farbe( ) {
+		
+		Color color = ColorVorschau.color;
+		
+		
+		return color;
+	}
 
+	
+	
+	
 	
 }

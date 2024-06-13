@@ -16,6 +16,7 @@ import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
+import de.demoncore.scenes.shop.BallColors;
 
 public class PongBall extends GameObject {
 
@@ -29,6 +30,8 @@ public class PongBall extends GameObject {
 
 	boolean isIntersectionWithPlayer = false;
 	boolean isMoving = false;
+	
+	BallColors Farbe = new BallColors();
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
 
@@ -95,7 +98,7 @@ public class PongBall extends GameObject {
 	public void update() {
 		super.update();
 		
-		color = GameMath.LerpColor(GameMath.LerpColor(color.cyan, Color.red, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 4));
+		color = /*Farbe.Farbe();*/ GameMath.LerpColor(GameMath.LerpColor(color.cyan, Color.red, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.GetInstance().GetGameTime() * 4));
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
