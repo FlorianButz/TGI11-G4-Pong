@@ -127,7 +127,6 @@ public class BallColors extends AdvencedShopScene {
 		
 		
 		
-		
 		//Buttons die Farbe geben
 		RED.normalColor = Color.red;				
 		YELLOW.normalColor = Color.yellow;
