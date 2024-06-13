@@ -3,11 +3,14 @@ package de.demoncore.scenes.shop;
 import java.awt.Color;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.SettingsMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.gui.GUIMenu;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.Resources;
 import de.demoncore.gui.GUIButton;
@@ -26,18 +29,17 @@ public class AdvencedShopScene extends BaseScene{
 		Background.color = Color.darkGray;
 
 		
-		GUIButton CreateBackButton() {
-			GUIButton back = new GUIButton(0, 0, 500, 50, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
-				@Override
-				public void ButtonClick() {
-					super.ButtonClick();
-					//HideMenu();
-					Settings.SaveAllSettings();
-				}
-			});
-			back.alignment = GUIAlignment.Center;
-			return back;
-		}
+		
+		
+		GUIButton back = new GUIButton(-450, 500, 600, 75, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new ShopScene());;
+			}
+		});
+		back.alignment = GUIAlignment.Center;
+		addObject(back);;
 		
 		
 	
