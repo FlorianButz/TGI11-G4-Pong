@@ -12,7 +12,7 @@ import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.Resources;
 
 
-public class BallColors extends AdvencedShopScene {
+public class BallColors extends AdvancedShopScene {
 
 	GameObject ColorVorschau;
 	

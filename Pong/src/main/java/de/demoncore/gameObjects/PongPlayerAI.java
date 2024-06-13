@@ -6,7 +6,7 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayerAI extends PongPlayer {
 
-	public float difficulty = 0.35f; // Nur werte zwischen 0 und 1
+	public float difficulty = 0.4f; // Nur werte zwischen 0 und 1
 	
 	private float aiStupidity = 3.5f; // Je hoeher der wert, desto duemmer ist die AI
 	
@@ -43,7 +43,7 @@ public class PongPlayerAI extends PongPlayer {
 		Vector3 bPos = new Vector3(0, ballY);
 		float velMulti = Vector3.Distance(pPos, bPos);
 		
-		if(lastPongBallPos.x < PongBall.getInstance().GetPosition().x) {
+		if(Vector3.Distance(lastPongBallPos, GetPosition()) > Vector3.Distance(PongBall.getInstance().GetPosition(), GetPosition())) {
 			
 			if(ballY >= GetPosition().y + size.y / 2)
 				speed = new Vector3(0, (playerAcceleration * (velMulti / 100)) * (float)(Math.random() / 2 + 0.5), 0);

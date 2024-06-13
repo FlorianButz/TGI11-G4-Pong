@@ -87,7 +87,7 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		anim.Play(); // Spiele animation 1
-
+		
 		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, Translation.get("mainmenu.singleplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
