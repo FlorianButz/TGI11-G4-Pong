@@ -10,58 +10,26 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.DefaultScene;
+import de.demoncore.scenes.MainMenu;
 import de.demoncore.utils.Resources;
 
 
 public class ShopScene extends BaseScene {
 
-	GameObject Base1;
-	GameObject Base2;
-	GameObject Base3;
-	GameObject Base4;
-	GameObject Throne1;
-	GameObject Throne2;
-	GameObject Throne3;
-	GameObject Throne4;
+	GameObject Base;
+	
 	
 	@Override
 	public void initializeScene() {
 		
-		addObject(new PauseMenu());	
+		Base = new GameObject(0, 0, 0, 0);
+		addObject(Base);
 		
-		Base1 = new GameObject(-300, -250, 300, 300);
-		addObject(Base1);
 		
-		Base2 = new GameObject(300, -250, 300, 300);
-		addObject(Base2);
 		
-		Base3 = new GameObject(-300, 250, 300, 300);
-		addObject(Base3);
 		
-		Base4 = new GameObject(300, 250, 300, 300);
-		addObject(Base4);
-		
-		Base1.color = Color.DARK_GRAY;
-		Base2.color = Color.DARK_GRAY;
-		Base3.color = Color.DARK_GRAY;
-		Base4.color = Color.DARK_GRAY;
-		
-		Throne1 = new GameObject(-300, -250, 200, 200);
-		addObject(Throne1);
-		
-		Throne2 = new GameObject(300, -250, 200, 200);
-		addObject(Throne2);
-		
-		Throne3 = new GameObject(-300, 250, 200, 200);
-		addObject(Throne3);
-		
-		Throne4 = new GameObject(300, 250, 200, 200);
-		addObject(Throne4);
-		
-		Throne1.color = Color.LIGHT_GRAY;
-		Throne2.color = Color.lightGray;
-		Throne3.color = Color.lightGray;
-		Throne4.color = Color.LIGHT_GRAY;
+		Base.color = Color.DARK_GRAY;
 		
 		GUIButton BallColor = new GUIButton(-300, -250, 200, 75, Translation.get("mainmenu.BallColor"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
@@ -103,7 +71,15 @@ public class ShopScene extends BaseScene {
 		Background.alignment = GUIAlignment.Center;
 		addObject(Background);
 		
-		
+		GUIButton back = new GUIButton(0, 400, 600, 75, Translation.get("Back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.LoadScene(new MainMenu());;
+			}
+		});
+		back.alignment = GUIAlignment.Center;
+		addObject(back);;
 		
 		super.initializeScene();
 	}
