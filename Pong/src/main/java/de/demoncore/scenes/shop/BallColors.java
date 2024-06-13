@@ -154,6 +154,9 @@ public class BallColors extends AdvencedShopScene {
 		MAGENTA.hoverColor = Color.magenta.darker().darker();
 		WHITE.hoverColor = Color.white.darker().darker();
 		
+		
+		
+		
 		super.initializeScene();
 	}
 	
