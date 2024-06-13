@@ -1,8 +1,7 @@
 package de.demoncore.scenes.shop;
 
-import de.demoncore.scenes.BaseScene;
 
-public class SchleagerColor extends AdvancedShopScene {
+public class SchleagerColor extends AdvencedShopScene {
 
 	
 	

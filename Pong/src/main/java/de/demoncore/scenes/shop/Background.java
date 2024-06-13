@@ -1,8 +1,7 @@
 package de.demoncore.scenes.shop;
 
-import de.demoncore.scenes.shop.AdvancedShopScene;
 
-public class Background extends AdvancedShopScene {
+public class Background extends AdvencedShopScene {
 
 	
 	

@@ -2,7 +2,7 @@ package de.demoncore.scenes.shop;
 
 
 
-public class PowerUps extends AdvancedShopScene{
+public class PowerUps extends AdvencedShopScene{
 
 	@Override
 	public void initializeScene() {
