@@ -37,7 +37,7 @@ public class AudioMaster {
 	private static ALCCapabilities alcCapabilities;
 	private static ALCapabilities alCapabilities;
 
-	public static void InitializeOpenAL() {
+	public static void initializeOpenAL() {
 		
 		Logger.logInfo("Initialisiere OpenAL Audio...");
 		

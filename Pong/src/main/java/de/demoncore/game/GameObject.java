@@ -10,7 +10,7 @@ import de.demoncore.utils.Vector3;
 
 public class GameObject {
 	
-	public Vector3 size;	// Größe
+	public Vector3 size;	// Grï¿½ï¿½e
 	protected Vector3 position;	// Position
 	protected Vector3 localPosition;	// Lokale Position
 	
@@ -73,7 +73,7 @@ public class GameObject {
 	public boolean collisionEnabled = true; // Ob das Objekt Kollisionen hat
 	public float boundingMargin = 0f;
 	
-	public Rectangle GetBoundingBox() {	// Gibt die Kollisions box zurück
+	public Rectangle GetBoundingBox() {	// Gibt die Kollisions box zurueck
 		Rectangle r = new Rectangle();
 		
 		int sizeX = (int)(size.x + boundingMargin);

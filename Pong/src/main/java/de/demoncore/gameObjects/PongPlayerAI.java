@@ -6,7 +6,7 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayerAI extends PongPlayer {
 
-	public float difficulty = 0.75f; // Nur werte zwischen 0 und 1
+	public float difficulty = 0.55f; // Nur werte zwischen 0 und 1
 	
 	private float aiStupidity = 3.5f; // Je hoeher der wert, desto duemmer ist die AI
 	

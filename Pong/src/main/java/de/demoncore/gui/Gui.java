@@ -99,7 +99,7 @@ public class Gui {
 		}
 	}
 	
-	public static void AddOnApplicationClose(WindowListener event) {
+	public static void addOnApplicationClose(WindowListener event) {
 		frame.addWindowListener(event);
 	}
 	

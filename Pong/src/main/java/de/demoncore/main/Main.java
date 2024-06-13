@@ -20,7 +20,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 			
-		AudioMaster.InitializeOpenAL();		// Initialisiere Audio 
+		AudioMaster.initializeOpenAL();		// Initialisiere Audio 
 
 		// Initialisiere Assets
 
@@ -44,7 +44,7 @@ public class Main {
 		gl.Start();
 		new Gui(gl);
 		
-		Gui.AddOnApplicationClose(new java.awt.event.WindowAdapter() {
+		Gui.addOnApplicationClose(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		        AudioMaster.DestroyOpenAL();
