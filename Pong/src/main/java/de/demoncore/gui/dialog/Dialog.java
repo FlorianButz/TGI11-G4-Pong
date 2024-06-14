@@ -56,9 +56,9 @@ public class Dialog extends GameObject {
 		
 		content.add(createBackground());
 		
-		sfxSource = new AudioSource[] { new AudioSource(this).SetSpacial(false), new AudioSource(this).SetSpacial(false) };
-		SceneManager.GetActiveScene().addObject(sfxSource[0]);
-		SceneManager.GetActiveScene().addObject(sfxSource[1]);
+		sfxSource = new AudioSource[] { new AudioSource(this).setSpacial(false), new AudioSource(this).setSpacial(false) };
+		SceneManager.getActiveScene().addObject(sfxSource[0]);
+		SceneManager.getActiveScene().addObject(sfxSource[1]);
 		
 		name = new GUIText(25, -325, Translation.literal(""), Resources.dialogFont.deriveFont(75F), new Color(1f, 1f, 1f, 1f));
 		name.alignment = GUIAlignment.DownLeft;
@@ -109,7 +109,7 @@ public class Dialog extends GameObject {
 			return;
 		}
 
-		SceneManager.GetActiveScene().destroyObject(spaceText);
+		SceneManager.getActiveScene().destroyObject(spaceText);
 		
 		Thread characterThread = new Thread("DialogAnimate") {
 			@Override
@@ -134,7 +134,7 @@ public class Dialog extends GameObject {
 				}
 
 				if(isInScene)
-					SceneManager.GetActiveScene().addObject(spaceText);
+					SceneManager.getActiveScene().addObject(spaceText);
 				
 				isLinePlaying = false;
 				
@@ -152,15 +152,15 @@ public class Dialog extends GameObject {
 	
 	void createDialog() {
 		for(GUIObject o : content) {
-			SceneManager.GetActiveScene().addObject(o);
+			SceneManager.getActiveScene().addObject(o);
 		}
 	}
 	
 	void destroyDialog() {
-		SceneManager.GetActiveScene().destroyObject(this);
+		SceneManager.getActiveScene().destroyObject(this);
 		
 		for(GUIObject o : content) {
-			SceneManager.GetActiveScene().destroyObject(o);
+			SceneManager.getActiveScene().destroyObject(o);
 		}
 		
 		isActiveDialog = false;
@@ -171,8 +171,8 @@ public class Dialog extends GameObject {
 		super.onDestroy();
 
 		KeyHandler.listeners.remove(listener);
-		SceneManager.GetActiveScene().destroyObject(sfxSource[0]);
-		SceneManager.GetActiveScene().destroyObject(sfxSource[1]);
+		SceneManager.getActiveScene().destroyObject(sfxSource[0]);
+		SceneManager.getActiveScene().destroyObject(sfxSource[1]);
 	}
 	
 	protected GUIObject createBackground() {

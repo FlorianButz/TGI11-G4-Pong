@@ -24,6 +24,10 @@ public class Vector3 {
 		this.z = 0;
 	}
 	
+	public Vector3 clamp(Vector3 lowerLimit, Vector3 upperLimit) {
+		return new Vector3(GameMath.clamp(x, lowerLimit.x, upperLimit.x), GameMath.clamp(y, lowerLimit.y, upperLimit.y), GameMath.clamp(z, lowerLimit.z, upperLimit.z));
+	}
+	
 	public Vector3 multiply(float multiplier) {
 		return new Vector3(x * multiplier, y * multiplier, z * multiplier);
 	}
@@ -63,7 +67,7 @@ public class Vector3 {
 		return (Math.abs(x) + Math.abs(y) + Math.abs(z)) / 3;
 	}
 	
-	public Vector3 Normalized() {
+	public Vector3 normalized() {
         float length = (float) Math.sqrt(x * x + y * y + z * z);
         if (length == 0) {
             return Vector3.zero(); // Nullvektor zurueck geben wenn laenge = 0

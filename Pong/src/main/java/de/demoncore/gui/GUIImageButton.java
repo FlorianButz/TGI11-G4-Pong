@@ -33,11 +33,11 @@ public class GUIImageButton extends GUIButton {
 		super.Draw(g2d, screenWidth, screenHeight);
 
 		g2d.setColor(currentColor);
-		g2d.fillRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
+		g2d.fillRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 		
 		g2d.setStroke(new BasicStroke(4));
 		g2d.setColor(normalColor);
-		g2d.drawRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
+		g2d.drawRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 		
 		g2d.setColor(currentTextColor);
 
@@ -50,14 +50,14 @@ public class GUIImageButton extends GUIButton {
 				currentTextColor.getBlue(),
 				0);
 		
-		Vector3 pos = GetUIPosition(screenWidth, screenHeight)
+		Vector3 pos = getUIPosition(screenWidth, screenHeight)
 				.add(new Vector3(
-				GetScale().x * anchorPoint.x + localPosition.x,
-				GetScale().y * anchorPoint.y + localPosition.y
+				getScale().x * anchorPoint.x + localPosition.x,
+				getScale().y * anchorPoint.y + localPosition.y
 				))
 				.subtract(new Vector3(
-					GetScale().x * textCurrentSize * anchorPoint.x + localPosition.x,
-					GetScale().y * textCurrentSize * anchorPoint.y + localPosition.y
+					getScale().x * textCurrentSize * anchorPoint.x + localPosition.x,
+					getScale().y * textCurrentSize * anchorPoint.y + localPosition.y
 				));;
 		
 		if(!isHovering) {
@@ -79,8 +79,8 @@ public class GUIImageButton extends GUIButton {
 		float fps = Draw.GetFramesPerSecond();
 		
 		if(this.isHovering) {
-			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
-			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
+			currentColor = GameMath.lerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.lerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
 
 			textCurrentSize = GameMath.Lerp(textCurrentSize, textHoverSize, sizeTransitionSmoothing / fps);
 			
@@ -88,8 +88,8 @@ public class GUIImageButton extends GUIButton {
 		}
 		else {
 			
-			currentColor = GameMath.LerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
-			currentTextColor = GameMath.LerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
+			currentColor = GameMath.lerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.lerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
 
 			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps);
 			

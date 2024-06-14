@@ -40,7 +40,7 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 		AudioMaster.AddOnPauseListener(this);
 	}
 	
-	public AudioSource SetSpacial(boolean isSpacial) {
+	public AudioSource setSpacial(boolean isSpacial) {
 		this.isSpacial = isSpacial;
 		return this;
 	}
@@ -78,12 +78,12 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 		super.update();
 		
 		if(parentObject != null)
-			position = parentObject.GetPosition();
+			position = parentObject.getPosition();
 
 		if(isSpacial)
 			AL10.alSource3f(sourceId, AL10.AL_POSITION, position.x, 0, position.y);
 		else {
-			Vector3 camPos = SceneManager.GetActiveScene().cameraPosition;
+			Vector3 camPos = SceneManager.getActiveScene().cameraPosition;
 			AL10.alSource3f(sourceId, AL10.AL_POSITION, camPos.x, 0, camPos.y);
 		}
 	}

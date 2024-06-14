@@ -11,7 +11,7 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayer extends RigidBody {
 
-	public float playerAcceleration = 15f; // Speed
+	public static float playerAcceleration = 15f; // Speed
 
 	public boolean isPlayer1 = true;
 	protected boolean playerControlsEnabled = true;
@@ -23,7 +23,7 @@ public class PongPlayer extends RigidBody {
 	@Override
 	public void update() {
 		if(GameLogic.IsGamePaused()) return;
-		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
+		position.y = GameMath.clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 		
 		playerAcceleration = Settings.isSlowPedals() ? 5.5f : 15f;
 		
@@ -39,7 +39,7 @@ public class PongPlayer extends RigidBody {
 		
 		super.update();
 		
-		position.y = GameMath.Clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
+		position.y = GameMath.clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 	}
 
 }

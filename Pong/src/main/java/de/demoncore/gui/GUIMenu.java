@@ -9,6 +9,7 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
@@ -31,8 +32,8 @@ public class GUIMenu extends GameObject {
 	ColorAnimator bgInAnim;
 	ColorAnimator bgOutAnim;
 
-	protected Vector3 inAnimationFromPosition = new Vector3(0, -2500, 0);
-	protected Vector3 outAnimationToPosition = new Vector3(0, -2500, 0);
+	protected Vector3 inAnimationFromPosition = new Vector3(0, -3000, 0);
+	protected Vector3 outAnimationToPosition = new Vector3(0, -3000, 0);
 
 	protected EasingType inAnimationEasingType = EasingType.OutExponential;
 	protected EasingType outAnimationEasingType = EasingType.InOutQuint;
@@ -72,7 +73,7 @@ public class GUIMenu extends GameObject {
 		KeyHandler.listeners.add(l);
 	}
 
-	protected GUIButton CreateBackButton() {
+	protected GUIButton createBackButton() {
 		GUIButton back = new GUIButton(-65, 65, 50, 50, Translation.literal("X"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 		@Override
 		public void ButtonClick() {
@@ -85,41 +86,41 @@ public class GUIMenu extends GameObject {
 		return back;
 	}
 	
-	protected List<GUIObject> AddMenuContent() {
+	protected List<GUIObject> addMenuContent() {
 		return new ArrayList<GUIObject>();
 	}
 	
-	protected GUIObject CreateBackground() {
+	protected GUIObject createBackground() {
 		GUIRectangle bg = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x + 1500, (int)Gui.GetScreenDimensions().y + 1500, new Color(0, 0, 0, 0f));
 		bg.alignment = GUIAlignment.Center;
 		bg.doUIScale = false;
 		return bg;
 	}
 	
-	private void CreateMenu() {
+	private void createMenu() {
 		hasMenuBeenCreated = true;
 		
-		background = CreateBackground();
+		background = createBackground();
 		
-		back = CreateBackButton();
+		back = createBackButton();
 		
 		menuContent.add(background);
-		menuContent.addAll(AddMenuContent());
+		menuContent.addAll(addMenuContent());
 		menuContent.add(back);
 		
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().addObject(o);
+			SceneManager.getActiveScene().addObject(o);
 		}
 		
 		boolean isInScene = false;
-		for(GameObject g : SceneManager.GetActiveScene().getSceneObjects()) {
+		for(GameObject g : SceneManager.getActiveScene().getSceneObjects()) {
 			if(g == this) isInScene = true;
 		}
 		
-		if(isInScene == false) SceneManager.GetActiveScene().addObject(this);
+		if(isInScene == false) SceneManager.getActiveScene().addObject(this);
 	}
 	
-	private void ChangePos() {
+	private void changePos() {
 		for(GameObject g : menuContent) {
 			if(g == background) continue;
 			g.SetLocalPosition(new Vector3(0, menuYPos, 0));
@@ -128,7 +129,10 @@ public class GUIMenu extends GameObject {
 	
 	public void ShowMenu() {
 		if(!hasMenuBeenCreated) 
-			CreateMenu();
+			createMenu();
+		
+		inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
 		
 		if(outAnim != null) outAnim.Stop();
 		if(bgOutAnim != null) bgOutAnim.Stop();
@@ -136,19 +140,19 @@ public class GUIMenu extends GameObject {
 		isMenuVisible = true;
 		
 		bgInAnim = new ColorAnimator(background.color, backgroundColor, inAnimationTimeBackground, inAnimationEasingTypeBackground);
-		bgInAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		bgInAnim.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
-		public void OnUpdate(Color value) {
-			super.OnUpdate(value);
+		public void onUpdate(Color value) {
+			super.onUpdate(value);
 			background.color = value;
 		}
 		});
 		
 		inAnim = new Vector3Animator(inAnimationFromPosition, new Vector3(0, 0, 0), inAnimationTimePosition, inAnimationEasingType);
-		inAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		inAnim.setOnUpdate(new AnimatorUpdateEvent() {
 			@Override
-			public void OnUpdate(Vector3 value) {
-				super.OnUpdate(value);
+			public void onUpdate(Vector3 value) {
+				super.onUpdate(value);
 				
 				if(!background.enableRendering) {
 					for(GUIObject o : menuContent) {
@@ -157,48 +161,51 @@ public class GUIMenu extends GameObject {
 				}
 				
 				menuYPos = (int) value.y;
-				ChangePos();
+				changePos();
 			}
 		});
 		
 		bgInAnim.Play();
-		inAnim.Play();
+		inAnim.play();
 	}
 
 	public void HideMenu() {
+		
+		inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
 		
 		inAnim.Stop();
 		bgInAnim.Stop();
 
 		bgOutAnim = new ColorAnimator(background.color, new Color(0f, 0f, 0f, 0f), outAnimationTimeBackground, outAnimationEasingTypeBackground);
-		bgOutAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		bgOutAnim.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
-		public void OnUpdate(Color value) {
-			super.OnUpdate(value);
+		public void onUpdate(Color value) {
+			super.onUpdate(value);
 			background.color = value;
 		}
 		});
 		bgOutAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
 			@Override
-			public void OnComplete() {
-				super.OnComplete();			
+			public void onComplete() {
+				super.onComplete();			
 				background.enableRendering = false;
 			}
 		});
 		
 		outAnim = new Vector3Animator(new Vector3(0, menuYPos, 0), outAnimationToPosition, outAnimationTimePosition, outAnimationEasingType);
-		outAnim.SetOnUpdate(new AnimatorUpdateEvent() {
+		outAnim.setOnUpdate(new AnimatorUpdateEvent() {
 			@Override
-			public void OnUpdate(Vector3 value) {
-				super.OnUpdate(value);
+			public void onUpdate(Vector3 value) {
+				super.onUpdate(value);
 				menuYPos = (int) value.y;
-				ChangePos();
+				changePos();
 			}
 		});
-		outAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+		outAnim.setOnComplete(new AnimatorOnCompleteEvent() {
 			@Override
-			public void OnComplete() {
-				super.OnComplete();
+			public void onComplete() {
+				super.onComplete();
 				
 				for(GUIObject o : menuContent) {
 					if(o != background)
@@ -210,7 +217,7 @@ public class GUIMenu extends GameObject {
 		});
 		
 		bgOutAnim.Play();
-		outAnim.Play();
+		outAnim.play();
 	}
 	
 	@Override
@@ -223,10 +230,10 @@ public class GUIMenu extends GameObject {
 	}
 	
 	private boolean CheckIfFocused() {
-		for(GameObject g : SceneManager.GetActiveScene().getSceneObjects()) {
+		for(GameObject g : SceneManager.getActiveScene().getSceneObjects()) {
 			if(g != this) {
 				if(g instanceof GUIMenu) {
-					if(SceneManager.GetActiveScene().getSceneObjects().indexOf(g) > SceneManager.GetActiveScene().getSceneObjects().indexOf(this))
+					if(SceneManager.getActiveScene().getSceneObjects().indexOf(g) > SceneManager.getActiveScene().getSceneObjects().indexOf(this))
 						if(((GUIMenu)g).isMenuVisible)
 							return false;
 				}
@@ -246,7 +253,7 @@ public class GUIMenu extends GameObject {
 		KeyHandler.listeners.remove(l);
 		
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().destroyObject(o);
+			SceneManager.getActiveScene().destroyObject(o);
 		}
 	}
 }

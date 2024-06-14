@@ -30,7 +30,7 @@ public class ColorAnimator {
 		this.onCompleteEvent = event;
 	}
 	
-	public void SetOnUpdate(AnimatorUpdateEvent event) {
+	public void setOnUpdate(AnimatorUpdateEvent event) {
 		this.updateEvent = event;
 	}
 	
@@ -77,9 +77,9 @@ public class ColorAnimator {
                         	time = Easing.EaseInOutSine(time);
                         }
                         
-                        value = GameMath.LerpColor(fromValue, toValue, time);
+                        value = GameMath.lerpColor(fromValue, toValue, time);
                         if(updateEvent != null && !isAnimationCancled)
-                        	updateEvent.OnUpdate(value);
+                        	updateEvent.onUpdate(value);
                         
                         long endTime = System.currentTimeMillis();
                         long sleepTime = frameDuration - (endTime - startTime);
@@ -90,7 +90,7 @@ public class ColorAnimator {
                     }
                     
                     if(onCompleteEvent != null && !isAnimationCancled)
-                    	onCompleteEvent.OnComplete();
+                    	onCompleteEvent.onComplete();
                     
                 } catch (InterruptedException v) {
                     System.out.println(v);

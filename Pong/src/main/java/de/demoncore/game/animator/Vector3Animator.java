@@ -23,11 +23,11 @@ public class Vector3Animator {
 		this.easeType = easeType;
 	}
 
-	public void SetOnComplete(AnimatorOnCompleteEvent event) {
+	public void setOnComplete(AnimatorOnCompleteEvent event) {
 		this.onCompleteEvent = event;
 	}
 	
-	public void SetOnUpdate(AnimatorUpdateEvent event) {
+	public void setOnUpdate(AnimatorUpdateEvent event) {
 		this.updateEvent = event;
 	}
 	
@@ -39,7 +39,7 @@ public class Vector3Animator {
 	
 	public Thread animationThread;
 	
-	public Vector3Animator Play() {		
+	public Vector3Animator play() {		
 		animationThread = new Thread("vector3animator.animation") {
 			
 			Vector3 value = fromValue;
@@ -74,7 +74,7 @@ public class Vector3Animator {
                         
                         value = Vector3.Lerp(fromValue, toValue, time);
                         if(updateEvent != null && !isAnimationCancled)
-                        	updateEvent.OnUpdate(value);
+                        	updateEvent.onUpdate(value);
                         
                         long endTime = System.currentTimeMillis();
                         long sleepTime = frameDuration - (endTime - startTime);
@@ -85,7 +85,7 @@ public class Vector3Animator {
                     }
                     
                     if(onCompleteEvent != null && !isAnimationCancled)
-                    	onCompleteEvent.OnComplete();
+                    	onCompleteEvent.onComplete();
                     
                 } catch (InterruptedException v) {
                     System.out.println(v);

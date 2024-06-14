@@ -24,7 +24,7 @@ public class PongEndScreen extends GUIMenu {
 	}
 	
 	@Override
-	protected List<GUIObject> AddMenuContent() {
+	protected List<GUIObject> addMenuContent() {
 	
 		List<GUIObject> content = new ArrayList<GUIObject>();
 		
@@ -46,12 +46,12 @@ public class PongEndScreen extends GUIMenu {
 	}
 	
 	@Override
-	protected GUIButton CreateBackButton() {
+	protected GUIButton createBackButton() {
 		
 		GUIButton btn = new GUIButton(0, 250, 650, 75, Translation.get("pong.play_again"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
-				SceneManager.LoadScene(SceneManager.GetActiveScene());
+				SceneManager.LoadScene(SceneManager.getActiveScene());
 				super.ButtonClick();
 			}
 			});

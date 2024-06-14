@@ -35,7 +35,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	}
 
 	@Override
-	protected List<GUIObject> AddMenuContent() {
+	protected List<GUIObject> addMenuContent() {
 		List<GUIObject> content = new ArrayList<GUIObject>();
 		
 		Translation.listeners.add(this);
@@ -49,7 +49,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 			public void ButtonClick() {
 				super.ButtonClick();
 				SettingsMenu settingsMenu = new SettingsMenu();
-				SceneManager.GetActiveScene().addObject(settingsMenu);
+				SceneManager.getActiveScene().addObject(settingsMenu);
 				settingsMenu.ShowMenu();
 			}
 		});
@@ -70,7 +70,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	}
 	
 	@Override
-	protected GUIButton CreateBackButton() {
+	protected GUIButton createBackButton() {
 		GUIButton returnToGameButton = new GUIButton(0, -25, 750, 100, Translation.get("pausemenu.returntogame"), Resources.uiFont.deriveFont(40F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -85,7 +85,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	@Override
 	public void ShowMenu() {
 		for(GUIObject o : menuContent) {
-			SceneManager.GetActiveScene().onTop(o);
+			SceneManager.getActiveScene().onTop(o);
 		}
 		
 		super.ShowMenu();

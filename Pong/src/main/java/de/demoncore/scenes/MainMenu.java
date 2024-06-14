@@ -56,37 +56,37 @@ public class MainMenu extends BaseScene {
 		addObject(title);
 		
 		Vector3Animator anim = new Vector3Animator(Vector3.one().multiply(150), Vector3.one().multiply(160), 5, EasingType.Linear); // Erstelle neue animation für den Titel text
-		anim.SetOnUpdate(new AnimatorUpdateEvent() {
+		anim.setOnUpdate(new AnimatorUpdateEvent() {
 			@Override
-			public void OnUpdate(Vector3 value) {
-				super.OnUpdate(value);
+			public void onUpdate(Vector3 value) {
+				super.onUpdate(value);
 				title.SetFont(title.GetFont().deriveFont(value.x));	// Ändere die größe vom text in der animation
 			}
 		});
-		anim.SetOnComplete(new AnimatorOnCompleteEvent() {
+		anim.setOnComplete(new AnimatorOnCompleteEvent() {
 			@Override
-			public void OnComplete() {
-				super.OnComplete();
+			public void onComplete() {
+				super.onComplete();
 				
 				Vector3Animator anim2 = new Vector3Animator(Vector3.one().multiply(160), Vector3.one().multiply(150), 5, EasingType.Linear); // Erstelle zweite animation für den Titel text
-				anim2.SetOnUpdate(new AnimatorUpdateEvent() {
+				anim2.setOnUpdate(new AnimatorUpdateEvent() {
 					@Override
-					public void OnUpdate(Vector3 value) {
-						super.OnUpdate(value);
+					public void onUpdate(Vector3 value) {
+						super.onUpdate(value);
 						title.SetFont(title.GetFont().deriveFont(value.x));	// Ändere die größe vom text in der animation
 					}
 				});
-				anim2.SetOnComplete(new AnimatorOnCompleteEvent() {
+				anim2.setOnComplete(new AnimatorOnCompleteEvent() {
 					@Override
-					public void OnComplete() {
-						super.OnComplete();
-						anim.Play();	// Spiele animation 1 wenn animation 2 fertig ist
+					public void onComplete() {
+						super.onComplete();
+						anim.play();	// Spiele animation 1 wenn animation 2 fertig ist
 					}
 				});
-				anim2.Play();	// Spiele animation 2 wenn animation 1 fertig ist
+				anim2.play();	// Spiele animation 2 wenn animation 1 fertig ist
 			}
 		});
-		anim.Play(); // Spiele animation 1
+		anim.play(); // Spiele animation 1
 		
 		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, Translation.get("mainmenu.singleplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override

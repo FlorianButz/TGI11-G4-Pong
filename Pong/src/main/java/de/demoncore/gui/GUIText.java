@@ -40,7 +40,7 @@ public class GUIText extends GUIObject {
 		super.Draw(g2d, screenWidth, screenHeight);
 	
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
-		g2d.drawString(text.Get(), GetUIPosition(screenWidth, screenHeight).x, (float) (GetUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));
+		g2d.drawString(text.Get(), getUIPosition(screenWidth, screenHeight).x, (float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));
 	}
 	
 	public void SetFont(Font font) {
@@ -56,10 +56,10 @@ public class GUIText extends GUIObject {
 	}
 	
 	@Override
-	public Vector3 GetPosition() {
+	public Vector3 getPosition() {
 		return position.subtract(new Vector3(
-				GetScale().x * anchorPoint.x + localPosition.x,
-				GetScale().y * anchorPoint.y + localPosition.y
+				getScale().x * anchorPoint.x + localPosition.x,
+				getScale().y * anchorPoint.y + localPosition.y
 				));
 	}
 	
@@ -80,7 +80,7 @@ public class GUIText extends GUIObject {
 	}
 	
 	@Override
-	public Vector3 GetScale() {		
+	public Vector3 getScale() {		
 		return size;
 	}
 

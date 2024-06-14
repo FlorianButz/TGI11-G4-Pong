@@ -62,47 +62,49 @@ public class GUIToggle extends GUIObject {
 	public void OnAddToScene() {
 		super.OnAddToScene();
 
-		source = new AudioSource(this).SetSpacial(false);
-		SceneManager.GetActiveScene().addObject(source);
+		source = new AudioSource(this).setSpacial(false);
+		SceneManager.getActiveScene().addObject(source);
 	}
 
 	float checkDownscaleFactor = 2.5f;
 	float checkmarkPosX = -1;
 
+	int limitDecimalPlaces = 2;
+	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.Draw(g2d, screenWidth, screenHeight);
 
 		g2d.setColor(currentColor);
-		g2d.fillRect((int) GetUIPosition(screenWidth, screenHeight).x, (int) GetUIPosition(screenWidth, screenHeight).y,
-				(int) GetScale().x, (int) GetScale().y);
+		g2d.fillRect((int) getUIPosition(screenWidth, screenHeight).x, (int) getUIPosition(screenWidth, screenHeight).y,
+				(int) getScale().x, (int) getScale().y);
 
 		g2d.setStroke(new BasicStroke(4));
 		g2d.setColor(normalColor);
-		g2d.drawRect((int) GetUIPosition(screenWidth, screenHeight).x, (int) GetUIPosition(screenWidth, screenHeight).y,
-				(int) GetScale().x, (int) GetScale().y);
+		g2d.drawRect((int) getUIPosition(screenWidth, screenHeight).x, (int) getUIPosition(screenWidth, screenHeight).y,
+				(int) getScale().x, (int) getScale().y);
 
 		int sX = (int) (size.x / checkDownscaleFactor);
 		int sY = (int) (size.y / (checkDownscaleFactor / 2));
-		int pX = (int) (GetUIPosition(screenWidth, screenHeight).x + GetScale().x - sX * 1.1f);
+		int pX = (int) (getUIPosition(screenWidth, screenHeight).x + getScale().x - sX * 1.1f);
 		if (!isOn)
-			pX = (int) (GetUIPosition(screenWidth, screenHeight).x + sX * 0.1f);
-		int pY = (int) (GetUIPosition(screenWidth, screenHeight).y + (GetScale().y / 2) - sY / 2);
+			pX = (int) (getUIPosition(screenWidth, screenHeight).x + sX * 0.1f);
+		int pY = (int) (getUIPosition(screenWidth, screenHeight).y + (getScale().y / 2) - sY / 2);
 
 		if (checkmarkPosX == -1)
 			checkmarkPosX = pX;
-		checkmarkPosX = GameMath.Lerp(checkmarkPosX, pX, 6f / Draw.GetFramesPerSecond());
+		checkmarkPosX = GameMath.limitDecimalPoints(GameMath.Lerp(checkmarkPosX, pX, 25f / Draw.GetFramesPerSecond()), limitDecimalPlaces);
 
 		g2d.setFont(Resources.uiFont.deriveFont(0.75F * size.y));
 		Rectangle2D bounds = g2d.getFontMetrics(g2d.getFont()).getStringBounds("String", g2d);
 		if (isOn)
 			g2d.drawString(Translation.get("settings.on").Get(),
-					GetUIPosition(screenWidth, screenHeight).x + GetScale().x + 35,
-					(float) (GetUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
+					getUIPosition(screenWidth, screenHeight).x + getScale().x + 35,
+					(float) (getUIPosition(screenWidth, screenHeight).y + size.y / 3 + bounds.getHeight() / 2));
 		else
 			g2d.drawString(Translation.get("settings.off").Get(),
-					GetUIPosition(screenWidth, screenHeight).x + size.x + 35,
-					(float) (GetUIPosition(screenWidth, screenHeight).y + GetScale().y / 3 + bounds.getHeight() / 2));
+					getUIPosition(screenWidth, screenHeight).x + size.x + 35,
+					(float) (getUIPosition(screenWidth, screenHeight).y + getScale().y / 3 + bounds.getHeight() / 2));
 
 		g2d.setColor(currentCheckmarkColor);
 		g2d.fillRect((int) checkmarkPosX, pY, sX, sY);
@@ -111,19 +113,20 @@ public class GUIToggle extends GUIObject {
 		float fps = Draw.GetFramesPerSecond();
 
 		if (this.isHovering) {
-			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
-			currentCheckmarkColor = GameMath.LerpColor(currentCheckmarkColor, hoverCheckmarkColor,
+			currentColor = GameMath.lerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
+			currentCheckmarkColor = GameMath.lerpColor(currentCheckmarkColor, hoverCheckmarkColor,
 					colorTransitionSmoothing / fps);
 
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth,
-					sizeTransitionSmoothing / fps);
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth,
+					sizeTransitionSmoothing / fps), limitDecimalPlaces);
 		} else {
 
-			currentColor = GameMath.LerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
-			currentCheckmarkColor = GameMath.LerpColor(currentCheckmarkColor, normalCheckmarkColor,
+			currentColor = GameMath.lerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
+			currentCheckmarkColor = GameMath.lerpColor(currentCheckmarkColor, normalCheckmarkColor,
 					colorTransitionSmoothing / fps);
-
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps);
+			
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth,
+					sizeTransitionSmoothing / fps), limitDecimalPlaces);
 		}
 	}
 
@@ -142,7 +145,7 @@ public class GUIToggle extends GUIObject {
 		currentColor = normalColor;
 		currentCheckmarkColor = normalCheckmarkColor;
 
-		SceneManager.GetActiveScene().ShakeCamera(60, 2, 45);
+		SceneManager.getActiveScene().ShakeCamera(60, 2, 45);
 		event.ButtonClick();
 
 		event.isMouseDown = true;
@@ -156,7 +159,7 @@ public class GUIToggle extends GUIObject {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		SceneManager.GetActiveScene().destroyObject(source);
+		SceneManager.getActiveScene().destroyObject(source);
 	}
 
 	@Override

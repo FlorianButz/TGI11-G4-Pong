@@ -9,6 +9,7 @@ import de.demoncore.game.Translation;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongEndScreen;
+import de.demoncore.gameObjects.PongLatiku;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gameObjects.PongPlayerAI;
 import de.demoncore.gui.GUIText;
@@ -34,7 +35,9 @@ public class OnePlayerPong extends BaseScene {
 		PointSystem.Initialize();
 
 		addObject(new PauseMenu());
+		addObject(new PongLatiku());
 
+		
 		player1 = new PongPlayer(0, 0);
 		addObject(player1);
 
@@ -45,6 +48,8 @@ public class OnePlayerPong extends BaseScene {
 		ball = new PongBall(0, 0, player1, player2);
 		addObject(ball);
 
+		onTop(ball);
+		
 		points = new GUIText(0, 100, Translation.literal(PointSystem.getPlayer1Points() + "   |   " + PointSystem.getPlayer2Points()), Resources.uiFont.deriveFont(65F), Color.white);
 		addObject(points);
 
@@ -86,12 +91,12 @@ public class OnePlayerPong extends BaseScene {
 
 		//ball.speed = ogSpeed + (PointSystem.getPlayer1Points() + PointSystem.getPlayer2Points() / 2);
 		
-		Vector3 pos = player1.GetRawPosition();
+		Vector3 pos = player1.getRawPosition();
 		pos.x = -Gui.GetScreenDimensions().x / 2 + (Gui.GetScreenDimensions().x / 15);
-		player1.SetPosition(pos);
+		player1.setPosition(pos);
 
-		Vector3 pos2 = player2.GetRawPosition();
+		Vector3 pos2 = player2.getRawPosition();
 		pos2.x = Gui.GetScreenDimensions().x / 2 - (Gui.GetScreenDimensions().x / 15);
-		player2.SetPosition(pos2);
+		player2.setPosition(pos2);
 	}
 }

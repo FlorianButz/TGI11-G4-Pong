@@ -54,7 +54,7 @@ public class Dungeon extends BaseScene {
 	public void updateScene() {
 		super.updateScene();
 		
-		cameraPosition = Vector3.Lerp(cameraPosition, player.GetPosition(), 0.065f);
+		cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.065f);
 	}
 	
 	public long seed;
@@ -109,7 +109,7 @@ public class Dungeon extends BaseScene {
 				do {
 					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
-				player.SetPosition(Vector3.zero().subtract(Vector3.one().multiply(dungeonSize * 2).subtract(Vector3.one().multiply(15))));
+				player.setPosition(Vector3.zero().subtract(Vector3.one().multiply(dungeonSize * 2).subtract(Vector3.one().multiply(15))));
 			}
 		};
 		gen.start();

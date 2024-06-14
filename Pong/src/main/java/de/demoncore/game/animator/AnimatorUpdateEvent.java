@@ -6,15 +6,15 @@ import de.demoncore.sprites.Sprite;
 import de.demoncore.utils.Vector3;
 
 public abstract class AnimatorUpdateEvent {
-	public void OnUpdate(Vector3 value) {
+	public void onUpdate(Vector3 value) {
 		
 	}
 	
-	public void OnUpdate(Color value) {
+	public void onUpdate(Color value) {
 		
 	}
 	
-	public void OnUpdate(Sprite value) {
+	public void onUpdate(Sprite value) {
 		
 	}
 }

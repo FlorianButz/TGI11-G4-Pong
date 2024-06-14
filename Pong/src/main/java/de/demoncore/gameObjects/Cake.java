@@ -12,21 +12,21 @@ public class Cake extends SpriteObject {
 		super(posX, posY, 50, 50, Resources.cake);
 		collisionEnabled = false;
 		
-		interaction = new InteractableObject(posX, posY, 175, 175, StorymodePlayer.GetPlayerInstance(), new InteractEvent() {
+		interaction = new InteractableObject(posX, posY, 175, 175, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
 		@Override
 		public void OnInteract() {
 			super.OnInteract();
-			StorymodePlayer.GetPlayerInstance().health.Heal(1);
+			StorymodePlayer.getPlayerInstance().health.Heal(1);
 			Destroy();
 		}
 		});
 		interaction.interactionString = "Eat Cake";
 		
-		SceneManager.GetActiveScene().addObject(interaction);
+		SceneManager.getActiveScene().addObject(interaction);
 	}
 	
 	void Destroy() {
-		SceneManager.GetActiveScene().destroyObject(this);
-		SceneManager.GetActiveScene().destroyObject(interaction);
+		SceneManager.getActiveScene().destroyObject(this);
+		SceneManager.getActiveScene().destroyObject(interaction);
 	}
 }

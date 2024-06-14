@@ -14,7 +14,7 @@ public class GUIRectangle extends GUIObject {
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.Draw(g2d, screenWidth, screenHeight);
 		
-		g2d.fillRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)GetScale().x, (int)GetScale().y);
+		g2d.fillRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)getScale().x, (int)getScale().y);
 	}
 	
 }

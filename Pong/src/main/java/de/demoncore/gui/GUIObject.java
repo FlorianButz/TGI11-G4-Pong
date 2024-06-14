@@ -11,6 +11,7 @@ import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class GUIObject extends GameObject {
@@ -48,7 +49,7 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
-	public Vector3 GetScale() {
+	public Vector3 getScale() {
 		return size;
 	}
 	
@@ -59,39 +60,39 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
-	public Vector3 GetPosition() {	// Gibt die korrekte Position vom GameObject zurück
+	public Vector3 getPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position.subtract(new Vector3(
-				GetScale().x * anchorPoint.x + localPosition.x,
-				GetScale().y * anchorPoint.y + localPosition.y
+				getScale().x * anchorPoint.x + localPosition.x,
+				getScale().y * anchorPoint.y + localPosition.y
 				));
 	}
 	
-	public Vector3 GetUIPosition(int screenWidth, int screenHeight) {
+	public Vector3 getUIPosition(int screenWidth, int screenHeight) {
 		
 		switch(alignment)
 		{
 		
 		case Center:
-			return new Vector3(screenWidth / 2, screenHeight / 2).add(GetPosition());
+			return new Vector3(screenWidth / 2, screenHeight / 2).add(getPosition());
 			
 		case TopLeft:
-			return new Vector3(0, 0).add(GetPosition());
+			return new Vector3(0, 0).add(getPosition());
 		case TopMiddle:
-			return new Vector3(screenWidth / 2, 0).add(GetPosition());
+			return new Vector3(screenWidth / 2, 0).add(getPosition());
 		case TopRight:
-			return new Vector3(screenWidth / 2, screenHeight / 2).add(GetPosition());
+			return new Vector3(screenWidth / 2, screenHeight / 2).add(getPosition());
 			
 		case MiddleLeft:
-			return new Vector3(0, screenHeight / 2).add(GetPosition());
+			return new Vector3(0, screenHeight / 2).add(getPosition());
 		case MiddleRight:
-			return new Vector3(screenWidth, screenHeight / 2).add(GetPosition());
+			return new Vector3(screenWidth, screenHeight / 2).add(getPosition());
 			
 		case DownLeft:
-			return new Vector3(0, screenHeight).add(GetPosition());
+			return new Vector3(0, screenHeight).add(getPosition());
 		case DownMiddle:
-			return new Vector3(screenWidth / 2, screenHeight).add(GetPosition());
+			return new Vector3(screenWidth / 2, screenHeight).add(getPosition());
 		case DownRight:
-			return new Vector3(screenWidth, screenHeight).add(GetPosition());
+			return new Vector3(screenWidth, screenHeight).add(getPosition());
 			
 		}
 		
@@ -103,10 +104,10 @@ public class GUIObject extends GameObject {
 	public void MouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
+			for(GameObject o : SceneManager.getActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
-						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o))
+						if(SceneManager.getActiveScene().getSceneObjects().indexOf(this) < SceneManager.getActiveScene().getSceneObjects().indexOf(o))
 							if(o.enableRendering) return;
 					}
 				}
@@ -119,10 +120,10 @@ public class GUIObject extends GameObject {
 	public void MouseUp(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
+			for(GameObject o : SceneManager.getActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
-						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o)) {
+						if(SceneManager.getActiveScene().getSceneObjects().indexOf(this) < SceneManager.getActiveScene().getSceneObjects().indexOf(o)) {
 							if(o.enableRendering) return;
 						}
 					}
@@ -214,7 +215,7 @@ public class GUIObject extends GameObject {
 	}
 	
 	public boolean CheckIntersection(int x, int y) {
-		Vector3 screenPos = this.GetUIPosition(
+		Vector3 screenPos = this.getUIPosition(
 				(int)Gui.GetScreenDimensions().x,
 				(int)Gui.GetScreenDimensions().y
 				);
@@ -224,8 +225,8 @@ public class GUIObject extends GameObject {
 		Rectangle r1 = new Rectangle(
 				(int)(screenPos.x),
 				(int)(screenPos.y),
-				(int)(this.GetScale().x * Settings.getUIScale()),
-				(int)(this.GetScale().y * Settings.getUIScale()));
+				(int)(this.getScale().x * Settings.getUIScale()),
+				(int)(this.getScale().y * Settings.getUIScale()));
 		
 		Rectangle r2 = new Rectangle(x, y, 15, 15);
 		return r1.intersects(r2);
@@ -241,13 +242,13 @@ public class GUIObject extends GameObject {
 				(int)(MouseInfo.getPointerInfo().getLocation().getX() - Gui.GetScreenLocation().x),
 				(int)(MouseInfo.getPointerInfo().getLocation().getY()  - Gui.GetScreenLocation().y))) {
 			
-			for(GameObject o : SceneManager.GetActiveScene().getSceneObjects()) {
+			for(GameObject o : SceneManager.getActiveScene().getSceneObjects()) {
 				if(o instanceof GUIObject) {
 					if(((GUIObject)o).CheckIntersection(
 							(int)MouseInfo.getPointerInfo().getLocation().getX(),
 							(int)MouseInfo.getPointerInfo().getLocation().getY())) {
 						
-						if(SceneManager.GetActiveScene().getSceneObjects().indexOf(this) < SceneManager.GetActiveScene().getSceneObjects().indexOf(o)) {
+						if(SceneManager.getActiveScene().getSceneObjects().indexOf(this) < SceneManager.getActiveScene().getSceneObjects().indexOf(o)) {
 							if(o.enableRendering) {
 								OnMouseStopHoverOverUIObject();
 								return;
@@ -268,9 +269,10 @@ public class GUIObject extends GameObject {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);
-
+		
 		CheckHover();
 	}
+
 	
 	@Override
 	public boolean CheckDistanceCulled(Rectangle viewport) {

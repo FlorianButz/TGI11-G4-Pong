@@ -35,18 +35,18 @@ public class GameObject {
 		isInScene = true;
 	}
 	
-	public Vector3 GetPosition() {	// Gibt die korrekte Position vom GameObject zurück
+	public Vector3 getPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position.subtract(new Vector3(
 				size.x * anchorPoint.x + localPosition.x,
 				size.y * anchorPoint.y + localPosition.y
 				));
 	}
 	
-	public Vector3 GetRawPosition() {	// Gibt die korrekte Position vom GameObject zurück
+	public Vector3 getRawPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position;
 	}
 	
-	public void SetPosition(Vector3 position) {
+	public void setPosition(Vector3 position) {
 		this.position = position;
 	}
 	
@@ -62,7 +62,7 @@ public class GameObject {
 		this.size = scale;
 	}
 	
-	public Vector3 GetScale() {
+	public Vector3 getScale() {
 		return size;
 	}
 	
@@ -88,7 +88,7 @@ public class GameObject {
 	}
 	
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		Vector3 worldPos = GetPosition();
+		Vector3 worldPos = getPosition();
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 	}

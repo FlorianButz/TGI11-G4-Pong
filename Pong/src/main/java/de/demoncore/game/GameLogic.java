@@ -11,7 +11,7 @@ public class GameLogic {
 	
 	private static boolean isGamePaused = false;
 	
-	public static GameLogic GetInstance() {
+	public static GameLogic getInstance() {
 		return _instance;
 	}
 	
@@ -38,8 +38,8 @@ public class GameLogic {
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
 				
-				if(SceneManager.GetActiveScene() != null) 
-					AudioMaster.SetListener(SceneManager.GetActiveScene().cameraPosition);
+				if(SceneManager.getActiveScene() != null) 
+					AudioMaster.SetListener(SceneManager.getActiveScene().cameraPosition);
 				
 				accurateTps = 1000000000.0 / (System.nanoTime() - accurateLastTime);
 				accurateLastTime = System.nanoTime();
@@ -69,7 +69,7 @@ public class GameLogic {
 		return isGamePaused;
 	}
 	
-	public float GetGameTime() {
+	public float getGameTime() {
 		return gameTime;
 	}
 	

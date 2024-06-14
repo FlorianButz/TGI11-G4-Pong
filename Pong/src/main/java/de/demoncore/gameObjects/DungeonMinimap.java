@@ -33,8 +33,8 @@ public class DungeonMinimap extends GUIObject {
 		g2d.setColor(new Color(0.25f, 0.25f, 0.25f, 0.25f));
 		
 		Rectangle viewRect = new Rectangle(
-				(int)GetUIPosition(screenWidth, screenHeight).x - (250) / 2,
-				(int)GetUIPosition(screenWidth, screenHeight).y - (250) / 2,
+				(int)getUIPosition(screenWidth, screenHeight).x - (250) / 2,
+				(int)getUIPosition(screenWidth, screenHeight).y - (250) / 2,
 				250,
 				250);
 		
@@ -51,23 +51,23 @@ public class DungeonMinimap extends GUIObject {
 			for(GameObject gObj : gArr) {
 				if(gObj == null) continue;
 
-				float viewOffX = player.GetPosition().x;
-				float viewOffY = player.GetPosition().y;
+				float viewOffX = player.getPosition().x;
+				float viewOffY = player.getPosition().y;
 				
 				g2d.setColor(Color.white);
 				
 				g2d.drawRect(
-						(int)GetUIPosition(screenWidth, screenHeight).x + (int)(((gObj.GetPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
-						(int)GetUIPosition(screenWidth, screenHeight).y + (int)(((gObj.GetPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)getUIPosition(screenWidth, screenHeight).x + (int)(((gObj.getPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)getUIPosition(screenWidth, screenHeight).y + (int)(((gObj.getPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
 						40,
 						40);
 
 				g2d.setColor(new Color(1, 1, 1,
-					GameMath.Clamp(GameMath.RemapValue(Vector3.Distance(gObj.GetPosition().add(gObj.size.multiply(0.5f)), player.GetPosition()), 0, 1500, 1, 0), 0, 1)));
+					GameMath.clamp(GameMath.RemapValue(Vector3.Distance(gObj.getPosition().add(gObj.size.multiply(0.5f)), player.getPosition()), 0, 1500, 1, 0), 0, 1)));
 				
 				g2d.fillRect(
-						(int)GetUIPosition(screenWidth, screenHeight).x + (int)(((gObj.GetPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
-						(int)GetUIPosition(screenWidth, screenHeight).y + (int)(((gObj.GetPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)getUIPosition(screenWidth, screenHeight).x + (int)(((gObj.getPosition().x - viewOffX) / (float)dungeonSettings.dungeonSize) * 45),
+						(int)getUIPosition(screenWidth, screenHeight).y + (int)(((gObj.getPosition().y - viewOffY) / (float)dungeonSettings.dungeonSize) * 45),
 						40,
 						40);
 			}
@@ -76,8 +76,8 @@ public class DungeonMinimap extends GUIObject {
 		g2d.setColor(Color.yellow);
 		
 		g2d.fillOval(
-				(int)GetUIPosition(screenWidth, screenHeight).x - (5) / 2,
-				(int)GetUIPosition(screenWidth, screenHeight).y - (5) / 2,
+				(int)getUIPosition(screenWidth, screenHeight).x - (5) / 2,
+				(int)getUIPosition(screenWidth, screenHeight).y - (5) / 2,
 				5,
 				5);
 		

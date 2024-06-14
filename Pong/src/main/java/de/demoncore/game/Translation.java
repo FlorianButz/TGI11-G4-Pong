@@ -63,6 +63,9 @@ public class Translation {
 
 		germanTranslation.put("settings.pedals.fast", "Schnell");
 		englishTranslation.put("settings.pedals.fast", "Fast");
+		
+		germanTranslation.put("settings.smallgui", "Kleine GUI");
+		englishTranslation.put("settings.smallgui", "Small GUI");
 
 		
 		germanTranslation.put("mainmenu.singleplayer", "1 Spieler");

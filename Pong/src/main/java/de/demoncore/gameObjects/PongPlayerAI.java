@@ -6,7 +6,7 @@ import de.demoncore.utils.Vector3;
 
 public class PongPlayerAI extends PongPlayer {
 
-	public float difficulty = 0.55f; // Nur werte zwischen 0 und 1
+	public float difficulty = 0.65f; // Nur werte zwischen 0 und 1
 	
 	private float aiStupidity = 3.5f; // Je hoeher der wert, desto duemmer ist die AI
 	
@@ -14,7 +14,7 @@ public class PongPlayerAI extends PongPlayer {
 		super(posX, posY);
 
 		playerControlsEnabled = false;
-		playerAcceleration = 15;
+		playerAcceleration = 1;
 		friction = 0.95f;
 	
 		aiStupidity = GameMath.Lerp(3, 0.2f, difficulty);
@@ -29,7 +29,7 @@ public class PongPlayerAI extends PongPlayer {
 	@Override
 	public void update() {
 		if(GameLogic.IsGamePaused()) return;
-
+		
 		if(counter >= 35) {
 			counter = 0;
 			randFactor = (int)(((100 * aiStupidity * Math.random())) - 50 * aiStupidity);
@@ -37,32 +37,33 @@ public class PongPlayerAI extends PongPlayer {
 		counter++;
 		
 		Vector3 speed = Vector3.zero();
-		int ballY = (int) (PongBall.getInstance().GetPosition().y + randFactor);
+		int ballY = (int) (PongBall.getInstance().getPosition().y + randFactor);
 
 		Vector3 pPos = new Vector3(0, position.y);
 		Vector3 bPos = new Vector3(0, ballY);
 		float velMulti = Vector3.Distance(pPos, bPos);
 
-		if(lastPongBallPos.x < PongBall.getInstance().GetPosition().x) {
-			if(ballY >= GetPosition().y + size.y / 2)
+		if(lastPongBallPos.x < PongBall.getInstance().getPosition().x) {
+			if(ballY >= getPosition().y + size.y / 2)
 				speed = new Vector3(0, (playerAcceleration * (velMulti / 100)) * (float)(Math.random() / 2 + 0.5), 0);
 			else
 				speed = new Vector3(0, (-playerAcceleration * (velMulti / 100)) * (float)(Math.random() / 2 + 0.5), 0);
 
 			AddForce(speed);
 		}else {
-			if(-75 > GetPosition().y + size.y / 2) {
+			if(-75 > getPosition().y + size.y / 2) {
 				speed = new Vector3(0, (2 + playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
 				AddForce(speed);
-			}else if(75 < GetPosition().y + size.y / 2) {
+			}else if(75 < getPosition().y + size.y / 2) {
 				speed = new Vector3(0, (-2 + -playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
 				AddForce(speed);				
 			}
 		}
+		
 
-		lastPongBallPos = PongBall.getInstance().GetPosition();
+		lastPongBallPos = PongBall.getInstance().getPosition();
 		
 		super.update();
 	}

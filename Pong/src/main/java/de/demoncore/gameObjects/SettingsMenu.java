@@ -55,7 +55,7 @@ public class SettingsMenu extends GUIMenu {
 	float speedIncrement = 0.0065f;
 	
 	@Override
-	public List<GUIObject> AddMenuContent() {
+	public List<GUIObject> addMenuContent() {
 		
 		List<GUIObject> content = new ArrayList<GUIObject>();
 
@@ -260,10 +260,7 @@ public class SettingsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				Logger.logInfo("" + Settings.isCameraShake());
 				Settings.setCameraShake(!Settings.isCameraShake());
-				Logger.logInfo("CS");
-				Logger.logInfo("" + Settings.isCameraShake());
 			}
 		});
 		toggleCameraShake.SetIsOn(Settings.isCameraShake());
@@ -281,7 +278,6 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonClick();
 
 				Settings.setParticleEffects(!Settings.isParticleEffects());
-				Logger.logInfo("TP");
 			}
 		});
 		toggleParticleEffectsText.SetIsOn(Settings.isParticleEffects());
@@ -304,6 +300,23 @@ public class SettingsMenu extends GUIMenu {
 		togglePedalSpeed.alignment = GUIAlignment.Center;
 		content.add(togglePedalSpeed);
 		
+		GUIText smallGuiText = new GUIText(-450, buttonHeight * 5 + spacing * 9 + startPos, Translation.get("settings.smallgui"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		smallGuiText.alignment = GUIAlignment.Center;
+		smallGuiText.SetTextAlignment(TextAlignment.Left);
+		content.add(smallGuiText);
+		
+		GUIToggle smallGuiToggle = new GUIToggle(250, buttonHeight * 5 + spacing * 9 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+
+				Settings.setSmallGui(!Settings.isSmallGui());
+			}
+		});
+		smallGuiToggle.SetIsOn(Settings.isSmallGui());
+		smallGuiToggle.alignment = GUIAlignment.Center;
+		content.add(smallGuiToggle);
+		
 		GUITheme.LoadTextTheme(debugModeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeDisplay, Theme.TextSecondary);
@@ -314,6 +327,7 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadTextTheme(cameraShakeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(particleEffectsText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(pedalSpeedText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(smallGuiText, Theme.TextSecondary);
 
 		GUITheme.LoadButtonTheme(volumeDown, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(volumeUp, Theme.ButtonSecondary);
@@ -325,6 +339,7 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadButtonTheme(toggleCameraShake, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleParticleEffectsText, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(togglePedalSpeed, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(smallGuiToggle, Theme.ButtonSecondary);
 		
 		return content;
 	}
@@ -344,7 +359,7 @@ public class SettingsMenu extends GUIMenu {
 	}
 	
 	@Override
-	protected GUIButton CreateBackButton() {
+	protected GUIButton createBackButton() {
 		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {

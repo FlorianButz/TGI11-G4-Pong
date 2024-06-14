@@ -67,24 +67,26 @@ public class GUIButton extends GUIObject {
 	public void OnAddToScene() {
 		super.OnAddToScene();
 
-		source = new AudioSource(this).SetSpacial(false);
-		SceneManager.GetActiveScene().addObject(source);
+		source = new AudioSource(this).setSpacial(false);
+		SceneManager.getActiveScene().addObject(source);
 	}
 	
 	public void SetText(TranslationComponent text) {
 		this.text = text;
 	}
 	
+	int limitDecimalPlace = 2;
+	
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.Draw(g2d, screenWidth, screenHeight);
 
 		g2d.setColor(currentColor);
-		g2d.fillRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
+		g2d.fillRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 		
 		g2d.setStroke(new BasicStroke(4));
 		g2d.setColor(normalColor);
-		g2d.drawRect((int)GetUIPosition(screenWidth, screenHeight).x, (int)GetUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
+		g2d.drawRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)size.x, (int)size.y);
 		
 		g2d.setFont(font.deriveFont(textCurrentSize));
 		g2d.setColor(currentTextColor);
@@ -92,28 +94,28 @@ public class GUIButton extends GUIObject {
 		this.size.x = currentButtonWidth;
 		
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
-		g2d.drawString(text.Get(), (int)(GetUIPosition(screenWidth, screenHeight).x + this.GetScale().x / 2 - bounds.getWidth() / 2),
-				(int)(GetUIPosition(screenWidth, screenHeight).y + this.GetScale().y / 2 +  textCurrentSize / 3)
+		g2d.drawString(text.Get(), (int)(getUIPosition(screenWidth, screenHeight).x + this.getScale().x / 2 - bounds.getWidth() / 2),
+				(int)(getUIPosition(screenWidth, screenHeight).y + this.getScale().y / 2 +  textCurrentSize / 3)
 				);
 		
 		float fps = Draw.GetFramesPerSecond();
 		
 		if(this.isHovering) {
-			currentColor = GameMath.LerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
-			currentTextColor = GameMath.LerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
+			currentColor = GameMath.lerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.lerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
 		
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize + textHoverSize, sizeTransitionSmoothing / fps);
+			textCurrentSize = GameMath.limitDecimalPoints(GameMath.Lerp(textCurrentSize, textNormalSize + textHoverSize, sizeTransitionSmoothing / fps), limitDecimalPlace);
 
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing / fps);
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing / fps), limitDecimalPlace);
 		}
 		else {
 			
-			currentColor = GameMath.LerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
-			currentTextColor = GameMath.LerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
+			currentColor = GameMath.lerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
+			currentTextColor = GameMath.lerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
 	
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps);
+			textCurrentSize = GameMath.limitDecimalPoints(GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps), limitDecimalPlace);
 
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps);
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps), limitDecimalPlace);
 		}
 	}
 	
@@ -132,7 +134,7 @@ public class GUIButton extends GUIObject {
 		currentColor = normalColor;
 		currentTextColor = normalTextColor;
 		
-		SceneManager.GetActiveScene().ShakeCamera(60, 2, 45);
+		SceneManager.getActiveScene().ShakeCamera(60, 2, 45);
 		event.ButtonClick();
 		
 		event.isMouseDown = true;
@@ -144,7 +146,7 @@ public class GUIButton extends GUIObject {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		SceneManager.GetActiveScene().destroyObject(source);
+		SceneManager.getActiveScene().destroyObject(source);
 	}
 	
 	@Override

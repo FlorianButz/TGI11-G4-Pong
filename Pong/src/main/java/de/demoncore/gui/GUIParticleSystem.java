@@ -69,7 +69,7 @@ public class GUIParticleSystem extends GUIObject {
 		int pCount = initialParticleEmitCount + GameMath.RandomRange(0, initialParticleEmitCountRandom);
 		particles = new ArrayList<Particle>(pCount);
 		
-		particleSystemTimeStart = GameLogic.GetInstance().gameTime;
+		particleSystemTimeStart = GameLogic.getInstance().gameTime;
 		
 		for(int i = 0; i < pCount; i++) {
 			AddParticle();
@@ -99,10 +99,10 @@ public class GUIParticleSystem extends GUIObject {
 				GameMath.RandomRange(-particleSpawnArea.x, particleSpawnArea.x),
 				GameMath.RandomRange(-particleSpawnArea.y, particleSpawnArea.y)
 				);
-		p.position = p.position.add(randomSpawnPosition).add(this.GetUIPosition(sw, sh));
+		p.position = p.position.add(randomSpawnPosition).add(this.getUIPosition(sw, sh));
 
 		float randomColorValue = GameMath.RandomRange(0f, 1f);
-		p.startColor = GameMath.LerpColor(particleColorFirst, particleColorSecond, randomColorValue);
+		p.startColor = GameMath.lerpColor(particleColorFirst, particleColorSecond, randomColorValue);
 
 		p.rotation = GameMath.RandomRange(0, 90);
 		
@@ -116,7 +116,7 @@ public class GUIParticleSystem extends GUIObject {
 		super.update();
 		
 		if(GameLogic.IsGamePaused() || hasInitialized == false) return;
-		particleSystemTime = GameLogic.GetInstance().gameTime - particleSystemTimeStart;
+		particleSystemTime = GameLogic.getInstance().gameTime - particleSystemTimeStart;
 
 		if(emitLoop && !isStoppedByCull) {			
 			if(emitTime >= emitPause) {
@@ -141,7 +141,7 @@ public class GUIParticleSystem extends GUIObject {
 
 			p.velocity = vel;
 			
-			p.color = GameMath.LerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
+			p.color = GameMath.lerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
 			p.size = Vector3.one().multiply(GameMath.Lerp(initialParticleSize, endParticleSize, (float)p.currentLifetime / (float)p.maxLifetime));
 
 			if(p.currentLifetime >= p.maxLifetime) {
@@ -166,7 +166,7 @@ public class GUIParticleSystem extends GUIObject {
 			Vector3 worldPos = p.position;
 			
 			if(Settings.getDebugMode()) {
-				g2d.setColor(GameMath.LerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
+				g2d.setColor(GameMath.lerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
 				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
 			}
 			

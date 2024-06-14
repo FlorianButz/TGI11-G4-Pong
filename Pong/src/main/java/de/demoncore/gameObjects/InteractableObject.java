@@ -69,13 +69,13 @@ public class InteractableObject extends GameObject {
 		if(player.GetBoundingBox().intersects(GetBoundingBox())) {
 			g2d.setColor(textColor);
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
-			g2d.drawString(Translation.get("interactable.interact").Get(), GetPosition().x + 15, GetPosition().y - 15);
+			g2d.drawString(Translation.get("interactable.interact").Get(), getPosition().x + 15, getPosition().y - 15);
 			g2d.setFont(Resources.uiFont.deriveFont(20F));
 
 			if(interactionString != null) {
 				TranslationComponent c = Translation.get(interactionString);
 				c.isLiteral = true;
-				g2d.drawString(c.Get(), GetPosition().x + 15, GetPosition().y + 20);
+				g2d.drawString(c.Get(), getPosition().x + 15, getPosition().y + 20);
 			}
 		}
 	}
@@ -84,6 +84,6 @@ public class InteractableObject extends GameObject {
 	public void update() {
 		super.update();
 
-		textColor = GameMath.LerpColor(textColor, defTextCol, 0.1f);
+		textColor = GameMath.lerpColor(textColor, defTextCol, 0.1f);
 	}
 }

@@ -51,11 +51,11 @@ public class MusicManager {
 		if(activeMusic != null) {
 			
 			Vector3Animator volumeAnim = new Vector3Animator(Vector3.one().multiply(originalVolume), Vector3.zero(), 1f, EasingType.Linear);
-			volumeAnim.SetOnUpdate(new AnimatorUpdateEvent() {@Override public void OnUpdate(Vector3 value) { super.OnUpdate(value); AL10.alSourcef(sourceId, AL10.AL_GAIN, value.x); }});
-			volumeAnim.SetOnComplete(new AnimatorOnCompleteEvent() {
+			volumeAnim.setOnUpdate(new AnimatorUpdateEvent() {@Override public void onUpdate(Vector3 value) { super.onUpdate(value); AL10.alSourcef(sourceId, AL10.AL_GAIN, value.x); }});
+			volumeAnim.setOnComplete(new AnimatorOnCompleteEvent() {
 			@Override
-			public void OnComplete() {
-				super.OnComplete();
+			public void onComplete() {
+				super.onComplete();
 				
 				AL10.alSourceStop(sourceId);
 				activeMusic = musicClip;
@@ -63,12 +63,12 @@ public class MusicManager {
 				AL10.alSourcePlay(sourceId);
 				
 				Vector3Animator volumeAnim = new Vector3Animator(Vector3.zero(), Vector3.one().multiply(originalVolume), 1f, EasingType.Linear);
-				volumeAnim.SetOnUpdate(new AnimatorUpdateEvent() {@Override public void OnUpdate(Vector3 value) { super.OnUpdate(value); AL10.alSourcef(sourceId, AL10.AL_GAIN, value.x); }});
-				volumeAnim.Play();
+				volumeAnim.setOnUpdate(new AnimatorUpdateEvent() {@Override public void onUpdate(Vector3 value) { super.onUpdate(value); AL10.alSourcef(sourceId, AL10.AL_GAIN, value.x); }});
+				volumeAnim.play();
 			}
 			});
 			
-			volumeAnim.Play();
+			volumeAnim.play();
 		}else {
 			activeMusic = musicClip;
 			AL10.alSourcei(sourceId, AL10.AL_BUFFER, activeMusic.GetBuffer());

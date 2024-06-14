@@ -45,6 +45,7 @@ public class Resources {
 	public static Sprite playerWalk2;
 	public static Sprite shopIcon;
 	public static Sprite shopHoverIcon;
+	public static Sprite latiku;
 	
 	public static DialogLine testLine;
 	
@@ -126,6 +127,7 @@ public class Resources {
 		playerWalk2 = new Sprite(Main.class.getResourceAsStream("/textures/PlayerWalk3.png")).load();
 		shopIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopIcon.png")).load();
 		shopHoverIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopHoverIcon.png")).load();
+		latiku = new Sprite(Main.class.getResourceAsStream("/textures/PongLatiku.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

@@ -22,7 +22,7 @@ public class SceneManager {
 	
 	private static boolean isInitialized = false;
 	
-	public static BaseScene GetActiveScene(){
+	public static BaseScene getActiveScene(){
 		CheckForInit();
 		return activeScene;
 	}
@@ -48,7 +48,7 @@ public class SceneManager {
 	}
 	
 	public static void LoadScene(BaseScene scene) {
-		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(GetActiveScene().getSceneObjects());
+		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(getActiveScene().getSceneObjects());
 		
 		GUIRectangle blackScreen = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x * 2, (int)Gui.GetScreenDimensions().y * 2, new Color(0, 0, 0, 0f)); // Level uebergang
 		blackScreen.doUIScale = false;
@@ -56,21 +56,21 @@ public class SceneManager {
 		ColorAnimator fadeIn = new ColorAnimator(Color.black, blackScreen.color, 1f, EasingType.InOutQuint); // Uebergang ein
 		
 		blackScreen.alignment = GUIAlignment.Center;
-		GetActiveScene().addObject(blackScreen);
+		getActiveScene().addObject(blackScreen);
 		
-		fadeOut.SetOnUpdate(new AnimatorUpdateEvent() {
+		fadeOut.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
-		public void OnUpdate(Color value) {
-			super.OnUpdate(value);
+		public void onUpdate(Color value) {
+			super.onUpdate(value);
 			blackScreen.color = value;
 			Draw.screenScale = GameMath.RemapValue((float)value.getAlpha() / 255, 0, 1, 1, 0);
 		}
 		});
 		
-		fadeIn.SetOnUpdate(new AnimatorUpdateEvent() {
+		fadeIn.setOnUpdate(new AnimatorUpdateEvent() {
 			@Override
-			public void OnUpdate(Color value) {
-				super.OnUpdate(value);
+			public void onUpdate(Color value) {
+				super.onUpdate(value);
 				blackScreen.color = value;
 				Draw.screenScale = GameMath.RemapValue((float)value.getAlpha() / 255, 0, 1, 1, 0);
 			}
@@ -78,12 +78,12 @@ public class SceneManager {
 		
 		fadeOut.SetOnComplete(new AnimatorOnCompleteEvent() {
 		@Override
-		public void OnComplete() {
-			super.OnComplete();
+		public void onComplete() {
+			super.onComplete();
 		
 			for(GameObject o : objectsInCurrentScene) {
 				if(o == blackScreen) continue;
-				GetActiveScene().destroyObject(o);
+				getActiveScene().destroyObject(o);
 			}
 			
 			GameLogic.SetGamePaused(false);
@@ -95,7 +95,7 @@ public class SceneManager {
 				PLoadScene(new DefaultScene());
 			}
 			
-			GetActiveScene().addObject(blackScreen);
+			getActiveScene().addObject(blackScreen);
 			
 			fadeIn.Play();
 		}
@@ -103,9 +103,9 @@ public class SceneManager {
 		
 		fadeIn.SetOnComplete(new AnimatorOnCompleteEvent() {
 		@Override
-		public void OnComplete() {
-			super.OnComplete();
-			GetActiveScene().destroyObject(blackScreen);
+		public void onComplete() {
+			super.onComplete();
+			getActiveScene().destroyObject(blackScreen);
 		}
 		});
 		

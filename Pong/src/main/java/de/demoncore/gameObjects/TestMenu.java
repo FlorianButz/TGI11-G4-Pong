@@ -18,7 +18,7 @@ public class TestMenu extends GUIMenu {
 	}
 	
 	@Override
-	protected List<GUIObject> AddMenuContent() {
+	protected List<GUIObject> addMenuContent() {
 		List<GUIObject> content = new ArrayList<GUIObject>();
 		
 		GUIText text = new GUIText(0, 0, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);

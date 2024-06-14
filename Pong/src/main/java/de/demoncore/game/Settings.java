@@ -25,6 +25,7 @@ public class Settings {
 		setParticleEffects(deserializedSettings.particleEffects);
 		setSlowPedals(deserializedSettings.slowPedal);
 		setCameraShake(deserializedSettings.cameraShake);
+		setSmallGui(deserializedSettings.smallGui);
 		
 		AudioMaster.SetMasterVolume(masterVolume / 100f);
 		AudioMaster.SetMusicVolume(musicVolume / 100f);
@@ -42,6 +43,7 @@ public class Settings {
 		classToSave.cameraShake = cameraShake;
 		classToSave.particleEffects = particleEffects;
 		classToSave.slowPedal = slowPedals;
+		classToSave.smallGui = smallGui;
 
 		// Speicherdatei erstellen
 		
@@ -53,14 +55,25 @@ public class Settings {
 	private static float masterVolume;
 	private static float musicVolume;
 	private static boolean fullscreen;
-	
-	private static float uiScale = .5f;
+
+	private static float uiScale = 1f;
+	private static float smallUiScale = 0.5f;
+	private static float uiScaleMultiplier = 0.85f;
 
 	private static boolean debugMode;
 	private static boolean particleEffects;
 	private static boolean cameraShake;
 	private static boolean slowPedals;
+	private static boolean smallGui;
 	
+	public static boolean isSmallGui() {
+		return smallGui;
+	}
+
+	public static void setSmallGui(boolean isOn) {
+		smallGui = isOn;
+	}
+
 	private static Language language = Language.Deutsch;
 	
 	// SET / GET METHODEN
@@ -80,15 +93,16 @@ public class Settings {
 	}
 	
 	public static void setUIScale(float scale) {
-		uiScale = scale;
+		uiScale = scale * uiScaleMultiplier;
+		smallUiScale = (scale / 2f) * uiScaleMultiplier;
 	}
 	
 	public static float getUIScale() {
-		return uiScale;
+		return smallGui ? smallUiScale : uiScale;
 	}
 	
 	public static void setVolume(float newVolume) {
-		masterVolume = GameMath.Clamp(newVolume, 0, 100);
+		masterVolume = GameMath.clamp(newVolume, 0, 100);
 		AudioMaster.SetMasterVolume(newVolume / 100f);
 	}
 	
@@ -97,7 +111,7 @@ public class Settings {
 	}
 
 	public static void setMusicVolume(float newVolume) {
-		musicVolume = GameMath.Clamp(newVolume, 0, 100);
+		musicVolume = GameMath.clamp(newVolume, 0, 100);
 		AudioMaster.SetMusicVolume(newVolume / 100f);
 	}
 	

@@ -80,12 +80,12 @@ public class TwoPlayerPong extends BaseScene {
 	public void updateScene() {
 		super.updateScene();
 
-		Vector3 pos = player1.GetRawPosition();
+		Vector3 pos = player1.getRawPosition();
 		pos.x = -Gui.GetScreenDimensions().x / 2 + (Gui.GetScreenDimensions().x / 15);
-		player1.SetPosition(pos);
+		player1.setPosition(pos);
 
-		Vector3 pos2 = player2.GetRawPosition();
+		Vector3 pos2 = player2.getRawPosition();
 		pos2.x = Gui.GetScreenDimensions().x / 2 - (Gui.GetScreenDimensions().x / 15);
-		player2.SetPosition(pos2);
+		player2.setPosition(pos2);
 	}
 }

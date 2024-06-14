@@ -34,8 +34,8 @@ public class GUITextArea extends GUIText {
 		
 		int counter = 0;
 	    for (String line : newText.split("\n")) {
-	    	g2d.drawString(line, GetUIPosition(screenWidth, screenHeight).x,
-	    			(float) (GetUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+	    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x,
+	    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
 	    	counter++;
 	    }
 	}

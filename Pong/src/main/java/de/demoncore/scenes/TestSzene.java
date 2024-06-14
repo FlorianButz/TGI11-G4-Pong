@@ -36,7 +36,7 @@ public class TestSzene extends BaseScene {
 			public void onInteractionKeyPressed() {
 				super.onInteractionKeyPressed();
 				
-				rotesObjekt.SetPosition(rotesObjekt.GetPosition().add(Vector3.one()));
+				rotesObjekt.setPosition(rotesObjekt.getPosition().add(Vector3.one()));
 				ShakeCamera(50, 2, 2);
 				
 				rotesObjekt.enableRendering = !rotesObjekt.enableRendering;
@@ -48,7 +48,7 @@ public class TestSzene extends BaseScene {
 	public void updateScene() {
 		super.updateScene();
 
-		cameraPosition = Vector3.Lerp(cameraPosition, player.GetPosition(), 0.035f);
+		cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.035f);
 	}
 	
 }

@@ -27,7 +27,7 @@ public class StorymodePlayer extends RigidBody {
 	
 	private static StorymodePlayer instance;
 	
-	public static StorymodePlayer GetPlayerInstance() {
+	public static StorymodePlayer getPlayerInstance() {
 		return instance;
 	}
 	
@@ -38,20 +38,20 @@ public class StorymodePlayer extends RigidBody {
 		health = new GUIHealthbar(65, 85, 45, 6);
 		health.alignment = GUIAlignment.TopLeft;
 	
-		SceneManager.GetActiveScene().addObject(health);
+		SceneManager.getActiveScene().addObject(health);
 	
 		activeImage = Resources.playerIdle;
 		
 		walkAnim = new SpriteAnimator(new Sprite[] {Resources.playerWalk1, Resources.playerIdle, Resources.playerWalk2, Resources.playerIdle}, 0.15f, EasingType.Linear);
 		walkAnim.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
-		public void OnUpdate(Sprite value) {
+		public void onUpdate(Sprite value) {
 			activeImage = value;
 		}
 		});
 		walkAnim.setOnComplete(new AnimatorOnCompleteEvent() {
 		@Override
-		public void OnComplete() {
+		public void onComplete() {
 			activeImage = Resources.playerIdle;
 		}
 		});
@@ -62,7 +62,7 @@ public class StorymodePlayer extends RigidBody {
 	@Override
 	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		if(activeImage != null)
-			g2d.drawImage(activeImage.getTexture(), (int)GetPosition().x, (int)GetPosition().y, (int)GetScale().x, (int)GetScale().y, null);
+			g2d.drawImage(activeImage.getTexture(), (int)getPosition().x, (int)getPosition().y, (int)getScale().x, (int)getScale().y, null);
 	}
 	
 	@Override
@@ -92,7 +92,7 @@ public class StorymodePlayer extends RigidBody {
 			
 			trail.particleLifetime = 25;
 			trail.Init();
-			SceneManager.GetActiveScene().addObject(trail);
+			SceneManager.getActiveScene().addObject(trail);
 		}
 		
 		if(Math.abs(velocity.Magnitude()) >= 0.1) {
@@ -104,9 +104,9 @@ public class StorymodePlayer extends RigidBody {
 			walkAnim.stop();
 		}
 		
-		AddForce(KeyHandler.playerInput1.Normalized().multiply(playerAcceleration));
+		AddForce(KeyHandler.playerInput1.normalized().multiply(playerAcceleration));
 		
-		trail.SetPosition(this.position);
+		trail.setPosition(this.position);
 		
 		super.update();
 	}

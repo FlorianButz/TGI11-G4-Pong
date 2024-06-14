@@ -60,7 +60,7 @@ public class Draw extends JPanel {
 			lastTime = System.currentTimeMillis();
 		}
 		
-		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.GetActiveScene().getSceneObjects());
+		gameObjectsInScene = new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects());
 		Graphics2D g2d = (Graphics2D) g;
 		
 		int screenwidth = (int) Gui.GetScreenDimensions().x;
@@ -97,19 +97,19 @@ public class Draw extends JPanel {
 		
 		// Neuen transform erstellen
 		AffineTransform transformation = new AffineTransform();
-		transformation.rotate(Math.toRadians(SceneManager.GetActiveScene().cameraZRotation),
-				-SceneManager.GetActiveScene().cameraPosition.x + screenwidth / 2,
-				-SceneManager.GetActiveScene().cameraPosition.y + screenheight / 2);
+		transformation.rotate(Math.toRadians(SceneManager.getActiveScene().cameraZRotation),
+				-SceneManager.getActiveScene().cameraPosition.x + screenwidth / 2,
+				-SceneManager.getActiveScene().cameraPosition.y + screenheight / 2);
 		transformation.translate(
-				-SceneManager.GetActiveScene().cameraPosition.x + SceneManager.GetActiveScene().localCameraPosition.x + Gui.GetScreenDimensions().x / 2,
-				-SceneManager.GetActiveScene().cameraPosition.y + SceneManager.GetActiveScene().localCameraPosition.y + Gui.GetScreenDimensions().y / 2);
+				-SceneManager.getActiveScene().cameraPosition.x + SceneManager.getActiveScene().localCameraPosition.x + Gui.GetScreenDimensions().x / 2,
+				-SceneManager.getActiveScene().cameraPosition.y + SceneManager.getActiveScene().localCameraPosition.y + Gui.GetScreenDimensions().y / 2);
 		
 		g2d.transform(transformation);
 		
 		// Maske erstellen
 		
-		if(SceneManager.GetActiveScene() != null) {
-			Rectangle viewport = SceneManager.GetActiveScene().getCameraViewport();
+		if(SceneManager.getActiveScene() != null) {
+			Rectangle viewport = SceneManager.getActiveScene().getCameraViewport();
 			g2d.setClip(viewport);
 		}
 		
@@ -135,12 +135,12 @@ public class Draw extends JPanel {
 				g2d.setColor(new Color(g2d.getColor().getRed(), g2d.getColor().getGreen(), g2d.getColor().getBlue(), 100));
 				
 				g2d.setFont(g2d.getFont().deriveFont(10F));
-				g2d.drawString(currentGameObj.getClass().getSimpleName(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 10);
+				g2d.drawString(currentGameObj.getClass().getSimpleName(), currentGameObj.getPosition().x - 10, currentGameObj.getPosition().y - 10);
 
-				g2d.drawString("Pos: " + currentGameObj.GetPosition().ToString(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 20);
+				g2d.drawString("Pos: " + currentGameObj.getPosition().ToString(), currentGameObj.getPosition().x - 10, currentGameObj.getPosition().y - 20);
 				
 				if(currentGameObj instanceof RigidBody) {
-					g2d.drawString("Vel: " + ((RigidBody)currentGameObj).velocity.ToString(), currentGameObj.GetPosition().x - 10, currentGameObj.GetPosition().y - 30);
+					g2d.drawString("Vel: " + ((RigidBody)currentGameObj).velocity.ToString(), currentGameObj.getPosition().x - 10, currentGameObj.getPosition().y - 30);
 				}
 			}
 			
@@ -151,7 +151,7 @@ public class Draw extends JPanel {
 		}
 		
 		if(Settings.getDebugMode()) {
-			Rectangle viewport = SceneManager.GetActiveScene().getCameraViewport();
+			Rectangle viewport = SceneManager.getActiveScene().getCameraViewport();
 			g2d.setStroke(new BasicStroke(5));
 			g2d.setColor(new Color(1, 1, 0, 0.75f));
 			g2d.drawString("Camera viewport", viewport.x + 10, (int)viewport.getMaxY() - 15);
@@ -319,7 +319,7 @@ public class Draw extends JPanel {
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.drawString("Version -> " + Main.version, 15, 25);
 			g2d.drawString("FPS -> " + fps + " / Inf", 15, 45);
-			g2d.drawString("TPS -> " + GameLogic.GetInstance().GetAverageTps() + " / 63.0", 15, 65);
+			g2d.drawString("TPS -> " + GameLogic.getInstance().GetAverageTps() + " / 63.0", 15, 65);
 			g2d.drawString("Aktive Threads -> " + Thread.activeCount(), 15, 85);
 		}
 
@@ -327,11 +327,11 @@ public class Draw extends JPanel {
 		g2d.setClip(clip);
 		
 		// Mauszeiger anzeigen
-		g2d.setColor(new Color(1, 1, 1, GameMath.Clamp(mouseAlpha, 0, 1)));
+		g2d.setColor(new Color(1, 1, 1, GameMath.clamp(mouseAlpha, 0, 1)));
 		g2d.fillOval((int)(GetMousePos().x  - Gui.GetScreenLocation().x),
 						(int)(GetMousePos().y - Gui.GetScreenLocation().y),
 						11, 11);
-		g2d.setColor(new Color(0, 0, 0, GameMath.Clamp(mouseAlpha, 0, 1)));
+		g2d.setColor(new Color(0, 0, 0, GameMath.clamp(mouseAlpha, 0, 1)));
 		g2d.fillOval((int)(GetMousePos().x  - Gui.GetScreenLocation().x + 3),
 						(int)(GetMousePos().y  - Gui.GetScreenLocation().y + 3),
 						5, 5);

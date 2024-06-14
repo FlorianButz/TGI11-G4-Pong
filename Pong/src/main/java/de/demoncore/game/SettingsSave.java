@@ -13,6 +13,7 @@ public class SettingsSave implements Serializable {
 	public boolean slowPedal = false;
 	public boolean particleEffects = true;
 	public boolean cameraShake = true;
+	public boolean smallGui = true;
 	
 	public Language language;
 	

@@ -61,7 +61,7 @@ public class SpriteAnimator {
                         	
                         	if(isAnimationCancled) {
                                 if(onCompleteEvent != null)
-                                	onCompleteEvent.OnComplete();
+                                	onCompleteEvent.onComplete();
                         		isAnimationCancled = false;
                         		return;
                         	}
@@ -86,7 +86,7 @@ public class SpriteAnimator {
                             int index =(int)GameMath.Lerp(0, values.length, time);
                             value = values[index];
                             if(updateEvent != null && !isAnimationCancled)
-                            	updateEvent.OnUpdate(value);
+                            	updateEvent.onUpdate(value);
                             
                             long endTime = System.currentTimeMillis();
                             long sleepTime = frameDuration - (endTime - startTime);
@@ -98,7 +98,7 @@ public class SpriteAnimator {
                     }
                     
                     if(onCompleteEvent != null)
-                    	onCompleteEvent.OnComplete();
+                    	onCompleteEvent.onComplete();
                     
                 } catch (InterruptedException v) {
                     System.out.println(v);
