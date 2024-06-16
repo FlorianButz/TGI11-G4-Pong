@@ -1,4 +1,4 @@
-package de.demoncore.gameObjects;
+package de.demoncore.gameObjects.storymode;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,6 +10,8 @@ import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.game.animator.SpriteAnimator;
 import de.demoncore.game.animator.Easing.EasingType;
+import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.sprites.Sprite;
@@ -38,6 +40,8 @@ public class StorymodePlayer extends RigidBody {
 		health = new GUIHealthbar(65, 85, 45, 6);
 		health.alignment = GUIAlignment.TopLeft;
 	
+		friction = 0.8f;
+		
 		SceneManager.getActiveScene().addObject(health);
 	
 		activeImage = Resources.playerIdle;
@@ -60,7 +64,7 @@ public class StorymodePlayer extends RigidBody {
 	Sprite activeImage;
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		if(activeImage != null)
 			g2d.drawImage(activeImage.getTexture(), (int)getPosition().x, (int)getPosition().y, (int)getScale().x, (int)getScale().y, null);
 	}
@@ -104,7 +108,7 @@ public class StorymodePlayer extends RigidBody {
 			walkAnim.stop();
 		}
 		
-		AddForce(KeyHandler.playerInput1.normalized().multiply(playerAcceleration));
+		addForce(KeyHandler.playerInput1.normalized().multiply(playerAcceleration));
 		
 		trail.setPosition(this.position);
 		

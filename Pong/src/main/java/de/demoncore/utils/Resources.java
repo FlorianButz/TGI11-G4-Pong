@@ -2,7 +2,8 @@ package de.demoncore.utils;
 
 import java.awt.Font;
 import java.io.InputStream;
-import java.lang.constant.ClassDesc;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
@@ -40,14 +41,25 @@ public class Resources {
 	public static Sprite fullHeart;
 	public static Sprite brokenHeart;
 	public static Sprite cake;
+	public static Sprite sign;
 	public static Sprite playerIdle;
 	public static Sprite playerWalk1;
 	public static Sprite playerWalk2;
 	public static Sprite shopIcon;
 	public static Sprite shopHoverIcon;
 	public static Sprite latiku;
-	
+	public static Sprite smallStone;
+	public static Sprite bigStone;
+	public static Sprite grass1;
+	public static Sprite grass2;
+	public static Sprite grass3;
+	public static Sprite tree;
+	public static Sprite dungeonDoor;
+
 	public static DialogLine testLine;
+	public static DialogLine signTest1;
+	
+	static List<DialogLine> dialogs;
 	
 	public static void loadFonts() {
 		
@@ -128,6 +140,14 @@ public class Resources {
 		shopIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopIcon.png")).load();
 		shopHoverIcon = new Sprite(Main.class.getResourceAsStream("/textures/ShopHoverIcon.png")).load();
 		latiku = new Sprite(Main.class.getResourceAsStream("/textures/PongLatiku.png")).load();
+		sign = new Sprite(Main.class.getResourceAsStream("/textures/Sign.png")).load();
+		smallStone = new Sprite(Main.class.getResourceAsStream("/textures/SmallStone.png")).load();
+		bigStone = new Sprite(Main.class.getResourceAsStream("/textures/BigStone.png")).load();
+		grass1 = new Sprite(Main.class.getResourceAsStream("/textures/Grass1.png")).load();
+		grass2 = new Sprite(Main.class.getResourceAsStream("/textures/Grass2.png")).load();
+		grass3 = new Sprite(Main.class.getResourceAsStream("/textures/Grass3.png")).load();
+		tree = new Sprite(Main.class.getResourceAsStream("/textures/Tree.png")).load();
+		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}
@@ -138,8 +158,14 @@ public class Resources {
 		
 		Logger.logInfo("Lade Ressourcen: Lade Dialoge...");
 		
-		testLine = new DialogLine("Wise Old Man", "Hello, this is a test!", null);
+		dialogs = new ArrayList<DialogLine>();
 
+		testLine = new DialogLine("Wise Old Man", "Hello, this is a test!", null);
+		dialogs.add(testLine);
+
+		signTest1 = new DialogLine("Sign", "This is a sign!", new DialogLine("Sign", "This is the second text!", new DialogLine("Sign", "Please don't leave me alone :(", null)));
+		dialogs.add(signTest1);
+		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}
 }

@@ -49,16 +49,16 @@ public class PongPlayerAI extends PongPlayer {
 			else
 				speed = new Vector3(0, (-playerAcceleration * (velMulti / 100)) * (float)(Math.random() / 2 + 0.5), 0);
 
-			AddForce(speed);
+			addForce(speed);
 		}else {
 			if(-75 > getPosition().y + size.y / 2) {
 				speed = new Vector3(0, (2 + playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
-				AddForce(speed);
+				addForce(speed);
 			}else if(75 < getPosition().y + size.y / 2) {
 				speed = new Vector3(0, (-2 + -playerAcceleration / 2) * (float)(Math.random() / 2 + 0.5), 0);
 
-				AddForce(speed);				
+				addForce(speed);				
 			}
 		}
 		

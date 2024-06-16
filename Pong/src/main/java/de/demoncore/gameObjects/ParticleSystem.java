@@ -66,8 +66,8 @@ public class ParticleSystem extends GameObject {
 	}
 
 	@Override
-	public void OnAddToScene() {
-		super.OnAddToScene();
+	public void onAddToScene() {
+		super.onAddToScene();
 	}
 	
 	public void Init() {
@@ -160,7 +160,7 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		if(particles == null || !Settings.isParticleEffects()) return;
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(particles == null) return;
@@ -188,7 +188,7 @@ public class ParticleSystem extends GameObject {
 	}
 	
 	@Override
-	public boolean CheckDistanceCulled(Rectangle viewport) {
+	public boolean checkDistanceCulled(Rectangle viewport) {
 		for (Particle p : new ArrayList<Particle>(particles)){
 			Vector3 particleWorldPosition = p.position;
 			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
@@ -199,7 +199,7 @@ public class ParticleSystem extends GameObject {
 		}
 		
 		if(particles.size() == 0) {
-			if(!GetBoundingBox().intersects(viewport)) {
+			if(!getBoundingBox().intersects(viewport)) {
 				isStoppedByCull = true;
 				return false;
 			}else{

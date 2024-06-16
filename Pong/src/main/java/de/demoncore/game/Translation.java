@@ -155,7 +155,7 @@ public class Translation {
 		}
 	}
 
-	public static void ChangeLanguage(Language language) {
+	public static void changeLanguage(Language language) {
 		activeLanguage = language;
 		
 		for(OnLanguageUpdateListener l : listeners) {

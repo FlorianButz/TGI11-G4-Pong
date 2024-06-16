@@ -75,7 +75,7 @@ public class PongBall extends GameObject {
 	}
 
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		Vector3 worldPos = getPosition();
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
@@ -106,7 +106,7 @@ public class PongBall extends GameObject {
 
 		position = position.add(velocity.multiply(speed));
 
-		if(player1.GetBoundingBox().intersects(GetBoundingBox()) || player2.GetBoundingBox().intersects(GetBoundingBox())) {
+		if(player1.getBoundingBox().intersects(getBoundingBox()) || player2.getBoundingBox().intersects(getBoundingBox())) {
 			if(!isIntersectionWithPlayer) {
 				isIntersectionWithPlayer = true;
 
@@ -119,7 +119,7 @@ public class PongBall extends GameObject {
 			isIntersectionWithPlayer = false;
 		}
 
-		if (isNotFullyIntersecting(GetBoundingBox(), SceneManager.getActiveScene().getRawCameraViewport())) {
+		if (isNotFullyIntersecting(getBoundingBox(), SceneManager.getActiveScene().getRawCameraViewport())) {
 			Logger.logMessage("Intersektion Ball mit Wand", this);
 			sfxSource.Play(Resources.pongPlayerHitWall);
 
@@ -134,6 +134,7 @@ public class PongBall extends GameObject {
 		Vector3 normal = new Vector3(-1, 0);
 
 		if (getPosition().x	<= 0) normal = normal.multiply(-1f);
+		
 		return normal;
 
 	}

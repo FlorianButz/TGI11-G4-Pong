@@ -1,6 +1,8 @@
-package de.demoncore.gameObjects;
+package de.demoncore.gameObjects.storymode;
 
 import de.demoncore.game.SceneManager;
+import de.demoncore.gameObjects.InteractEvent;
+import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.Resources;
 

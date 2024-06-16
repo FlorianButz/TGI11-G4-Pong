@@ -1,4 +1,4 @@
-package de.demoncore.gameObjects;
+package de.demoncore.gameObjects.storymode;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -26,7 +26,7 @@ public class DungeonMinimap extends GUIObject {
 	}
 
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 
 		Shape s = g2d.getClip();
 		

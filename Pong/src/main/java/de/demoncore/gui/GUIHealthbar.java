@@ -20,8 +20,8 @@ public class GUIHealthbar extends GUIObject {
 	int sw = 0, sh = 0;
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		super.Draw(g2d, screenWidth, screenHeight);		
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		super.draw(g2d, screenWidth, screenHeight);		
 		
 		for(int i = 0; i < heartCount; i++) {
 			if(i >= health) {

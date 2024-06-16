@@ -19,7 +19,7 @@ public class GUITextArea extends GUIText {
 	}
 
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setFont(font.deriveFont(font.getSize()));
 		g2d.setColor(color);
 		

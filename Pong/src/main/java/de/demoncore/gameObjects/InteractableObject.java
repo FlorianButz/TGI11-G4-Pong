@@ -33,7 +33,7 @@ public class InteractableObject extends GameObject {
 			public void onInteractionKeyPressed() {
 				super.onInteractionKeyPressed();
 
-				if(player.GetBoundingBox().intersects(GetBoundingBox())) {
+				if(player.getBoundingBox().intersects(getBoundingBox())) {
 					textColor = Color.white;
 					OnInteract();
 				}
@@ -61,12 +61,12 @@ public class InteractableObject extends GameObject {
 	Color textColor = new Color(0.35f, 0.35f, 0.35f, 1f);
 
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		//Vector3 worldPos = GetPosition();
 		//g2d.setColor(new Color(1, 1, 1, 0.5f));
 		//g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
-		if(player.GetBoundingBox().intersects(GetBoundingBox())) {
+		if(player.getBoundingBox().intersects(getBoundingBox())) {
 			g2d.setColor(textColor);
 			g2d.setFont(Resources.uiFont.deriveFont(35F));
 			g2d.drawString(Translation.get("interactable.interact").Get(), getPosition().x + 15, getPosition().y - 15);

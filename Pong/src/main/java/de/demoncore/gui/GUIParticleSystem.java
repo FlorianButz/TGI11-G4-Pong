@@ -61,8 +61,8 @@ public class GUIParticleSystem extends GUIObject {
 	}
 
 	@Override
-	public void OnAddToScene() {
-		super.OnAddToScene();
+	public void onAddToScene() {
+		super.onAddToScene();
 	}
 	
 	public void Init() {
@@ -154,7 +154,7 @@ public class GUIParticleSystem extends GUIObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		sw = screenWidth;
 		sh = screenHeight;
 		
@@ -185,7 +185,7 @@ public class GUIParticleSystem extends GUIObject {
 	}
 	
 	@Override
-	public boolean CheckDistanceCulled(Rectangle viewport) {
+	public boolean checkDistanceCulled(Rectangle viewport) {
 		for (Particle p : particles){
 			Vector3 particleWorldPosition = p.position;
 			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
@@ -196,7 +196,7 @@ public class GUIParticleSystem extends GUIObject {
 		}
 		
 		if(particles.size() == 0) {
-			if(!GetBoundingBox().intersects(viewport)) {
+			if(!getBoundingBox().intersects(viewport)) {
 				isStoppedByCull = true;
 				return false;
 			}else{

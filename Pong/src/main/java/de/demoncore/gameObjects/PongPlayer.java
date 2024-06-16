@@ -34,7 +34,7 @@ public class PongPlayer extends RigidBody {
 			} else {
 				geschwindigkeit = new Vector3(0,KeyHandler.playerInput2.y * playerAcceleration,0);
 			}
-			AddForce(geschwindigkeit);
+			addForce(geschwindigkeit);
 		}
 		
 		super.update();

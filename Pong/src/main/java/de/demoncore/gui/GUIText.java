@@ -28,7 +28,7 @@ public class GUIText extends GUIObject {
 	}
 
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		
 		g2d.setFont(font.deriveFont(font.getSize()));
 		
@@ -37,7 +37,7 @@ public class GUIText extends GUIObject {
 				g2d.getFontMetrics().getMaxDescent() +
 				g2d.getFontMetrics().getMaxAdvance() / 2;
 		
-		super.Draw(g2d, screenWidth, screenHeight);
+		super.draw(g2d, screenWidth, screenHeight);
 	
 		Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(text.Get(), g2d);
 		g2d.drawString(text.Get(), getUIPosition(screenWidth, screenHeight).x, (float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight()));

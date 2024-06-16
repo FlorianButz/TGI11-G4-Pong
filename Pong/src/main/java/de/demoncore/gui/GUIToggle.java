@@ -59,8 +59,8 @@ public class GUIToggle extends GUIObject {
 	}
 
 	@Override
-	public void OnAddToScene() {
-		super.OnAddToScene();
+	public void onAddToScene() {
+		super.onAddToScene();
 
 		source = new AudioSource(this).setSpacial(false);
 		SceneManager.getActiveScene().addObject(source);
@@ -72,8 +72,8 @@ public class GUIToggle extends GUIObject {
 	int limitDecimalPlaces = 2;
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		super.Draw(g2d, screenWidth, screenHeight);
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		super.draw(g2d, screenWidth, screenHeight);
 
 		g2d.setColor(currentColor);
 		g2d.fillRect((int) getUIPosition(screenWidth, screenHeight).x, (int) getUIPosition(screenWidth, screenHeight).y,

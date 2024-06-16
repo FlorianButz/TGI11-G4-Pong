@@ -123,7 +123,7 @@ public class GUIMenu extends GameObject {
 	private void changePos() {
 		for(GameObject g : menuContent) {
 			if(g == background) continue;
-			g.SetLocalPosition(new Vector3(0, menuYPos, 0));
+			g.setLocalPosition(new Vector3(0, menuYPos, 0));
 		}
 	}
 	

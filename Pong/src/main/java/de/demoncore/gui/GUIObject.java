@@ -80,7 +80,7 @@ public class GUIObject extends GameObject {
 		case TopMiddle:
 			return new Vector3(screenWidth / 2, 0).add(getPosition());
 		case TopRight:
-			return new Vector3(screenWidth / 2, screenHeight / 2).add(getPosition());
+			return new Vector3(screenWidth, 0).add(getPosition());
 			
 		case MiddleLeft:
 			return new Vector3(0, screenHeight / 2).add(getPosition());
@@ -267,7 +267,7 @@ public class GUIObject extends GameObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);
 		
 		CheckHover();
@@ -275,7 +275,7 @@ public class GUIObject extends GameObject {
 
 	
 	@Override
-	public boolean CheckDistanceCulled(Rectangle viewport) {
+	public boolean checkDistanceCulled(Rectangle viewport) {
 		return false;
 	}
 }

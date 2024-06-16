@@ -22,14 +22,14 @@ public class RigidBody extends GameObject {
 		lastPosition = new Vector3(posX, posY);
 	}
 
-	void CheckCollision() {
+	void checkCollision() {
 		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects());
 		
 		for(GameObject g : objs) {
 			if(g.collisionEnabled && g != this) {
 
-				Rectangle thisObj = GetBoundingBox();
-				Rectangle otherObj = g.GetBoundingBox();
+				Rectangle thisObj = getBoundingBox();
+				Rectangle otherObj = g.getBoundingBox();
 				
 				if(thisObj.intersects(otherObj)) {
 					Rectangle intersection = thisObj.intersection(otherObj);					
@@ -47,14 +47,14 @@ public class RigidBody extends GameObject {
 		}
 	}
 	
-	boolean CheckIntersect() {
+	boolean checkIntersect() {
 		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects());
 		
 		for(GameObject g : objs) {
 			if(g.collisionEnabled && g != this) {
 
-				Rectangle thisObj = GetBoundingBox();
-				Rectangle otherObj = g.GetBoundingBox();
+				Rectangle thisObj = getBoundingBox();
+				Rectangle otherObj = g.getBoundingBox();
 				
 				if(thisObj.intersects(otherObj)) {
 					return true;
@@ -65,7 +65,7 @@ public class RigidBody extends GameObject {
 		return false;
 	}
 	
-	void CheckValidVelocity() {
+	void checkValidVelocity() {
 		
 		{
 			Vector3 velocityX = new Vector3(velocity.x, 0, 0);
@@ -80,7 +80,7 @@ public class RigidBody extends GameObject {
 					break;
 				}
 				position = position.add(velocityX.multiply(1f / (float)iteration));
-				isIntersecting = CheckIntersect();
+				isIntersecting = checkIntersect();
 				if(!isIntersecting)
 					velocity.x = velocityX.multiply(1f / (float)iteration).x;
 
@@ -103,7 +103,7 @@ public class RigidBody extends GameObject {
 				}
 
 				position = position.add(velocityY.multiply(1f / (float)iteration));
-				isIntersecting = CheckIntersect();
+				isIntersecting = checkIntersect();
 				if(!isIntersecting) {
 					velocity.y = velocityY.multiply(1f / (float)iteration).y;
 				}
@@ -121,19 +121,19 @@ public class RigidBody extends GameObject {
 
 		if(GameLogic.IsGamePaused()) return;
 		
-		CheckCollision();
-		CheckValidVelocity();
+		checkCollision();
+		checkValidVelocity();
 		
 		position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
 		velocity = velocity.multiply(friction);
 
-		CheckCollision();
-		CheckValidVelocity();
+		checkCollision();
+		checkValidVelocity();
 		
 		lastPosition = position;
 	}
 	
-	public void AddForce(Vector3 force) {
+	public void addForce(Vector3 force) {
 //		boolean isIntersecting = false;
 //		int iteration = 0;
 //

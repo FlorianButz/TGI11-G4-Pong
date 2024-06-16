@@ -29,6 +29,7 @@ public class Gui {
 	
 		frame = new JFrame();
 		frame.setSize(1200, 900);
+		frame.setMinimumSize(new Dimension(750, 600));
 		frame.setTitle(Main.gameName);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);

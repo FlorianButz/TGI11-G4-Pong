@@ -31,7 +31,7 @@ public class GameObject {
 	
 	public void update() {}
 	
-	public void OnAddToScene() {
+	public void onAddToScene() {
 		isInScene = true;
 	}
 	
@@ -50,15 +50,15 @@ public class GameObject {
 		this.position = position;
 	}
 	
-	public Vector3 GetLocalPosition() {	// Gibt die Lokale Position vom GameObject zurück
+	public Vector3 getLocalPosition() {	// Gibt die Lokale Position vom GameObject zurück
 		return localPosition;
 	}
 	
-	public void SetLocalPosition(Vector3 position) {
+	public void setLocalPosition(Vector3 position) {
 		this.localPosition = position;
 	}
 	
-	public void SetScale(Vector3 scale) {
+	public void setScale(Vector3 scale) {
 		this.size = scale;
 	}
 	
@@ -73,7 +73,7 @@ public class GameObject {
 	public boolean collisionEnabled = true; // Ob das Objekt Kollisionen hat
 	public float boundingMargin = 0f;
 	
-	public Rectangle GetBoundingBox() {	// Gibt die Kollisions box zurueck
+	public Rectangle getBoundingBox() {	// Gibt die Kollisions box zurueck
 		Rectangle r = new Rectangle();
 		
 		int sizeX = (int)(size.x + boundingMargin);
@@ -87,13 +87,13 @@ public class GameObject {
 		return r;
 	}
 	
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		Vector3 worldPos = getPosition();
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 	}
 	
-	public boolean CheckDistanceCulled(Rectangle viewport) {
-		return GetBoundingBox().intersects(viewport);
+	public boolean checkDistanceCulled(Rectangle viewport) {
+		return getBoundingBox().intersects(viewport);
 	}
 }

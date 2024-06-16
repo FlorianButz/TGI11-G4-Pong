@@ -87,7 +87,7 @@ public class BaseScene {
 			for(GameObject gameObject : new ArrayList<GameObject>(sceneObjects)){
 				gameObject.update();
 				
-				if(gameObject.CheckDistanceCulled(cameraViewport)) {
+				if(gameObject.checkDistanceCulled(cameraViewport)) {
 					gameObject.isDistanceCulled = false;
 				}else {
 					gameObject.isDistanceCulled = true;
@@ -99,7 +99,7 @@ public class BaseScene {
 	
 	public void addObject(GameObject g) {
 		sceneObjects.add(g);
-		g.OnAddToScene();
+		g.onAddToScene();
 	}
 	
 	public void destroyObject(GameObject g) {

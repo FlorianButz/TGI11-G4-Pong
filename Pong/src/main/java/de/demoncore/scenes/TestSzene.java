@@ -6,7 +6,7 @@ import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.StorymodePlayer;
+import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;

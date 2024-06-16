@@ -67,7 +67,7 @@ public class Draw extends JPanel {
 		int screenheight = (int) Gui.GetScreenDimensions().y;
 		
 		Settings.setUIScale((float)Math.min((float)screenwidth / 1920f, (float)screenheight / 1080f));
-
+		
 		// Zeichne Hintergrund
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenwidth, screenheight);
@@ -114,6 +114,7 @@ public class Draw extends JPanel {
 		}
 		
 		// Zeichne alle Spielobjekte
+
 		
 		g2d.setColor(Color.WHITE);
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
@@ -123,7 +124,7 @@ public class Draw extends JPanel {
 			
 			// Debug modus
 			if(!(currentGameObj instanceof GUIObject) && Settings.getDebugMode()){
-				Rectangle r = currentGameObj.GetBoundingBox();
+				Rectangle r = currentGameObj.getBoundingBox();
 				if(currentGameObj.collisionEnabled)
 					g2d.setColor(Color.green);
 				else
@@ -146,8 +147,10 @@ public class Draw extends JPanel {
 			
 			if(currentGameObj.enableRendering && !currentGameObj.isDistanceCulled) {
 				if(!(currentGameObj instanceof GUIObject))	// Gucken ob es GUI objekt ist, weil die müssen als letztes auf den Bildschirm
-					currentGameObj.Draw(g2dGobj, screenwidth, screenheight);
+					currentGameObj.draw(g2dGobj, screenwidth, screenheight);
 			}
+			
+			g2dGobj.dispose();
 		}
 		
 		if(Settings.getDebugMode()) {
@@ -170,7 +173,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(!guiObject.doUIScale) {
-					guiObject.Draw(g2dGobj, screenwidth, screenheight);
+					guiObject.draw(g2dGobj, screenwidth, screenheight);
 					continue;
 				}
 			}
@@ -183,7 +186,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.TopLeft) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -197,7 +200,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.TopMiddle) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -211,7 +214,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.TopRight) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -225,7 +228,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.MiddleLeft) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -239,7 +242,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.Center) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -253,7 +256,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.MiddleRight) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -267,7 +270,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.DownLeft) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -281,7 +284,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.DownMiddle) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			
@@ -295,7 +298,7 @@ public class Draw extends JPanel {
 				GUIObject guiObject = (GUIObject) gameObjectsInScene.get(guiObj);
 
 				if(guiObject.alignment == GUIAlignment.DownRight) {
-					guiObject.Draw(g2d, screenwidth, screenheight);
+					guiObject.draw(g2d, screenwidth, screenheight);
 				}
 			}
 			

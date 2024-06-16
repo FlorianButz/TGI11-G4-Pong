@@ -7,7 +7,7 @@ import de.demoncore.utils.Vector3;
 
 public class SpriteObject extends GameObject {
 
-	private Sprite sprite;
+	protected Sprite sprite;
 	
 	public SpriteObject(int posX, int posY, int width, int height, Sprite sprite) {
 		super(posX, posY, width, height);
@@ -16,7 +16,7 @@ public class SpriteObject extends GameObject {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		Vector3 worldPos = getPosition();
 		g2d.drawImage(sprite.getTexture(),
 				(int)worldPos.x,

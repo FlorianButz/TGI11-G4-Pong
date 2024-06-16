@@ -22,6 +22,7 @@ import de.demoncore.gui.GUITheme;
 import de.demoncore.gui.GUITheme.Theme;
 import de.demoncore.gui.Gui;
 import de.demoncore.gui.TextAlignment;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class Dialog extends GameObject {
@@ -65,12 +66,12 @@ public class Dialog extends GameObject {
 		name.SetTextAlignment(TextAlignment.Left);
 		content.add(name);
 		
-		spaceText = new GUIText(-75 -125, -35, Translation.get("dialog.continue"), Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
+		spaceText = new GUIText(-300, -35, Translation.get("dialog.continue"), Resources.uiFont.deriveFont(20F), new Color(1f, 1f, 1f, 0.5f));
 		spaceText.SetTextAlignment(TextAlignment.Right);
 		spaceText.alignment = GUIAlignment.DownRight;
 		content.add(spaceText);
 		
-		GUIButton skipBtn = new GUIButton(-100, -35, 150, 35, Translation.get("dialog.skip"), Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
+		GUIButton skipBtn = new GUIButton(-150, -35, 250, 35, Translation.get("dialog.skip"), Resources.uiFont.deriveFont(20F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -133,8 +134,9 @@ public class Dialog extends GameObject {
 					}
 				}
 
-				if(isInScene)
+				if(isInScene) {
 					SceneManager.getActiveScene().addObject(spaceText);
+				}
 				
 				isLinePlaying = false;
 				
@@ -176,7 +178,7 @@ public class Dialog extends GameObject {
 	}
 	
 	protected GUIObject createBackground() {
-		GUIRectangle bg = new GUIRectangle(0, -200, (int)Gui.GetScreenDimensions().x, (int)400, new Color(0.075f, 0.075f, 0.075f, 0.65f));
+		GUIRectangle bg = new GUIRectangle(0, -200, (int)Gui.GetScreenDimensions().x * 4, (int)400, new Color(0.075f, 0.075f, 0.075f, 0.65f));
 		bg.alignment = GUIAlignment.DownMiddle;
 		return bg;
 	}

@@ -6,14 +6,16 @@ import java.util.List;
 import java.util.Random;
 
 import de.demoncore.game.GameObject;
-import de.demoncore.gameObjects.Cake;
-import de.demoncore.gameObjects.DungeonMinimap;
 import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.StorymodePlayer;
+import de.demoncore.gameObjects.storymode.Cake;
+import de.demoncore.gameObjects.storymode.DungeonDoor;
+import de.demoncore.gameObjects.storymode.DungeonMinimap;
+import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class Dungeon extends BaseScene {
