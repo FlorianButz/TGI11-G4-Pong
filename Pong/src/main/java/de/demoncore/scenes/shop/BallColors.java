@@ -2,6 +2,7 @@ package de.demoncore.scenes.shop;
 
 import java.awt.Color;
 
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
@@ -9,6 +10,7 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 
 
@@ -25,84 +27,7 @@ public class BallColors extends AdvencedShopScene {
 		addObject(ColorVorschau);
 		
 		
-		GUIButton RED = new GUIButton(300, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.red;
-			}
-		});
-		RED.alignment = GUIAlignment.Center;
-		addObject(RED);
-		
-		GUIButton BLUE = new GUIButton(500, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.BLUE;
-			}
-		});
-		BLUE.alignment = GUIAlignment.Center;
-		addObject(BLUE);
-		
-		GUIButton ORANGE = new GUIButton(700, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.ORANGE;
-			}
-		});
-		ORANGE.alignment = GUIAlignment.Center;
-		addObject(ORANGE);
-		
-		GUIButton CYAN = new GUIButton(900, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.CYAN;
-			}
-		});
-		CYAN.alignment = GUIAlignment.Center;
-		addObject(CYAN);
-		
-		GUIButton GREEN = new GUIButton(100, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.GREEN;
-			}
-		});
-		GREEN.alignment = GUIAlignment.Center;
-		addObject(GREEN);
-		
-		GUIButton MAGENTA = new GUIButton(300, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.MAGENTA;
-			}
-		});
-		MAGENTA.alignment = GUIAlignment.Center;
-		addObject(MAGENTA);
-		
-		GUIButton PINK = new GUIButton(500, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.PINK;
-			}
-		});
-		PINK.alignment = GUIAlignment.Center;
-		addObject(PINK);
-		
-		GUIButton WHITE = new GUIButton(100, -400, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton WHITE = new GUIButton(-900, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -113,7 +38,84 @@ public class BallColors extends AdvencedShopScene {
 		WHITE.alignment = GUIAlignment.Center;
 		addObject(WHITE);
 		
-		GUIButton YELLOW = new GUIButton(700, -200, 100, 100, Translation.get(""), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton RED = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.red;
+			}
+		});
+		RED.alignment = GUIAlignment.Center;
+		addObject(RED);
+		
+		GUIButton BLUE = new GUIButton(-300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.BLUE;
+			}
+		});
+		BLUE.alignment = GUIAlignment.Center;
+		addObject(BLUE);
+		
+		GUIButton ORANGE = new GUIButton(0, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.ORANGE;
+			}
+		});
+		ORANGE.alignment = GUIAlignment.Center;
+		addObject(ORANGE);
+		
+		GUIButton CYAN = new GUIButton(300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.CYAN;
+			}
+		});
+		CYAN.alignment = GUIAlignment.Center;
+		addObject(CYAN);
+		
+		GUIButton GREEN = new GUIButton(600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.GREEN;
+			}
+		});
+		GREEN.alignment = GUIAlignment.Center;
+		addObject(GREEN);
+		
+		GUIButton MAGENTA = new GUIButton(900, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.MAGENTA;
+			}
+		});
+		MAGENTA.alignment = GUIAlignment.Center;
+		addObject(MAGENTA);
+		
+		GUIButton PINK = new GUIButton(0, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.PINK;
+			}
+		});
+		PINK.alignment = GUIAlignment.Center;
+		addObject(PINK);
+		
+		GUIButton YELLOW = new GUIButton(-300, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -124,8 +126,19 @@ public class BallColors extends AdvencedShopScene {
 		YELLOW.alignment = GUIAlignment.Center;
 		addObject(YELLOW);
 		
+		GUIButton RAINBOW = new GUIButton(-600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
+			}
+		});
+		RAINBOW.alignment = GUIAlignment.Center;
+		addObject(RAINBOW);
 		
 		
+	
 		
 		//Buttons die Farbe geben
 		RED.normalColor = Color.red;				
@@ -136,7 +149,10 @@ public class BallColors extends AdvencedShopScene {
 		CYAN.normalColor = Color.cyan;
 		PINK.normalColor = Color.pink;
 		MAGENTA.normalColor = Color.magenta;
+		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
+				
 		
+	
 		//Hover Farbe etwas verdunkeln
 		RED.hoverColor = Color.red.darker().darker();
 		YELLOW.hoverColor = Color.yellow.darker().darker(); //.darker() 2 mal damit es passt sonnst wärs zu hell
@@ -147,9 +163,10 @@ public class BallColors extends AdvencedShopScene {
 		PINK.hoverColor = Color.pink.darker().darker();
 		MAGENTA.hoverColor = Color.magenta.darker().darker();
 		WHITE.hoverColor = Color.white.darker().darker();
+		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
 		
 		
-		
+		//GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4))
 		
 		super.initializeScene();
 	}
