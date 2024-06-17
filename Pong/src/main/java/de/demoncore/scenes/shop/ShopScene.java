@@ -17,19 +17,14 @@ import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
 
-	GameObject Base;
 	
 	
 	@Override
 	public void initializeScene() {
 		
-		Base = new GameObject(0, 0, 0, 0);
-		addObject(Base);
+	
 		
 		
-		
-		
-		Base.color = Color.DARK_GRAY;
 		
 		GUIButton BallColor = new GUIButton(-300, -250, 200, 75, Translation.get("mainmenu.BallColor"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
