@@ -17,12 +17,32 @@ import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
 
-	
+	GameObject Base1;
+	GameObject Base2;
+	GameObject Base3;
+	GameObject Base4;
+
 	
 	@Override
 	public void initializeScene() {
 		
+		Base1 = new GameObject(0, 0, 50, 25);
+		addObject(Base1);
+		
+		Base2 = new GameObject(0, 0, 25, 50);
+		addObject(Base2);
+		
+		Base3 = new GameObject(0, 0, 35, 45);
+		addObject(Base3);
+		
+		Base4 = new GameObject(0, 0, 45, 35);
+		addObject(Base4);
+		
 	
+		Base1.color = Color.GRAY;
+		Base2.color = Color.GRAY;
+		Base3.color = Color.GRAY;
+		Base4.color = Color.GRAY;
 		
 		
 		
