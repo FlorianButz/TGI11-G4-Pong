@@ -22,7 +22,7 @@ public class BallColors extends AdvencedShopScene {
 	
 	@Override
 	public void initializeScene() {
-		
+	
 		
 		ColorVorschau = new GameObject(500, 0, 200, 200);
 		addObject(ColorVorschau);
@@ -164,14 +164,18 @@ public class BallColors extends AdvencedShopScene {
 		PINK.hoverColor = Color.pink.darker().darker();
 		MAGENTA.hoverColor = Color.magenta.darker().darker();
 		WHITE.hoverColor = Color.white.darker().darker();
+		
+		
+		
+		
 		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
 		
 		
 		//GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4))
 		
-		super.initializeScene();
 		
-	}
+		super.initializeScene();
+		}
 	
 	public Color Farbe( ) {
 		
@@ -181,6 +185,5 @@ public class BallColors extends AdvencedShopScene {
 		return color;
 	}
 
-	
 	
 }
