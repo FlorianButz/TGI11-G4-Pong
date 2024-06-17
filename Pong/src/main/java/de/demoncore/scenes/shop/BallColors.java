@@ -23,7 +23,8 @@ public class BallColors extends AdvencedShopScene {
 	@Override
 	public void initializeScene() {
 		
-		ColorVorschau = new GameObject(-500, -300, 200, 200);
+		
+		ColorVorschau = new GameObject(500, 0, 200, 200);
 		addObject(ColorVorschau);
 		
 		
@@ -131,7 +132,7 @@ public class BallColors extends AdvencedShopScene {
 			public void ButtonClick() {
 				super.ButtonClick();
 				
-				ColorVorschau.color = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
+				ColorVorschau.color = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 8));
 			}
 		});
 		RAINBOW.alignment = GUIAlignment.Center;
@@ -169,6 +170,7 @@ public class BallColors extends AdvencedShopScene {
 		//GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4))
 		
 		super.initializeScene();
+		
 	}
 	
 	public Color Farbe( ) {
@@ -179,8 +181,6 @@ public class BallColors extends AdvencedShopScene {
 		return color;
 	}
 
-	
-	
 	
 	
 }

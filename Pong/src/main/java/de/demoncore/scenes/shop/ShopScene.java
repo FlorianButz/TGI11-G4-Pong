@@ -18,11 +18,11 @@ import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
 
+
 	
 	
 	@Override
-	public void initializeScene() {
-		
+	public void initializeScene() {			
 		
 		GUIButton BallColor = new GUIButton(-600, -200, 250, 400, Translation.get("BallSkins"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
