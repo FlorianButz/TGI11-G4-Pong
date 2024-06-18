@@ -17,12 +17,12 @@ import de.demoncore.utils.Resources;
 public class BallColors extends AdvencedShopScene {
 
 	GameObject ColorVorschau;
+	GUIButton RAINBOW;
 	
-
 	
 	@Override
 	public void initializeScene() {
-	
+		
 		
 		ColorVorschau = new GameObject(500, 0, 200, 200);
 		addObject(ColorVorschau);
@@ -127,7 +127,7 @@ public class BallColors extends AdvencedShopScene {
 		YELLOW.alignment = GUIAlignment.Center;
 		addObject(YELLOW);
 		
-		GUIButton RAINBOW = new GUIButton(-600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		RAINBOW = new GUIButton(-600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -150,7 +150,7 @@ public class BallColors extends AdvencedShopScene {
 		CYAN.normalColor = Color.cyan;
 		PINK.normalColor = Color.pink;
 		MAGENTA.normalColor = Color.magenta;
-		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
+		
 				
 		
 	
@@ -167,12 +167,14 @@ public class BallColors extends AdvencedShopScene {
 		
 		
 		
+			
+		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
+		RAINBOW.hoverColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
 		
-		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
 		
+	
 		
 		//GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4))
-		
 		
 		super.initializeScene();
 		}
@@ -184,6 +186,7 @@ public class BallColors extends AdvencedShopScene {
 		
 		return color;
 	}
+	
 
 	
 }
