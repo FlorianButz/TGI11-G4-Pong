@@ -24,7 +24,7 @@ public class ShopScene extends BaseScene {
 	@Override
 	public void initializeScene() {			
 		
-		GUIButton BallColor = new GUIButton(-600, -200, 250, 400, Translation.get("BallSkins"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton BallColor = new GUIButton(-600, -200, 250, 400, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -34,7 +34,7 @@ public class ShopScene extends BaseScene {
 		BallColor.alignment = GUIAlignment.Center;
 		addObject(BallColor);
 				
-		GUIButton SchlaegerColor = new GUIButton(-300, -200, 250, 400, Translation.get("Schläger"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton SchlaegerColor = new GUIButton(-300, -200, 250, 400, Translation.get("shop.pedals"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -44,7 +44,7 @@ public class ShopScene extends BaseScene {
 		SchlaegerColor.alignment = GUIAlignment.Center;
 		addObject(SchlaegerColor);
 		
-		GUIButton PowerUps = new GUIButton(0, -200, 250, 400, Translation.get("PowerUps"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton PowerUps = new GUIButton(0, -200, 250, 400, Translation.get("shop.powerups"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -54,7 +54,7 @@ public class ShopScene extends BaseScene {
 		PowerUps.alignment = GUIAlignment.Center;
 		addObject(PowerUps);
 		
-		GUIButton Background = new GUIButton(300, -200, 250, 400, Translation.get("Background"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton Background = new GUIButton(300, -200, 250, 400, Translation.get("shop.backgrounds"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -65,7 +65,7 @@ public class ShopScene extends BaseScene {
 		addObject(Background);
 		
 		
-		GUIButton BallTrails = new GUIButton(600, -200, 250, 400, Translation.get("Balltrails"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton BallTrails = new GUIButton(600, -200, 250, 400, Translation.get("shop.trails"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -75,12 +75,7 @@ public class ShopScene extends BaseScene {
 		BallTrails.alignment = GUIAlignment.Center;
 		addObject(BallTrails);
 		
-		
-		
-		
-		
-		
-		GUIButton back = new GUIButton(0, 400, 600, 75, Translation.get("Back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(0, 400, 600, 75, Translation.get("shop.back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

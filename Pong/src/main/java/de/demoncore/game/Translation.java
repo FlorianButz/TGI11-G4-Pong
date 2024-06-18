@@ -93,7 +93,7 @@ public class Translation {
 		germanTranslation.put("pausemenu.returntogame", "Zurueck zum Spiel");
 		englishTranslation.put("pausemenu.returntogame", "Return to Game");
 		
-		germanTranslation.put("pausemenu.backtomainmenu", "Zurueck zum Hauptmenue");
+		germanTranslation.put("pausemenu.backtomainmenu", "Zurueck zum Speisekarte");
 		englishTranslation.put("pausemenu.backtomainmenu", "Back to Main Menu");
 	
 		
@@ -126,7 +126,26 @@ public class Translation {
 
 		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
 		englishTranslation.put("pong.back", "Back to Main Menu");
-	
+		
+
+		germanTranslation.put("shop.pedals", "Schlaeger");
+		englishTranslation.put("shop.pedals", "Pedal");
+
+		germanTranslation.put("shop.ballskins", "Ball Skins");
+		englishTranslation.put("shop.ballskins", "Ball skins");
+
+		germanTranslation.put("shop.powerups", "Power UPs");
+		englishTranslation.put("shop.powerups", "Power ups");
+
+		germanTranslation.put("shop.backgrounds", "Hintergruende");
+		englishTranslation.put("shop.backgrounds", "Backgrounds");
+
+		germanTranslation.put("shop.trails", "Ball Spur");
+		englishTranslation.put("shop.trails", "Ball trails");
+
+		germanTranslation.put("shop.back", "Zurueck");
+		englishTranslation.put("shop.back", "Back");
+
 	}
 
 	public static TranslationComponent get(String translationID) {
