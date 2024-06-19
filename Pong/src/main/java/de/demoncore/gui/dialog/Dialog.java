@@ -178,7 +178,7 @@ public class Dialog extends GameObject {
 	}
 	
 	protected GUIObject createBackground() {
-		GUIRectangle bg = new GUIRectangle(0, -200, (int)Gui.GetScreenDimensions().x * 4, (int)400, new Color(0.075f, 0.075f, 0.075f, 0.65f));
+		GUIRectangle bg = new GUIRectangle(0, -200, (int)Gui.GetScreenDimensions().x * 4, (int)400, new Color(0.075f, 0.075f, 0.075f, 0.9f));
 		bg.alignment = GUIAlignment.DownMiddle;
 		return bg;
 	}

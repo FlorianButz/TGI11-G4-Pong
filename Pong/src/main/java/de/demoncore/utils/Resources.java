@@ -55,6 +55,7 @@ public class Resources {
 	public static Sprite grass3;
 	public static Sprite tree;
 	public static Sprite dungeonDoor;
+	public static Sprite path;
 
 	public static DialogLine testLine;
 	public static DialogLine signTest1;
@@ -148,6 +149,7 @@ public class Resources {
 		grass3 = new Sprite(Main.class.getResourceAsStream("/textures/Grass3.png")).load();
 		tree = new Sprite(Main.class.getResourceAsStream("/textures/Tree.png")).load();
 		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
+		path = new Sprite(Main.class.getResourceAsStream("/textures/Path.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

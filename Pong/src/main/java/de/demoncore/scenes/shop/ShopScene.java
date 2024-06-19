@@ -28,7 +28,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new BallColors());
+				SceneManager.loadScene(new BallColors());
 			}
 		});
 		BallColor.alignment = GUIAlignment.Center;
@@ -38,7 +38,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new SchleagerColor());
+				SceneManager.loadScene(new SchleagerColor());
 			}
 		});
 		SchlaegerColor.alignment = GUIAlignment.Center;
@@ -48,7 +48,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new PowerUps());
+				SceneManager.loadScene(new PowerUps());
 			}
 		});
 		PowerUps.alignment = GUIAlignment.Center;
@@ -58,7 +58,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new Background());
+				SceneManager.loadScene(new Background());
 			}
 		});
 		Background.alignment = GUIAlignment.Center;
@@ -69,7 +69,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new DefaultScene());
+				SceneManager.loadScene(new DefaultScene());
 			}
 		});
 		BallTrails.alignment = GUIAlignment.Center;
@@ -79,7 +79,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new MainMenu());;
+				SceneManager.loadScene(new MainMenu());;
 			}
 		});
 		back.alignment = GUIAlignment.Center;

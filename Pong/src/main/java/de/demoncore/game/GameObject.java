@@ -14,6 +14,8 @@ public class GameObject {
 	protected Vector3 position;	// Position
 	protected Vector3 localPosition;	// Lokale Position
 	
+	protected double rotationZ = 0;
+	
 	public Color color = Color.white;	// Farbe vom GameObject
 	
 	public Vector3 anchorPoint = new Vector3(0.5f, 0.5f);	// Der "Mittelpunkt" vom GameObject
@@ -56,6 +58,10 @@ public class GameObject {
 	
 	public void setLocalPosition(Vector3 position) {
 		this.localPosition = position;
+	}
+	
+	public double getRotationZ() { // Gibt rotation zurueck
+		return rotationZ;
 	}
 	
 	public void setScale(Vector3 scale) {

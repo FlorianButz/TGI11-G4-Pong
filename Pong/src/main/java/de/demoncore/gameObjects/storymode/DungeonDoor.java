@@ -12,15 +12,15 @@ public class DungeonDoor extends SpriteObject {
 	InteractableObject interaction;
 
 	public DungeonDoor(int posX, int posY, boolean isFunctional) {
-		super(posX, posY, 19 * 5, 25 * 5, Resources.dungeonDoor);
+		super(posX, posY, (int)(27 * 7.5), (int)(30 * 7.5), Resources.dungeonDoor);
 
 		if(isFunctional) {
 
-			interaction = new InteractableObject(posX, posY, 250, 275, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
+			interaction = new InteractableObject(posX, posY, 325, 375, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
 				@Override
 				public void OnInteract() {
 					super.OnInteract();
-					SceneManager.LoadScene(new Dungeon());
+					SceneManager.loadScene(new Dungeon());
 				}
 			});
 			interaction.interactionString = "Enter Dungeon";

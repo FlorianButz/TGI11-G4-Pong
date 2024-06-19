@@ -93,7 +93,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new OnePlayerPong());
+				SceneManager.loadScene(new OnePlayerPong());
 			}
 		});
 		singleplayer.alignment = GUIAlignment.Center;
@@ -103,7 +103,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new TwoPlayerPong());
+				SceneManager.loadScene(new TwoPlayerPong());
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;
@@ -113,7 +113,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new StorymodeMain());
+				SceneManager.loadScene(new StorymodeMain());
 			}
 		});
 		storymode.alignment = GUIAlignment.Center;
@@ -147,7 +147,7 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new ShopScene());
+				SceneManager.loadScene(new ShopScene());
 			}
 		});
 		shop.alignment = GUIAlignment.Center;

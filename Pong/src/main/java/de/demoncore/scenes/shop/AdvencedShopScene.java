@@ -34,7 +34,7 @@ public class AdvencedShopScene extends BaseScene{
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new ShopScene());;
+				SceneManager.loadScene(new ShopScene());;
 			}
 		});
 		back.alignment = GUIAlignment.Center;

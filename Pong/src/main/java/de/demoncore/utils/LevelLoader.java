@@ -10,6 +10,7 @@ import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.storymode.BigStone;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.Grass;
+import de.demoncore.gameObjects.storymode.Path;
 import de.demoncore.gameObjects.storymode.Sign;
 import de.demoncore.gameObjects.storymode.SmallStone;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
@@ -25,6 +26,7 @@ public class LevelLoader {
 	// 4 Sign
 	// 5 Tree
 	// 6 Dungeon Door
+	// 7 Path
 	
 	
 	public static void LoadLevel(URL levelFilePath) {
@@ -48,6 +50,8 @@ public class LevelLoader {
 				
 				for(String obj : objects) {
 					
+					if(obj.isEmpty()) continue;
+					
 					String[] objectInfos = obj.split(":");
 
 					int objectId = Integer.parseInt(objectInfos[0]);
@@ -56,9 +60,7 @@ public class LevelLoader {
 
 					switch(objectId) {
 					case 0:
-						
 						SceneManager.getActiveScene().addObject(new StorymodePlayer(objectPosX, objectPosY));
-						
 						break;
 					case 1:
 						SceneManager.getActiveScene().addObject(new Grass(objectPosX, objectPosY));
@@ -78,6 +80,9 @@ public class LevelLoader {
 						break;
 					case 6:
 						SceneManager.getActiveScene().addObject(new DungeonDoor(objectPosX, objectPosY, true));
+						break;
+					case 7:
+						SceneManager.getActiveScene().addObject(new Path(objectPosX, objectPosY));
 						break;
 					}
 				}

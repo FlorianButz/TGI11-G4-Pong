@@ -60,7 +60,7 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.LoadScene(new MainMenu());
+				SceneManager.loadScene(new MainMenu());
 			}
 		});
 		backToMainMenuButton.alignment = GUIAlignment.Center;

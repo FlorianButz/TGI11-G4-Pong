@@ -35,7 +35,7 @@ public class PongEndScreen extends GUIMenu {
 		GUIButton btn = new GUIButton(0, 150, 650, 75, Translation.get("pong.back"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
-				SceneManager.LoadScene(new MainMenu());
+				SceneManager.loadScene(new MainMenu());
 				super.ButtonClick();
 			}
 			});
@@ -51,7 +51,7 @@ public class PongEndScreen extends GUIMenu {
 		GUIButton btn = new GUIButton(0, 250, 650, 75, Translation.get("pong.play_again"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
-				SceneManager.LoadScene(SceneManager.getActiveScene());
+				SceneManager.loadScene(SceneManager.getActiveScene());
 				super.ButtonClick();
 			}
 			});
