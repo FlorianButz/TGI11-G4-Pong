@@ -24,11 +24,12 @@ public class BallColors extends AdvencedShopScene {
 	public void initializeScene() {
 		
 		
-		ColorVorschau = new GameObject(500, 0, 200, 200);
+		ColorVorschau = new GameObject(0, -125, 50, 50);
 		addObject(ColorVorschau);
 		
+
 		
-		GUIButton WHITE = new GUIButton(-900, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton WHITE = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -39,62 +40,7 @@ public class BallColors extends AdvencedShopScene {
 		WHITE.alignment = GUIAlignment.Center;
 		addObject(WHITE);
 		
-		GUIButton RED = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.red;
-			}
-		});
-		RED.alignment = GUIAlignment.Center;
-		addObject(RED);
-		
-		GUIButton BLUE = new GUIButton(-300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.BLUE;
-			}
-		});
-		BLUE.alignment = GUIAlignment.Center;
-		addObject(BLUE);
-		
-		GUIButton ORANGE = new GUIButton(0, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.ORANGE;
-			}
-		});
-		ORANGE.alignment = GUIAlignment.Center;
-		addObject(ORANGE);
-		
-		GUIButton CYAN = new GUIButton(300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.CYAN;
-			}
-		});
-		CYAN.alignment = GUIAlignment.Center;
-		addObject(CYAN);
-		
-		GUIButton GREEN = new GUIButton(600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
-			@Override
-			public void ButtonClick() {
-				super.ButtonClick();
-				
-				ColorVorschau.color = Color.GREEN;
-			}
-		});
-		GREEN.alignment = GUIAlignment.Center;
-		addObject(GREEN);
-		
-		GUIButton MAGENTA = new GUIButton(900, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton MAGENTA = new GUIButton(-300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -105,7 +51,7 @@ public class BallColors extends AdvencedShopScene {
 		MAGENTA.alignment = GUIAlignment.Center;
 		addObject(MAGENTA);
 		
-		GUIButton PINK = new GUIButton(0, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton PINK = new GUIButton(0, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -116,7 +62,29 @@ public class BallColors extends AdvencedShopScene {
 		PINK.alignment = GUIAlignment.Center;
 		addObject(PINK);
 		
-		GUIButton YELLOW = new GUIButton(-300, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton RED = new GUIButton(300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.red;
+			}
+		});
+		RED.alignment = GUIAlignment.Center;
+		addObject(RED);
+		
+		GUIButton ORANGE = new GUIButton(600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.ORANGE;
+			}
+		});
+		ORANGE.alignment = GUIAlignment.Center;
+		addObject(ORANGE);
+		
+		GUIButton YELLOW = new GUIButton(-600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -127,7 +95,40 @@ public class BallColors extends AdvencedShopScene {
 		YELLOW.alignment = GUIAlignment.Center;
 		addObject(YELLOW);
 		
-		RAINBOW = new GUIButton(-600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton GREEN = new GUIButton(-300, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.GREEN;
+			}
+		});
+		GREEN.alignment = GUIAlignment.Center;
+		addObject(GREEN);
+		
+		GUIButton CYAN = new GUIButton(0, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.CYAN;
+			}
+		});
+		CYAN.alignment = GUIAlignment.Center;
+		addObject(CYAN);
+		
+		GUIButton BLUE = new GUIButton(300, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = Color.BLUE;
+			}
+		});
+		BLUE.alignment = GUIAlignment.Center;
+		addObject(BLUE);
+		
+		RAINBOW = new GUIButton(600, 100, 200, 300, Translation.get("Select (Rainbow)"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
