@@ -17,7 +17,6 @@ import de.demoncore.utils.Resources;
 public class BallColors extends AdvencedShopScene {
 
 	GameObject ColorVorschau;
-	GUIButton RAINBOW;
 	
 	
 	@Override
@@ -128,7 +127,7 @@ public class BallColors extends AdvencedShopScene {
 		BLUE.alignment = GUIAlignment.Center;
 		addObject(BLUE);
 		
-		RAINBOW = new GUIButton(600, 100, 200, 300, Translation.get("Select (Rainbow)"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton RAINBOW = new GUIButton(600, 100, 200, 300, Translation.get("Select (Rainbow)"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
