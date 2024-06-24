@@ -1,16 +1,20 @@
 package de.demoncore.gameObjects;
 
 
+import java.awt.Color;
+
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Vector3;
-
+import de.demoncore.scenes.shop.SchleagerColor;
 
 public class PongPlayer extends RigidBody {
 
+	SchleagerColor Farb = new SchleagerColor();
+	
 	public static float playerAcceleration = 15f; // Speed
 
 	public boolean isPlayer1 = true;
@@ -36,6 +40,8 @@ public class PongPlayer extends RigidBody {
 			}
 			addForce(geschwindigkeit);
 		}
+		
+		color = /*Farb.Farbe() */ Color.DARK_GRAY.darker().darker().darker(); //temporär
 		
 		super.update();
 		

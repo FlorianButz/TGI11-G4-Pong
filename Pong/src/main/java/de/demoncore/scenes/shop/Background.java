@@ -114,7 +114,7 @@ public class Background extends AdvencedShopScene {
 		btn_9.alignment = GUIAlignment.Center;
 		addObject(btn_9);
 		
-		GUIButton btn_10 = new GUIButton(600, 100, 200, 300, Translation.get("Select (Rainbow)"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton btn_10 = new GUIButton(600, 100, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

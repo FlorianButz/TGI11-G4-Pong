@@ -69,7 +69,7 @@ public class ShopScene extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.loadScene(new DefaultScene());
+				SceneManager.loadScene(new Ball_Trail());
 			}
 		});
 		BallTrails.alignment = GUIAlignment.Center;

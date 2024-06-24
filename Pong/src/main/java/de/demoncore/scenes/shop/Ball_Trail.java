@@ -6,11 +6,11 @@ import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.utils.Resources;
 
-public class PowerUps extends AdvencedShopScene{
-
+public class Ball_Trail extends AdvencedShopScene {
+	
 	@Override
 	public void initializeScene() {
-	
+
 		GUIButton btn_1 = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -122,14 +122,24 @@ public class PowerUps extends AdvencedShopScene{
 		addObject(btn_10);
 	
 	
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		super.initializeScene();
 	}
 	
+
 }
