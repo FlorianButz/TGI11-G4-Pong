@@ -138,8 +138,20 @@ public class BallColors extends AdvencedShopScene {
 		RAINBOW.alignment = GUIAlignment.Center;
 		addObject(RAINBOW);
 		
+		GUIButton BLACK_WHITE = new GUIButton(-600, 600, 200, 300, Translation.get("Select (Black/White)"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				ColorVorschau.color = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+			}
+		});
+		BLACK_WHITE.alignment = GUIAlignment.Center;
+		addObject(BLACK_WHITE);
 		
-	
+		
+		
+		
 		
 		//Buttons die Farbe geben
 		RED.normalColor = Color.red;				
@@ -150,9 +162,6 @@ public class BallColors extends AdvencedShopScene {
 		CYAN.normalColor = Color.cyan;
 		PINK.normalColor = Color.pink;
 		MAGENTA.normalColor = Color.magenta;
-		
-				
-		
 	
 		//Hover Farbe etwas verdunkeln
 		RED.hoverColor = Color.red.darker().darker();
@@ -170,10 +179,14 @@ public class BallColors extends AdvencedShopScene {
 			
 		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
 		RAINBOW.hoverColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
-		
-		
+		BLACK_WHITE.normalColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+		BLACK_WHITE.hoverColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1)).darker().darker();
 	
 		
+		
+		
+		
+		//GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 		//GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4))
 		
 		super.initializeScene();

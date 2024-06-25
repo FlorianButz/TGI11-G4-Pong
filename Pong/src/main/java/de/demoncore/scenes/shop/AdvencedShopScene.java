@@ -16,10 +16,15 @@ import de.demoncore.utils.Resources;
 import de.demoncore.gui.GUIButton;
 public class AdvencedShopScene extends BaseScene{
 
-	
+	GameObject Block;
 	@Override
 	public void initializeScene() {
 			
+		
+		Block = new GameObject(0, 450, 2000, 250);
+		addObject(Block);
+		
+		Block.color = Color.DARK_GRAY;
 		
 		GUIButton back = new GUIButton(0, 500, 600, 75, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
