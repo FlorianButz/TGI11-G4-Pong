@@ -41,7 +41,7 @@ public class PongPlayer extends RigidBody {
 			addForce(geschwindigkeit);
 		}
 		
-		color = /*Farb.Farbe() */ Color.DARK_GRAY.darker().darker().darker(); //temporär
+		color = /*Farb.Farbe() */ Color.WHITE.brighter(); //temporär
 		
 		super.update();
 		
