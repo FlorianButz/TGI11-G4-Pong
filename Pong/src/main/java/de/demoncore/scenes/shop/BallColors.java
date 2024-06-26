@@ -1,6 +1,7 @@
 package de.demoncore.scenes.shop;
 
 import java.awt.Color;
+import java.nio.channels.SelectableChannel;
 
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
@@ -20,7 +21,8 @@ public class BallColors extends AdvencedShopScene {
 	GameObject ColorVorschau;
 	GUIButton RAINBOW;
 	GUIButton BLACK_WHITE;
-
+	int selectetColor;
+	
 	@Override
 	public void initializeScene() {
 
@@ -34,8 +36,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.WHITE;
+				System.out.println("White");
+				selectetColor = 1;
 			}
 		});
 		WHITE.alignment = GUIAlignment.Center;
@@ -45,8 +47,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.MAGENTA;
+				System.out.println("Magenta");
+				selectetColor = 2;
 			}
 		});
 		MAGENTA.alignment = GUIAlignment.Center;
@@ -56,8 +58,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.PINK;
+				System.out.println("Pink");
+				selectetColor = 3;
 			}
 		});
 		PINK.alignment = GUIAlignment.Center;
@@ -67,8 +69,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.red;
+				System.out.println("Red");
+				selectetColor = 4;
 			}
 		});
 		RED.alignment = GUIAlignment.Center;
@@ -78,8 +80,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.ORANGE;
+				System.out.println("Orange");
+				selectetColor = 5;
 			}
 		});
 		ORANGE.alignment = GUIAlignment.Center;
@@ -89,8 +91,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.YELLOW;
+				System.out.println("Yellow");
+				selectetColor = 6;
 			}
 		});
 		YELLOW.alignment = GUIAlignment.Center;
@@ -100,8 +102,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.GREEN;
+				System.out.println("Green");
+				selectetColor = 7;
 			}
 		});
 		GREEN.alignment = GUIAlignment.Center;
@@ -111,8 +113,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.CYAN;
+				System.out.println("Cyan");
+				selectetColor = 8;
 			}
 		});
 		CYAN.alignment = GUIAlignment.Center;
@@ -122,8 +124,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = Color.BLUE;
+				System.out.println("Blue");
+				selectetColor = 9;
 			}
 		});
 		BLUE.alignment = GUIAlignment.Center;
@@ -133,8 +135,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 8));
+				selectetColor = 10;
+				System.out.println("Rainbow");
 			}
 		});
 		RAINBOW.alignment = GUIAlignment.Center;
@@ -144,8 +146,8 @@ public class BallColors extends AdvencedShopScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-
-				ColorVorschau.color = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+				selectetColor = 11;
+				System.out.println("Black White");
 			}
 		});
 		BLACK_WHITE.alignment = GUIAlignment.Center;
@@ -204,6 +206,60 @@ public class BallColors extends AdvencedShopScene {
 		BLACK_WHITE.normalColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 		BLACK_WHITE.hoverColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1)).darker().darker();
 
+		switch (selectetColor) {
+		case 1:
+			ColorVorschau.color = Color.WHITE;;
+			break;
+
+		case 2:
+			ColorVorschau.color = Color.MAGENTA;
+			break;
+			
+		case 3:
+			ColorVorschau.color = Color.PINK;
+			break;
+			
+		case 4:
+			ColorVorschau.color = Color.RED;
+			break;
+			
+		case 5:
+			ColorVorschau.color = Color.ORANGE;
+			break;
+			
+		case 6:
+			ColorVorschau.color = Color.YELLOW;
+			break;
+			
+		case 7:
+			ColorVorschau.color = Color.GREEN;
+			break;
+			
+		case 8:
+			ColorVorschau.color = Color.CYAN;
+			break;
+			
+		case 9:
+			ColorVorschau.color = Color.BLUE;
+			break;
+			
+		case 10:
+			ColorVorschau.color = RAINBOW.currentColor;
+			break;
+			
+		case 11:
+			ColorVorschau.color = BLACK_WHITE.currentColor;
+			break;
+			
+		case 12:
+			ColorVorschau.color = Color.WHITE;
+			break;
+			
+		case 13:
+			ColorVorschau.color = Color.WHITE;
+			break;
+		}
+		
 		
 		super.updateScene();
 	}
