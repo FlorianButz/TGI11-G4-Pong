@@ -143,11 +143,11 @@ public class MainMenu extends BaseScene {
 		
 		
 		
-		GUIImageButton shop = new GUIImageButton(475, 0, 75, 75, Resources.shopIcon, Resources.shopHoverIcon, new GUIButtonClickEvent() {
+		GUIImageButton shop = new GUIImageButton(475, 0, 75, 75, 65, Resources.shopIcon, Resources.shopHoverIcon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.loadScene(new ShopScene());
+				SceneManager.loadScene(new de.demoncore.scenes.shopnew.ShopScene());
 			}
 		});
 		shop.alignment = GUIAlignment.Center;

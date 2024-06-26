@@ -85,6 +85,7 @@ public class BaseScene {
 			cameraViewport = calcViewport();
 			
 			for(GameObject gameObject : new ArrayList<GameObject>(sceneObjects)){
+				if(gameObject == null) continue;
 				gameObject.update();
 				
 				if(gameObject.checkDistanceCulled(cameraViewport)) {

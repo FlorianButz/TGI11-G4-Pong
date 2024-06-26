@@ -15,15 +15,26 @@ public class GUIImageButton extends GUIButton {
 
 	Sprite normalSprite;
 	Sprite hoverSprite;
+
+	int imageSize;
+	float normalButtonHeight;
+	float hoverButtonHeight;
+	float currentButtonHeight;
 	
-	public GUIImageButton(int posX, int posY, int width, int height, Sprite normalSprite, Sprite hoverSprite, GUIButtonClickEvent e) {
+	public GUIImageButton(int posX, int posY, int width, int height, int imageSize, Sprite normalSprite, Sprite hoverSprite, GUIButtonClickEvent e) {
 		super(posX, posY, width, height, Translation.literal(""), Resources.uiFont, e);	
 		this.normalSprite = normalSprite;
 		this.hoverSprite = hoverSprite;
 		
+		this.imageSize = imageSize;
+		
 		textCurrentSize = 1f;
 		textHoverSize = 0.35f;
 		textNormalSize = 0.8f;
+		
+		currentButtonHeight = height;
+		hoverButtonHeight = 25;
+		normalButtonHeight = height;
 		
 		hoverTextColor = Color.white;
 	}
@@ -42,7 +53,7 @@ public class GUIImageButton extends GUIButton {
 		g2d.setColor(currentTextColor);
 
 		this.size.x = currentButtonWidth;
-		this.size.y = currentButtonWidth;
+		this.size.y = currentButtonHeight;
 
 		Color tint = new Color(
 				currentTextColor.getRed(),
@@ -53,26 +64,26 @@ public class GUIImageButton extends GUIButton {
 		Vector3 pos = getUIPosition(screenWidth, screenHeight)
 				.add(new Vector3(
 				getScale().x * anchorPoint.x + localPosition.x,
-				getScale().y * anchorPoint.y + localPosition.y
+				getScale().y* anchorPoint.y + localPosition.y
 				))
 				.subtract(new Vector3(
-					getScale().x * textCurrentSize * anchorPoint.x + localPosition.x,
-					getScale().y * textCurrentSize * anchorPoint.y + localPosition.y
+						imageSize * textCurrentSize * anchorPoint.x + localPosition.x,
+						imageSize * textCurrentSize * anchorPoint.y + localPosition.y
 				));;
 		
 		if(!isHovering) {
 			g2d.drawImage(normalSprite.getTexture(),
 					(int)pos.x,
 					(int)pos.y,
-					(int)(size.x * textCurrentSize),
-					(int)(size.y * textCurrentSize),
+					(int)(imageSize * textCurrentSize),
+					(int)(imageSize * textCurrentSize),
 					null);
 		}else {
 			g2d.drawImage(hoverSprite.getTexture(),
 					(int)pos.x,
 					(int)pos.y,
-					(int)(size.x * textCurrentSize),
-					(int)(size.y * textCurrentSize),
+					(int)(imageSize * textCurrentSize),
+					(int)(imageSize * textCurrentSize),
 					null);
 		}
 		
@@ -82,18 +93,20 @@ public class GUIImageButton extends GUIButton {
 			currentColor = GameMath.lerpColor(currentColor, hoverColor, colorTransitionSmoothing / fps);
 			currentTextColor = GameMath.lerpColor(currentTextColor, hoverTextColor, colorTransitionSmoothing / fps);
 
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textHoverSize, sizeTransitionSmoothing / fps);
-			
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing / fps);
+			textCurrentSize = GameMath.limitDecimalPoints(GameMath.Lerp(textCurrentSize, textHoverSize, sizeTransitionSmoothing / fps), 2);
+
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth + hoverButtonWidth, sizeTransitionSmoothing / fps), 2);
+			currentButtonHeight = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonHeight, normalButtonHeight + hoverButtonHeight, sizeTransitionSmoothing / fps), 2);
 		}
 		else {
 			
 			currentColor = GameMath.lerpColor(currentColor, normalColor, colorTransitionSmoothing / fps);
 			currentTextColor = GameMath.lerpColor(currentTextColor, normalTextColor, colorTransitionSmoothing / fps);
 
-			textCurrentSize = GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps);
-			
-			currentButtonWidth = GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps);
+			textCurrentSize = GameMath.limitDecimalPoints(GameMath.Lerp(textCurrentSize, textNormalSize, sizeTransitionSmoothing / fps), 2);
+
+			currentButtonWidth = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonWidth, normalButtonWidth, sizeTransitionSmoothing / fps), 2);
+			currentButtonHeight = GameMath.limitDecimalPoints(GameMath.Lerp(currentButtonHeight, normalButtonHeight, sizeTransitionSmoothing / fps), 2);
 		}
 	}
 }
