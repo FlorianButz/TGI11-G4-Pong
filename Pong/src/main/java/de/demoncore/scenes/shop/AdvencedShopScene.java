@@ -38,8 +38,6 @@ public class AdvencedShopScene extends BaseScene{
 		addObject(back);;
 		
 		
-	
-		
 		super.initializeScene();
 	}
 
