@@ -2,6 +2,7 @@ package de.demoncore.scenes.shopnew;
 
 import java.awt.Color;
 
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -9,6 +10,7 @@ import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIText;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.shop.BallColors;
 import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
@@ -28,6 +30,11 @@ public class ShopScene extends BaseScene {
 		addObject(title);
 		
 		GUIImageButton ballSkinsButton = new GUIImageButton(getX(0), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.loadScene(new BallColors());
+			}
 		});
 		ballSkinsButton.alignment = GUIAlignment.Center;
 		addObject(ballSkinsButton);
