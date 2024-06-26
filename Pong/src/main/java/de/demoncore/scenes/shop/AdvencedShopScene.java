@@ -22,10 +22,10 @@ public class AdvencedShopScene extends BaseScene{
 	public void initializeScene() {
 			
 		
-		Block = new GUIRectangle(0, 450, 2000, 250, Color.DARK_GRAY);
+		Block = new GUIRectangle(0, -150, 4000, 325, Color.DARK_GRAY);
 		addObject(Block);
 		
-
+		Block.alignment = GUIAlignment.DownMiddle;
 		
 		GUIButton back = new GUIButton(0, 500, 600, 75, Translation.get("settings.saveandback"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
