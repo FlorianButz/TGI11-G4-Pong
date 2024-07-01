@@ -19,7 +19,7 @@ public class AdvencedShopScene extends BaseScene{
 			
 		
 		Block = new GUIRectangle(0, -150, 4000, 325, Color.BLACK);
-		addObject(Block);
+		//addObject(Block);
 		
 		Block.alignment = GUIAlignment.DownMiddle;
 		

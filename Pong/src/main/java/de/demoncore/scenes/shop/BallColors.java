@@ -201,8 +201,8 @@ public class BallColors extends AdvencedShopScene {
 
 	@Override
 	public void updateScene() {
-		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4));
-		RAINBOW.hoverColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 4)).darker().darker();
+		RAINBOW.normalColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2));
+		RAINBOW.hoverColor = GameMath.lerpColor(GameMath.lerpColor(Color.cyan, Color.red, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)), Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 2)).darker().darker();
 		BLACK_WHITE.normalColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 		BLACK_WHITE.hoverColor = GameMath.lerpColor(Color.DARK_GRAY, Color.WHITE, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1)).darker().darker();
 
