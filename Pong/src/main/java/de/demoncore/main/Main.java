@@ -8,6 +8,7 @@ import de.demoncore.game.GameLogic;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
+import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
@@ -30,6 +31,7 @@ public class Main {
 		Resources.loadDialog();
 		
 		Settings.LoadAllSettings();
+		ShopValues.LoadAllSettings();
 		
 		Translation.initializeTranslation();
 		
@@ -48,6 +50,9 @@ public class Main {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		        AudioMaster.DestroyOpenAL();
+
+		        Settings.SaveAllSettings();
+				ShopValues.SaveAllSettings();
 		    }
 		});
 		

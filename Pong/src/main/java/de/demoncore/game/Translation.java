@@ -134,11 +134,8 @@ public class Translation {
 		germanTranslation.put("shop.ballskins", "Ball Skins");
 		englishTranslation.put("shop.ballskins", "Ball skins");
 
-		germanTranslation.put("shop.powerups", "Power UPs");
-		englishTranslation.put("shop.powerups", "Power ups");
-
-		germanTranslation.put("shop.backgrounds", "Hintergruende");
-		englishTranslation.put("shop.backgrounds", "Backgrounds");
+		germanTranslation.put("shop.spawns", "Wiedererscheinung");
+		englishTranslation.put("shop.spawns", "Spawn animation");
 
 		germanTranslation.put("shop.trails", "Ball Spur");
 		englishTranslation.put("shop.trails", "Ball trails");

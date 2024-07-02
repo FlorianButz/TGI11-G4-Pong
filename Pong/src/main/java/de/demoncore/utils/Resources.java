@@ -57,6 +57,11 @@ public class Resources {
 	public static Sprite dungeonDoor;
 	public static Sprite path;
 
+	public static Sprite shop_ballskin;
+	public static Sprite shop_ballspawn;
+	public static Sprite shop_balltrail;
+	public static Sprite shop_pedalskin;
+
 	public static DialogLine testLine;
 	public static DialogLine signTest1;
 	
@@ -150,6 +155,11 @@ public class Resources {
 		tree = new Sprite(Main.class.getResourceAsStream("/textures/Tree.png")).load();
 		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
 		path = new Sprite(Main.class.getResourceAsStream("/textures/Path.png")).load();
+
+		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
+		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();
+		shop_balltrail = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallTrailIcon.png")).load();
+		shop_ballspawn = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSpawnIcon.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

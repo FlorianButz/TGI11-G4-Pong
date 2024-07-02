@@ -3,33 +3,37 @@ package de.demoncore.scenes.shopnew;
 import java.awt.Color;
 
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIText;
+import de.demoncore.gui.GUITheme;
+import de.demoncore.gui.GUITheme.Theme;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.MainMenu;
 import de.demoncore.scenes.shop.BallColors;
 import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
 
 	int xSpacing = 100;
-	int amountBtn = 4;
+	float amountBtn = 3f;
 	int buttonWidth = 325;
 	
-	int posY = 100;
+	int posY = -25;
 	
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
 	
-		GUIText title = new GUIText(0, 200, Translation.literal("Shop"), Resources.dialogFont.deriveFont(55F), Color.white);
+		GUIText title = new GUIText(0, 125, Translation.literal("Shop"), Resources.dialogFont.deriveFont(125F), Color.white);
 		title.alignment = GUIAlignment.TopMiddle;
 		addObject(title);
 		
-		GUIImageButton ballSkinsButton = new GUIImageButton(getX(0), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+		GUIImageButton ballSkinsButton = new GUIImageButton(getX(0), posY, buttonWidth, 650, 150, Resources.shop_ballskin, Resources.shop_ballskin, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -39,51 +43,57 @@ public class ShopScene extends BaseScene {
 		ballSkinsButton.alignment = GUIAlignment.Center;
 		addObject(ballSkinsButton);
 		
-		GUIText ballSkinsText = new GUIText(getX(0), 400 + posY, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText ballSkinsText = new GUIText(getX(0), 400 + posY, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(45F), Color.white);
 		ballSkinsText.alignment = GUIAlignment.Center;
 		addObject(ballSkinsText);
 
 
-		GUIImageButton ballTrailsButton = new GUIImageButton(getX(1), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+		GUIImageButton ballTrailsButton = new GUIImageButton(getX(1), posY, buttonWidth, 650, 150, Resources.shop_balltrail, Resources.shop_balltrail, new GUIButtonClickEvent() {
 		});
 		ballTrailsButton.alignment = GUIAlignment.Center;
 		addObject(ballTrailsButton);
 		
-		GUIText ballTrailsText = new GUIText(getX(1), 400 + posY, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText ballTrailsText = new GUIText(getX(1), 400 + posY, Translation.get("shop.trails"), Resources.uiFont.deriveFont(45F), Color.white);
 		ballTrailsText.alignment = GUIAlignment.Center;
 		addObject(ballTrailsText);
 		
-		GUIImageButton pedalSkinsButton = new GUIImageButton(getX(2), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+		GUIImageButton pedalSkinsButton = new GUIImageButton(getX(2), posY, buttonWidth, 650, 150, Resources.shop_pedalskin, Resources.shop_pedalskin, new GUIButtonClickEvent() {
 		});
 		pedalSkinsButton.alignment = GUIAlignment.Center;
 		addObject(pedalSkinsButton);
 		
-		GUIText pedalSkinsText = new GUIText(getX(2), 400 + posY, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText pedalSkinsText = new GUIText(getX(2), 400 + posY, Translation.get("shop.pedals"), Resources.uiFont.deriveFont(45F), Color.white);
 		pedalSkinsText.alignment = GUIAlignment.Center;
 		addObject(pedalSkinsText);
-
-
-		GUIImageButton backgroundsButton = new GUIImageButton(getX(3), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+		
+		GUIImageButton spawnAnimationButton = new GUIImageButton(getX(3), posY, buttonWidth, 650, 150, Resources.shop_ballspawn, Resources.shop_ballspawn, new GUIButtonClickEvent() {
 		});
-		backgroundsButton.alignment = GUIAlignment.Center;
-		addObject(backgroundsButton);
+		spawnAnimationButton.alignment = GUIAlignment.Center;
+		addObject(spawnAnimationButton);
 		
-		GUIText backgroundsText = new GUIText(getX(3), 400 + posY, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
-		backgroundsText.alignment = GUIAlignment.Center;
-		addObject(backgroundsText);
-		
-		GUIImageButton powerupsButton = new GUIImageButton(getX(4), posY, buttonWidth, 650, 150, Resources.cake, Resources.fullHeart, new GUIButtonClickEvent() {
+		GUIText spawnAnimationText = new GUIText(getX(3), 400 + posY, Translation.get("shop.spawns"), Resources.uiFont.deriveFont(45F), Color.white);
+		spawnAnimationText.alignment = GUIAlignment.Center;
+		addObject(spawnAnimationText);
+
+		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("shop.back"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.loadScene(new MainMenu());
+				ShopValues.SaveAllSettings();
+			}
 		});
-		powerupsButton.alignment = GUIAlignment.Center;
-		addObject(powerupsButton);
+		back.alignment = GUIAlignment.DownMiddle;
+		addObject(back);
 		
-		GUIText powerupsText = new GUIText(getX(4), 400 + posY, Translation.literal("Test"), Resources.uiFont.deriveFont(45F), Color.white);
-		powerupsText.alignment = GUIAlignment.Center;
-		addObject(powerupsText);
+		spawnAnimationButton.normalColor = new Color(1, 1, 1, 0.15f);
+		ballSkinsButton.normalColor = new Color(1, 1, 1, 0.15f);
+		pedalSkinsButton.normalColor = new Color(1, 1, 1, 0.15f);
+		ballTrailsButton.normalColor = new Color(1, 1, 1, 0.15f);
 	}
 	
 	int getX(int index) {
-		return (index * buttonWidth + index * xSpacing) - ((amountBtn / 2) * buttonWidth + (amountBtn / 2) * xSpacing);
+		return (int) ((int)(index * buttonWidth + index * xSpacing) - ((amountBtn / 2) * buttonWidth + (amountBtn / 2) * xSpacing));
 	}
 	
 }
