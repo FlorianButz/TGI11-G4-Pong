@@ -33,11 +33,13 @@ public class ShopScene extends BaseScene {
 		title.alignment = GUIAlignment.TopMiddle;
 		addObject(title);
 		
+		BallSkinsMenu s = new BallSkinsMenu();
+		addObject(s);
 		GUIImageButton ballSkinsButton = new GUIImageButton(getX(0), posY, buttonWidth, 650, 150, Resources.shop_ballskin, Resources.shop_ballskin, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.loadScene(new BallColors());
+				s.ShowMenu();
 			}
 		});
 		ballSkinsButton.alignment = GUIAlignment.Center;

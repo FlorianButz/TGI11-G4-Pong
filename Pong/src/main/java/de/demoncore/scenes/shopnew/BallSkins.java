@@ -5,9 +5,6 @@ public enum BallSkins {
 	White,
 	Red,
 	Yellow,
-	Green,
-	Blue,
-	Rainbow,
-	WhiteGlow
+	Rainbow
 	
 }
