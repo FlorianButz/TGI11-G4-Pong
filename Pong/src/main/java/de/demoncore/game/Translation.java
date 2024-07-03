@@ -143,6 +143,17 @@ public class Translation {
 		germanTranslation.put("shop.back", "Zurueck");
 		englishTranslation.put("shop.back", "Back");
 
+		germanTranslation.put("color.white", "Weiss");
+		englishTranslation.put("color.white", "White");
+		
+		germanTranslation.put("color.red", "Rot");
+		englishTranslation.put("color.red", "Red");
+
+		germanTranslation.put("color.yellow", "Gelb");
+		englishTranslation.put("color.yellow", "Yellow");
+		
+		germanTranslation.put("color.rgb", "Regenbogen");
+		englishTranslation.put("color.rgb", "Rainbow");
 	}
 
 	public static TranslationComponent get(String translationID) {
