@@ -98,7 +98,9 @@ public class PongBall extends GameObject {
 
 	
 	public static Color regenbogen() {
-		return GameMath.lerpColor(Color.pink, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+		return GameMath.lerpColor(
+				GameMath.lerpColor(Color.magenta, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() *2)),
+				Color.cyan, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 	}
 	@Override
 		public void update() {
