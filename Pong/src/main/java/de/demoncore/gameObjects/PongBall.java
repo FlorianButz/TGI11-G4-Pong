@@ -133,6 +133,9 @@ public class PongBall extends GameObject {
 			speed = speed + 0.01f;	  //Linear
 			//speed = speed * 1.001f; //Exponentiel
 		}
+		if (speed > 30f) {
+			speed = 30f;
+		}
 		
 		System.out.println(speed);
 		
