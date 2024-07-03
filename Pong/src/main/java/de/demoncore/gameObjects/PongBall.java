@@ -103,7 +103,9 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-
+		speed = speed * 1.001f;
+		
+		
 		position = position.add(velocity.multiply(speed));
 
 		if(player1.getBoundingBox().intersects(getBoundingBox()) || player2.getBoundingBox().intersects(getBoundingBox())) {
@@ -202,7 +204,7 @@ public class PongBall extends GameObject {
 		positions = new ArrayList<Vector3>(Collections.nCopies(50, Vector3.zero()));
 
 		PongSpawnEffect.callEffect();
-		
+		speed = 9f;
 		moveTimer();		
 	}
 
