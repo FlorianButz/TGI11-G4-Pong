@@ -49,8 +49,14 @@ public class ShopScene extends BaseScene {
 		ballSkinsText.alignment = GUIAlignment.Center;
 		addObject(ballSkinsText);
 
-
+		BallTrailsMenu t = new BallTrailsMenu();
+		addObject(t);
 		GUIImageButton ballTrailsButton = new GUIImageButton(getX(1), posY, buttonWidth, 650, 150, Resources.shop_balltrail, Resources.shop_balltrail, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				t.ShowMenu();
+			}
 		});
 		ballTrailsButton.alignment = GUIAlignment.Center;
 		addObject(ballTrailsButton);
@@ -77,7 +83,7 @@ public class ShopScene extends BaseScene {
 		spawnAnimationText.alignment = GUIAlignment.Center;
 		addObject(spawnAnimationText);
 
-		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("shop.back"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("shop.back"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -87,6 +93,16 @@ public class ShopScene extends BaseScene {
 		});
 		back.alignment = GUIAlignment.DownMiddle;
 		addObject(back);
+
+		spawnAnimationButton.textNormalSize = 2;
+		ballSkinsButton.textNormalSize = 2;
+		pedalSkinsButton.textNormalSize = 2;
+		ballTrailsButton.textNormalSize = 2;
+
+		spawnAnimationButton.textHoverSize = 1.5f;
+		ballSkinsButton.textHoverSize = 1.5f;
+		pedalSkinsButton.textHoverSize = 1.5f;
+		ballTrailsButton.textHoverSize = 1.5f;
 		
 		spawnAnimationButton.normalColor = new Color(1, 1, 1, 0.15f);
 		ballSkinsButton.normalColor = new Color(1, 1, 1, 0.15f);

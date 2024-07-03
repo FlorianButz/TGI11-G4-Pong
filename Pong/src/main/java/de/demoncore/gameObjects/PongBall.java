@@ -18,6 +18,7 @@ import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 import de.demoncore.scenes.shop.BallColors;
+import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
 
 public class PongBall extends GameObject {
@@ -81,11 +82,20 @@ public class PongBall extends GameObject {
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
-		if(isMoving) {
+		if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Simple) {
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.fillRect((int)positions.get(2).x, (int)positions.get(2).y, (int)size.x, (int)size.y);
 			g2d.setColor(new Color(1, 1, 1, 0.05f));
 			g2d.fillRect((int)positions.get(4).x, (int)positions.get(4).y, (int)size.x, (int)size.y);
+		}
+		else if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Particles) {
+			for(int i = 0; i < positions.size(); i++) {
+				g2d.setColor(GameMath.lerpColor(color, new Color(0f, 0f, 0f, 0f), (float)i / positions.size()));
+				g2d.drawLine((int)positions.get(GameMath.Clamp(i-1, 0, positions.size())).x,
+						(int)positions.get(GameMath.Clamp(i-1, 0, positions.size())).y,
+						(int)positions.get(GameMath.Clamp(i, 0, positions.size())).x,
+						(int)positions.get(GameMath.Clamp(i, 0, positions.size())).y);
+			}
 		}
 	}
 
@@ -109,13 +119,13 @@ public class PongBall extends GameObject {
 			
         switch (ShopValues.shopData.activeBallSkin) {
         case White:
-            color = color.white;
+            color = Color.white;
             break;
         case Red:
-           color = color.red;
+           color = Color.red;
             break;
         case Yellow:
-            color = color.YELLOW;
+            color = Color.YELLOW;
             break;
         case Rainbow:
         	color = regenbogen();
@@ -129,15 +139,13 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-		if (speed < 30f) {
+		if (speed < 20f) {
 			speed = speed + 0.01f;	  //Linear
 			//speed = speed * 1.001f; //Exponentiel
 		}
 		if (speed > 30f) {
 			speed = 30f;
 		}
-		
-		System.out.println(speed);
 		
 		position = position.add(velocity.multiply(speed));
 

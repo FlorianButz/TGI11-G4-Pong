@@ -20,7 +20,7 @@ import de.demoncore.gui.Gui;
 import de.demoncore.gui.TextAlignment;
 import de.demoncore.utils.Resources;
 
-public class BallSkinsMenu extends GUIMenu {
+public class BallTrailsMenu extends GUIMenu {
 
 
 	int xSpacing = 100;
@@ -43,7 +43,7 @@ public class BallSkinsMenu extends GUIMenu {
 	
 		List<GUIObject> guiObjects = new ArrayList<GUIObject>();
 		
-		GUIText title = new GUIText(75, 100, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(45f), Color.white);
+		GUIText title = new GUIText(75, 100, Translation.get("shop.trails"), Resources.uiFont.deriveFont(45f), Color.white);
 		title.alignment = GUIAlignment.TopLeft;
 		title.SetTextAlignment(TextAlignment.Left);
 		guiObjects.add(title);
@@ -57,14 +57,14 @@ public class BallSkinsMenu extends GUIMenu {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallSkins & 0b00000001) != 0) {					
-					ShopValues.shopData.activeBallSkin = BallSkins.White;
+				if((ShopValues.shopData.unlockedBallTrails & 0b00000001) != 0) {					
+					ShopValues.shopData.activeBallTrail = BallTrails.None;
 				}
 			}
 		});
 		option1Button.alignment = GUIAlignment.Center;
 		
-		GUIText option1Text = new GUIText(getX(0), 400 + posY, Translation.get("color.white"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option1Text = new GUIText(getX(0), 400 + posY, Translation.get("trails.none"), Resources.uiFont.deriveFont(45F), Color.white);
 		option1Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option1Text);
 
@@ -74,14 +74,14 @@ public class BallSkinsMenu extends GUIMenu {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallSkins & 0b00000010) != 0) {					
-					ShopValues.shopData.activeBallSkin = BallSkins.Red;
+				if((ShopValues.shopData.unlockedBallTrails & 0b00000010) != 0) {					
+					ShopValues.shopData.activeBallTrail = BallTrails.Simple;
 				}
 			}
 		});
 		option2Button.alignment = GUIAlignment.Center;
 		
-		GUIText option2Text = new GUIText(getX(1), 400 + posY, Translation.get("color.red"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option2Text = new GUIText(getX(1), 400 + posY, Translation.get("trails.simple"), Resources.uiFont.deriveFont(45F), Color.white);
 		option2Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option2Text);
 		
@@ -91,14 +91,14 @@ public class BallSkinsMenu extends GUIMenu {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallSkins & 0b00000100) != 0) {					
-					ShopValues.shopData.activeBallSkin = BallSkins.Yellow;
+				if((ShopValues.shopData.unlockedBallTrails & 0b00000100) != 0) {					
+					ShopValues.shopData.activeBallTrail = BallTrails.Particles;
 				}
 			}
 		});
 		option3Button.alignment = GUIAlignment.Center;
 		
-		GUIText option3Text = new GUIText(getX(2), 400 + posY, Translation.get("color.yellow"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option3Text = new GUIText(getX(2), 400 + posY, Translation.get("trails.particles"), Resources.uiFont.deriveFont(45F), Color.white);
 		option3Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option3Text);
 
@@ -108,14 +108,14 @@ public class BallSkinsMenu extends GUIMenu {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallSkins & 0b00001000) != 0) {					
-					ShopValues.shopData.activeBallSkin = BallSkins.Rainbow;
+				if((ShopValues.shopData.unlockedBallTrails & 0b00001000) != 0) {
+					ShopValues.shopData.activeBallTrail = BallTrails.Beam;
 				}
 			}
 		});
 		option4Button.alignment = GUIAlignment.Center;
 		
-		GUIText option4Text = new GUIText(getX(3), 400 + posY, Translation.get("color.rgb"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option4Text = new GUIText(getX(3), 400 + posY, Translation.get("trails.beam"), Resources.uiFont.deriveFont(45F), Color.white);
 		option4Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option4Text);
 
@@ -128,13 +128,13 @@ public class BallSkinsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallSkins.White.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallSkins.White.getNumVal());
+				if(BallTrails.None.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-BallTrails.None.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallSkins = (byte) (ShopValues.shopData.unlockedBallSkins | 0b00000001);
+				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000001);
 				SceneManager.getActiveScene().destroyObject(buyOption1);
 			}
 		});
@@ -151,13 +151,13 @@ public class BallSkinsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallSkins.Red.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallSkins.Red.getNumVal());
+				if(BallTrails.Simple.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-BallTrails.Simple.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallSkins = (byte) (ShopValues.shopData.unlockedBallSkins | 0b00000010);
+				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000010);
 				SceneManager.getActiveScene().destroyObject(buyOption2);
 			}
 		});
@@ -174,13 +174,13 @@ public class BallSkinsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallSkins.Yellow.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallSkins.Yellow.getNumVal());
+				if(BallTrails.Particles.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-BallTrails.Particles.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallSkins = (byte) (ShopValues.shopData.unlockedBallSkins | 0b00000100);
+				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000100);
 				SceneManager.getActiveScene().destroyObject(buyOption3);
 			}
 		});
@@ -197,13 +197,13 @@ public class BallSkinsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 				
-				if(BallSkins.Rainbow.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallSkins.Rainbow.getNumVal());
+				if(BallTrails.Beam.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-BallTrails.Beam.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallSkins = (byte) (ShopValues.shopData.unlockedBallSkins | 0b00001000);
+				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00001000);
 				SceneManager.getActiveScene().destroyObject(buyOption4);
 			}
 		});
@@ -218,13 +218,13 @@ public class BallSkinsMenu extends GUIMenu {
 		guiObjects.add(option3Button);
 		guiObjects.add(option4Button);
 		
-		if((ShopValues.shopData.unlockedBallSkins & 0b00000001) == 0)
+		if((ShopValues.shopData.unlockedBallTrails & 0b00000001) == 0)
 			guiObjects.add(buyOption1);
-		if((ShopValues.shopData.unlockedBallSkins & 0b00000010) == 0)
+		if((ShopValues.shopData.unlockedBallTrails & 0b00000010) == 0)
 			guiObjects.add(buyOption2);
-		if((ShopValues.shopData.unlockedBallSkins & 0b00000100) == 0)
+		if((ShopValues.shopData.unlockedBallTrails & 0b00000100) == 0)
 			guiObjects.add(buyOption3);
-		if((ShopValues.shopData.unlockedBallSkins & 0b00001000) == 0)
+		if((ShopValues.shopData.unlockedBallTrails & 0b00001000) == 0)
 			guiObjects.add(buyOption4);
 		
 		option1Preview.alignment = GUIAlignment.Center;

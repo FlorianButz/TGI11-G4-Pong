@@ -7,7 +7,6 @@ public enum BallTrails {
 	Particles(15),
 	Beam(35);
 	
-	
 	private int numVal;
 
 	BallTrails(int numVal) {

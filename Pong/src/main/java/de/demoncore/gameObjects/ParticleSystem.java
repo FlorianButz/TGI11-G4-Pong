@@ -190,6 +190,7 @@ public class ParticleSystem extends GameObject {
 	@Override
 	public boolean checkDistanceCulled(Rectangle viewport) {
 		for (Particle p : new ArrayList<Particle>(particles)){
+			if(p == null) continue;
 			Vector3 particleWorldPosition = p.position;
 			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
 			if(!viewport.intersects(pBounds)) {

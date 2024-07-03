@@ -157,6 +157,18 @@ public class Translation {
 		
 		germanTranslation.put("color.rgb", "Regenbogen");
 		englishTranslation.put("color.rgb", "Rainbow");
+
+		germanTranslation.put("trails.none", "Keine");
+		englishTranslation.put("trails.none", "None");
+
+		germanTranslation.put("trails.simple", "Einfach");
+		englishTranslation.put("trails.simple", "Simple");
+
+		germanTranslation.put("trails.particles", "Partikel");
+		englishTranslation.put("trails.particles", "Particles");
+
+		germanTranslation.put("trails.beam", "Beam");
+		englishTranslation.put("trails.beam", "Beam");
 	}
 
 	public static TranslationComponent get(String translationID) {
