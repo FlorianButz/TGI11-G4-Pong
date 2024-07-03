@@ -32,7 +32,7 @@ public class BallColors extends AdvencedShopScene {
 
 
 
-		GUIButton WHITE = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton WHITE = new GUIButton(-600, -400, 200, 300, Translation.get("White"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -43,7 +43,7 @@ public class BallColors extends AdvencedShopScene {
 		WHITE.alignment = GUIAlignment.Center;
 		addObject(WHITE);
 
-		GUIButton MAGENTA = new GUIButton(-300, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton MAGENTA = new GUIButton(-300, -400, 200, 300, Translation.get("Pink"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -169,7 +169,7 @@ public class BallColors extends AdvencedShopScene {
 
 		//Hover Farbe etwas verdunkeln
 		RED.hoverColor = Color.red.darker().darker();
-		YELLOW.hoverColor = Color.yellow.darker().darker(); //.darker() 2 mal damit es passt sonnst wärs zu hell
+		YELLOW.hoverColor = Color.yellow.darker().darker(); //.darker() 2 mal damit es passt sonnst wï¿½rs zu hell
 		GREEN.hoverColor = Color.green.darker().darker();
 		BLUE.hoverColor = Color.blue.darker().darker();
 		ORANGE.hoverColor = Color.orange.darker().darker();
