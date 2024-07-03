@@ -127,8 +127,8 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-		speed = speed * 1.001f;
-		
+		speed = speed + 0.01f;	  //Linear
+		//speed = speed * 1.001f; //Exponentiel
 		
 		position = position.add(velocity.multiply(speed));
 
