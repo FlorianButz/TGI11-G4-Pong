@@ -136,7 +136,7 @@ public class ParticleSystem extends GameObject {
 		}
 
 		List<Particle> removeParticles = new ArrayList<Particle>();
-		for(Particle p : particles) {
+		for(Particle p : new ArrayList<Particle>(particles)) {
 			Vector3 vel = p.velocity;
 			p.position.x += vel.x;
 			p.position.y += vel.y;

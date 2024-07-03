@@ -6,14 +6,16 @@ import java.util.List;
 
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.PongBall;
+import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIObject;
+import de.demoncore.gui.GUIRectangle;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.TextAlignment;
-import de.demoncore.scenes.shop.BallColors;
 import de.demoncore.utils.Resources;
 
 public class BallSkinsMenu extends GUIMenu {
@@ -28,16 +30,26 @@ public class BallSkinsMenu extends GUIMenu {
 	private GUIButton option2Button;
 	private GUIButton option3Button;
 	private GUIButton option4Button;
+	private GUIRectangle option1Preview;
+	private GUIRectangle option2Preview;
+	private GUIRectangle option3Preview;
+	private GUIRectangle option4Preview;
+	private GUIText currency;
 	
 	@Override
 	protected List<GUIObject> addMenuContent() {
 	
 		List<GUIObject> guiObjects = new ArrayList<GUIObject>();
 		
-		GUIText title = new GUIText(75, 50, Translation.literal("Shop"), Resources.uiFont.deriveFont(100F), Color.white);
+		GUIText title = new GUIText(75, 125, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(100F), Color.white);
 		title.alignment = GUIAlignment.TopLeft;
 		title.SetTextAlignment(TextAlignment.Left);
 		guiObjects.add(title);
+
+		currency = new GUIText(-75, 125, Translation.literal("Pong Taler: " + ShopValues.shopData.getPlayerMoney()), Resources.uiFont.deriveFont(100F), Color.white);
+		currency.alignment = GUIAlignment.TopRight;
+		currency.SetTextAlignment(TextAlignment.Right);
+		guiObjects.add(currency);
 		
 		option1Button = new GUIButton(getX(0), posY, buttonWidth, 650, Translation.literal(""), Resources.uiFont, new GUIButtonClickEvent() {
 			@Override
@@ -53,7 +65,9 @@ public class BallSkinsMenu extends GUIMenu {
 		option1Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option1Text);
 
-
+		option1Preview = new GUIRectangle(getX(0), 0, 150, 150, Color.white);
+		guiObjects.add(option1Preview);
+		
 		option2Button = new GUIButton(getX(1), posY, buttonWidth, 650, Translation.literal(""), Resources.uiFont, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -68,6 +82,9 @@ public class BallSkinsMenu extends GUIMenu {
 		option2Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option2Text);
 		
+		option2Preview = new GUIRectangle(getX(1), 0, 150, 150, Color.white);
+		guiObjects.add(option2Preview);
+		
 		option3Button = new GUIButton(getX(2), posY, buttonWidth, 650, Translation.literal(""), Resources.uiFont, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
@@ -81,6 +98,9 @@ public class BallSkinsMenu extends GUIMenu {
 		GUIText option3Text = new GUIText(getX(2), 400 + posY, Translation.get("color.yellow"), Resources.uiFont.deriveFont(45F), Color.white);
 		option3Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option3Text);
+
+		option3Preview = new GUIRectangle(getX(2), 0, 150, 150, Color.white);
+		guiObjects.add(option3Preview);
 		
 		option4Button = new GUIButton(getX(3), posY, buttonWidth, 650, Translation.literal(""), Resources.uiFont, new GUIButtonClickEvent() {
 			@Override
@@ -96,6 +116,13 @@ public class BallSkinsMenu extends GUIMenu {
 		option4Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option4Text);
 
+		option4Preview = new GUIRectangle(getX(3), 0, 150, 150, Color.white);
+		guiObjects.add(option4Preview);
+
+		option1Preview.alignment = GUIAlignment.Center;
+		option2Preview.alignment = GUIAlignment.Center;
+		option3Preview.alignment = GUIAlignment.Center;
+		option4Preview.alignment = GUIAlignment.Center;
 		
 		option1Button.normalColor = new Color(1, 1, 1, 0.15f);
 		option2Button.normalColor = new Color(1, 1, 1, 0.15f);
@@ -108,13 +135,20 @@ public class BallSkinsMenu extends GUIMenu {
 	@Override
 	public void update() {
 		super.update();
-	
+		
 		if(option1Button != null &&
 				option2Button != null &&
 				option3Button != null &&
 				option4Button != null) {
 
+			option1Preview.color = Color.white;
+			option2Preview.color = Color.red;
+			option3Preview.color = Color.yellow;
+			option4Preview.color = PongBall.regenbogen();
+			
 			clearCol();
+			
+			currency.SetText(Translation.literal("Pong Taler: " + ShopValues.shopData.getPlayerMoney()));
 			
 			switch (ShopValues.shopData.activeBallSkin) {
 			case White:
