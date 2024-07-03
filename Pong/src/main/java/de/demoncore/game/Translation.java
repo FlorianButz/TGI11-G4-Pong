@@ -128,8 +128,8 @@ public class Translation {
 		englishTranslation.put("pong.back", "Back to Main Menu");
 		
 
-		germanTranslation.put("shop.pedals", "Schlaeger");
-		englishTranslation.put("shop.pedals", "Pedal");
+		germanTranslation.put("shop.pedals", "Schlaeger Skins");
+		englishTranslation.put("shop.pedals", "Pedal skins");
 
 		germanTranslation.put("shop.ballskins", "Ball Skins");
 		englishTranslation.put("shop.ballskins", "Ball skins");

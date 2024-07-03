@@ -120,12 +120,21 @@ public class Resources {
 
 		Logger.logInfo("Lade Ressourcen: Lade Musik");
 		
+		/*
 		ambienceDark1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Gone.mp3"));
 		ambienceDark2 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/TheLastLight.mp3"));
 		ambienceFast1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/NearTheEnd.mp3"));
 		ambienceHappy1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/G4Pong_HappyOrchestra.mp3"));
 		ambienceMysterious1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/FarAway.mp3"));
 		sneakySnitch = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/SneakySnitch.mp3"));
+		*/
+
+		ambienceDark1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
+		ambienceDark2 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
+		ambienceFast1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
+		ambienceHappy1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
+		ambienceMysterious1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
+		sneakySnitch = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
 		
 		Logger.logMessage("Laden der Musik Erfolgreich!");
 	}

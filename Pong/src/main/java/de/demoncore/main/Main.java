@@ -14,7 +14,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "0.3.152a";
+	public static String version = "0.5.152a";
 	public static String gameName = "Pong auf Crack";
 	
 	boolean quickLoad = true; // Nachher auf false setzten
@@ -25,10 +25,10 @@ public class Main {
 
 		// Initialisiere Assets
 
-		Resources.loadSprites();
-		Resources.loadFonts();
 		Resources.loadAudio();
 		Resources.loadDialog();
+		Resources.loadSprites();
+		Resources.loadFonts();
 		
 		Settings.LoadAllSettings();
 		ShopValues.LoadAllSettings();
