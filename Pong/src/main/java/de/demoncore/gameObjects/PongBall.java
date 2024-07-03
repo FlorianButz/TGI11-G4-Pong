@@ -18,6 +18,7 @@ import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 import de.demoncore.scenes.shop.BallColors;
+import de.demoncore.scenes.shopnew.ShopValues;
 
 public class PongBall extends GameObject {
 
@@ -95,11 +96,34 @@ public class PongBall extends GameObject {
 		SceneManager.getActiveScene().destroyObject(sfxSource);
 	}
 
+	
+	public static Color regenbogen() {
+		return GameMath.lerpColor(Color.pink, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+	}
 	@Override
-	public void update() {
+		public void update() {
 		super.update();
 		
-		color = /*Farbe.Farbe();*/ GameMath.lerpColor(Color.pink, Color.DARK_GRAY, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+		
+        switch (ShopValues.shopData.activeBallSkin) {
+        case White:
+            color = color.white;
+            break;
+        case Red:
+           color = color.red;
+            break;
+        case Yellow:
+            color = color.pink;
+            break;
+        case Rainbow:
+        	color = regenbogen();
+            break;
+
+        default:
+            break;
+        }    
+        
+
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			

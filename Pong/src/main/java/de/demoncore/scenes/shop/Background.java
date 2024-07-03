@@ -15,7 +15,7 @@ public class Background extends AdvencedShopScene {
 		
 		
 		
-		GUIButton btn_1 = new GUIButton(-600, -400, 200, 300, Translation.get("Select"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton btn_1 = new GUIButton(-600, -400, 200, 300, Translation.get("White"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
