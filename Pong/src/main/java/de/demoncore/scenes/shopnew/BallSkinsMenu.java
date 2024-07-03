@@ -41,12 +41,12 @@ public class BallSkinsMenu extends GUIMenu {
 	
 		List<GUIObject> guiObjects = new ArrayList<GUIObject>();
 		
-		GUIText title = new GUIText(75, 125, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(100F), Color.white);
+		GUIText title = new GUIText(75, 125, Translation.get("shop.ballskins"), Resources.uiFont.deriveFont(85f), Color.white);
 		title.alignment = GUIAlignment.TopLeft;
 		title.SetTextAlignment(TextAlignment.Left);
 		guiObjects.add(title);
 
-		currency = new GUIText(-75, 125, Translation.literal("Pong Taler: " + ShopValues.shopData.getPlayerMoney()), Resources.uiFont.deriveFont(100F), Color.white);
+		currency = new GUIText(-75, 125, Translation.literal("Pong Taler: " + ShopValues.shopData.getPlayerMoney()), Resources.uiFont.deriveFont(85f), Color.white);
 		currency.alignment = GUIAlignment.TopRight;
 		currency.SetTextAlignment(TextAlignment.Right);
 		guiObjects.add(currency);
@@ -119,10 +119,60 @@ public class BallSkinsMenu extends GUIMenu {
 		option4Preview = new GUIRectangle(getX(3), 0, 150, 150, Color.white);
 		guiObjects.add(option4Preview);
 
+		GUIButton buyOption1 = new GUIButton(getX(0), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallSkins.White.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+			}
+		});
+		buyOption1.alignment = GUIAlignment.Center;
+
+		GUIButton buyOption2 = new GUIButton(getX(1), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallSkins.White.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+			}
+		});
+		buyOption2.alignment = GUIAlignment.Center;
+		
+		GUIButton buyOption3 = new GUIButton(getX(2), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallSkins.White.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+			}
+		});
+		buyOption3.alignment = GUIAlignment.Center;
+		
+		GUIButton buyOption4 = new GUIButton(getX(3), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallSkins.White.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+			}
+		});
+		buyOption4.alignment = GUIAlignment.Center;
+
+		if((ShopValues.shopData.unlockedBallSkins & 0b00000001) == 0)
+			guiObjects.add(buyOption1);
+		if((ShopValues.shopData.unlockedBallSkins & 0b00000010) == 0)
+			guiObjects.add(buyOption2);
+		if((ShopValues.shopData.unlockedBallSkins & 0b00000100) == 0)
+			guiObjects.add(buyOption3);
+		if((ShopValues.shopData.unlockedBallSkins & 0b00001000) == 0)
+			guiObjects.add(buyOption4);
+
 		option1Preview.alignment = GUIAlignment.Center;
 		option2Preview.alignment = GUIAlignment.Center;
 		option3Preview.alignment = GUIAlignment.Center;
 		option4Preview.alignment = GUIAlignment.Center;
+		option1Preview.collisionEnabled = false;
+		option2Preview.collisionEnabled = false;
+		option3Preview.collisionEnabled = false;
+		option4Preview.collisionEnabled = false;
+
+		buyOption1.normalColor = new Color(1, 1, 1, 0.15f);
+		buyOption2.normalColor = new Color(1, 1, 1, 0.15f);
+		buyOption3.normalColor = new Color(1, 1, 1, 0.15f);
+		buyOption4.normalColor = new Color(1, 1, 1, 0.15f);
 		
 		option1Button.normalColor = new Color(1, 1, 1, 0.15f);
 		option2Button.normalColor = new Color(1, 1, 1, 0.15f);

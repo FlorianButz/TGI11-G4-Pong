@@ -19,7 +19,7 @@ import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
 
-	int xSpacing = 100;
+	int xSpacing = 150;
 	float amountBtn = 3f;
 	int buttonWidth = 325;
 	
@@ -77,7 +77,7 @@ public class ShopScene extends BaseScene {
 		spawnAnimationText.alignment = GUIAlignment.Center;
 		addObject(spawnAnimationText);
 
-		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("shop.back"), Resources.uiFont.deriveFont(25F), new GUIButtonClickEvent() {
+		GUIButton back = new GUIButton(0, -125, 800, 50, Translation.get("shop.back"), Resources.uiFont.deriveFont(15F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

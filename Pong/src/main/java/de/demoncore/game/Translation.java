@@ -142,6 +142,9 @@ public class Translation {
 
 		germanTranslation.put("shop.back", "Zurueck");
 		englishTranslation.put("shop.back", "Back");
+		
+		germanTranslation.put("shop.buy", "Kaufen");
+		englishTranslation.put("shop.buy", "Buy");
 
 		germanTranslation.put("color.white", "Weiss");
 		englishTranslation.put("color.white", "White");
