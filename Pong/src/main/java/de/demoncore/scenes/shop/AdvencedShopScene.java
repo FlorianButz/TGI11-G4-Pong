@@ -9,6 +9,7 @@ import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIRectangle;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.scenes.shopnew.ShopScene;
 import de.demoncore.utils.Resources;
 
 public class AdvencedShopScene extends BaseScene{
