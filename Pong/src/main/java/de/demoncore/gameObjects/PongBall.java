@@ -113,7 +113,7 @@ public class PongBall extends GameObject {
            color = color.red;
             break;
         case Yellow:
-            color = color.pink;
+            color = color.YELLOW;
             break;
         case Rainbow:
         	color = regenbogen();
