@@ -104,7 +104,7 @@ public class PongBall extends GameObject {
 		public void update() {
 		super.update();
 		
-		
+			
         switch (ShopValues.shopData.activeBallSkin) {
         case White:
             color = color.white;
@@ -113,7 +113,7 @@ public class PongBall extends GameObject {
            color = color.red;
             break;
         case Yellow:
-            color = color.pink;
+            color = color.YELLOW;
             break;
         case Rainbow:
         	color = regenbogen();
@@ -127,8 +127,12 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-		speed = speed + 0.01f;	  //Linear
-		//speed = speed * 1.001f; //Exponentiel
+		if (speed < 30f) {
+			speed = speed + 0.01f;	  //Linear
+			//speed = speed * 1.001f; //Exponentiel
+		}
+		
+		System.out.println(speed);
 		
 		position = position.add(velocity.multiply(speed));
 
