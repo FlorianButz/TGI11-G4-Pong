@@ -104,7 +104,7 @@ public class PongBall extends GameObject {
 		public void update() {
 		super.update();
 		
-		
+			
         switch (ShopValues.shopData.activeBallSkin) {
         case White:
             color = color.white;
