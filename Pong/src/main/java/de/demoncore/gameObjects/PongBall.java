@@ -129,7 +129,7 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-		if (speed < 50f) {
+		if (speed < 30f) {
 			speed = speed + 0.01f;	  //Linear
 			//speed = speed * 1.001f; //Exponentiel
 		}
