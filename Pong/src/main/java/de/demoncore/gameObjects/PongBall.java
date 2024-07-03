@@ -99,11 +99,13 @@ public class PongBall extends GameObject {
 	public void update() {
 		super.update();
 		
-		color = /*Farbe.Farbe();*/ GameMath.lerpColor(Color.WHITE, Color.DARK_GRAY, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+		color = /*Farbe.Farbe();*/ GameMath.lerpColor(Color.pink, Color.DARK_GRAY, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 			
-
+		speed = speed * 1.001f;
+		
+		
 		position = position.add(velocity.multiply(speed));
 
 		if(player1.getBoundingBox().intersects(getBoundingBox()) || player2.getBoundingBox().intersects(getBoundingBox())) {
@@ -202,7 +204,7 @@ public class PongBall extends GameObject {
 		positions = new ArrayList<Vector3>(Collections.nCopies(50, Vector3.zero()));
 
 		PongSpawnEffect.callEffect();
-		
+		speed = 9f;
 		moveTimer();		
 	}
 
