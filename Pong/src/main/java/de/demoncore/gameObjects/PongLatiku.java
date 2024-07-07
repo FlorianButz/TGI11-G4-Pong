@@ -1,6 +1,8 @@
 package de.demoncore.gameObjects;
 
 import de.demoncore.game.animator.Easing.EasingType;
+import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.shopnew.SpawnAnimations;
 import de.demoncore.game.PongSpawnEffect;
 import de.demoncore.game.PongSpawnEffect.PongSpawnEffectListener;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
@@ -16,6 +18,7 @@ public class PongLatiku extends SpriteObject implements PongSpawnEffectListener 
 		super(0, 0, 100, 100, Resources.latiku);
 
 		PongSpawnEffect.listeners.add(this);
+		enableRendering = false;
 	}
 	
 	@Override
@@ -26,6 +29,9 @@ public class PongLatiku extends SpriteObject implements PongSpawnEffectListener 
 	}
 	
 	public void spawnEffect() {
+		if(ShopValues.shopData.activeSpawnAnimation != SpawnAnimations.Latiku) return;
+		
+		enableRendering = true;
 		Vector3Animator positionOut = new Vector3Animator(new Vector3(-35, -200), new Vector3(1250, -400), 1.75f, EasingType.InOutQuint);
 		positionOut.setOnUpdate(new AnimatorUpdateEvent() {
 		@Override
@@ -33,6 +39,13 @@ public class PongLatiku extends SpriteObject implements PongSpawnEffectListener 
 			super.onUpdate(value);
 			setPosition(value);
 		}
+		});
+		positionOut.setOnComplete(new AnimatorOnCompleteEvent() {
+			@Override
+			public void onComplete() {
+				super.onComplete();
+				enableRendering = false;
+			}
 		});
 		
 		Vector3Animator positionIn = new Vector3Animator(new Vector3(-1250, -400), new Vector3(-35, -200), 2f, EasingType.InOutQuint);
@@ -63,8 +76,5 @@ public class PongLatiku extends SpriteObject implements PongSpawnEffectListener 
 		}
 		});
 		positionIn.play();
-	}
-
-	
-	
+	}	
 }

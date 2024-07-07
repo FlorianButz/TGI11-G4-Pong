@@ -1,20 +1,22 @@
 package de.demoncore.scenes.shopnew;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.demoncore.game.SceneManager;
-import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIImageButton;
+import de.demoncore.gui.GUIMenu;
+import de.demoncore.gui.GUIObject;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.GUITheme;
-import de.demoncore.gui.GUITheme.Theme;
+import de.demoncore.gui.GUITextArea;
+import de.demoncore.gui.TextAlignment;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.scenes.MainMenu;
-import de.demoncore.scenes.shop.BallColors;
 import de.demoncore.utils.Resources;
 
 public class ShopScene extends BaseScene {
@@ -32,6 +34,31 @@ public class ShopScene extends BaseScene {
 		GUIText title = new GUIText(0, 125, Translation.literal("Shop"), Resources.dialogFont.deriveFont(125F), Color.white);
 		title.alignment = GUIAlignment.TopMiddle;
 		addObject(title);
+		
+		GUIMenu info = new GUIMenu() {
+			@Override
+			protected List<GUIObject> addMenuContent() {
+				List<GUIObject> objects = new ArrayList<GUIObject>();
+
+				GUIText infoText = new GUIText(0, 0, Translation.get("shop.info"), Resources.uiFont.deriveFont(35F), Color.white);
+				infoText.alignment = GUIAlignment.Center;
+				infoText.SetTextAlignment(TextAlignment.Center);
+				objects.add(infoText);
+				
+				return objects;
+			}
+		};
+		GUIImageButton infoBtn = new GUIImageButton(-125, 125, 75, 75, 100, Resources.info_icon, Resources.info_icon, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				info.ShowMenu();
+			}
+		});
+		infoBtn.alignment = GUIAlignment.TopRight;
+		infoBtn.normalColor = new Color(0.5f, 0.5f, 0.5f, 0.25f);
+		infoBtn.currentColor = infoBtn.normalColor;
+		addObject(infoBtn);
 		
 		BallSkinsMenu s = new BallSkinsMenu();
 		addObject(s);
@@ -51,7 +78,7 @@ public class ShopScene extends BaseScene {
 
 		BallTrailsMenu t = new BallTrailsMenu();
 		addObject(t);
-		GUIImageButton ballTrailsButton = new GUIImageButton(getX(1), posY, buttonWidth, 650, 150, Resources.shop_balltrail, Resources.shop_balltrail, new GUIButtonClickEvent() {
+		GUIImageButton ballTrailsButton = new GUIImageButton(getX(1), posY, buttonWidth, 650, 150, Resources.shop_particletrailicon, Resources.shop_particletrailicon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -65,7 +92,14 @@ public class ShopScene extends BaseScene {
 		ballTrailsText.alignment = GUIAlignment.Center;
 		addObject(ballTrailsText);
 		
+		PedalSkinsMenu p = new PedalSkinsMenu();
+		addObject(p);
 		GUIImageButton pedalSkinsButton = new GUIImageButton(getX(2), posY, buttonWidth, 650, 150, Resources.shop_pedalskin, Resources.shop_pedalskin, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				p.ShowMenu();
+			}
 		});
 		pedalSkinsButton.alignment = GUIAlignment.Center;
 		addObject(pedalSkinsButton);
@@ -74,7 +108,14 @@ public class ShopScene extends BaseScene {
 		pedalSkinsText.alignment = GUIAlignment.Center;
 		addObject(pedalSkinsText);
 		
+		SpawnAnimationsMenu sm = new SpawnAnimationsMenu();
+		addObject(sm);
 		GUIImageButton spawnAnimationButton = new GUIImageButton(getX(3), posY, buttonWidth, 650, 150, Resources.shop_ballspawn, Resources.shop_ballspawn, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				sm.ShowMenu();
+			}
 		});
 		spawnAnimationButton.alignment = GUIAlignment.Center;
 		addObject(spawnAnimationButton);

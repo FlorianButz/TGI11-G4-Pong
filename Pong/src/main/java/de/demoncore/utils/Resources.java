@@ -62,6 +62,19 @@ public class Resources {
 	public static Sprite shop_balltrail;
 	public static Sprite shop_pedalskin;
 
+	public static Sprite shop_notrailicon;
+	public static Sprite shop_simpletrailicon;
+	public static Sprite shop_particletrailicon;
+	public static Sprite shop_beamtrailicon;
+
+	public static Sprite shop_whitepedalicon;
+	public static Sprite shop_linespedalicon;
+	public static Sprite shop_wavespedalicon;
+	public static Sprite shop_dotspedalicon;
+
+	public static Sprite blocked_icon;
+	public static Sprite info_icon;
+	
 	public static DialogLine testLine;
 	public static DialogLine signTest1;
 	
@@ -169,6 +182,19 @@ public class Resources {
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();
 		shop_balltrail = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallTrailIcon.png")).load();
 		shop_ballspawn = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSpawnIcon.png")).load();
+
+		shop_notrailicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_NoTrailIcon.png")).load();
+		shop_simpletrailicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_SimpleTrailIcon.png")).load();
+		shop_particletrailicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_ParticleTrailIcon.png")).load();
+		shop_beamtrailicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BeamTrailIcon.png")).load();
+		
+		shop_whitepedalicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_WhitePedal.png")).load();
+		shop_linespedalicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_LinesPedal.png")).load();
+		shop_wavespedalicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_WavesPedal.png")).load();
+		shop_dotspedalicon	= new Sprite(Main.class.getResourceAsStream("/textures/Shop_DotsPedal.png")).load();
+
+		blocked_icon = new Sprite(Main.class.getResourceAsStream("/textures/BlockedIcon.png")).load();
+		info_icon = new Sprite(Main.class.getResourceAsStream("/textures/InfoIcon.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

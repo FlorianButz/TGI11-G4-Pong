@@ -3,8 +3,9 @@ package de.demoncore.scenes.shopnew;
 public enum PedalSkins {
 
 	White(0),
-	BlueParticles(40),
-	RedParticles(50);
+	Lines(40),
+	Waves(50),
+	Dots(65);
 	
 	private int numVal;
 

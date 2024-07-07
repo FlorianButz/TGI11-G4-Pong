@@ -21,7 +21,7 @@ import de.demoncore.gui.Gui;
 import de.demoncore.gui.TextAlignment;
 import de.demoncore.utils.Resources;
 
-public class BallTrailsMenu extends GUIMenu {
+public class PedalSkinsMenu extends GUIMenu {
 
 
 	int xSpacing = 100;
@@ -50,85 +50,85 @@ public class BallTrailsMenu extends GUIMenu {
 		currency.SetTextAlignment(TextAlignment.Right);
 		guiObjects.add(currency);
 		
-		option1Button = new GUIImageButton(getX(0), posY, buttonWidth, 650, 150, Resources.shop_notrailicon, Resources.shop_notrailicon, new GUIButtonClickEvent() {
+		option1Button = new GUIImageButton(getX(0), posY, buttonWidth, 650, 450, Resources.shop_whitepedalicon, Resources.shop_whitepedalicon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallTrails & 0b00000001) != 0) {					
-					ShopValues.shopData.activeBallTrail = BallTrails.None;
+				if((ShopValues.shopData.unlockedPedalSkins & 0b00000001) != 0) {					
+					ShopValues.shopData.activePedalSkin = PedalSkins.White;
 				}
 			}
 		});
 		option1Button.alignment = GUIAlignment.Center;
 		
-		GUIText option1Text = new GUIText(getX(0), 400 + posY, Translation.get("trails.none"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option1Text = new GUIText(getX(0), 400 + posY, Translation.get("pedals.white"), Resources.uiFont.deriveFont(45F), Color.white);
 		option1Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option1Text);
 		
-		option2Button = new GUIImageButton(getX(1), posY, buttonWidth, 650,  150, Resources.shop_simpletrailicon, Resources.shop_simpletrailicon, new GUIButtonClickEvent() {
+		option2Button = new GUIImageButton(getX(1), posY, buttonWidth, 650,  450, Resources.shop_linespedalicon, Resources.shop_linespedalicon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallTrails & 0b00000010) != 0) {					
-					ShopValues.shopData.activeBallTrail = BallTrails.Simple;
+				if((ShopValues.shopData.unlockedPedalSkins & 0b00000010) != 0) {					
+					ShopValues.shopData.activePedalSkin = PedalSkins.Lines;
 				}
 			}
 		});
 		option2Button.alignment = GUIAlignment.Center;
 		
-		GUIText option2Text = new GUIText(getX(1), 400 + posY, Translation.get("trails.simple"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option2Text = new GUIText(getX(1), 400 + posY, Translation.get("pedals.lines"), Resources.uiFont.deriveFont(45F), Color.white);
 		option2Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option2Text);
 		
-		option3Button = new GUIImageButton(getX(2), posY, buttonWidth, 650, 150, Resources.shop_particletrailicon, Resources.shop_particletrailicon, new GUIButtonClickEvent() {
+		option3Button = new GUIImageButton(getX(2), posY, buttonWidth, 650, 450, Resources.shop_wavespedalicon, Resources.shop_wavespedalicon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallTrails & 0b00000100) != 0) {					
-					ShopValues.shopData.activeBallTrail = BallTrails.Particles;
+				if((ShopValues.shopData.unlockedPedalSkins & 0b00000100) != 0) {					
+					ShopValues.shopData.activePedalSkin = PedalSkins.Waves;
 				}
 			}
 		});
 		option3Button.alignment = GUIAlignment.Center;
 		
-		GUIText option3Text = new GUIText(getX(2), 400 + posY, Translation.get("trails.particles"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option3Text = new GUIText(getX(2), 400 + posY, Translation.get("pedals.waves"), Resources.uiFont.deriveFont(45F), Color.white);
 		option3Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option3Text);
 		
-		option4Button = new GUIImageButton(getX(3), posY, buttonWidth, 650, 150, Resources.shop_beamtrailicon, Resources.shop_beamtrailicon, new GUIButtonClickEvent() {
+		option4Button = new GUIImageButton(getX(3), posY, buttonWidth, 650, 450, Resources.shop_dotspedalicon, Resources.shop_dotspedalicon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				if((ShopValues.shopData.unlockedBallTrails & 0b00001000) != 0) {
-					ShopValues.shopData.activeBallTrail = BallTrails.Beam;
+				if((ShopValues.shopData.unlockedPedalSkins & 0b00001000) != 0) {					
+					ShopValues.shopData.activePedalSkin = PedalSkins.Dots;
 				}
 			}
 		});
 		option4Button.alignment = GUIAlignment.Center;
 		
-		GUIText option4Text = new GUIText(getX(3), 400 + posY, Translation.get("trails.beam"), Resources.uiFont.deriveFont(45F), Color.white);
+		GUIText option4Text = new GUIText(getX(3), 400 + posY, Translation.get("pedals.dots"), Resources.uiFont.deriveFont(45F), Color.white);
 		option4Text.alignment = GUIAlignment.Center;
 		guiObjects.add(option4Text);
 
-		GUIButton buyOption1 = new GUIButton(getX(0), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallTrails.None.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), null);
+		GUIButton buyOption1 = new GUIButton(getX(0), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + PedalSkins.White.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), null);
 		buyOption1.alignment = GUIAlignment.Center;
 		buyOption1.setButtonEvent(new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallTrails.None.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallTrails.None.getNumVal());
+				if(PedalSkins.White.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-PedalSkins.White.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000001);
+				ShopValues.shopData.unlockedPedalSkins = (byte) (ShopValues.shopData.unlockedPedalSkins | 0b00000001);
 				SceneManager.getActiveScene().destroyObject(buyOption1);
 			}
 		});
 		
-		GUIButton buyOption2 = new GUIButton(getX(1), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallTrails.Simple.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
+		GUIButton buyOption2 = new GUIButton(getX(1), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + PedalSkins.Lines.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -140,18 +140,18 @@ public class BallTrailsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallTrails.Simple.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallTrails.Simple.getNumVal());
+				if(PedalSkins.Lines.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-PedalSkins.Lines.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000010);
+				ShopValues.shopData.unlockedPedalSkins = (byte) (ShopValues.shopData.unlockedPedalSkins | 0b00000010);
 				SceneManager.getActiveScene().destroyObject(buyOption2);
 			}
 		});
 		
-		GUIButton buyOption3 = new GUIButton(getX(2), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallTrails.Particles.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
+		GUIButton buyOption3 = new GUIButton(getX(2), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + PedalSkins.Waves.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -163,18 +163,18 @@ public class BallTrailsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 
-				if(BallTrails.Particles.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallTrails.Particles.getNumVal());
+				if(PedalSkins.Waves.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-PedalSkins.Waves.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00000100);
+				ShopValues.shopData.unlockedPedalSkins = (byte) (ShopValues.shopData.unlockedPedalSkins | 0b00000100);
 				SceneManager.getActiveScene().destroyObject(buyOption3);
 			}
 		});
 		
-		GUIButton buyOption4 = new GUIButton(getX(3), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + BallTrails.Beam.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
+		GUIButton buyOption4 = new GUIButton(getX(3), posY + 275, 250, 50, Translation.literal(Translation.get("shop.buy").Get() + " (" + PedalSkins.Dots.getNumVal() + " Pong Taler)"), Resources.uiFont.deriveFont(18F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -186,13 +186,13 @@ public class BallTrailsMenu extends GUIMenu {
 			public void ButtonClick() {
 				super.ButtonClick();
 				
-				if(BallTrails.Beam.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
-					ShopValues.shopData.addPlayerMoney(-BallTrails.Beam.getNumVal());
+				if(PedalSkins.Dots.getNumVal() <= ShopValues.shopData.getPlayerMoney()) {
+					ShopValues.shopData.addPlayerMoney(-PedalSkins.Dots.getNumVal());
 				}else {
 					return;
 				}
 				
-				ShopValues.shopData.unlockedBallTrails = (byte) (ShopValues.shopData.unlockedBallTrails | 0b00001000);
+				ShopValues.shopData.unlockedPedalSkins = (byte) (ShopValues.shopData.unlockedPedalSkins | 0b00001000);
 				SceneManager.getActiveScene().destroyObject(buyOption4);
 			}
 		});
@@ -203,13 +203,13 @@ public class BallTrailsMenu extends GUIMenu {
 		guiObjects.add(option3Button);
 		guiObjects.add(option4Button);
 		
-		if((ShopValues.shopData.unlockedBallTrails & 0b00000001) == 0)
+		if((ShopValues.shopData.unlockedPedalSkins & 0b00000001) == 0)
 			guiObjects.add(buyOption1);
-		if((ShopValues.shopData.unlockedBallTrails & 0b00000010) == 0)
+		if((ShopValues.shopData.unlockedPedalSkins & 0b00000010) == 0)
 			guiObjects.add(buyOption2);
-		if((ShopValues.shopData.unlockedBallTrails & 0b00000100) == 0)
+		if((ShopValues.shopData.unlockedPedalSkins & 0b00000100) == 0)
 			guiObjects.add(buyOption3);
-		if((ShopValues.shopData.unlockedBallTrails & 0b00001000) == 0)
+		if((ShopValues.shopData.unlockedPedalSkins & 0b00001000) == 0)
 			guiObjects.add(buyOption4);
 
 		option1Text.color = new Color(1, 1, 1, 0.75f);
@@ -248,17 +248,17 @@ public class BallTrailsMenu extends GUIMenu {
 			
 			currency.SetText(Translation.literal("Pong Taler: " + ShopValues.shopData.getPlayerMoney()));
 			
-			switch (ShopValues.shopData.activeBallTrail) {
-			case None:
+			switch (ShopValues.shopData.activePedalSkin) {
+			case White:
 				option1Button.normalColor = new Color(1f, 0.8f, 0.1f, 0.5f);
 				break;
-			case Simple:
+			case Lines:
 				option2Button.normalColor = new Color(1f, 0.8f, 0.1f, 0.5f);
 				break;
-			case Particles:
+			case Waves:
 				option3Button.normalColor = new Color(1f, 0.8f, 0.1f, 0.5f);
 				break;
-			case Beam:
+			case Dots:
 				option4Button.normalColor = new Color(1f, 0.8f, 0.1f, 0.5f);
 				break;
 

@@ -1,20 +1,20 @@
 package de.demoncore.gameObjects;
 
 
-import java.awt.Color;
+import java.awt.Graphics2D;
 
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;
+import de.demoncore.scenes.shopnew.PedalSkins;
+import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
-import de.demoncore.scenes.shop.SchleagerColor;
 
 public class PongPlayer extends RigidBody {
 
-	SchleagerColor Farb = new SchleagerColor();
-	
 	public static float playerAcceleration = 15f; // Speed
 
 	public boolean isPlayer1 = true;
@@ -41,11 +41,25 @@ public class PongPlayer extends RigidBody {
 			addForce(geschwindigkeit);
 		}
 		
-		color = /*Farb.Farbe() */ Color.WHITE.brighter(); //temporär
-		
 		super.update();
 		
 		position.y = GameMath.clamp(position.y,(-Gui.GetScreenDimensions().y/2) + size.y / 2,(Gui.GetScreenDimensions().y/2) - size.y / 2);
 	}
 
+	@Override
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		super.draw(g2d, screenWidth, screenHeight);
+		
+		if(ShopValues.shopData.activePedalSkin == PedalSkins.Waves) {
+			g2d.drawImage(Resources.shop_wavespedalicon.getTexture(), (int)position.x - (int)getScale().y / 2, (int)getPosition().y,
+					(int)getScale().y, (int)getScale().y, null);
+		}else if(ShopValues.shopData.activePedalSkin == PedalSkins.Lines) {
+			g2d.drawImage(Resources.shop_linespedalicon.getTexture(), (int)position.x - (int)getScale().y / 2, (int)getPosition().y,
+					(int)getScale().y, (int)getScale().y, null);
+		}else if(ShopValues.shopData.activePedalSkin == PedalSkins.Dots) {
+			g2d.drawImage(Resources.shop_dotspedalicon.getTexture(), (int)position.x - (int)getScale().y / 2, (int)getPosition().y,
+					(int)getScale().y, (int)getScale().y, null);
+		}
+	}
+	
 }

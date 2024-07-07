@@ -3,8 +3,6 @@ package de.demoncore.scenes;
 import java.awt.Color;
 import java.awt.Font;
 
-import org.w3c.dom.ls.LSResourceResolver;
-
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
@@ -20,12 +18,8 @@ import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.GUIToggle;
 import de.demoncore.main.Main;
-import de.demoncore.scenes.shop.ShopScene;
-import de.demoncore.scenes.storymode.Dungeon;
 import de.demoncore.scenes.storymode.StorymodeMain;
-import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 

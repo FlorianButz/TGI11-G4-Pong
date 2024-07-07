@@ -1,5 +1,6 @@
 package de.demoncore.gameObjects;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -13,13 +14,13 @@ import de.demoncore.game.GameObject;
 import de.demoncore.game.PointSystem;
 import de.demoncore.game.PongSpawnEffect;
 import de.demoncore.game.SceneManager;
+import de.demoncore.scenes.shopnew.BallTrails;
+import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.shopnew.SpawnAnimations;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
-import de.demoncore.scenes.shop.BallColors;
-import de.demoncore.scenes.shopnew.BallTrails;
-import de.demoncore.scenes.shopnew.ShopValues;
 
 public class PongBall extends GameObject {
 
@@ -33,14 +34,14 @@ public class PongBall extends GameObject {
 
 	boolean isIntersectionWithPlayer = false;
 	boolean isMoving = false;
-	
-	BallColors Farbe = new BallColors();
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
 
 	public static PongBall getInstance() {
 		return instance;
 	}
+
+	ParticleSystem trail;
 
 	public PongBall(int posX, int posY, PongPlayer player1, PongPlayer player2) {
 		super(posX, posY, 25, 25);
@@ -54,9 +55,32 @@ public class PongBall extends GameObject {
 		sfxSource = new AudioSource(this).setSpacial(false);
 		SceneManager.getActiveScene().addObject(sfxSource);
 		sfxSource.SetVolume(0.65f);
-		
+
 		PongSpawnEffect.callEffect();
 		moveTimer();
+
+		trail = new ParticleSystem((int)this.position.x, (int)this.position.y);
+
+		trail.emitLoop = true;
+		trail.particleSpawnArea = new Vector3(10, 10, 10);
+		trail.particleGravity = 0;
+		trail.initialParticleEmitCount = 0;
+		trail.initialParticleEmitCountRandom = 0;
+		trail.emitPause = 2;
+
+		trail.emitChunk = 6;
+
+		trail.particleColorFirst = new Color(1, 1, 1, 0.2f);
+		trail.particleColorSecond = new Color(1, 1, 1, 0.2f);
+
+		trail.initialParticleSpeedMin = Vector3.one().multiply(-1);
+		trail.initialParticleSpeedMax = Vector3.one();
+		trail.particleSpeedMultiplier = 0.45f;
+
+		trail.particleLifetime = 50;
+		trail.emitLoop = false;
+		trail.Init();
+		SceneManager.getActiveScene().addObject(trail);
 	}
 
 	void moveTimer() {
@@ -65,11 +89,14 @@ public class PongBall extends GameObject {
 		Thread timer = new Thread("ball.timer") {
 			public void run() {
 				try {
-					Thread.currentThread().sleep(3000);
+					if(ShopValues.shopData.activeSpawnAnimation != SpawnAnimations.None)
+						sleep(3000);
+					else
+						sleep(1000);
 				} catch (InterruptedException e) {
 					Logger.logError("Ball sleep Fehler", e);
 				}
-				
+
 				isMoving = true;
 			};
 		};
@@ -82,20 +109,26 @@ public class PongBall extends GameObject {
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
+		trail.emitLoop = false;
+		trail.setPosition(position);
+
 		if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Simple) {
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.fillRect((int)positions.get(2).x, (int)positions.get(2).y, (int)size.x, (int)size.y);
 			g2d.setColor(new Color(1, 1, 1, 0.05f));
 			g2d.fillRect((int)positions.get(4).x, (int)positions.get(4).y, (int)size.x, (int)size.y);
 		}
-		else if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Particles) {
+		else if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Beam) {
 			for(int i = 0; i < positions.size(); i++) {
-				g2d.setColor(GameMath.lerpColor(color, new Color(0f, 0f, 0f, 0f), (float)i / positions.size()));
-				g2d.drawLine((int)positions.get(GameMath.Clamp(i-1, 0, positions.size())).x,
-						(int)positions.get(GameMath.Clamp(i-1, 0, positions.size())).y,
-						(int)positions.get(GameMath.Clamp(i, 0, positions.size())).x,
-						(int)positions.get(GameMath.Clamp(i, 0, positions.size())).y);
+				g2d.setStroke(new BasicStroke(10f));
+				g2d.setColor(GameMath.lerpColor(color, new Color(0f, 0f, 0f, 0f), (float)(i) / positions.size()));
+				g2d.drawLine((int)positions.get(GameMath.Clamp(i / 8 -1, 0, positions.size())).x + (int)getScale().x / 2,
+						(int)positions.get(GameMath.Clamp(i / 8 -1, 0, positions.size())).y + (int)getScale().y / 2,
+						(int)positions.get(GameMath.Clamp(i / 8, 0, positions.size())).x + (int)getScale().x / 2,
+						(int)positions.get(GameMath.Clamp(i / 8, 0, positions.size())).y + (int)getScale().y / 2);
 			}
+		}else if(isMoving && ShopValues.shopData.activeBallTrail == BallTrails.Particles) {
+			trail.emitLoop = true;
 		}
 	}
 
@@ -106,49 +139,49 @@ public class PongBall extends GameObject {
 		SceneManager.getActiveScene().destroyObject(sfxSource);
 	}
 
-	
+
 	public static Color regenbogen() {
 		return GameMath.lerpColor(
 				GameMath.lerpColor(Color.magenta, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() *2)),
 				Color.cyan, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 	}
 	@Override
-		public void update() {
+	public void update() {
 		super.update();
-		
-			
-        switch (ShopValues.shopData.activeBallSkin) {
-        case White:
-            color = Color.white;
-            break;
-        case Red:
-           color = Color.red;
-            break;
-        case Yellow:
-            color = Color.YELLOW;
-            break;
-        case Rainbow:
-        	color = regenbogen();
-            break;
 
-        default:
-            break;
-        }    
-        
 
+		switch (ShopValues.shopData.activeBallSkin) {
+		case White:
+			color = Color.white;
+			break;
+		case Red:
+			color = Color.red;
+			break;
+		case Yellow:
+			color = Color.YELLOW;
+			break;
+		case Rainbow:
+			color = regenbogen();
+			break;
+
+		default:
+			break;
+		}    
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
-			
+
 		if (speed < 20f) {
-			speed = speed + 0.01f;	  //Linear
-			//speed = speed * 1.001f; //Exponentiel
+			speed = speed + 0.0025f;	  //Linear
 		}
 		if (speed > 30f) {
 			speed = 30f;
 		}
 		
-		position = position.add(velocity.multiply(speed));
+		position = position.add(velocity.multiply(speed)); 
+		// Wenn man sich ganz besonders fuehlt, Zeile mit dem replacen :
+		//position = position.add(velocity.multiply(speed).add(new Vector3((float)Math.random() * 98 - 14f, (float)Math.random() * 98 - 14f)));
 
+		
 		if(player1.getBoundingBox().intersects(getBoundingBox()) || player2.getBoundingBox().intersects(getBoundingBox())) {
 			if(!isIntersectionWithPlayer) {
 				isIntersectionWithPlayer = true;
@@ -177,7 +210,7 @@ public class PongBall extends GameObject {
 		Vector3 normal = new Vector3(-1, 0);
 
 		if (getPosition().x	<= 0) normal = normal.multiply(-1f);
-		
+
 		return normal;
 
 	}
@@ -239,14 +272,14 @@ public class PongBall extends GameObject {
 
 			spawnParticles();
 		}
-		
+
 		sfxSource.Play(Resources.pongGoal);
 		setPosition(Vector3.zero());
 		positions = new ArrayList<Vector3>(Collections.nCopies(50, Vector3.zero()));
 
 		PongSpawnEffect.callEffect();
 		speed = 9f;
-		moveTimer();		
+		moveTimer();
 	}
 
 	private void spawnParticles() {

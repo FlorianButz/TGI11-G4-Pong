@@ -169,6 +169,27 @@ public class Translation {
 
 		germanTranslation.put("trails.beam", "Beam");
 		englishTranslation.put("trails.beam", "Beam");
+		
+		germanTranslation.put("pedals.white", "Weiss");
+		englishTranslation.put("pedals.white", "White");
+
+		germanTranslation.put("pedals.lines", "Striche");
+		englishTranslation.put("pedals.lines", "Lines");
+
+		germanTranslation.put("pedals.waves", "Wellen");
+		englishTranslation.put("pedals.waves", "Waves");
+		
+		germanTranslation.put("pedals.dots", "Punkte");
+		englishTranslation.put("pedals.dots", "Dots");
+
+		germanTranslation.put("spawns.none", "Keine");
+		englishTranslation.put("spawns.none", "None");
+		
+		germanTranslation.put("spawns.latiku", "Latiku");
+		englishTranslation.put("spawns.latiku", "Latiku");
+	
+		germanTranslation.put("shop.info", "Pong Taler koennen im Einzelspieler durch Gewinnen des Spiels erlangt werden.");
+		englishTranslation.put("shop.info", "Pong Taler can be obtained in 1 Player Mode by winning the game.");
 	}
 
 	public static TranslationComponent get(String translationID) {
