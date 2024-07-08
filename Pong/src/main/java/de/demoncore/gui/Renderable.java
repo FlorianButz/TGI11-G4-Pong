@@ -14,44 +14,40 @@ import de.demoncore.game.Settings;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
-public class Renderable extends GameObject {
+public class Renderable {
+	
+	public Vector3 size;	// Gr��e
+	protected Vector3 position;	// Position
+
+	public Color color = Color.white;	// Farbe vom GameObject
+	
+	public Vector3 anchorPoint = new Vector3(0.5f, 0.5f);	// Der "Mittelpunkt" vom GameObject
 	
 	public Renderable(int posX, int posY, int width, int height) {
-		super(posX, posY, width, height);
-
-		collisionEnabled = false;
+		position = new Vector3(posX, posY);
+		size = new Vector3(width, height);
 	}
 	
-	@Override
 	public Vector3 getScale() {
 		return size;
 	}
 	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-	}
-	
-	@Override
 	public Vector3 getPosition() {	// Gibt die korrekte Position vom GameObject zurück
 		return position.subtract(new Vector3(
-				getScale().x * anchorPoint.x + localPosition.x,
-				getScale().y * anchorPoint.y + localPosition.y
+				getScale().x * anchorPoint.x,
+				getScale().y * anchorPoint.y
 				));
 	}
 	
-	@Override
-	public void update() {
-		super.update();
+	public void setPosition(Vector3 position) {
+		this.position = position;
 	}
 	
-	@Override
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		g2d.setColor(color);
 	}
 
 	
-	@Override
 	public boolean checkDistanceCulled(Rectangle viewport) {
 		return false;
 	}

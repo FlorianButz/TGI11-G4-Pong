@@ -145,6 +145,7 @@ public class PongBall extends GameObject {
 				GameMath.lerpColor(Color.magenta, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() *2)),
 				Color.cyan, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
 	}
+
 	@Override
 	public void update() {
 		super.update();
