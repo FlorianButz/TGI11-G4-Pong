@@ -42,9 +42,20 @@ public class RigidBody extends GameObject {
 					velocity = velocity.multiply(0f);
 					
 					this.position = this.position.add(positionAdd.multiply(0.5f));
+					
+					onCollision(thisObj, otherObj);
+					onCollision(this, g);
 				}
 			}
 		}
+	}
+	
+	protected void onCollision(Rectangle thisObject, Rectangle otherObject) {
+		
+	}
+	
+	protected void onCollision(GameObject thisObject, GameObject otherObject) {
+		
 	}
 	
 	boolean checkIntersect() {
@@ -122,13 +133,13 @@ public class RigidBody extends GameObject {
 		if(GameLogic.IsGamePaused()) return;
 		
 		checkCollision();
-		checkValidVelocity();
+		//checkValidVelocity();
 		
 		position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
 		velocity = velocity.multiply(friction);
 
 		checkCollision();
-		checkValidVelocity();
+		//checkValidVelocity();
 		
 		lastPosition = position;
 	}

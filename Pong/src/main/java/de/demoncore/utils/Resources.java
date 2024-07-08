@@ -72,6 +72,8 @@ public class Resources {
 	public static Sprite shop_wavespedalicon;
 	public static Sprite shop_dotspedalicon;
 
+	public static Sprite ball;
+	
 	public static Sprite blocked_icon;
 	public static Sprite info_icon;
 	
@@ -193,6 +195,8 @@ public class Resources {
 		shop_wavespedalicon = new Sprite(Main.class.getResourceAsStream("/textures/Shop_WavesPedal.png")).load();
 		shop_dotspedalicon	= new Sprite(Main.class.getResourceAsStream("/textures/Shop_DotsPedal.png")).load();
 
+		ball = new Sprite(Main.class.getResourceAsStream("/textures/Ball.png")).load();
+		
 		blocked_icon = new Sprite(Main.class.getResourceAsStream("/textures/BlockedIcon.png")).load();
 		info_icon = new Sprite(Main.class.getResourceAsStream("/textures/InfoIcon.png")).load();
 		

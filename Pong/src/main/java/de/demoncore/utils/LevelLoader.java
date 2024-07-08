@@ -2,9 +2,9 @@ package de.demoncore.utils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.storymode.BigStone;
@@ -29,10 +29,10 @@ public class LevelLoader {
 	// 7 Path
 	
 	
-	public static void LoadLevel(URL levelFilePath) {
+	public static void LoadLevel(InputStream stream) {
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader (levelFilePath.getFile()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 			String line = null;
 			StringBuilder stringBuilder = new StringBuilder();
 			String ls = System.getProperty("line.separator");

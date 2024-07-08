@@ -1,6 +1,8 @@
 package de.demoncore.scenes.storymode;
 
+import de.demoncore.game.GameObject;
 import de.demoncore.gameObjects.PauseMenu;
+import de.demoncore.gameObjects.storymode.BaseEnemy;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.BaseScene;
@@ -15,7 +17,9 @@ public class StorymodeMain extends BaseScene {
 		
 		addObject(new PauseMenu());
 		
-		LevelLoader.LoadLevel(Main.class.getResource("/levels/storymode_main.plv"));
+		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
+		
+		addObject(new BaseEnemy(100, 25));
 	}
 	
 	@Override
