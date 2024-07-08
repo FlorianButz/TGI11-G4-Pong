@@ -177,9 +177,9 @@ public class PongBall extends GameObject {
 			speed = 30f;
 		}
 		
-		//position = position.add(velocity.multiply(speed)); 
-		// Wenn man sich ganz besonders fuehlt, Zeile mit dem replacen : //ok gemacht hehe
-		position = position.add(velocity.multiply(speed).add(new Vector3((float)Math.random() * 98 - 14f, (float)Math.random() * 98 - 14f)));
+		position = position.add(velocity.multiply(speed)); 
+		// Wenn man sich ganz besonders fuehlt, Zeile mit dem replacen :
+		//position = position.add(velocity.multiply(speed).add(new Vector3((float)Math.random() * 98 - 14f, (float)Math.random() * 98 - 14f)));
 
 		
 		if(player1.getBoundingBox().intersects(getBoundingBox()) || player2.getBoundingBox().intersects(getBoundingBox())) {
