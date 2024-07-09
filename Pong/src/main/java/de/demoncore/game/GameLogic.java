@@ -38,7 +38,7 @@ public class GameLogic {
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
 				
-				if(SceneManager.getActiveScene() != null) 
+				if(SceneManager.getActiveScene() != null && AudioMaster.isInitialized())
 					AudioMaster.SetListener(SceneManager.getActiveScene().cameraPosition);
 				
 				accurateTps = 1000000000.0 / (System.nanoTime() - accurateLastTime);

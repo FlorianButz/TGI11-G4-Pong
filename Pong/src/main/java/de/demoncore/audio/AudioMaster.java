@@ -36,6 +36,12 @@ public class AudioMaster {
 
 	private static ALCCapabilities alcCapabilities;
 	private static ALCapabilities alCapabilities;
+	
+	private static boolean isInitialized;
+	
+	public static boolean isInitialized() {
+		return isInitialized;
+	}
 
 	public static void initializeOpenAL() {
 		
@@ -49,6 +55,8 @@ public class AudioMaster {
 		ALC10.alcMakeContextCurrent(context);
 
 		alCapabilities = AL.createCapabilities(alcCapabilities);
+	
+		isInitialized = true;
 	}
 
 	public static void SetListener(Vector3 position) {

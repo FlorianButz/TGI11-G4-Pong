@@ -12,8 +12,8 @@ import de.demoncore.utils.GameMath;
 public class GUIValueBar extends GUIObject {
 
 	protected float value = 0;
-	protected float minValue = 0;
-	protected float maxValue = 0;
+	public float minValue = 0;
+	public float maxValue = 0;
 
 	float displayValue;
 	
@@ -21,6 +21,8 @@ public class GUIValueBar extends GUIObject {
 	public Color borderColor;
 	
 	public float borderSize = 1;
+	
+	public float updateSmoothing = 3.5f;
 	
 	public GUIValueBar(int posX, int posY, int width, int height, float minValue, float maxValue) {
 		super(posX, posY, width, height);
@@ -38,7 +40,7 @@ public class GUIValueBar extends GUIObject {
 	@Override
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		
-		displayValue = GameMath.Lerp(displayValue, value, 3.5f / Draw.GetFramesPerSecond());
+		displayValue = GameMath.Lerp(displayValue, value, updateSmoothing / Draw.GetFramesPerSecond());
 		
 		g2d.setColor(color);
 		g2d.fillRect((int)getUIPosition(screenWidth, screenHeight).x, (int)getUIPosition(screenWidth, screenHeight).y, (int)getScale().x, (int)getScale().y);

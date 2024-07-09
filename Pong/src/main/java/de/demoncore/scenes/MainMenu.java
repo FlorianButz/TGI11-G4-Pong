@@ -29,7 +29,7 @@ public class MainMenu extends BaseScene {
 	public void initializeScene() {
 		super.initializeScene();
 		
-		MusicManager.PlayMusic(Resources.sneakySnitch);
+		//MusicManager.PlayMusic(Resources.sneakySnitch);
 		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert
 		bgSys.particleSpawnArea = new Vector3(1000, 1000);

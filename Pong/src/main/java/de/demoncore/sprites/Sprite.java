@@ -36,7 +36,7 @@ public class Sprite {
         }
 		
 		try {
-		
+			
 			BufferedImage bufferedImage = ImageIO.read(imageStream);
 
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

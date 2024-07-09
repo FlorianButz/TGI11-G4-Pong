@@ -9,6 +9,7 @@ import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
+import de.demoncore.scenes.SplashScreen;
 import de.demoncore.sprites.Sprite;
 
 public class Resources {
@@ -29,13 +30,6 @@ public class Resources {
 	public static AudioClip pongGoal;
 	
 	public static AudioClip dialogTalk;
-
-	public static AudioClip ambienceDark1;
-	public static AudioClip ambienceDark2;
-	public static AudioClip ambienceHappy1;
-	public static AudioClip ambienceMysterious1;
-	public static AudioClip ambienceFast1;
-	public static AudioClip sneakySnitch;
 
 	public static Sprite test;
 	public static Sprite fullHeart;
@@ -83,7 +77,7 @@ public class Resources {
 	static List<DialogLine> dialogs;
 	
 	public static void loadFonts() {
-		
+
 		// Schriftarten werden geladen
 		
 		Logger.logInfo("Lade Ressourcen: Lade Schriftarten");
@@ -92,6 +86,7 @@ public class Resources {
 			InputStream is = Main.class.getResourceAsStream("/fonts/PixeloidSans.ttf");
 			try {
 				uiFont = Font.createFont(Font.TRUETYPE_FONT, is);
+
 			}catch(Exception e) {
 				Logger.logError("Konnte Schriftart nicht erstellen. | " + e.getMessage(), e);		
 			}
@@ -99,6 +94,7 @@ public class Resources {
 			is = Main.class.getResourceAsStream("/fonts/OldEnglishGothicPixel.ttf");
 			try {
 				dialogFont = Font.createFont(Font.TRUETYPE_FONT, is);
+
 			}catch(Exception e) {
 				Logger.logError("Konnte Schriftart nicht erstellen. | " + e.getMessage(), e);		
 			}
@@ -130,32 +126,10 @@ public class Resources {
 		dialogTalk = AudioMaster.loadSoundWav("/audio/Dialog_Talk.wav");
 		
 		Logger.logMessage("Laden der Soundeffekte Erfolgreich!");
-		
-		// Musik wird geladen
-
-		Logger.logInfo("Lade Ressourcen: Lade Musik");
-		
-		/*
-		ambienceDark1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Gone.mp3"));
-		ambienceDark2 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/TheLastLight.mp3"));
-		ambienceFast1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/NearTheEnd.mp3"));
-		ambienceHappy1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/G4Pong_HappyOrchestra.mp3"));
-		ambienceMysterious1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/FarAway.mp3"));
-		sneakySnitch = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/SneakySnitch.mp3"));
-		*/
-
-		ambienceDark1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		ambienceDark2 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		ambienceFast1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		ambienceHappy1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		ambienceMysterious1 = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		sneakySnitch = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/Button_Click.mp3"));
-		
-		Logger.logMessage("Laden der Musik Erfolgreich!");
 	}
 	
 	public static void loadSprites() {
-
+		
 		// Texturen werden geladen
 
 		Logger.logInfo("Lade Ressourcen: Lade Texturen");

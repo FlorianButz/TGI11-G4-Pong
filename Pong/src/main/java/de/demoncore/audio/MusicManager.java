@@ -1,13 +1,11 @@
 package de.demoncore.audio;
 
-import java.nio.IntBuffer;
-
 import org.lwjgl.openal.AL10;
 
 import de.demoncore.game.Settings;
-import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
+import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;

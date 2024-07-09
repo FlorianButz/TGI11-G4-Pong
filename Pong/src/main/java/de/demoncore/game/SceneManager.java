@@ -14,6 +14,7 @@ import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.scenes.DefaultScene;
 import de.demoncore.scenes.MainMenu;
+import de.demoncore.scenes.SplashScreen;
 import de.demoncore.utils.GameMath;
 
 public class SceneManager {
@@ -31,7 +32,7 @@ public class SceneManager {
 		if(isInitialized == true) return;
 		isInitialized = true;
 		
-		PLoadScene(new MainMenu());
+		PLoadScene(new SplashScreen());
 	}
 	
 	public static void UpdateScenes() {
