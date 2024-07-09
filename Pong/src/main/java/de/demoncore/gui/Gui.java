@@ -111,4 +111,6 @@ public class Gui {
 	public static GraphicsConfiguration GetGraphicsConfig() {
 		return frame.getGraphicsConfiguration();
 	}
+	
+	
 }

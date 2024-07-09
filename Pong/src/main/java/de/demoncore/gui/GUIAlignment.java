@@ -9,5 +9,6 @@ public enum GUIAlignment {
 	MiddleRight,
 	DownLeft,
 	DownMiddle,
-	DownRight
+	DownRight,
+	None
 }

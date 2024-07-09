@@ -15,7 +15,7 @@ public class StorymodeMain extends BaseScene {
 		
 		addObject(new PauseMenu());
 		
-		LevelLoader.LoadLevel(Main.class.getResource("/levels/storymode_main.plv"));
+		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
 	}
 	
 	@Override

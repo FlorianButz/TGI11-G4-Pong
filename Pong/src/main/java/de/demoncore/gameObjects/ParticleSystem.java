@@ -55,9 +55,9 @@ public class ParticleSystem extends GameObject {
 	float particleSystemTimeStart = 0;
 
 	boolean isStoppedByCull = false;
-	
+
 	boolean hasInitialized = false;
-	
+
 	public ParticleSystem(int x, int y) {
 		super(x, y, 5, 5);
 
@@ -69,23 +69,23 @@ public class ParticleSystem extends GameObject {
 	public void onAddToScene() {
 		super.onAddToScene();
 	}
-	
+
 	public void Init() {
 		int pCount = initialParticleEmitCount + GameMath.RandomRange(0, initialParticleEmitCountRandom);
 		particles = new ArrayList<Particle>(pCount);
-		
+
 		particleSystemTimeStart = GameLogic.getInstance().gameTime;
-		
+
 		for(int i = 0; i < pCount; i++) {
 			AddParticle();
 		}
-		
+
 		hasInitialized = true;
 	}
-	
+
 	void AddParticle() {
 		if(!Settings.isParticleEffects()) return;
-		
+
 		Particle p = new Particle();
 
 		p.size = new Vector3(
@@ -110,16 +110,16 @@ public class ParticleSystem extends GameObject {
 		p.startColor = GameMath.lerpColor(particleColorFirst, particleColorSecond, randomColorValue);
 
 		p.rotation = GameMath.RandomRange(0, 90);
-		
+
 		particles.add(p);
 	}
-	
+
 	int updateTimer = 0;
-	
+
 	@Override
 	public void update() {
 		super.update();
-		
+
 		if(GameLogic.IsGamePaused() || hasInitialized == false) return;
 		particleSystemTime = GameLogic.getInstance().gameTime - particleSystemTimeStart;
 
@@ -128,7 +128,7 @@ public class ParticleSystem extends GameObject {
 				for(int s = 0; s < emitChunk; s++) {
 					AddParticle();
 				}
-				
+
 				emitTime = 0;
 			}
 			else
@@ -136,69 +136,78 @@ public class ParticleSystem extends GameObject {
 		}
 
 		List<Particle> removeParticles = new ArrayList<Particle>();
-		for(Particle p : new ArrayList<Particle>(particles)) {
-			Vector3 vel = p.velocity;
-			p.position.x += vel.x;
-			p.position.y += vel.y;
+		try {
 
-			vel = vel.multiply(particleDamping);
-			vel.y += particleGravity;
+			for(Particle p : new ArrayList<Particle>(particles)) {
+				if(p != null) {
 
-			p.velocity = vel;
-			
-			p.color = GameMath.lerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
-			p.size = Vector3.one().multiply(GameMath.Lerp(initialParticleSize, endParticleSize, (float)p.currentLifetime / (float)p.maxLifetime));
+					Vector3 vel = p.velocity;
+					p.position.x += vel.x;
+					p.position.y += vel.y;
 
-			if(p.currentLifetime >= p.maxLifetime) {
-				removeParticles.add(p);
+					vel = vel.multiply(particleDamping);
+					vel.y += particleGravity;
+
+					p.velocity = vel;
+
+					p.color = GameMath.lerpColor(p.startColor, particleColorEnd, (float)p.currentLifetime / (float)p.maxLifetime);
+					p.size = Vector3.one().multiply(GameMath.Lerp(initialParticleSize, endParticleSize, (float)p.currentLifetime / (float)p.maxLifetime));
+
+					if(p.currentLifetime >= p.maxLifetime) {
+						removeParticles.add(p);
+					}
+					p.currentLifetime++;
+				}
 			}
-			p.currentLifetime++;
+		}catch(Exception e) {
+
 		}
 
 		if(particles != null)
 			particles.removeAll(removeParticles);
 	}
-	
+
 	@Override
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		if(particles == null || !Settings.isParticleEffects()) return;
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(particles == null) return;
 			if(p == null) continue;
-			
+
 			Vector3 worldPos = p.position;
-			
+
 			if(Settings.getDebugMode()) {
 				g2d.setColor(GameMath.lerpColor(Color.white, Color.red, (float) p.currentLifetime / (float) p.maxLifetime));
 				g2d.drawString("P" + particles.indexOf(p), worldPos.x + 2, worldPos.y - 5);
 			}
-			
+
 			g2d.setColor(p.color);
-		    g2d.rotate(Math.toRadians(p.rotation), worldPos.x, worldPos.y);
+			g2d.rotate(Math.toRadians(p.rotation), worldPos.x, worldPos.y);
 			g2d.fillRect((int)worldPos.x + (int)(p.size.x / 2), (int)worldPos.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
 			g2d.rotate(Math.toRadians(-p.rotation), worldPos.x, worldPos.y);
 		}
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
 		particles = null;
 	}
-	
+
 	@Override
 	public boolean checkDistanceCulled(Rectangle viewport) {
 		for (Particle p : new ArrayList<Particle>(particles)){
-			if(p == null) continue;
-			Vector3 particleWorldPosition = p.position;
-			Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
-			if(!viewport.intersects(pBounds)) {
-				particles.remove(p);
-			}else {
+			if(p != null) {
+				Vector3 particleWorldPosition = p.position;
+				Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
+				if(!viewport.intersects(pBounds)) {
+					particles.remove(p);
+				}else {
+				}
 			}
 		}
-		
+
 		if(particles.size() == 0) {
 			if(!getBoundingBox().intersects(viewport)) {
 				isStoppedByCull = true;
