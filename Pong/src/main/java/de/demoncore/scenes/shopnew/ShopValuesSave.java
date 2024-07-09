@@ -6,7 +6,7 @@ public class ShopValuesSave implements Serializable {
 
 	private static final long serialVersionUID = -6383494586351025640L;
 
-	private int playerPongBucks = 2560; // CHANGE BACK TO 0
+	private int playerPongBucks = 256; // CHANGE BACK TO 0
 
 	public BallSkins activeBallSkin = BallSkins.White;
 	public BallTrails activeBallTrail = BallTrails.Simple;
