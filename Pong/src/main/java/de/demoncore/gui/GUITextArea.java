@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 import de.demoncore.game.Settings;
 import de.demoncore.game.TranslationComponent;
+import de.demoncore.utils.Resources;
 
 public class GUITextArea extends GUIText {
 
@@ -37,22 +38,27 @@ public class GUITextArea extends GUIText {
 
 	    	line = line.replace("\r", "");
 
+	    	Font f = font;
+	    	
+	    	g2d.setFont(font);
 	    	float sizeAddition = font.getSize();
 	    	if(line.contains("\b")) {
 	    		line = line.replace("\b", "");
 	    		sizeAddition += 30;
+	    		f = Resources.dialogFont;
 	    	}
 	    	
-	    	g2d.setFont(g2d.getFont().deriveFont(sizeAddition));
+	    	int height = g2d.getFontMetrics().getHeight();
+	    	g2d.setFont(f.deriveFont(sizeAddition));
 	    	
 	    	if(textAlignment == TextAlignment.Center) {
 	    		Rectangle2D boundsLine = g2d.getFontMetrics().getStringBounds(line, g2d);
 	    				
 		    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x + getScale().x / 2 - (int)boundsLine.getMaxX() / 2,
-		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (height + newLineSpacing) * counter));
 	    	}else {
 		    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x,
-		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (height + newLineSpacing) * counter));
 	    	}
 	    	
 	    	counter++;
