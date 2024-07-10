@@ -16,8 +16,8 @@ public class GuiCredidtsMenu extends GUIMenu{
 
 	public static Color regenbogen() {
 		return GameMath.lerpColor(
-				GameMath.lerpColor(Color.magenta, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() *2)),
-				Color.cyan, (float) Math.sin(GameLogic.getInstance().getGameTime() * 1));
+				GameMath.lerpColor(Color.magenta, Color.green, (float) Math.sin(GameLogic.getInstance().getGameTime() *0.5)),
+				Color.cyan, (float) Math.sin(GameLogic.getInstance().getGameTime() * 0.3));
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class GuiCredidtsMenu extends GUIMenu{
 
 		List<GUIObject> Objects = new ArrayList<GUIObject>();
 		
-		guiText = new GUITextArea(0, -650, Translation.literal("\r\n"
+		guiText = new GUITextArea(0, -550, Translation.literal("\r\n"
 				+ "\bGrafikdesigner\r\n"
 				+ "\r\n"
 				+ "Jonathan Kugler\r\n"
@@ -34,13 +34,13 @@ public class GuiCredidtsMenu extends GUIMenu{
 				+ "\r\n"
 				+ "\bProgrammierer\r\n"
 				+ "\r\n"
-				+ "Florian Butz\r\n"
+				+ "Florian Karl Butz\r\n"
 				+ "Marcel Firlus\r\n"
 				+ "Tim Hilzinger\r\n"
 				+ "\r\n"
 				+ "\bMusik\r\n"
 				+ "\r\n"
-				+ "Florian Butz"), Resources.uiFont.deriveFont(40f),regenbogen());
+				+ "Florian Karl Butz"), Resources.uiFont.deriveFont(40f),regenbogen());
 		guiText.alignment = GUIAlignment.Center;
 		guiText.SetTextAlignment(TextAlignment.Center);
 		Objects.add(guiText);
