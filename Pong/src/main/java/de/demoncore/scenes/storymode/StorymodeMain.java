@@ -35,8 +35,6 @@ public class StorymodeMain extends BaseScene {
 	public void updateScene() {
 		super.updateScene();
 		
-		System.out.println(StorymodePlayer.getPlayerInstance().getHealth());
-		
 		if(StorymodePlayer.getPlayerInstance() != null)
 			cameraPosition = Vector3.Lerp(cameraPosition, StorymodePlayer.getPlayerInstance().getPosition(), 0.065f);
 	}

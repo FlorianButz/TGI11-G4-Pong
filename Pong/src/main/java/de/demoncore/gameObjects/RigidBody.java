@@ -135,7 +135,8 @@ public class RigidBody extends GameObject {
 		checkCollision();
 		//checkValidVelocity();
 		
-		position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
+		position = position.add(velocity.multiply(0.27f));
+		//position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
 		velocity = velocity.multiply(friction);
 
 		checkCollision();

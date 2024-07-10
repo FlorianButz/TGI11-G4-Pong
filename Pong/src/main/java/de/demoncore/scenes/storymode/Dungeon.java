@@ -10,6 +10,7 @@ import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.storymode.Cake;
+import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.DungeonHallway;
 import de.demoncore.gameObjects.storymode.DungeonMinimap;
 import de.demoncore.gameObjects.storymode.DungeonRoom;
@@ -109,7 +110,19 @@ public class Dungeon extends BaseScene {
 					for(GameObject room : roomArr) {
 						if(room == null) continue;
 						((DungeonRoom)room).createWalls(hallways);
-					}	
+						onBottom(room);
+					}
+				}
+				
+				for(DungeonHallway hallway : hallways) {
+					if(hallway == null) continue;
+					hallway.createWalls();
+					onTop(hallway);
+				}
+				
+				for(GameObject gO : getSceneObjects()) {
+					if(gO instanceof DungeonRoom || gO instanceof DungeonHallway) continue;
+					onTop(gO);
 				}
 				
 				minimap.dungeon = dungeonRoom;
@@ -130,6 +143,8 @@ public class Dungeon extends BaseScene {
 		if(y < 0 || y >= dungeonRoom.length) return false;
 		if(dungeonRoom[x][y] != null) return false;
 		
+		int sp = 20;
+		
 		DungeonRoom go = new DungeonRoom((int)getRoomPosition(x, y).x, (int)getRoomPosition(x, y).y, dungeonSize, dungeonSize);
 		dungeonRoom[x][y] = go;
 		go.rPX = x;
@@ -144,9 +159,9 @@ public class Dungeon extends BaseScene {
 				DungeonHallway hallway = new DungeonHallway(
 						(int)((getRoomPosition(x, y).x + getRoomPosition(x + 1, y).x) / 2),
 						(int)getRoomPosition(x, y).y,
-						dungeonSpacing,
-						dungeonSize / 3);
-				hallway.color = Color.darkGray;
+						dungeonSpacing + sp,
+						dungeonSize / 3,
+						true);
 				hallway.collisionEnabled = false;
 				addObject(hallway);
 				hallway.fromRPX = x;
@@ -163,9 +178,9 @@ public class Dungeon extends BaseScene {
 				DungeonHallway hallway = new DungeonHallway(
 						(int)((getRoomPosition(x, y).x + getRoomPosition(x - 1, y).x) / 2),
 						(int)getRoomPosition(x, y).y,
-						dungeonSpacing,
-						dungeonSize / 3);
-				hallway.color = Color.darkGray;
+						dungeonSpacing + sp,
+						dungeonSize / 3,
+						true);
 				hallway.collisionEnabled = false;
 				addObject(hallway);
 				hallway.fromRPX = x;
@@ -183,8 +198,8 @@ public class Dungeon extends BaseScene {
 						(int)getRoomPosition(x, y).x,
 						(int)((getRoomPosition(x, y).y + getRoomPosition(x, y + 1).y) / 2),
 						dungeonSize / 3,
-						dungeonSpacing);
-				hallway.color = Color.darkGray;
+						dungeonSpacing + sp,
+						false);
 				hallway.collisionEnabled = false;
 				addObject(hallway);
 				hallway.fromRPX = x;
@@ -202,8 +217,8 @@ public class Dungeon extends BaseScene {
 						(int)getRoomPosition(x, y).x,
 						(int)((getRoomPosition(x, y).y + getRoomPosition(x, y - 1).y) / 2),
 						dungeonSize / 3,
-						dungeonSpacing);
-				hallway.color = Color.darkGray;
+						dungeonSpacing + sp,
+						false);
 				hallway.collisionEnabled = false;
 				addObject(hallway);
 				hallway.fromRPX = x;

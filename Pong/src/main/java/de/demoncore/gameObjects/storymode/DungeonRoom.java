@@ -8,6 +8,7 @@ import java.util.List;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -28,7 +29,7 @@ public class DungeonRoom extends GameObject {
 	public DungeonRoom(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
 		
-		color = Color.black;
+		color = new Color(1, 1, 1, 0.1f);
 		
 		collisionEnabled = false;
 	}
@@ -37,7 +38,7 @@ public class DungeonRoom extends GameObject {
 	boolean bot;
 	boolean lef;
 	boolean rig;
-	int count;
+	int count = 0;
 	
 	public void createWalls(List<DungeonHallway> hallways) {
 		
@@ -46,11 +47,44 @@ public class DungeonRoom extends GameObject {
 				int x = h.toRPX - h.fromRPX;
 				int y = h.toRPY - h.fromRPY;
 				
+				if(x == -1) {
+					count++;
+					lef = true;
+				}else if(x == 1) {
+					count++;
+					rig = true;
+				}
+				
+				if(y == -1) {
+					count++;
+					top = true;
+				}else if(y == 1) {
+					count++;
+					bot = true;
+				}
+			}else if(h.toRPX == rPX && h.toRPY == rPY) {
+				int x = h.fromRPX - h.toRPX;
+				int y = h.fromRPY - h.toRPY;
+				
+				if(x == -1) {
+					count++;
+					lef = true;
+				}else if(x == 1) {
+					count++;
+					rig = true;
+				}
+				
+				if(y == -1) {
+					count++;
+					top = true;
+				}else if(y == 1) {
+					count++;
+					bot = true;
+				}
 			}
 		}
-		System.err.println("HALLWAYS DETECTION");
 		
-		int space = 185;
+		int space = 210;
 		
 		if(top) {
 			
@@ -59,14 +93,12 @@ public class DungeonRoom extends GameObject {
 					(int)getPosition().y,
 					(int)getScale().x / 2 - space,
 					25);
-			//wallTop.anchorPoint = new Vector3(0, 0.5f);
 			
 			secondWallTop= new GameObject(
 					(int)getPosition().x + (int)getScale().x - (int)getScale().x / 4 + space / 2,
 					(int)getPosition().y ,
 					(int)getScale().x / 2 - space,
 					25);
-			//secondWallTop.anchorPoint = new Vector3(1, 0.5f);
 
 			SceneManager.getActiveScene().addObject(wallTop);
 			SceneManager.getActiveScene().addObject(secondWallTop);
@@ -88,14 +120,12 @@ public class DungeonRoom extends GameObject {
 					(int)getPosition().y + (int)getScale().y,
 					(int)getScale().x / 2 - space,
 					25);
-			//wallTop.anchorPoint = new Vector3(0, 0.5f);
 			
 			secondWallBottom= new GameObject(
 					(int)getPosition().x + (int)getScale().x - (int)getScale().x / 4 + space / 2,
 					(int)getPosition().y + (int)getScale().y,
 					(int)getScale().x / 2 - space,
 					25);
-			//secondWallTop.anchorPoint = new Vector3(1, 0.5f);
 
 			SceneManager.getActiveScene().addObject(wallBottom);
 			SceneManager.getActiveScene().addObject(secondWallBottom);
@@ -109,6 +139,71 @@ public class DungeonRoom extends GameObject {
 			SceneManager.getActiveScene().addObject(wallBottom);
 		}
 		
+		if(rig) {
+			
+			wallRight = new GameObject(
+					(int)getPosition().x + (int)getScale().x,
+					(int)getPosition().y + (int)getScale().y / 4 - space / 2,
+					25,
+					(int)getScale().y / 2 - space);
+			
+			secondWallRight= new GameObject(
+					(int)getPosition().x + (int)getScale().x,
+					(int)getPosition().y + (int)getScale().y - (int)getScale().y / 4 + space / 2,
+					25,
+					(int)getScale().y / 2 - space);
+
+			SceneManager.getActiveScene().addObject(wallRight);
+			SceneManager.getActiveScene().addObject(secondWallRight);
+			
+		}else {
+			wallRight = new GameObject(
+					(int)getPosition().x + (int)getScale().x,
+					(int)getPosition().y + (int)getScale().y / 2,
+					25,
+					(int)getScale().y);
+			SceneManager.getActiveScene().addObject(wallRight);
+		}
+		
+		if(lef) {
+			
+			wallLeft = new GameObject(
+					(int)getPosition().x,
+					(int)getPosition().y + (int)getScale().y / 4 - space / 2,
+					25,
+					(int)getScale().y / 2 - space);
+			
+			secondWallLeft = new GameObject(
+					(int)getPosition().x,
+					(int)getPosition().y + (int)getScale().y - (int)getScale().y / 4 + space / 2,
+					25,
+					(int)getScale().y / 2 - space);
+
+			SceneManager.getActiveScene().addObject(wallLeft);
+			SceneManager.getActiveScene().addObject(secondWallLeft);
+			
+		}else {
+			wallLeft = new GameObject(
+					(int)getPosition().x,
+					(int)getPosition().y + (int)getScale().y / 2,
+					25,
+					(int)getScale().y);
+			SceneManager.getActiveScene().addObject(wallLeft);
+		}
+
+		wallTop.enableRendering = false;
+		wallBottom.enableRendering = false;
+		wallLeft.enableRendering = false;
+		wallRight.enableRendering = false;
+
+		if(secondWallBottom != null)
+			secondWallBottom.enableRendering = false;
+		if(secondWallLeft != null)
+			secondWallLeft.enableRendering = false;
+		if(secondWallRight != null)
+			secondWallRight.enableRendering = false;
+		if(secondWallTop != null)
+			secondWallTop.enableRendering = false;
 	}
 	
 	@Override
@@ -135,14 +230,16 @@ public class DungeonRoom extends GameObject {
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.draw(g2d, screenWidth, screenHeight);
 	
-		g2d.setStroke(new BasicStroke(5f));
+		g2d.setStroke(new BasicStroke(15f));
 		g2d.setColor(Color.white);
 		
 		Vector3 worldPos = getPosition();
 		g2d.drawRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 		
-		g2d.setFont(Resources.uiFont.deriveFont(45f));
-		g2d.drawString("" + top + bot + lef + rig + "  " + count, (int)worldPos.x, (int)worldPos.y + 50);
+		if(Settings.getDebugMode()) {
+			g2d.setFont(Resources.uiFont.deriveFont(45f));
+			g2d.drawString("" + top + bot + lef + rig + " HC: " + count, (int)worldPos.x + 45, (int)worldPos.y + 100);
+		}
 	}
 	
 }
