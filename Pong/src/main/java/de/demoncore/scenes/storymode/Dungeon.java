@@ -12,6 +12,7 @@ import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.storymode.Cake;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.DungeonMinimap;
+import de.demoncore.gameObjects.storymode.DungeonRoom;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.scenes.BaseScene;
@@ -123,9 +124,7 @@ public class Dungeon extends BaseScene {
 		if(y < 0 || y >= dungeonRoom.length) return;
 		if(dungeonRoom[x][y] != null) return;
 		
-		GameObject go = new GameObject((int)getRoomPosition(x, y).x, (int)getRoomPosition(x, y).y, dungeonSize, dungeonSize);
-		go.color = Color.gray;
-		go.collisionEnabled = false;
+		DungeonRoom go = new DungeonRoom((int)getRoomPosition(x, y).x, (int)getRoomPosition(x, y).y, dungeonSize, dungeonSize);
 		dungeonRoom[x][y] = go;
 		addObject(dungeonRoom[x][y]);
 		
