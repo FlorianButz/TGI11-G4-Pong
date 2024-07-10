@@ -10,13 +10,12 @@ import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.storymode.Cake;
-import de.demoncore.gameObjects.storymode.DungeonDoor;
+import de.demoncore.gameObjects.storymode.DungeonHallway;
 import de.demoncore.gameObjects.storymode.DungeonMinimap;
 import de.demoncore.gameObjects.storymode.DungeonRoom;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.scenes.BaseScene;
-import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class Dungeon extends BaseScene {
@@ -71,7 +70,7 @@ public class Dungeon extends BaseScene {
 	private int roomsCount = 0;
 	
 	public GameObject[][] dungeonRoom;
-	public List<GameObject> hallways = new ArrayList<GameObject>();
+	public List<DungeonHallway> hallways = new ArrayList<DungeonHallway>();
 	
 	Thread gen;
 	
@@ -106,6 +105,13 @@ public class Dungeon extends BaseScene {
 				
 				addRoom((int)(dungeonSizeArray / 2), (int)(dungeonSizeArray / 2));
 			
+				for(GameObject[] roomArr : dungeonRoom) {
+					for(GameObject room : roomArr) {
+						if(room == null) continue;
+						((DungeonRoom)room).createWalls(hallways);
+					}	
+				}
+				
 				minimap.dungeon = dungeonRoom;
 				GameObject randomRoom;
 				
@@ -118,77 +124,99 @@ public class Dungeon extends BaseScene {
 		gen.start();
 	}
 
-	void addRoom(int x, int y) {
-		if(roomsCount >= maxRooms) return;
-		if(x < 0 || x >= dungeonRoom.length) return;
-		if(y < 0 || y >= dungeonRoom.length) return;
-		if(dungeonRoom[x][y] != null) return;
+	boolean addRoom(int x, int y) {
+		if(roomsCount >= maxRooms) return false;
+		if(x < 0 || x >= dungeonRoom.length) return false;
+		if(y < 0 || y >= dungeonRoom.length) return false;
+		if(dungeonRoom[x][y] != null) return false;
 		
 		DungeonRoom go = new DungeonRoom((int)getRoomPosition(x, y).x, (int)getRoomPosition(x, y).y, dungeonSize, dungeonSize);
 		dungeonRoom[x][y] = go;
+		go.rPX = x;
+		go.rPY = y;
 		addObject(dungeonRoom[x][y]);
 		
 		onBottom(go);
-		
 		roomsCount++;
 		
 		if(rng.nextDouble() > 0.4 * ((float)roomsCount / (float)maxRooms) * 5) {
-			addRoom(x + 1, y);
-			
-			GameObject hallway = new GameObject(
-					(int)((getRoomPosition(x, y).x + getRoomPosition(x + 1, y).x) / 2),
-					(int)getRoomPosition(x, y).y,
-					dungeonSpacing,
-					dungeonSize / 3);
-			hallway.color = Color.darkGray;
-			hallway.collisionEnabled = false;
-			addObject(hallway);
-			hallways.add(hallway);
-			
-			onBottom(hallway);
+			if(addRoom(x + 1, y)) {			
+				DungeonHallway hallway = new DungeonHallway(
+						(int)((getRoomPosition(x, y).x + getRoomPosition(x + 1, y).x) / 2),
+						(int)getRoomPosition(x, y).y,
+						dungeonSpacing,
+						dungeonSize / 3);
+				hallway.color = Color.darkGray;
+				hallway.collisionEnabled = false;
+				addObject(hallway);
+				hallway.fromRPX = x;
+				hallway.fromRPY = y;
+				hallway.toRPX = x + 1;
+				hallway.toRPY = y;
+				hallways.add(hallway);
+				
+				onBottom(hallway);
+			}
 		}
 		if(rng.nextDouble() > 0.2 * ((float)roomsCount / (float)maxRooms) * 5) {
-			addRoom(x - 1, y);
-			
-			GameObject hallway = new GameObject(
-					(int)((getRoomPosition(x, y).x + getRoomPosition(x - 1, y).x) / 2),
-					(int)getRoomPosition(x, y).y,
-					dungeonSpacing,
-					dungeonSize / 3);
-			hallway.color = Color.darkGray;
-			hallway.collisionEnabled = false;
-			addObject(hallway);
-
-			onBottom(hallway);
+			if(addRoom(x - 1, y)) {				
+				DungeonHallway hallway = new DungeonHallway(
+						(int)((getRoomPosition(x, y).x + getRoomPosition(x - 1, y).x) / 2),
+						(int)getRoomPosition(x, y).y,
+						dungeonSpacing,
+						dungeonSize / 3);
+				hallway.color = Color.darkGray;
+				hallway.collisionEnabled = false;
+				addObject(hallway);
+				hallway.fromRPX = x;
+				hallway.fromRPY = y;
+				hallway.toRPX = x - 1;
+				hallway.toRPY = y;
+				hallways.add(hallway);
+				
+				onBottom(hallway);
+			}
 		}
 		if(rng.nextDouble() > 0.4 * ((float)roomsCount / (float)maxRooms) * 5) {
-			addRoom(x, y + 1);
-			
-			GameObject hallway = new GameObject(
-					(int)getRoomPosition(x, y).x,
-					(int)((getRoomPosition(x, y).y + getRoomPosition(x, y + 1).y) / 2),
-					dungeonSize / 3,
-					dungeonSpacing);
-			hallway.color = Color.darkGray;
-			hallway.collisionEnabled = false;
-			addObject(hallway);
-
-			onBottom(hallway);
+			if(addRoom(x, y + 1)) {			
+				DungeonHallway hallway = new DungeonHallway(
+						(int)getRoomPosition(x, y).x,
+						(int)((getRoomPosition(x, y).y + getRoomPosition(x, y + 1).y) / 2),
+						dungeonSize / 3,
+						dungeonSpacing);
+				hallway.color = Color.darkGray;
+				hallway.collisionEnabled = false;
+				addObject(hallway);
+				hallway.fromRPX = x;
+				hallway.fromRPY = y;
+				hallway.toRPX = x;
+				hallway.toRPY = y + 1;
+				hallways.add(hallway);
+				
+				onBottom(hallway);
+			}
 		}
 		if(rng.nextDouble() > 0.3 * ((float)roomsCount / (float)maxRooms) * 5) {
-			addRoom(x, y - 1);
-			
-			GameObject hallway = new GameObject(
-					(int)getRoomPosition(x, y).x,
-					(int)((getRoomPosition(x, y).y + getRoomPosition(x, y - 1).y) / 2),
-					dungeonSize / 3,
-					dungeonSpacing);
-			hallway.color = Color.darkGray;
-			hallway.collisionEnabled = false;
-			addObject(hallway);
-
-			onBottom(hallway);
+			if(addRoom(x, y - 1)) {				
+				DungeonHallway hallway = new DungeonHallway(
+						(int)getRoomPosition(x, y).x,
+						(int)((getRoomPosition(x, y).y + getRoomPosition(x, y - 1).y) / 2),
+						dungeonSize / 3,
+						dungeonSpacing);
+				hallway.color = Color.darkGray;
+				hallway.collisionEnabled = false;
+				addObject(hallway);
+				hallway.fromRPX = x;
+				hallway.fromRPY = y;
+				hallway.toRPX = x;
+				hallway.toRPY = y - 1;
+				hallways.add(hallway);
+				
+				onBottom(hallway);
+			}
 		}
+		
+		return true;
 	}
 
 	Vector3 getRoomPosition(int x, int y) {

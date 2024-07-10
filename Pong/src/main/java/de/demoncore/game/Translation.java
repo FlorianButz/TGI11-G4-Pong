@@ -123,6 +123,9 @@ public class Translation {
 
 		germanTranslation.put("pong.end_title", " hat das Spiel gewonnen!");
 		englishTranslation.put("pong.end_title", " won the game!");
+		
+		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugefügt: ");
+		englishTranslation.put("pong.end_title_points", "Pong Taler gathered: ");
 
 		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
 		englishTranslation.put("pong.back", "Back to Main Menu");

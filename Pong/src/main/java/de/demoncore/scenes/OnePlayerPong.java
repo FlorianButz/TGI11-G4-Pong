@@ -82,8 +82,8 @@ public class OnePlayerPong extends BaseScene {
 	}
 
 	void endGame(boolean player1) {
-		new PongEndScreen(player1).ShowMenu();
 		ShopValues.shopData.addPlayerMoney(PointSystem.getPlayer1Points()-PointSystem.getPlayer2Points());
+		new PongEndScreen(player1, PointSystem.getPlayer1Points()-PointSystem.getPlayer2Points()).ShowMenu();
 		destroyObject(ball);
 	}
 		

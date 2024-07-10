@@ -19,14 +19,29 @@ public class PongEndScreen extends GUIMenu {
 
 	boolean isPlayer1 = false;
 	
+	int points = 0;
+	
+	public PongEndScreen(boolean isPlayer1, int points) {
+		this.isPlayer1 = isPlayer1;
+		this.points = points;
+	}
+	
 	public PongEndScreen(boolean isPlayer1) {
 		this.isPlayer1 = isPlayer1;
+		this.points = -100;
 	}
 	
 	@Override
 	protected List<GUIObject> addMenuContent() {
 	
 		List<GUIObject> content = new ArrayList<GUIObject>();
+		
+		if(this.points != -100) {
+			GUIText points = new GUIText(0, -250, Translation.literal(Translation.get("pong.end_title_points").Get() + this.points), Resources.uiFont.deriveFont(60F), Color.white);
+			points.alignment = GUIAlignment.Center;
+			content.add(points);
+		}
+		
 		
 		GUIText title = new GUIText(0, -150, Translation.literal((isPlayer1 ? "Player 1 " : "Player 2") + Translation.get("pong.end_title").Get()), Resources.uiFont.deriveFont(60F), Color.white);
 		title.alignment = GUIAlignment.Center;
