@@ -124,5 +124,10 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	public int getHealth() {
 		return health;
 	}
+
+	@Override
+	public void setHealth(int health) {
+		this.health = health;
+	}
 	
 }

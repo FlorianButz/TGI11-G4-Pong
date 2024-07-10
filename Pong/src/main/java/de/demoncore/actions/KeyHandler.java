@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.demoncore.game.GameLogic;
-import de.demoncore.game.SceneManager;
-import de.demoncore.gameObjects.ParticleSystem;
-import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
 public class KeyHandler implements KeyListener, MouseListener {

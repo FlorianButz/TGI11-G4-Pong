@@ -47,15 +47,15 @@ public class GUIHealthbar extends GUIObject {
 		sh = screenHeight;
 	}
 
-	public int GetHealth() {
+	public int getHealth() {
 		return health;
 	}
 	
-	public void Heal(int healFactor) {
+	public void heal(int healFactor) {
 		health = GameMath.Clamp(health + healFactor, 0, heartCount);
 	}
 	
-	public void Damage(int damage) {
+	public void damage(int damage) {
 //		int healthBefore = health;
 		health = GameMath.Clamp(health - damage, 0, heartCount);
 		
@@ -73,6 +73,10 @@ public class GUIHealthbar extends GUIObject {
 //			SceneManager.GetActiveScene().AddObject(damageSystem);
 //			damageSystem.Init();
 //		}
+	}
+	
+	public void setHealth(int health) {
+		this.health = health;
 	}
 	
 	private void spawnParticles() {

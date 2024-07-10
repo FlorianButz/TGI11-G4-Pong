@@ -12,7 +12,7 @@ import de.demoncore.utils.Vector3;
 public class RigidBody extends GameObject {
 
 	public Vector3 velocity = Vector3.zero();
-	Vector3 lastPosition;
+	public Vector3 lastPosition;
 	
 	public float friction = 0.875f; // Wie viel geschwindigkeit jede iteration entnommen wird
 	

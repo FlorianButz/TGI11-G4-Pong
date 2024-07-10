@@ -197,6 +197,7 @@ public class ParticleSystem extends GameObject {
 
 	@Override
 	public boolean checkDistanceCulled(Rectangle viewport) {
+		if(particles == null) return true;
 		for (Particle p : new ArrayList<Particle>(particles)){
 			if(p != null) {
 				Vector3 particleWorldPosition = p.position;

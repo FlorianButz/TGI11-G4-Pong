@@ -18,7 +18,7 @@ public class Cake extends SpriteObject {
 		@Override
 		public void OnInteract() {
 			super.OnInteract();
-			StorymodePlayer.getPlayerInstance().health.Heal(1);
+			StorymodePlayer.getPlayerInstance().health.heal(1);
 			Destroy();
 		}
 		});

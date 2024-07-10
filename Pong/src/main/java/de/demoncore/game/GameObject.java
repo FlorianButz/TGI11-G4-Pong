@@ -49,6 +49,7 @@ public class GameObject {
 	}
 	
 	public void setPosition(Vector3 position) {
+		System.out.println("Set position " + position.ToString());
 		this.position = position;
 	}
 	

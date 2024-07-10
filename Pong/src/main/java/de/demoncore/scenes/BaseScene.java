@@ -37,6 +37,9 @@ public class BaseScene {
 	public void initializeScene() {
 	}
 
+	public void uninitializeScene() {
+	}
+	
 	public boolean isInitialized() {
 		return this.isInitialized;
 	}

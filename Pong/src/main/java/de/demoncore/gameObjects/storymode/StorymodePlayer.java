@@ -27,6 +27,8 @@ import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.gui.GUIValueBar;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.storymode.StorymodeMain;
+import de.demoncore.scenes.storymode.StorymodeSaveData;
 import de.demoncore.sprites.Sprite;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
@@ -61,14 +63,27 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, getPosition()));
 	
+	public float getPlayerXP() {
+		return playerXP;
+	}
+	
+	public void setPlayerXP(float xp) {
+		playerXP = xp;
+	}
+	
 	public static StorymodePlayer getPlayerInstance() {
 		return instance;
 	}
 
+	public void setPermPosition(Vector3 position) {
+		setPosition(position);
+		lastPosition = position;
+	}
+	
 	public StorymodePlayer(int x, int y) {
 		super(x, y, 30, 45);
 		instance = this;
-
+		
 		normalSize = size;
 		ballSize = new Vector3(normalSize.y * 0.6f, normalSize.y * 0.6f);
 
@@ -164,7 +179,10 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 			if (otherObject instanceof Damagable) {
 				((Damagable) otherObject).damage(damageAmount, this);
 			}
+		
+			ballVelocity = ballVelocity.multiply(1.04f);
 		}
+		
 	}
 
 	void setTexture(Sprite texture, boolean isBall) {
@@ -369,21 +387,26 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	public void damage(int amount, GameObject damageSource) {
 		if (isBallForm && damageSource instanceof BaseEnemy)
 			return;
-		health.Damage(amount);
+		health.damage(amount);
 	}
 
 	@Override
 	public void heal(int amount) {
-		health.Heal(amount);
+		health.heal(amount);
 	}
 
 	@Override
 	public int getHealth() {
-		return health.GetHealth();
+		return health.getHealth();
 	}
 
 	public void addXP(int i) {
 		playerXP += i;
+	}
+
+	@Override
+	public void setHealth(int health) {
+		this.health.setHealth(health);
 	}
 
 }

@@ -1,11 +1,13 @@
 package de.demoncore.utils;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.storymode.BigStone;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
@@ -27,6 +29,7 @@ public class LevelLoader {
 	// 5 Tree
 	// 6 Dungeon Door
 	// 7 Path
+	// 8 Rectangle
 	
 	
 	public static void LoadLevel(InputStream stream) {
@@ -83,6 +86,16 @@ public class LevelLoader {
 						break;
 					case 7:
 						SceneManager.getActiveScene().addObject(new Path(objectPosX, objectPosY));
+						break;
+					case 8:
+						int sizeX = Integer.parseInt(objectInfos[3]);
+						int sizeY = Integer.parseInt(objectInfos[4]);
+						int col = Integer.parseInt(objectInfos[5]);
+						
+						GameObject obj1 = new GameObject(objectPosX, objectPosY, sizeX, sizeY);
+						if(col == 1) obj1.color = new Color(0, 0, 0, 0);
+						
+						SceneManager.getActiveScene().addObject(obj1);
 						break;
 					}
 				}

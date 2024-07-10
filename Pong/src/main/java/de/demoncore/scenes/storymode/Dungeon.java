@@ -39,7 +39,7 @@ public class Dungeon extends BaseScene {
 		InteractableObject interact = new InteractableObject(25, 25, 75, 75, player, new InteractEvent() {
 		@Override
 		public void OnInteract() {
-			player.health.Damage(1);
+			player.health.damage(1);
 		}
 		});
 

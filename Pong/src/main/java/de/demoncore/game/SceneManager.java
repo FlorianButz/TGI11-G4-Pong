@@ -89,6 +89,8 @@ public class SceneManager {
 			
 			GameLogic.SetGamePaused(false);
 		
+			activeScene.uninitializeScene();
+			
 			if(scene != null) {
 				PLoadScene(scene);
 			}
@@ -106,7 +108,7 @@ public class SceneManager {
 		@Override
 		public void onComplete() {
 			super.onComplete();
-			getActiveScene().destroyObject(blackScreen);
+			getActiveScene().destroyObject(blackScreen);	
 		}
 		});
 		
