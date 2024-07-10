@@ -36,6 +36,14 @@ public class GUITextArea extends GUIText {
 	    for (String line : newText.split("\n")) {
 
 	    	line = line.replace("\r", "");
+
+	    	float sizeAddition = font.getSize();
+	    	if(line.contains("\b")) {
+	    		line = line.replace("\b", "");
+	    		sizeAddition += 30;
+	    	}
+	    	
+	    	g2d.setFont(g2d.getFont().deriveFont(sizeAddition));
 	    	
 	    	if(textAlignment == TextAlignment.Center) {
 	    		Rectangle2D boundsLine = g2d.getFontMetrics().getStringBounds(line, g2d);
