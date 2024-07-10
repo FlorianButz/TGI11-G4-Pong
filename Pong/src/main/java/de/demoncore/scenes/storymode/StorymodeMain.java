@@ -2,7 +2,6 @@ package de.demoncore.scenes.storymode;
 
 import de.demoncore.game.SaveManager;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.storymode.BaseEnemy;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.BaseScene;

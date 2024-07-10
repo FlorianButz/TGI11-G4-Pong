@@ -146,5 +146,18 @@ public class MainMenu extends BaseScene {
 		});
 		shop.alignment = GUIAlignment.Center;
 		addObject(shop);
+		
+		GUIImageButton credits = new GUIImageButton(-475, 0, 75, 75, 65, Resources.shopIcon, Resources.shopHoverIcon, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+
+				// Hier menu aufrufen
+			}
+		});
+		credits.alignment = GUIAlignment.Center;
+		addObject(credits);
+		
+		
 	}
 }
