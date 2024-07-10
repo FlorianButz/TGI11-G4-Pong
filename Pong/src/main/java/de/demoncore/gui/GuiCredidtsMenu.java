@@ -29,7 +29,7 @@ public class GuiCredidtsMenu extends GUIMenu{
 				+ "\bGrafikdesigner\r\n"
 				+ "\r\n"
 				+ "Jonathan Kugler\r\n"
-				+ "Philip Höschle\r\n"
+				+ "Philip Hoeschle\r\n"
 				+ "\r\n"
 				+ "\r\n"
 				+ "\bProgrammierer\r\n"
