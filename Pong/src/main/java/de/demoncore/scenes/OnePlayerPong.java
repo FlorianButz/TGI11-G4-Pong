@@ -14,6 +14,8 @@ import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gameObjects.PongPlayerAI;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
+import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.shopnew.ShopValuesSave;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -28,6 +30,8 @@ public class OnePlayerPong extends BaseScene {
 	GUIText points;
 	PointListener pointListener;
 
+	
+	
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
@@ -79,12 +83,12 @@ public class OnePlayerPong extends BaseScene {
 
 	void endGame(boolean player1) {
 		new PongEndScreen(player1).ShowMenu();
-		
+		ShopValues.shopData.addPlayerMoney(PointSystem.getPlayer1Points()-PointSystem.getPlayer2Points());
 		destroyObject(ball);
 	}
 		
 	float ogSpeed = 0;
-	
+		
 	@Override
 	public void updateScene() {
 		super.updateScene();
