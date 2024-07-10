@@ -22,6 +22,10 @@ public class StorymodeMain extends BaseScene {
 		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
 		StorymodeSaveData saveData = SaveManager.LoadSave("storymode.g4pong");
 		
+		if (saveData == null) {
+			saveData = new StorymodeSaveData();
+		}
+		
 		StorymodePlayer.getPlayerInstance().setHealth(saveData.playerHealth);
 		StorymodePlayer.getPlayerInstance().setPermPosition(new Vector3(saveData.playerX, saveData.playerY));
 		StorymodePlayer.getPlayerInstance().setPlayerXP(saveData.playerXP);
