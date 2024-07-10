@@ -17,7 +17,7 @@ public class GUIText extends GUIObject {
 	TranslationComponent text;
 	Font font;
 	
-	private TextAlignment textAlignment = TextAlignment.Center;
+	protected TextAlignment textAlignment = TextAlignment.Center;
 	
 	public GUIText(int posX, int posY, TranslationComponent text, Font font, Color fontColor) {
 		super(posX, posY, 250, 250);

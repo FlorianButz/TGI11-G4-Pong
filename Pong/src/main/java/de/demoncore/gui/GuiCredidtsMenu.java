@@ -14,7 +14,8 @@ public class GuiCredidtsMenu extends GUIMenu{
 
 		List<GUIObject> Objects = new ArrayList<GUIObject>();
 		
-		GUITextArea guiText = new GUITextArea(0, 0, Translation.literal("Test Credits\nZeile 2 test\ntest"), Resources.uiFont.deriveFont(40f),Color.cyan);
+		GUITextArea guiText = new GUITextArea(0, 0, Translation.literal("Grafikdesign - Jonatahn\r\n"
+				+ "aowdkpwo"), Resources.uiFont.deriveFont(40f),Color.cyan);
 		guiText.alignment = GUIAlignment.Center;
 		guiText.SetTextAlignment(TextAlignment.Center);
 		Objects.add(guiText);

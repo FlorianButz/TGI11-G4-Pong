@@ -34,8 +34,19 @@ public class GUITextArea extends GUIText {
 		
 		int counter = 0;
 	    for (String line : newText.split("\n")) {
-	    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x,
-	    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+
+	    	line = line.replace("\r", "");
+	    	
+	    	if(textAlignment == TextAlignment.Center) {
+	    		Rectangle2D boundsLine = g2d.getFontMetrics().getStringBounds(line, g2d);
+	    				
+		    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x + getScale().x / 2 - (int)boundsLine.getMaxX() / 2,
+		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+	    	}else {
+		    	g2d.drawString(line, getUIPosition(screenWidth, screenHeight).x,
+		    			(float) (getUIPosition(screenWidth, screenHeight).y + bounds.getHeight() + (g2d.getFontMetrics().getHeight() + newLineSpacing) * counter));
+	    	}
+	    	
 	    	counter++;
 	    }
 	}
