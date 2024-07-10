@@ -171,10 +171,10 @@ public class PongBall extends GameObject {
 
 		if(GameLogic.IsGamePaused() || !isMoving) return;
 
-		if (speed < 20f) {
+		if (speed < 30f) {
 			speed = speed + 0.0025f;	  //Linear
 		}
-	
+		//System.out.println(speed); //wenn man den speed sehen will
 		
 		position = position.add(velocity.multiply(speed)); 
 		// Wenn man sich ganz besonders fuehlt, Zeile mit dem replacen :
