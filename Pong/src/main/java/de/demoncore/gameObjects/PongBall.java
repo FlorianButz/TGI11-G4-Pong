@@ -25,7 +25,7 @@ import de.demoncore.utils.Vector3;
 public class PongBall extends GameObject {
 
 	private PongPlayer player1, player2;
-	public float speed = 9f;
+	public float speed = 9f;                     
 	private Vector3 velocity = Vector3.one();
 
 	private AudioSource sfxSource;
