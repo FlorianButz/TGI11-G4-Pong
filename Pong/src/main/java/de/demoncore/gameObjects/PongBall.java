@@ -174,9 +174,7 @@ public class PongBall extends GameObject {
 		if (speed < 20f) {
 			speed = speed + 0.0025f;	  //Linear
 		}
-		if (speed > 30f) {
-			speed = 30f;
-		}
+	
 		
 		position = position.add(velocity.multiply(speed)); 
 		// Wenn man sich ganz besonders fuehlt, Zeile mit dem replacen :
