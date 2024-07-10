@@ -85,6 +85,7 @@ public class Resources {
 		try {
 			InputStream is = Main.class.getResourceAsStream("/fonts/PixeloidSans.ttf");
 			try {
+				
 				uiFont = Font.createFont(Font.TRUETYPE_FONT, is);
 
 			}catch(Exception e) {
