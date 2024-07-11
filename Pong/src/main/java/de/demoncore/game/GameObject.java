@@ -11,7 +11,7 @@ import de.demoncore.utils.Vector3;
 
 public class GameObject {
 	
-	public Vector3 size;	// Gr��e
+	public Vector3 size;	// Groesse
 	protected Vector3 position;	// Position
 	protected Vector3 localPosition;	// Lokale Position
 	
@@ -50,7 +50,6 @@ public class GameObject {
 	}
 	
 	public void setPosition(Vector3 position) {
-		System.out.println("Set position " + position.ToString());
 		this.position = position;
 	}
 	
@@ -98,7 +97,7 @@ public class GameObject {
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		Vector3 worldPos = getPosition();
 		g2d.setColor(color);
-		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
+		g2d.fillRect(worldPos.getX(), worldPos.getY(), size.getX(), size.getY());
 	}
 	
 	public boolean checkDistanceCulled(Rectangle viewport) {

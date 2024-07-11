@@ -25,6 +25,7 @@ import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.gui.GUIValueBar;
+import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.scenes.storymode.StorymodeMain;
@@ -58,12 +59,14 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	private final int playerXPForOneLevel = 100;
 
 	private int damageAmount = 2;
+	private int radialDamageAmount = 4;
 
 	private static StorymodePlayer instance;
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, getPosition()));
 	
 	public float getPlayerXP() {
+		System.out.println(playerXP);
 		return playerXP;
 	}
 	
@@ -93,11 +96,9 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		friction = 0.8f;
 
 		SceneManager.getActiveScene().addObject(health);
-		
-		StorymodeSaveData saveData = StorymodeMain.getSaveData();
 
-		StorymodePlayer.getPlayerInstance().setHealth(saveData.playerHealth);
-		StorymodePlayer.getPlayerInstance().setPlayerXP(saveData.playerXP);
+		setHealth(StorymodeMain.saveData.playerHealth);
+		setPlayerXP(StorymodeMain.saveData.playerXP);
 		
 		levelBar = new GUIValueBar(0, 90, 850, 25, 0, 100) {
 			@Override
@@ -207,7 +208,12 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	public float ballSpeed = 3;
 
 	public void spaceKeyDown() {
-		if (!GameLogic.IsGamePaused() || (isBallForm == false && stamina == 0)) {
+		
+		if(stamina >= 75 && !GameLogic.IsGamePaused() && !isBallForm && KeyHandler.isCtrlPressed) {
+			radiusAttack();
+		}
+		
+		else if (!GameLogic.IsGamePaused() || (isBallForm == false && stamina == 0) && !isShockwaveVisible) {
 			isBallForm = !isBallForm;
 
 			ballVelocity = Vector3.zero();
@@ -223,6 +229,55 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 				setTexture(Resources.ball, true);
 				trail.emitLoop = true;
+			}
+		}
+	}
+	
+	boolean isShockwaveVisible = false;
+	float shockwaveScale = 0;
+	
+	private void radiusAttack() {
+		stamina = 0;
+		
+		ParticleSystem s = new ParticleSystem(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2);
+		
+		s.emitChunk = 500;
+		s.initialParticleSpeedMax = new Vector3(10, 10);
+		s.initialParticleSpeedMin = new Vector3(-10, -10);
+		s.particleSpeedMultiplier = 0.25f;
+		s.particleGravity = 1f;
+		s.particleLifetime = 150;
+		s.particleLifetimeRandom = 150;
+		
+		SceneManager.getActiveScene().addObject(s);
+		s.Init();
+		
+		isShockwaveVisible = true;
+		
+		Thread thread = new Thread() {
+			public void run() {
+				shockwaveScale = 0;
+				
+				try {
+					for(int i = 1; i < 750; i++) {
+						sleep(1);
+						shockwaveScale += 5f * ((1f / i) * 15);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				isShockwaveVisible = false;
+			};
+		};
+		thread.start();
+		
+		SceneManager.getActiveScene().ShakeCamera(20, 5, 100);
+		
+		for(GameObject e : new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects())) {
+			if(e instanceof BaseEnemy) {
+				if(Vector3.Distance(getPosition(), e.getPosition()) <= 400) {
+					((BaseEnemy) e).damage(radialDamageAmount, this);
+				}
 			}
 		}
 	}
@@ -251,8 +306,8 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		}
 
 		if (activeImage != null)
-			g2d.drawImage(activeImage.getTexture(), (int) getPosition().x, (int) getPosition().y, (int) getScale().x,
-					(int) getScale().y, null);
+			g2d.drawImage(activeImage.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(),
+				getScale().getY(), null);
 
 		g2d.setPaintMode();
 		
@@ -277,11 +332,17 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 				trail.emitLoop = true;
 			}
 		}
+		
+		if(isShockwaveVisible) {
+			g2d.setStroke(new BasicStroke(5));
+			g2d.setColor(new Color(1, 1, 1, GameMath.clamp(GameMath.RemapValue(shockwaveScale, 0, 500, 1, 0), 0, 1)));
+			g2d.drawOval(getPosition().getX() + getScale().getX() / 2 - (int)shockwaveScale / 2, getPosition().getY() + getScale().getY() / 2 - (int)shockwaveScale / 2, (int)shockwaveScale, (int)shockwaveScale);
+		}
 	}
 
 	@Override
 	public void update() {
-
+		
 		if (GameLogic.IsGamePaused())
 			return;
 

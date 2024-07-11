@@ -18,21 +18,21 @@ public class StorymodeMain extends BaseScene {
 		
 		addObject(new PauseMenu());
 		
+		saveData = getSaveData();
+				
 		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
-		StorymodeSaveData saveData = getSaveData();
-		
+
 		StorymodePlayer.getPlayerInstance().setPermPosition(new Vector3(saveData.playerX, saveData.playerY));
-		
 	}
 
 	public static StorymodeSaveData getSaveData() {
-		StorymodeSaveData saveData = SaveManager.LoadSave("storymode.g4pong");
+		StorymodeSaveData s = SaveManager.LoadSave("storymode.g4pong");
 		
-		if (saveData == null) {
-			saveData = new StorymodeSaveData();
+		if (s == null) {
+			s = new StorymodeSaveData();
 		}
 
-		return saveData;
+		return s;
 	}
 	
 	@Override
@@ -41,17 +41,33 @@ public class StorymodeMain extends BaseScene {
 		
 		if(StorymodePlayer.getPlayerInstance() != null)
 			cameraPosition = Vector3.Lerp(cameraPosition, StorymodePlayer.getPlayerInstance().getPosition(), 0.065f);
+
+		//cameraPosition = StorymodePlayer.getPlayerInstance().getPosition();
 	}
 	
 	@Override
 	public void uninitializeScene() {
 		super.uninitializeScene();
-		
-		StorymodeSaveData saveData = new StorymodeSaveData();
+		saveStorymode();
+	}
+	
+	public static void saveStorymode() {
+		if(saveData == null) return;
 		
 		saveData.playerHealth = StorymodePlayer.getPlayerInstance().getHealth();
 		saveData.playerX = StorymodePlayer.getPlayerInstance().getRawPosition().x;
 		saveData.playerY = StorymodePlayer.getPlayerInstance().getRawPosition().y;
+		saveData.playerXP = StorymodePlayer.getPlayerInstance().getPlayerXP();
+		
+		SaveManager.SaveToFile("storymode.g4pong", saveData);
+	}
+	
+	public static void savePlayerStats() {
+		if(saveData == null) return;
+		
+		saveData.playerHealth = StorymodePlayer.getPlayerInstance().getHealth();
+		saveData.playerX = saveData.playerX;
+		saveData.playerY = saveData.playerY;
 		saveData.playerXP = StorymodePlayer.getPlayerInstance().getPlayerXP();
 		
 		SaveManager.SaveToFile("storymode.g4pong", saveData);

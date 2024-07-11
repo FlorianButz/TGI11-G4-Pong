@@ -12,6 +12,14 @@ public class Vector3 {
 		return new Vector3(1, 1, 1);
 	}
 	
+	public int getX() {
+		return (int) Math.round(x);
+	}
+	
+	public int getY() {
+		return (int) Math.round(y);
+	}
+	
 	public Vector3(float x, float y, float z) {
 		this.x = x;
 		this.y = y;

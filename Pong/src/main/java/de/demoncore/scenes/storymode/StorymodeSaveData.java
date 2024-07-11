@@ -9,9 +9,14 @@ public class StorymodeSaveData implements Serializable {
 
 	private static final long serialVersionUID = 5565031600558695508L;
 
-	public int playerHealth = 5;
+	public int playerHealth = 6;
 	public float playerXP = 0;
 	
 	public float playerX = 0, playerY = 0;
+	
+	public StorymodeSaveData() {
+		System.out.println(playerXP);
+		
+	}
 	
 }

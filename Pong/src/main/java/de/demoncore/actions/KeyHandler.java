@@ -22,6 +22,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 	public static Vector3 playerInput1 = Vector3.zero(); // Der Input von dem Spieler (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
 	public static Vector3 playerInput2 = Vector3.zero(); // Der Input von dem Spieler 2 (welche taste gedrueckt) in form eines Vektors der bei Start auf 0 ist
 	
+	public static boolean isCtrlPressed = false;
+	
 	public KeyHandler(GameLogic gameLogic) {
 		this.gameLogic = gameLogic;
 	}
@@ -35,6 +37,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 	public void keyPressed(KeyEvent e) {
 		if(pressedKeys.contains(e.getKeyCode())) return; // Sperrt die Tastatur wenn gespammt wird
 		pressedKeys.add(e.getKeyCode()); // Sperre
+		
+		isCtrlPressed = pressedKeys.contains(KeyEvent.VK_CONTROL);
 		
 		for(GameActionListener listener : new ArrayList<GameActionListener>(listeners)) {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
@@ -72,6 +76,8 @@ public class KeyHandler implements KeyListener, MouseListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		isCtrlPressed = pressedKeys.contains(KeyEvent.VK_CONTROL) ? false : true;
+		
 		if(pressedKeys.contains(e.getKeyCode())) { pressedKeys.remove(pressedKeys.indexOf(e.getKeyCode())); } // Entfernt die Sperre
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {

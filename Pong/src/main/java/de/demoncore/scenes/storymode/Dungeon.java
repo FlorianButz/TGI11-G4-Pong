@@ -54,6 +54,13 @@ public class Dungeon extends BaseScene {
 	}
 
 	@Override
+	public void uninitializeScene() {
+		super.uninitializeScene();
+
+		StorymodeMain.savePlayerStats();
+	}
+	
+	@Override
 	public void updateScene() {
 		super.updateScene();
 		

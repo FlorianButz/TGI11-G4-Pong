@@ -133,14 +133,11 @@ public class RigidBody extends GameObject {
 		if(GameLogic.IsGamePaused()) return;
 		
 		checkCollision();
-		//checkValidVelocity();
 		
 		position = position.add(velocity.multiply(0.27f));
-		//position = Vector3.Lerp(lastPosition, position.add(velocity), 0.27f);
 		velocity = velocity.multiply(friction);
 
 		checkCollision();
-		//checkValidVelocity();
 		
 		lastPosition = position;
 	}
@@ -153,7 +150,7 @@ public class RigidBody extends GameObject {
 //			iteration++;
 //
 //			if(iteration >= 4) {
-				velocity = velocity.add(force.multiply(1f));
+				velocity = velocity.add(force);
 //				return;
 //			}
 //

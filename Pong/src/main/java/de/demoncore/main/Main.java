@@ -10,6 +10,7 @@ import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
 import de.demoncore.scenes.SplashScreen;
 import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 

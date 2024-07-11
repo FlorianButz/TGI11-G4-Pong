@@ -115,7 +115,6 @@ public class Draw extends JPanel {
 		
 		// Zeichne alle Spielobjekte
 
-		
 		g2d.setColor(Color.WHITE);
 		for (int i = 0; i < gameObjectsInScene.size(); i++) {
 			GameObject currentGameObj = gameObjectsInScene.get(i);
@@ -124,6 +123,7 @@ public class Draw extends JPanel {
 			
 			// Debug modus
 			if(!(currentGameObj instanceof GUIObject) && Settings.getDebugMode()){
+				if(currentGameObj == null) continue;
 				Rectangle r = currentGameObj.getBoundingBox();
 				if(currentGameObj.collisionEnabled)
 					g2d.setColor(Color.green);

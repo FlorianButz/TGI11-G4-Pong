@@ -36,9 +36,8 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
+		
 		spawnParticles();
-		StorymodePlayer.getPlayerInstance().addXP(25);
 	}
 
 	@Override
