@@ -131,7 +131,7 @@ public class Dungeon extends BaseScene {
 				do {
 					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
-				player.setPosition(Vector3.zero().subtract(Vector3.one().multiply(dungeonSize * 2).subtract(Vector3.one().multiply(15))));
+				randomRoom.startRoom();
 			}
 		};
 		gen.start();

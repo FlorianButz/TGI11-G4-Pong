@@ -93,7 +93,12 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		friction = 0.8f;
 
 		SceneManager.getActiveScene().addObject(health);
+		
+		StorymodeSaveData saveData = StorymodeMain.getSaveData();
 
+		StorymodePlayer.getPlayerInstance().setHealth(saveData.playerHealth);
+		StorymodePlayer.getPlayerInstance().setPlayerXP(saveData.playerXP);
+		
 		levelBar = new GUIValueBar(0, 90, 850, 25, 0, 100) {
 			@Override
 			public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
@@ -179,8 +184,6 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 			if (otherObject instanceof Damagable) {
 				((Damagable) otherObject).damage(damageAmount, this);
 			}
-		
-			ballVelocity = ballVelocity.multiply(1.04f);
 		}
 		
 	}

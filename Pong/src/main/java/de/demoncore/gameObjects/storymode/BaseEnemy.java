@@ -7,6 +7,7 @@ import de.demoncore.game.Damagable;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.ValueBarRenderable;
@@ -18,37 +19,43 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	public int damageAmount = 1;
 	public float enemySpeed = 2.75f;
 	public float stoppingDistance = 85f;
-	
+	public float chaseDistance = 500f;
+
 	public int initialHealth = 5;
 	public int health = 5;
-	
+
 	public ValueBarRenderable healthBar;
-	
+
 	public BaseEnemy(int posX, int posY) {
 		super(posX, posY, 25, 25);
-	
+
 		color = Color.magenta;
 		healthBar = new ValueBarRenderable(0, 0, 50, 10, 0, health);
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-	
+
 		spawnParticles();
 		StorymodePlayer.getPlayerInstance().addXP(25);
 	}
-	
+
 	@Override
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
 		super.draw(g2d, screenWidth, screenHeight);
-		
+
 		Vector3 worldPos = getPosition();
 		g2d.setColor(color);
 		g2d.fillRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
-		
+
 		if(health < initialHealth)
 			healthBar.draw(g2d, screenWidth, screenHeight);
+		
+		if(Settings.getDebugMode()) {
+			g2d.setColor(Color.red);
+			g2d.drawOval((int)worldPos.x - (int)(chaseDistance / 1.5f), (int)worldPos.y - (int)(chaseDistance / 1.5f), (int)(chaseDistance * 1.5f) + (int)getScale().x, (int)(chaseDistance * 1.5f) + (int)getScale().y);
+		}
 	}
 
 	private void spawnParticles() {
@@ -67,41 +74,43 @@ public class BaseEnemy extends RigidBody implements Damagable {
 		system.particleLifetimeRandom = 45;
 
 		system.particleColorFirst = Color.red;
-		
+
 		SceneManager.getActiveScene().addObject(system);
 		SceneManager.getActiveScene().ShakeCamera(35, 35, 35);
 		system.Init();
 	}
-	
+
 	protected boolean isAttacking;
 	int timer = 0;
 	byte speed = 1;
-	
+
 	@Override
 	public void update() {
 		super.update();
-		
+
 		if(GameLogic.IsGamePaused()) return;
-	
-		if(Vector3.Distance(StorymodePlayer.getPlayerInstance().getPosition(), getPosition()) >= stoppingDistance) {
-			Vector3 force = StorymodePlayer.getPlayerInstance().getPosition().subtract(getPosition()).normalized().multiply(enemySpeed);
-			addForce(force);
-			isAttacking = false;
-		}else {
-			velocity = Vector3.Lerp(velocity, Vector3.zero(), 0.03f);
-		
-			if(!isAttacking) {
-				isAttacking = true;
-				timer = 0;
-			}
-			
-			timer += speed;
-			
-			if((int)timer % attackSpeed == 0) {
-				StorymodePlayer.getPlayerInstance().damage(damageAmount, this);
+
+		if(Vector3.Distance(StorymodePlayer.getPlayerInstance().getPosition(), getPosition()) <= chaseDistance) {
+			if(Vector3.Distance(StorymodePlayer.getPlayerInstance().getPosition(), getPosition()) >= stoppingDistance) {
+				Vector3 force = StorymodePlayer.getPlayerInstance().getPosition().subtract(getPosition()).normalized().multiply(enemySpeed);
+				addForce(force);
+				isAttacking = false;
+			}else {
+				velocity = Vector3.Lerp(velocity, Vector3.zero(), 0.03f);
+
+				if(!isAttacking) {
+					isAttacking = true;
+					timer = 0;
+				}
+
+				timer += speed;
+
+				if((int)timer % attackSpeed == 0) {
+					StorymodePlayer.getPlayerInstance().damage(damageAmount, this);
+				}
 			}
 		}
-		
+
 		healthBar.setPosition(position.add(new Vector3(0, -25)));
 		healthBar.setValue(health);
 	}
@@ -111,7 +120,7 @@ public class BaseEnemy extends RigidBody implements Damagable {
 		health -= amount;
 
 		StorymodePlayer.getPlayerInstance().addXP(5);
-		
+
 		if(health <= 0) SceneManager.getActiveScene().destroyObject(this);
 	}
 
@@ -129,5 +138,5 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	
+
 }

@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.utils.Vector3;
 
 public class GameObject {
@@ -102,5 +103,9 @@ public class GameObject {
 	
 	public boolean checkDistanceCulled(Rectangle viewport) {
 		return getBoundingBox().intersects(viewport);
+	}
+
+	public void startRoom() {
+		StorymodePlayer.getPlayerInstance().setPosition(getPosition().add(getScale().multiply(0.5f)));
 	}
 }

@@ -30,10 +30,24 @@ public class DungeonRoom extends GameObject {
 		super(posX, posY, width, height);
 		
 		color = new Color(1, 1, 1, 0.1f);
-		
 		collisionEnabled = false;
+
+		if(Math.random() > 0.4f) {
+			for(int i = 0; i < ((int)(Math.random() * 5 + 1)); i++) {
+				Vector3 rand = getRandomPositionInRoom();
+				SceneManager.getActiveScene().addObject(new BaseEnemy((int)rand.x, (int)rand.y));
+			}
+		}
 	}
 
+	Vector3 getRandomPositionInRoom() {
+		
+		Vector3 startPos = getPosition().add(new Vector3(20, 20));
+		Vector3 toPos = getScale().subtract(new Vector3(20, 20));
+		
+		return startPos.add(new Vector3(toPos.x * (float)Math.random(), toPos.y * (float)Math.random()));
+	}
+	
 	boolean top;
 	boolean bot;
 	boolean lef;
