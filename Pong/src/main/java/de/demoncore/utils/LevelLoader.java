@@ -13,6 +13,7 @@ import de.demoncore.gameObjects.storymode.BigStone;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.Grass;
 import de.demoncore.gameObjects.storymode.Path;
+import de.demoncore.gameObjects.storymode.Pillar;
 import de.demoncore.gameObjects.storymode.Sign;
 import de.demoncore.gameObjects.storymode.SmallStone;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
@@ -25,12 +26,12 @@ public class LevelLoader {
 	// 1 Grass
 	// 2 Kleiner Stein
 	// 3 Stein
-	// 4 Sign
-	// 5 Tree
+	// 4 Tree
+	// 5 Sign
 	// 6 Dungeon Door
 	// 7 Path
 	// 8 Rectangle
-	
+	// 9 Pillar
 	
 	public static void LoadLevel(InputStream stream) {
 
@@ -96,6 +97,9 @@ public class LevelLoader {
 						if(col == 1) obj1.color = new Color(0, 0, 0, 0);
 						
 						SceneManager.getActiveScene().addObject(obj1);
+						break;
+					case 9:
+						SceneManager.getActiveScene().addObject(new Pillar(objectPosX, objectPosY));
 						break;
 					}
 				}

@@ -8,6 +8,8 @@ import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
+import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.ValueBarRenderable;
@@ -105,7 +107,7 @@ public class BaseEnemy extends RigidBody implements Damagable {
 				timer += speed;
 
 				if((int)timer % attackSpeed == 0) {
-					StorymodePlayer.getPlayerInstance().damage(damageAmount, this);
+					StorymodePlayer.getPlayerInstance().damage(damageAmount, this, Translation.get("deathReason.baseEnemy"));
 				}
 			}
 		}
@@ -115,7 +117,7 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	}
 
 	@Override
-	public void damage(int amount, GameObject damageSource) {
+	public void damage(int amount, GameObject damageSource, TranslationComponent deathReason) {
 		health -= amount;
 
 		StorymodePlayer.getPlayerInstance().addXP(5);

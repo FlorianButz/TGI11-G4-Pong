@@ -19,10 +19,13 @@ import de.demoncore.utils.Resources;
 
 public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 	
+	public static boolean isPauseMenuActive = false;
+	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
+		isPauseMenuActive = false;
 		Translation.listeners.remove(this);
 	}
 	
@@ -88,16 +91,16 @@ public class PauseMenu extends GUIMenu implements OnLanguageUpdateListener {
 			SceneManager.getActiveScene().onTop(o);
 		}
 		
-		super.ShowMenu();
+		isPauseMenuActive = true;
 		
-		GameLogic.SetGamePaused(true);
+		super.ShowMenu();
 	}
 	
 	@Override
 	public void HideMenu() {
 		super.HideMenu();
 
-		GameLogic.SetGamePaused(false);
+		isPauseMenuActive = false;
 	}
 
 	@Override

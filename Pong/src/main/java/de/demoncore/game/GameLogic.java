@@ -4,6 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.demoncore.audio.AudioMaster;
+import de.demoncore.gameObjects.PauseMenu;
+import de.demoncore.gui.dialog.Dialog;
 
 public class GameLogic {
 	
@@ -37,6 +39,11 @@ public class GameLogic {
 			@Override
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
+				
+				if(Dialog.isActiveDialog || PauseMenu.isPauseMenuActive)
+					GameLogic.SetGamePaused(true);
+				else
+					GameLogic.SetGamePaused(false);
 				
 				if(SceneManager.getActiveScene() != null && AudioMaster.isInitialized())
 					AudioMaster.SetListener(SceneManager.getActiveScene().cameraPosition);

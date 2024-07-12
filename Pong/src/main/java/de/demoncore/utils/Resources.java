@@ -50,6 +50,7 @@ public class Resources {
 	public static Sprite tree;
 	public static Sprite dungeonDoor;
 	public static Sprite path;
+	public static Sprite pillar;
 
 	public static Sprite shop_ballskin;
 	public static Sprite shop_ballspawn;
@@ -154,6 +155,7 @@ public class Resources {
 		tree = new Sprite(Main.class.getResourceAsStream("/textures/Tree.png")).load();
 		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
 		path = new Sprite(Main.class.getResourceAsStream("/textures/Path.png")).load();
+		pillar = new Sprite(Main.class.getResourceAsStream("/textures/Pillar.png")).load();
 
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();

@@ -124,7 +124,7 @@ public class Translation {
 		germanTranslation.put("pong.end_title", " hat das Spiel gewonnen!");
 		englishTranslation.put("pong.end_title", " won the game!");
 		
-		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugefügt: ");
+		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugefï¿½gt: ");
 		englishTranslation.put("pong.end_title_points", "Pong Taler gathered: ");
 
 		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
@@ -193,6 +193,9 @@ public class Translation {
 	
 		germanTranslation.put("shop.info", "Pong Taler koennen im Einzelspieler durch Gewinnen des Spiels erlangt werden.");
 		englishTranslation.put("shop.info", "Pong Taler can be obtained in 1 Player Mode by winning the game.");
+
+		germanTranslation.put("deathReason.baseEnemy", "Spieler wurde vom primitiven Gegnertyp getoetet.");
+		englishTranslation.put("deathReason.baseEnemy", "Player was killed by the primitive enemy type.");
 	}
 
 	public static TranslationComponent get(String translationID) {

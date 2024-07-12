@@ -3,6 +3,8 @@ package de.demoncore.gui;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowListener;
@@ -88,15 +90,12 @@ public class Gui {
 	
 	public static void Fullscreen(boolean isEnabled) {
 		if(isEnabled) {
-
-			frame.setExtendedState(frame.MAXIMIZED_BOTH);
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			frame.setUndecorated(true);
 			
 		}else {
-			
 			frame.setExtendedState(frame.MAXIMIZED_BOTH);
 			frame.setUndecorated(false);
-			
 		}
 	}
 	

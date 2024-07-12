@@ -7,6 +7,7 @@ import java.util.List;
 import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
 import de.demoncore.audio.AudioSource;
+import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;

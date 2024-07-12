@@ -16,6 +16,8 @@ import de.demoncore.game.Damagable;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.game.animator.Easing.EasingType;
@@ -25,6 +27,7 @@ import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.gui.GUIValueBar;
+import de.demoncore.gui.MessagePopup;
 import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
@@ -60,6 +63,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 	private int damageAmount = 2;
 	private int radialDamageAmount = 4;
+	private int maxHealth = 6;
 
 	private static StorymodePlayer instance;
 
@@ -95,7 +99,8 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 		friction = 0.8f;
 
-		SceneManager.getActiveScene().addObject(health);
+		if(!(SceneManager.getActiveScene() instanceof StorymodeMain))
+			SceneManager.getActiveScene().addObject(health);
 
 		setHealth(StorymodeMain.saveData.playerHealth);
 		setPlayerXP(StorymodeMain.saveData.playerXP);
@@ -183,7 +188,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 		if (isBallForm) {
 			if (otherObject instanceof Damagable) {
-				((Damagable) otherObject).damage(damageAmount, this);
+				((Damagable) otherObject).damage(damageAmount, this, Translation.literal(""));
 			}
 		}
 		
@@ -238,6 +243,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	
 	private void radiusAttack() {
 		stamina = 0;
+		staminaTimer = 100;
 		
 		ParticleSystem s = new ParticleSystem(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2);
 		
@@ -276,7 +282,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		for(GameObject e : new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects())) {
 			if(e instanceof BaseEnemy) {
 				if(Vector3.Distance(getPosition(), e.getPosition()) <= 400) {
-					((BaseEnemy) e).damage(radialDamageAmount, this);
+					((BaseEnemy) e).damage(radialDamageAmount, this, Translation.literal(""));
 				}
 			}
 		}
@@ -448,10 +454,25 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	}
 
 	@Override
-	public void damage(int amount, GameObject damageSource) {
+	public void damage(int amount, GameObject damageSource, TranslationComponent deathReason) {
 		if (isBallForm && damageSource instanceof BaseEnemy)
 			return;
 		health.damage(amount);
+		
+		if(health.getHealth() <= 0) {
+			heal(maxHealth);
+			SceneManager.loadScene(new StorymodeMain() {
+				@Override
+				public void initializeScene() {
+					super.initializeScene();
+				
+					MessagePopup p = new MessagePopup(Translation.literal("\bYou've died!\n\n" + deathReason.Get()));
+					p.textColor = new Color(0.9f, 0.25f, 0.1f, 1f);
+					addObject(p);
+					p.ShowMenu();
+				}
+			});
+		}
 	}
 
 	@Override
