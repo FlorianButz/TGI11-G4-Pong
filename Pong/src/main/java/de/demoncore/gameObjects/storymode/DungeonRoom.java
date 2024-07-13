@@ -9,6 +9,7 @@ import java.util.List;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -254,6 +255,30 @@ public class DungeonRoom extends GameObject {
 			g2d.setFont(Resources.uiFont.deriveFont(45f));
 			g2d.drawString("" + top + bot + lef + rig + " HC: " + count, (int)worldPos.x + 45, (int)worldPos.y + 100);
 		}
+	}
+
+	public DungeonDoor spawnExit() {
+		DungeonDoor door = new DungeonDoor(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2, false);
+		SceneManager.getActiveScene().addObject(door);
+		
+		ParticleSystem s = new ParticleSystem(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2);
+		
+		s.emitChunk = 500;
+		s.initialParticleSpeedMax = new Vector3(10, 10);
+		s.initialParticleSpeedMin = new Vector3(-10, -10);
+		s.particleColorEnd = new Color(0, 0, 0, 0);
+		s.particleSpeedMultiplier = 0.45f;
+		s.particleGravity = 0.025f;
+		s.particleLifetime = 750;
+		s.particleLifetimeRandom = 150;
+		s.initialParticleSize = 35;
+		s.initialParticleSizeRandom = 50;
+		s.endParticleSize = 0;
+		
+		SceneManager.getActiveScene().addObject(s);
+		s.Init();
+		
+		return door;
 	}
 	
 }

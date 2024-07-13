@@ -153,7 +153,8 @@ public class GUIButton extends GUIObject {
 	public void onMouseHoverOverUIObject() {
 		super.onMouseHoverOverUIObject();
 
-		source.Play(Resources.buttonHover);
+		if(source != null)
+			source.Play(Resources.buttonHover);
 	}
 	
 	@Override

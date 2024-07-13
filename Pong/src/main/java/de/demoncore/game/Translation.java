@@ -196,6 +196,37 @@ public class Translation {
 
 		germanTranslation.put("deathReason.baseEnemy", "Spieler wurde vom primitiven Gegnertyp getoetet.");
 		englishTranslation.put("deathReason.baseEnemy", "Player was killed by the primitive enemy type.");
+	
+
+		germanTranslation.put("sign.start.0", "Nur die mutigsten aller Kaempfer koennen lernen das Boese in dieser Welt zu besiegen.");
+		englishTranslation.put("sign.start.0", "Only the one's brave enough can attempt learning to fight the evil that spread in our world.");
+
+		germanTranslation.put("sign.start.1", "Nimm den Kompass, der unter dem Stein auf der rechten Seite liegt, und finde den Schrein des Wissens.");
+		englishTranslation.put("sign.start.1", "Take the compass that lies under the rock on the right and find the shrine of knowledge where the truth lies.");
+
+		germanTranslation.put("sign.stone.0", "Dieser einst friedliche Ort wurde in ein Konflikt der Menschheit gezogen.");
+		englishTranslation.put("sign.stone.0", "This once peaceful place was torn in to another on of the unnecessary conflicts from the human race.");
+
+		germanTranslation.put("sign.stone.1", "Zwei unschuldige Steine, die in ihrer Gemeinschaft von der Natur platziert wurden waren der Grund des Konfliktes.");
+		englishTranslation.put("sign.stone.1", "Two innocent rocks placed in unison were the core of this conflict.");
+
+		germanTranslation.put("sign.stone.2", "Ein Stein so perfekt, dass man sich an den Kanten schneiden konnte. Der andere natuerlicher und Bildschoen.");
+		englishTranslation.put("sign.stone.2", "One so perfect that fruits can be cut on its edges. The other more aesthetically pleasing and naturally correct.");
+		
+		germanTranslation.put("sign.stone.3", "Der Konflikt wurde schnell zu einem Krieg der nur durch ummauern der zwei Steine geloest wurden konnte, so dass die Menschheit und zukuenftige Generationen wieder in Frieden leben koennen.");
+		englishTranslation.put("sign.stone.3", "The conflict turned in to a war in which the only way to end it was to seal it away from the outside world returning peace to the world and its future generations.");
+
+		germanTranslation.put("sign.stone.4", "Mach was du willst aber zahl den Preis.");
+		englishTranslation.put("sign.stone.4", "Do what you want but pay the price.");
+
+		germanTranslation.put("sign.stone.natural", "Dies ist ein normaller Stein.");
+		englishTranslation.put("sign.stone.natural", "This is a normal rock.");
+
+		germanTranslation.put("sign.stone.perfect.0", "Dies ist der perfekteste Stein der jemals existiert hat.");
+		englishTranslation.put("sign.stone.perfect.0", "This is the most perfect rock that has ever existed.");
+		
+		germanTranslation.put("sign.stone.perfect.1", "Aber nicht alles was perfekt ist, ist schoen.");
+		englishTranslation.put("sign.stone.perfect.1", "But in beauty does not always lie perfection.");
 	}
 
 	public static TranslationComponent get(String translationID) {

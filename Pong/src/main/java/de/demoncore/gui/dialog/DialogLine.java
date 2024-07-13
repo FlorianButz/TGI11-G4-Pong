@@ -1,13 +1,15 @@
 package de.demoncore.gui.dialog;
 
+import de.demoncore.game.TranslationComponent;
+
 public class DialogLine {
 
 	private String name;
-	private String line;
+	private TranslationComponent line;
 	
 	private DialogLine nextLine;
 	
-	public DialogLine(String name, String line, DialogLine nextLine) {
+	public DialogLine(String name, TranslationComponent line, DialogLine nextLine) {
 		this.name = name;
 		this.line = line;
 		this.nextLine = nextLine;
@@ -18,7 +20,7 @@ public class DialogLine {
 	}
 
 	public String GetLine() {
-		return line;
+		return line.Get();
 	}
 	
 	public DialogLine GetNextLine() {

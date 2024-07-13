@@ -69,7 +69,7 @@ public class GameLogic {
 	
 	public static void SetGamePaused(boolean isPaused) {
 		isGamePaused = isPaused;
-		AudioMaster.SetAllPaused(isPaused);
+		//AudioMaster.SetAllPaused(isPaused);
 	}
 	
 	public static boolean IsGamePaused() {

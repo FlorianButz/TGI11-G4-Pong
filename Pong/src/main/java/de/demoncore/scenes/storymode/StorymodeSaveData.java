@@ -1,9 +1,8 @@
 package de.demoncore.scenes.storymode;
 
 import java.io.Serializable;
-
-import de.demoncore.gameObjects.storymode.StorymodePlayer;
-import de.demoncore.utils.Vector3;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StorymodeSaveData implements Serializable {
 
@@ -14,9 +13,5 @@ public class StorymodeSaveData implements Serializable {
 	
 	public float playerX = 0, playerY = 0;
 	
-	public StorymodeSaveData() {
-		System.out.println(playerXP);
-		
-	}
-	
+	public List<Integer> completedDungeons = new ArrayList<Integer>();
 }

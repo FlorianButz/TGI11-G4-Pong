@@ -1,5 +1,8 @@
 package de.demoncore.audio;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.lwjgl.openal.AL10;
 
 import de.demoncore.game.GameObject;
@@ -16,6 +19,8 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	private boolean isSpacial = true;
 
 	GameObject parentObject;
+	private TimerTask task;
+	private Timer timer;
 
 	public AudioSource(GameObject parentObject) {
 		super(0, 0, 0, 0);
@@ -38,6 +43,22 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 
 		AudioMaster.AddOnVolumeChangeListener(this);
 		AudioMaster.AddOnPauseListener(this);
+		
+		timer = new Timer();
+		task = new TimerTask() {
+			@Override
+			public void run() {				
+				if(parentObject != null)
+					position = parentObject.getPosition();
+
+				if(isSpacial)
+					AL10.alSource3f(sourceId, AL10.AL_POSITION, position.x, 0, position.y);
+				else {
+					Vector3 camPos = SceneManager.getActiveScene().cameraPosition;
+					AL10.alSource3f(sourceId, AL10.AL_POSITION, camPos.x, 0, camPos.y);
+				}
+			}
+		};
 	}
 	
 	public AudioSource setSpacial(boolean isSpacial) {
@@ -74,28 +95,22 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	}
 
 	@Override
-	public void update() {
-		super.update();
-		
-		if(parentObject != null)
-			position = parentObject.getPosition();
-
-		if(isSpacial)
-			AL10.alSource3f(sourceId, AL10.AL_POSITION, position.x, 0, position.y);
-		else {
-			Vector3 camPos = SceneManager.getActiveScene().cameraPosition;
-			AL10.alSource3f(sourceId, AL10.AL_POSITION, camPos.x, 0, camPos.y);
-		}
-	}
-
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		AL10.alDeleteSources(sourceId);
 		AudioMaster.RemoveOnVolumeChangeListener(this);
 		AudioMaster.RemoveOnPauseListener(this);
+		
+		task.cancel();
 	}
 
+	@Override
+	public void onAddToScene() {
+		super.onAddToScene();
+	
+		timer.scheduleAtFixedRate(task, 25, 25);
+	}
+	
 	@Override
 	public void OnVolumeChange(float volume) {
 		SetRealVolume(volume);

@@ -7,6 +7,7 @@ import java.util.List;
 
 import de.demoncore.audio.AudioClip;
 import de.demoncore.audio.AudioMaster;
+import de.demoncore.game.Translation;
 import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.SplashScreen;
@@ -49,8 +50,11 @@ public class Resources {
 	public static Sprite grass3;
 	public static Sprite tree;
 	public static Sprite dungeonDoor;
+	public static Sprite dungeonDoorBroken;
 	public static Sprite path;
 	public static Sprite pillar;
+	public static Sprite compassEmpty;
+	public static Sprite compassNeedle;
 
 	public static Sprite shop_ballskin;
 	public static Sprite shop_ballspawn;
@@ -71,11 +75,14 @@ public class Resources {
 	
 	public static Sprite blocked_icon;
 	public static Sprite info_icon;
+	public static Sprite credits_icon;
+	public static Sprite credits_icon_dark;
 	
 	public static DialogLine testLine;
-	public static DialogLine signTest1;
+	public static DialogLine startDialogSign;
 	
 	static List<DialogLine> dialogs;
+	private static DialogLine stoneDialogSign;
 	
 	public static void loadFonts() {
 
@@ -154,8 +161,11 @@ public class Resources {
 		grass3 = new Sprite(Main.class.getResourceAsStream("/textures/Grass3.png")).load();
 		tree = new Sprite(Main.class.getResourceAsStream("/textures/Tree.png")).load();
 		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
+		dungeonDoorBroken = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoorBroken.png")).load();
 		path = new Sprite(Main.class.getResourceAsStream("/textures/Path.png")).load();
 		pillar = new Sprite(Main.class.getResourceAsStream("/textures/Pillar.png")).load();
+		compassEmpty = new Sprite(Main.class.getResourceAsStream("/textures/CompassEmpty.png")).load();
+		compassNeedle = new Sprite(Main.class.getResourceAsStream("/textures/CompassNeedle.png")).load();
 
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();
@@ -176,6 +186,8 @@ public class Resources {
 		
 		blocked_icon = new Sprite(Main.class.getResourceAsStream("/textures/BlockedIcon.png")).load();
 		info_icon = new Sprite(Main.class.getResourceAsStream("/textures/InfoIcon.png")).load();
+		credits_icon = new Sprite(Main.class.getResourceAsStream("/textures/CreditsIcon.png")).load();
+		credits_icon_dark = new Sprite(Main.class.getResourceAsStream("/textures/CreditsIconDark.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}
@@ -188,11 +200,20 @@ public class Resources {
 		
 		dialogs = new ArrayList<DialogLine>();
 
-		testLine = new DialogLine("Wise Old Man", "Hello, this is a test!", null);
 		dialogs.add(testLine);
 
-		signTest1 = new DialogLine("Sign", "This is a sign!", new DialogLine("Sign", "This is the second text!", new DialogLine("Sign", "Please don't leave me alone :(", null)));
-		dialogs.add(signTest1);
+		startDialogSign = new DialogLine("Sign", Translation.get("sign.start.0"), new DialogLine("Sign", Translation.get("sign.start.1"), null));
+		dialogs.add(startDialogSign);
+		
+		stoneDialogSign = new DialogLine("Sign", Translation.get("sign.stone.0"),
+				new DialogLine("Sign", Translation.get("sign.stone.1"),
+						new DialogLine("Sign", Translation.get("sign.stone.2"),
+								new DialogLine("Sign", Translation.get("sign.stone.3"),
+										new DialogLine("Sign", Translation.get("sign.stone.4"), null)))));
+		dialogs.add(stoneDialogSign);
+		
+		dialogs.add(new DialogLine("Sign", Translation.get("sign.stone.natural"), null));
+		dialogs.add(new DialogLine("Sign", Translation.get("sign.stone.perfect.0"), new DialogLine("Sign", Translation.get("sign.stone.perfect.1"), null)));
 		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}

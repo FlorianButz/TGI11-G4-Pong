@@ -202,10 +202,6 @@ public class ParticleSystem extends GameObject {
 			if(p != null) {
 				Vector3 particleWorldPosition = p.position;
 				Rectangle pBounds = new Rectangle((int)particleWorldPosition.x + (int)(p.size.x / 2), (int)particleWorldPosition.y + (int)(p.size.y / 2), (int)p.size.x, (int)p.size.y);
-				if(!viewport.intersects(pBounds)) {
-					particles.remove(p);
-				}else {
-				}
 			}
 		}
 

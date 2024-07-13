@@ -1,14 +1,17 @@
 package de.demoncore.scenes.storymode;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.demoncore.game.GameObject;
+import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.PauseMenu;
+import de.demoncore.gameObjects.storymode.BaseEnemy;
 import de.demoncore.gameObjects.storymode.Cake;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.DungeonHallway;
@@ -23,6 +26,12 @@ public class Dungeon extends BaseScene {
 
 	StorymodePlayer player;
 	DungeonMinimap minimap;
+	
+	int dungeonId = 0;
+	
+	public Dungeon(int dungeonId) {
+		this.dungeonId = dungeonId;
+	}
 	
 	@Override
 	public void initializeScene() {
@@ -59,13 +68,59 @@ public class Dungeon extends BaseScene {
 
 		StorymodeMain.savePlayerStats();
 	}
+
+	boolean isDungeonComplete = false;
+	boolean dungeonGenerated = false;
 	
 	@Override
 	public void updateScene() {
 		super.updateScene();
 		
-		cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.065f);
+		if(!zoomAtDoor)
+			cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.065f);
+		else
+			cameraPosition = Vector3.Lerp(cameraPosition, exitDoor.getPosition().add(exitDoor.getScale().multiply(0.5f)), 0.03f);
+		
+		if(!isDungeonComplete && dungeonGenerated) {
+			
+			int enemyCount = 0;
+			for(GameObject go : new ArrayList<GameObject>(getSceneObjects())) {
+				if(go instanceof BaseEnemy)
+					enemyCount++;
+			}
+			
+			if(enemyCount == 0) {
+				isDungeonComplete = true;
+				
+				dungeonComplete();
+			}
+		}
 	}
+	
+	private void dungeonComplete() {
+		DungeonRoom randomRoom = null;
+		do {
+			randomRoom = (DungeonRoom) dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
+		}while(randomRoom == null);
+		exitDoor = randomRoom.spawnExit();
+		
+		zoomAtDoor = true;
+		
+		SceneManager.getActiveScene().ShakeCamera(10, 5, 300);
+		
+		StorymodeMain.saveData.completedDungeons.add(dungeonId);
+		
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		@Override
+		public void run() {
+			zoomAtDoor = false;	
+		}	
+		}, 2500);
+	}
+
+	public DungeonDoor exitDoor;
+	public boolean zoomAtDoor = false;
 	
 	public long seed;
 	public Random rng;
@@ -74,7 +129,7 @@ public class Dungeon extends BaseScene {
 	public int dungeonSpacing = 225;
 	public int dungeonSize = 1250;
 
-	public int maxRooms = 25;
+	public int maxRooms = 20;
 	private int roomsCount = 0;
 	
 	public GameObject[][] dungeonRoom;
@@ -139,6 +194,8 @@ public class Dungeon extends BaseScene {
 					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
 				randomRoom.startRoom();
+				
+				dungeonGenerated = true;
 			}
 		};
 		gen.start();

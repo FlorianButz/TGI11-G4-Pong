@@ -151,7 +151,7 @@ public class MainMenu extends BaseScene {
 		GuiCredidtsMenu creditsMenu = new GuiCredidtsMenu();
 		
 		
-		GUIImageButton credits = new GUIImageButton(-475, 0, 75, 75, 65, Resources.shopIcon, Resources.shopHoverIcon, new GUIButtonClickEvent() {
+		GUIImageButton credits = new GUIImageButton(-475, 0, 75, 75, 65, Resources.credits_icon_dark, Resources.credits_icon, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();

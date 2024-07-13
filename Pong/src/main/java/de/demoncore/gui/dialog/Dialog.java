@@ -51,6 +51,12 @@ public class Dialog extends GameObject {
 				super.onSpaceKeyPressed();
 				nextLine();
 			}
+			
+			@Override
+			public void onEscapePressed() {
+				super.onEscapePressed();
+				destroyDialog();
+			}
 		};
 		KeyHandler.listeners.add(listener);
 
@@ -100,6 +106,8 @@ public class Dialog extends GameObject {
 	}
 	
 	boolean isLinePlaying = false;
+
+	private Thread characterThread;
 	
 	void nextLine() {
 		
@@ -113,7 +121,7 @@ public class Dialog extends GameObject {
 
 		SceneManager.getActiveScene().destroyObject(spaceText);
 		
-		Thread characterThread = new Thread("DialogAnimate") {
+		characterThread = new Thread("DialogAnimate") {
 			@Override
 			public void run() {
 
@@ -131,7 +139,8 @@ public class Dialog extends GameObject {
 					try {
 						Thread.sleep(55);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						Logger.logInfo("Dialog interrupted");
+						return;
 					}
 				}
 
@@ -176,6 +185,8 @@ public class Dialog extends GameObject {
 		KeyHandler.listeners.remove(listener);
 		SceneManager.getActiveScene().destroyObject(sfxSource[0]);
 		SceneManager.getActiveScene().destroyObject(sfxSource[1]);
+		
+		characterThread.interrupt();
 	}
 	
 	protected GUIObject createBackground() {
