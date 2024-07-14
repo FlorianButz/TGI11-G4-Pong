@@ -29,8 +29,18 @@ public class Resources {
 	public static AudioClip pongPlayerHitWall;
 	public static AudioClip pongPlayerHitPedal;
 	public static AudioClip pongGoal;
-	
+
 	public static AudioClip dialogTalk;
+
+	public static AudioClip playerStep;
+	public static AudioClip playerAttackNormal;
+	public static AudioClip playerAttackRadial;
+	public static AudioClip playerTransformTB;
+	public static AudioClip playerTransformFB;
+	public static AudioClip playerDeath;
+	public static AudioClip playerHurt;
+	public static AudioClip playerHeal;
+	public static AudioClip openDoor;
 
 	public static Sprite test;
 	public static Sprite fullHeart;
@@ -55,6 +65,8 @@ public class Resources {
 	public static Sprite pillar;
 	public static Sprite compassEmpty;
 	public static Sprite compassNeedle;
+	public static Sprite bossDoor;
+	public static Sprite arrow;
 
 	public static Sprite shop_ballskin;
 	public static Sprite shop_ballspawn;
@@ -131,8 +143,18 @@ public class Resources {
 		pongPlayerHitPedal = AudioMaster.loadSoundWav("/audio/Pong_PlayerHitPedal.wav");
 		pongPlayerHitWall = AudioMaster.loadSoundWav("/audio/Pong_PlayerHitWall.wav");
 		pongGoal = AudioMaster.loadSoundWav("/audio/Pong_Goal.wav");
-		
+
 		dialogTalk = AudioMaster.loadSoundWav("/audio/Dialog_Talk.wav");
+
+		playerStep = AudioMaster.loadSoundWav("/audio/Storymode_Player_Step.wav");
+		playerAttackNormal = AudioMaster.loadSoundWav("/audio/Storymode_Player_NormalAttack.wav");
+		playerAttackRadial = AudioMaster.loadSoundWav("/audio/Storymode_Player_RadialAttack.wav");
+		playerTransformTB = AudioMaster.loadSoundWav("/audio/Storymode_Player_TransformToBall.wav");
+		playerTransformFB = AudioMaster.loadSoundWav("/audio/Storymode_Player_TransformFromBall.wav");
+		playerDeath = AudioMaster.loadSoundWav("/audio/Storymode_Player_Death.wav");
+		playerHurt = AudioMaster.loadSoundWav("/audio/Storymode_Player_Hurt.wav");
+		playerHeal = AudioMaster.loadSoundWav("/audio/Storymode_Player_Heal.wav");
+		openDoor = AudioMaster.loadSoundWav("/audio/Storymode_Player_OpenDoor.wav");
 		
 		Logger.logMessage("Laden der Soundeffekte Erfolgreich!");
 	}
@@ -166,6 +188,8 @@ public class Resources {
 		pillar = new Sprite(Main.class.getResourceAsStream("/textures/Pillar.png")).load();
 		compassEmpty = new Sprite(Main.class.getResourceAsStream("/textures/CompassEmpty.png")).load();
 		compassNeedle = new Sprite(Main.class.getResourceAsStream("/textures/CompassNeedle.png")).load();
+		bossDoor = new Sprite(Main.class.getResourceAsStream("/textures/BossDoor.png")).load();
+		arrow = new Sprite(Main.class.getResourceAsStream("/textures/Arrow.png")).load();
 
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();

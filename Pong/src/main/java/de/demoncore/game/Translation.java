@@ -196,6 +196,9 @@ public class Translation {
 
 		germanTranslation.put("deathReason.baseEnemy", "Spieler wurde vom primitiven Gegnertyp getoetet.");
 		englishTranslation.put("deathReason.baseEnemy", "Player was killed by the primitive enemy type.");
+		
+		germanTranslation.put("deathReason.arrow", "Spieler wurde von einem Pfeil aufgespießt.");
+		englishTranslation.put("deathReason.arrow", "Player was impaled by an arrow.");
 	
 
 		germanTranslation.put("sign.start.0", "Nur die mutigsten aller Kaempfer koennen lernen das Boese in dieser Welt zu besiegen.");

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameLogic;
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.Gui;
@@ -16,7 +17,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "0.6.236a";
+	public static String version = "0.6.241a";
 	public static String gameName = "G4 Pong";
 	
 	boolean quickLoad = true; // Nachher auf false setzten
@@ -38,6 +39,10 @@ public class Main {
 
 		        Settings.SaveAllSettings();
 				ShopValues.SaveAllSettings();
+				
+				if(SceneManager.getActiveScene() instanceof StorymodeMain) {
+					StorymodeMain.saveStorymode();
+				}
 		    }
 		});
 		

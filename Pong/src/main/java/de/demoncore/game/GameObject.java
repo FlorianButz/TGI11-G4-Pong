@@ -103,8 +103,4 @@ public class GameObject {
 	public boolean checkDistanceCulled(Rectangle viewport) {
 		return getBoundingBox().intersects(viewport);
 	}
-
-	public void startRoom() {
-		StorymodePlayer.getPlayerInstance().setPosition(getPosition().add(getScale().multiply(0.5f)));
-	}
 }

@@ -3,7 +3,7 @@ package de.demoncore.gameObjects.storymode;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import de.demoncore.game.Damagable;
+import de.demoncore.game.Damageable;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
@@ -13,13 +13,14 @@ import de.demoncore.game.TranslationComponent;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.gui.ValueBarRenderable;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
 
-public class BaseEnemy extends RigidBody implements Damagable {
+public class BaseEnemy extends RigidBody implements Damageable {
 
 	public int attackSpeed = 85;
 	public int damageAmount = 1;
-	public float enemySpeed = 2.75f;
+	public float enemySpeed = 0.75f;
 	public float stoppingDistance = 85f;
 	public float chaseDistance = 500f;
 
@@ -33,12 +34,22 @@ public class BaseEnemy extends RigidBody implements Damagable {
 
 		color = Color.magenta;
 		healthBar = new ValueBarRenderable(0, 0, 50, 10, 0, health);
+		friction = 0.975f;
+
+		Logger.logInfo("Spawning enemy: " + getClass().getName());
+	}
+
+	protected void setInitHealth(int health) {
+		this.health = health;
+		this.initialHealth = health;
+
+		healthBar = new ValueBarRenderable(0, 0, 50, 10, 0, health);	
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
 		spawnParticles();
 	}
 
@@ -52,7 +63,7 @@ public class BaseEnemy extends RigidBody implements Damagable {
 
 		if(health < initialHealth)
 			healthBar.draw(g2d, screenWidth, screenHeight);
-		
+
 		if(Settings.getDebugMode()) {
 			g2d.setColor(Color.red);
 			g2d.drawOval((int)worldPos.x - (int)(chaseDistance / 1.5f), (int)worldPos.y - (int)(chaseDistance / 1.5f), (int)(chaseDistance * 1.5f) + (int)getScale().x, (int)(chaseDistance * 1.5f) + (int)getScale().y);
@@ -82,8 +93,10 @@ public class BaseEnemy extends RigidBody implements Damagable {
 	}
 
 	protected boolean isAttacking;
-	int timer = 0;
-	byte speed = 1;
+	private int timer = 0;
+	private byte speed = 1;
+
+	ParticleSystem trail;
 
 	@Override
 	public void update() {
@@ -91,13 +104,40 @@ public class BaseEnemy extends RigidBody implements Damagable {
 
 		if(GameLogic.IsGamePaused()) return;
 
+		// Partikel effekt fuer den gegner
+		if (trail == null) {
+			trail = new ParticleSystem((int) this.position.x, (int) this.position.y);
+
+			trail.emitLoop = true;
+			trail.particleSpawnArea = new Vector3(10, 10, 10);
+			trail.particleGravity = 0;
+			trail.initialParticleEmitCount = 0;
+			trail.initialParticleEmitCountRandom = 0;
+			trail.emitPause = 5;
+
+			trail.emitChunk = 2;
+
+			trail.particleColorFirst = color;
+			trail.particleColorSecond = new Color(1, 1, 1, 0.2f);
+
+			trail.initialParticleSpeedMin = Vector3.one().multiply(-1);
+			trail.initialParticleSpeedMax = Vector3.one();
+			trail.particleSpeedMultiplier = 0.25f;
+
+			trail.particleLifetime = 25;
+			trail.Init();
+			SceneManager.getActiveScene().addObject(trail);
+		}
+		
+		trail.setPosition(position);
+
 		if(Vector3.Distance(StorymodePlayer.getPlayerInstance().getPosition(), getPosition()) <= chaseDistance) {
 			if(Vector3.Distance(StorymodePlayer.getPlayerInstance().getPosition(), getPosition()) >= stoppingDistance) {
 				Vector3 force = StorymodePlayer.getPlayerInstance().getPosition().subtract(getPosition()).normalized().multiply(enemySpeed);
 				addForce(force);
 				isAttacking = false;
 			}else {
-				velocity = Vector3.Lerp(velocity, Vector3.zero(), 0.03f);
+				//velocity = Vector3.Lerp(velocity, Vector3.zero(), 0.005f);
 
 				if(!isAttacking) {
 					isAttacking = true;
@@ -107,13 +147,21 @@ public class BaseEnemy extends RigidBody implements Damagable {
 				timer += speed;
 
 				if((int)timer % attackSpeed == 0) {
-					StorymodePlayer.getPlayerInstance().damage(damageAmount, this, Translation.get("deathReason.baseEnemy"));
+					attackPlayer();
 				}
 			}
 		}
 
 		healthBar.setPosition(position.add(new Vector3(0, -25)));
 		healthBar.setValue(health);
+	}
+
+	protected TranslationComponent getDeathReason() {
+		return Translation.get("deathReason.baseEnemy");
+	}
+
+	protected void attackPlayer() {
+		StorymodePlayer.getPlayerInstance().damage(damageAmount, this, getDeathReason());
 	}
 
 	@Override

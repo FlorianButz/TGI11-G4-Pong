@@ -14,4 +14,5 @@ public class StorymodeSaveData implements Serializable {
 	public float playerX = 0, playerY = 0;
 	
 	public List<Integer> completedDungeons = new ArrayList<Integer>();
+	public boolean compassUnlocked = false;
 }

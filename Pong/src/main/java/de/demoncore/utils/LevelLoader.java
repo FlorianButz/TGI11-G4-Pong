@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.storymode.BigStone;
+import de.demoncore.gameObjects.storymode.BossDoor;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.Grass;
 import de.demoncore.gameObjects.storymode.Path;
@@ -32,6 +33,7 @@ public class LevelLoader {
 	// 7 Path
 	// 8 Rectangle
 	// 9 Pillar
+	// 10 BossDoor
 	
 	public static void LoadLevel(InputStream stream) {
 
@@ -100,6 +102,9 @@ public class LevelLoader {
 						break;
 					case 9:
 						SceneManager.getActiveScene().addObject(new Pillar(objectPosX, objectPosY));
+						break;
+					case 10:
+						SceneManager.getActiveScene().addObject(new BossDoor(objectPosX, objectPosY));
 						break;
 					}
 				}

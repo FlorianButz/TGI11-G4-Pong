@@ -1,5 +1,6 @@
 package de.demoncore.gameObjects.storymode;
 
+import de.demoncore.audio.AudioSource;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
@@ -14,12 +15,17 @@ public class DungeonDoor extends SpriteObject {
 	InteractableObject interaction;
 	public boolean isDungeonComplete = false;
 
+	public AudioSource source;
+	
 	public DungeonDoor(int posX, int posY, boolean notExit) {
 		super(posX, posY,
 				(int)(27 * 7.5),
 				(int)(30 * 7.5),
 				!StorymodeMain.saveData.completedDungeons.contains(posX * posY) ? Resources.dungeonDoor : Resources.dungeonDoorBroken);
 
+		source = new AudioSource(this);
+		SceneManager.getActiveScene().addObject(source);
+				
 		isDungeonComplete = StorymodeMain.saveData.completedDungeons.contains(posX * posY);
 		
 		if(!isDungeonComplete) {
@@ -30,6 +36,7 @@ public class DungeonDoor extends SpriteObject {
 					public void OnInteract() {
 						super.OnInteract();
 						SceneManager.loadScene(new Dungeon(posX * posY));
+						source.Play(Resources.openDoor);
 					}
 				});
 				interaction.interactionString = "Enter Dungeon";
@@ -41,6 +48,7 @@ public class DungeonDoor extends SpriteObject {
 					public void OnInteract() {
 						super.OnInteract();
 						SceneManager.loadScene(new StorymodeMain());
+						source.Play(Resources.openDoor);
 					}
 				});
 				interaction.interactionString = "Exit Dungeon";
@@ -56,5 +64,6 @@ public class DungeonDoor extends SpriteObject {
 		SceneManager.getActiveScene().destroyObject(this);
 		if(interaction != null)
 			SceneManager.getActiveScene().destroyObject(interaction);
+		SceneManager.getActiveScene().destroyObject(source);
 	}
 }

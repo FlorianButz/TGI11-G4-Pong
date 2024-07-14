@@ -19,8 +19,6 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	private boolean isSpacial = true;
 
 	GameObject parentObject;
-	private TimerTask task;
-	private Timer timer;
 
 	public AudioSource(GameObject parentObject) {
 		super(0, 0, 0, 0);
@@ -43,22 +41,6 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 
 		AudioMaster.AddOnVolumeChangeListener(this);
 		AudioMaster.AddOnPauseListener(this);
-		
-		timer = new Timer();
-		task = new TimerTask() {
-			@Override
-			public void run() {				
-				if(parentObject != null)
-					position = parentObject.getPosition();
-
-				if(isSpacial)
-					AL10.alSource3f(sourceId, AL10.AL_POSITION, position.x, 0, position.y);
-				else {
-					Vector3 camPos = SceneManager.getActiveScene().cameraPosition;
-					AL10.alSource3f(sourceId, AL10.AL_POSITION, camPos.x, 0, camPos.y);
-				}
-			}
-		};
 	}
 	
 	public AudioSource setSpacial(boolean isSpacial) {
@@ -68,7 +50,7 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 
 	public AudioSource Play(AudioClip audioClip) {
 		if(!isInScene) {
-			Logger.logError("Versucht Audio zu spielen bevor die Source in der Scene ist. " + this.parentObject.getClass().getName(), this);
+			Logger.logWarning("Versucht Audio zu spielen bevor die Source in der Scene ist. " + this.parentObject.getClass().getName(), this);
 		}
 
 		AL10.alSourceStop(sourceId);
@@ -95,22 +77,31 @@ public class AudioSource extends GameObject implements OnVolumeChangeListener, O
 	}
 
 	@Override
+	public void update() {
+		super.update();
+	
+		if(parentObject != null)
+			position = parentObject.getPosition();
+
+		Vector3 camPos = SceneManager.getActiveScene().cameraPosition;
+		if(!isSpacial) {			
+			AL10.alSource3f(sourceId, AL10.AL_POSITION, camPos.x, camPos.y, 0);
+		}
+		else {
+			AL10.alSource3f(sourceId, AL10.AL_POSITION, getPosition().x, getPosition().y, 0);
+		}
+		
+		AL10.alListener3f(AL10.AL_POSITION, camPos.x, camPos.y, 0);
+	}
+	
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		AL10.alDeleteSources(sourceId);
 		AudioMaster.RemoveOnVolumeChangeListener(this);
 		AudioMaster.RemoveOnPauseListener(this);
-		
-		task.cancel();
 	}
 
-	@Override
-	public void onAddToScene() {
-		super.onAddToScene();
-	
-		timer.scheduleAtFixedRate(task, 25, 25);
-	}
-	
 	@Override
 	public void OnVolumeChange(float volume) {
 		SetRealVolume(volume);

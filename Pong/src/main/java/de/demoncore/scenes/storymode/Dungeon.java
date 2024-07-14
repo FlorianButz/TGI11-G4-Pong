@@ -31,6 +31,8 @@ public class Dungeon extends BaseScene {
 	
 	public Dungeon(int dungeonId) {
 		this.dungeonId = dungeonId;
+		
+		maxRooms = (int)(getDifficulty() * 25) + 3;
 	}
 	
 	@Override
@@ -107,7 +109,6 @@ public class Dungeon extends BaseScene {
 		zoomAtDoor = true;
 		
 		SceneManager.getActiveScene().ShakeCamera(10, 5, 300);
-		
 		StorymodeMain.saveData.completedDungeons.add(dungeonId);
 		
 		Timer t = new Timer();
@@ -116,7 +117,7 @@ public class Dungeon extends BaseScene {
 		public void run() {
 			zoomAtDoor = false;	
 		}	
-		}, 2500);
+		}, 3750);
 	}
 
 	public DungeonDoor exitDoor;
@@ -131,6 +132,8 @@ public class Dungeon extends BaseScene {
 
 	public int maxRooms = 20;
 	private int roomsCount = 0;
+	
+	public DungeonRoom startRoom;
 	
 	public GameObject[][] dungeonRoom;
 	public List<DungeonHallway> hallways = new ArrayList<DungeonHallway>();
@@ -188,12 +191,25 @@ public class Dungeon extends BaseScene {
 				}
 				
 				minimap.dungeon = dungeonRoom;
-				GameObject randomRoom;
+				DungeonRoom randomRoom;
 				
 				do {
-					randomRoom = dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
+					randomRoom = (DungeonRoom)dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
 				}while(randomRoom == null);
 				randomRoom.startRoom();
+				startRoom = randomRoom;
+				
+				for(GameObject[] roomArr : dungeonRoom) {
+					for(GameObject room : roomArr) {
+						if(room != startRoom && room != null)
+							((DungeonRoom)room).spawnEnemies();
+					}
+				}
+				
+				do {
+					randomRoom = (DungeonRoom)dungeonRoom[rng.nextInt(0, dungeonSizeArray)][rng.nextInt(0, dungeonSizeArray)];
+				}while(randomRoom == null || randomRoom == startRoom);
+				randomRoom.spawnEnemy();
 				
 				dungeonGenerated = true;
 			}
@@ -201,6 +217,10 @@ public class Dungeon extends BaseScene {
 		gen.start();
 	}
 
+	float getDifficulty() {
+		return (float)StorymodeMain.getCompleteDungeonCount() / (float)StorymodeMain.getDungeonCount();
+	}
+	
 	boolean addRoom(int x, int y) {
 		if(roomsCount >= maxRooms) return false;
 		if(x < 0 || x >= dungeonRoom.length) return false;

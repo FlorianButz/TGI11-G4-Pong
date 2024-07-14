@@ -9,7 +9,7 @@ import de.demoncore.game.Translation;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 
-public class GuiCredidtsMenu extends GUIMenu{
+public class GuiCreditsMenu extends GUIMenu{
 	
 	
 	private GUITextArea guiText;

@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.color.ColorSpace;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +11,8 @@ import java.util.List;
 
 import de.demoncore.actions.GameActionListener;
 import de.demoncore.actions.KeyHandler;
-import de.demoncore.game.Damagable;
+import de.demoncore.audio.AudioSource;
+import de.demoncore.game.Damageable;
 import de.demoncore.game.GameLogic;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
@@ -28,17 +28,15 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.gui.GUIValueBar;
 import de.demoncore.gui.MessagePopup;
-import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.scenes.storymode.StorymodeMain;
-import de.demoncore.scenes.storymode.StorymodeSaveData;
 import de.demoncore.sprites.Sprite;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
-public class StorymodePlayer extends RigidBody implements Damagable {
+public class StorymodePlayer extends RigidBody implements Damageable {
 
 	public float playerAcceleration = 7.75f; // Die Geschwindigkeitszunahme vom Spieler
 
@@ -66,6 +64,10 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	private int maxHealth = 6;
 
 	private static StorymodePlayer instance;
+
+	private AudioSource stepSource;
+	private AudioSource attackSource;
+	private AudioSource transformSource;
 
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, getPosition()));
 	
@@ -99,6 +101,19 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 		friction = 0.8f;
 
+		stepSource = new AudioSource(this);
+		stepSource.setSpacial(false);
+		stepSource.SetVolume(0.1f);
+		attackSource = new AudioSource(this);
+		attackSource.setSpacial(false);
+		attackSource.SetVolume(0.9f);
+		transformSource = new AudioSource(this);
+		transformSource.setSpacial(false);
+		transformSource.SetVolume(0.5f);
+		SceneManager.getActiveScene().addObject(stepSource);
+		SceneManager.getActiveScene().addObject(attackSource);
+		SceneManager.getActiveScene().addObject(transformSource);
+		
 		if(!(SceneManager.getActiveScene() instanceof StorymodeMain))
 			SceneManager.getActiveScene().addObject(health);
 
@@ -147,8 +162,19 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		walkAnim = new SpriteAnimator(new Sprite[] { Resources.playerWalk1, Resources.playerIdle, Resources.playerWalk2,
 				Resources.playerIdle }, 0.15f, EasingType.Linear);
 		walkAnim.setOnUpdate(new AnimatorUpdateEvent() {
+			int counter = 0;
+			
 			@Override
 			public void onUpdate(Sprite value) {
+				if(value != activeImage) {
+					counter++;
+					if(counter >= 5) {
+						counter = 0;
+						
+						if(!GameLogic.IsGamePaused())
+							stepSource.Play(Resources.playerStep);
+					}
+				}
 				setTexture(value, false);
 			}
 		});
@@ -170,7 +196,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	@Override
 	protected void onCollision(Rectangle thisObject, Rectangle otherObject) {
 		super.onCollision(thisObject, otherObject);
-
+		
 		Rectangle intersection = thisObject.intersection(otherObject);
 		Vector3 intersectionMiddle = new Vector3((float) intersection.getCenterX(), (float) intersection.getCenterY());
 
@@ -187,13 +213,15 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 		super.onCollision(thisObject, otherObject);
 
 		if (isBallForm) {
-			if (otherObject instanceof Damagable) {
-				((Damagable) otherObject).damage(damageAmount, this, Translation.literal(""));
+			attackSource.Play(Resources.playerAttackNormal);
+			
+			if (otherObject instanceof Damageable) {
+				((Damageable) otherObject).damage(damageAmount, this, Translation.literal(""));
 			}
 		}
 		
 	}
-
+	
 	void setTexture(Sprite texture, boolean isBall) {
 		if (isBallForm && isBall) {
 			activeImage = texture;
@@ -226,9 +254,12 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 			positions = new ArrayList<Vector3>(Collections.nCopies(10, getPosition()));
 			
 			if (!isBallForm) {
+				transformSource.Play(Resources.playerTransformFB);
 				setTexture(Resources.playerIdle, false);
 				trail.emitLoop = false;
 			} else {
+				transformSource.Play(Resources.playerTransformTB);
+
 				ballVelocity = velocity.multiply(1 / playerAcceleration).multiply(ballSpeed);
 				ballVelocity.clamp(Vector3.zero(), Vector3.one().multiply(ballSpeed));
 
@@ -244,6 +275,8 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	private void radiusAttack() {
 		stamina = 0;
 		staminaTimer = 100;
+		
+		attackSource.Play(Resources.playerAttackRadial);
 		
 		ParticleSystem s = new ParticleSystem(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2);
 		
@@ -296,6 +329,7 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 
 		SceneManager.getActiveScene().destroyObject(levelBar);
 		SceneManager.getActiveScene().destroyObject(staminaBar);
+		SceneManager.getActiveScene().destroyObject(stepSource);
 	}
 
 	Sprite activeImage;
@@ -459,8 +493,12 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 			return;
 		health.damage(amount);
 		
+		attackSource.Play(Resources.playerHurt);
+		
 		if(health.getHealth() <= 0) {
-			heal(maxHealth);
+			attackSource.Play(Resources.playerDeath);
+			
+			setHealth(maxHealth);
 			SceneManager.loadScene(new StorymodeMain() {
 				@Override
 				public void initializeScene() {
@@ -478,6 +516,8 @@ public class StorymodePlayer extends RigidBody implements Damagable {
 	@Override
 	public void heal(int amount) {
 		health.heal(amount);
+
+		attackSource.Play(Resources.playerHeal);
 	}
 
 	@Override

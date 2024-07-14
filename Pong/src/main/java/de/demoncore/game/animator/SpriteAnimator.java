@@ -1,9 +1,11 @@
 package de.demoncore.game.animator;
 
+import de.demoncore.game.GameLogic;
+import de.demoncore.game.SceneManager;
 import de.demoncore.game.animator.Easing.EasingType;
+import de.demoncore.scenes.BaseScene;
 import de.demoncore.sprites.Sprite;
 import de.demoncore.utils.GameMath;
-import de.demoncore.utils.Vector3;
 
 public class SpriteAnimator {
 
@@ -19,11 +21,15 @@ public class SpriteAnimator {
     
 	boolean isPlaying = false;
     
+	BaseScene startScene;
+	
     public SpriteAnimator(Sprite[] values, float duration, EasingType easeType) {		
 		this.values = values;
 		this.duration = duration;
 		this.easeType = easeType;
-	}
+	
+		this.startScene = SceneManager.getActiveScene();
+    }
 
 	public void setOnComplete(AnimatorOnCompleteEvent event) {
 		this.onCompleteEvent = event;
@@ -59,7 +65,7 @@ public class SpriteAnimator {
                     	int totalFrames = (int) (duration * fps); // Anzahl frames
                         for (int i = 0; i < totalFrames; i++) {
                         	
-                        	if(isAnimationCancled) {
+                        	if(isAnimationCancled || startScene != SceneManager.getActiveScene()) {
                                 if(onCompleteEvent != null)
                                 	onCompleteEvent.onComplete();
                         		isAnimationCancled = false;

@@ -3,13 +3,15 @@ package de.demoncore.gameObjects.storymode;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.Iterator;
 import java.util.List;
 
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.scenes.storymode.Dungeon;
+import de.demoncore.scenes.storymode.StorymodeMain;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -32,21 +34,191 @@ public class DungeonRoom extends GameObject {
 		
 		color = new Color(1, 1, 1, 0.1f);
 		collisionEnabled = false;
-
-		if(Math.random() > 0.4f) {
-			for(int i = 0; i < ((int)(Math.random() * 5 + 1)); i++) {
-				Vector3 rand = getRandomPositionInRoom();
-				SceneManager.getActiveScene().addObject(new BaseEnemy((int)rand.x, (int)rand.y));
+	}
+	
+	public void startRoom() {
+		StorymodePlayer.getPlayerInstance().setPosition(getPosition().add(getScale().multiply(0.5f)));
+	}
+	
+	public void spawnEnemies() {
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f) {
+			for(int i = 0; i < ((int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * (int)(5 * getDifficulty())) + 2); i++) {
+				spawnEnemy();
 			}
 		}
 	}
-
-	Vector3 getRandomPositionInRoom() {
+	
+	public void spawnEnemy() {
+		Vector3 rand = getRandomPositionInRoom();
 		
+		if(getDifficulty() >= 0.8) {
+			
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
+			
+			switch(rng) {
+			case 0:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 1:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 2:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 3:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 4:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 5:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 6:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 7:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 8:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 9:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			}
+		}else if(getDifficulty() >= 0.6) {
+			
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
+			
+			switch(rng) {
+			case 0:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 1:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 2:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 3:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 4:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 5:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 6:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 7:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 8:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 9:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			}
+		}else if(getDifficulty() >= 0.4) {
+			
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
+			
+			switch(rng) {
+			case 0:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 1:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 2:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 3:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 4:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 5:
+				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				break;
+			case 6:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 7:
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 8:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 9:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			}
+		}else if(getDifficulty() >= 0.2) {
+			
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
+			
+			switch(rng) {
+			case 0:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 1:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 2:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 3:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 4:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 5:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 6:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 7:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 8:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			case 9:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			}
+		}else {
+			
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 2);
+			
+			switch(rng) {
+			case 0:
+				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
+				break;
+			case 1:
+				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
+				break;
+			}
+		}
+	}
+	
+	float getDifficulty() {
+		return (float)StorymodeMain.getCompleteDungeonCount() / (float)StorymodeMain.getDungeonCount();
+	}
+	
+	Vector3 getRandomPositionInRoom() {
 		Vector3 startPos = getPosition().add(new Vector3(20, 20));
 		Vector3 toPos = getScale().subtract(new Vector3(20, 20));
 		
-		return startPos.add(new Vector3(toPos.x * (float)Math.random(), toPos.y * (float)Math.random()));
+		return startPos.add(new Vector3(toPos.x * ((Dungeon)SceneManager.getActiveScene()).rng.nextFloat(), toPos.y * ((Dungeon)SceneManager.getActiveScene()).rng.nextFloat()));
 	}
 	
 	boolean top;

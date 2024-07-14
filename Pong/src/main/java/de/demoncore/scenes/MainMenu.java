@@ -18,7 +18,7 @@ import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.GuiCredidtsMenu;
+import de.demoncore.gui.GuiCreditsMenu;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.utils.Resources;
@@ -148,7 +148,7 @@ public class MainMenu extends BaseScene {
 		shop.alignment = GUIAlignment.Center;
 		addObject(shop);
 		
-		GuiCredidtsMenu creditsMenu = new GuiCredidtsMenu();
+		GuiCreditsMenu creditsMenu = new GuiCreditsMenu();
 		
 		
 		GUIImageButton credits = new GUIImageButton(-475, 0, 75, 75, 65, Resources.credits_icon_dark, Resources.credits_icon, new GUIButtonClickEvent() {

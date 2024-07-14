@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.system.NonnullDefault;
+
 import de.demoncore.game.GameObject;
 import de.demoncore.game.Settings;
 import de.demoncore.gui.Gui;

@@ -60,7 +60,11 @@ public class GameLogic {
 				
 				gameTime += 0.1f;
 				
-				SceneManager.UpdateScenes();
+				try {
+					SceneManager.UpdateScenes();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		

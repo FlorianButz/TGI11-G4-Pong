@@ -26,6 +26,7 @@ public class RigidBody extends GameObject {
 		List<GameObject> objs = new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects());
 		
 		for(GameObject g : objs) {
+			if(g == null) continue;
 			if(g.collisionEnabled && g != this) {
 
 				Rectangle thisObj = getBoundingBox();

@@ -1,6 +1,6 @@
 package de.demoncore.game;
 
-public interface Damagable {
+public interface Damageable {
 	
 	public void damage(int amount, GameObject damageSource, TranslationComponent deathReason);
 	public void heal(int amount);
