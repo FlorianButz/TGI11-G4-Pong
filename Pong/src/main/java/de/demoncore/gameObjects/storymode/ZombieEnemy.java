@@ -8,9 +8,11 @@ public class ZombieEnemy extends BaseEnemy {
 		super(posX, posY);
 		
 		enemySpeed = 0.6f;
-		attackSpeed = 50;
+		attackSpeed = 35;
 		setInitHealth(8);
 		damageAmount = 2;
+		stoppingDistance = 175;
+		chaseDistance = 325;
 		
 		color = new Color(0.2f, 0.8f, 0.35f);
 	}

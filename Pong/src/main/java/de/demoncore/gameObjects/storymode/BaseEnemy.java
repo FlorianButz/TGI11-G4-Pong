@@ -51,6 +51,7 @@ public class BaseEnemy extends RigidBody implements Damageable {
 		super.onDestroy();
 
 		spawnParticles();
+		SceneManager.getActiveScene().destroyObject(trail);
 	}
 
 	@Override
@@ -172,7 +173,7 @@ public class BaseEnemy extends RigidBody implements Damageable {
 
 		if(health <= 0) SceneManager.getActiveScene().destroyObject(this);
 	}
-
+	
 	@Override
 	public void heal(int amount) {
 		health += amount;

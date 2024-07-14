@@ -175,6 +175,10 @@ public class AudioMaster {
 		}
 	}
 	
+	public static void ClearBuffer(AudioClip clip) {
+		AL10.alDeleteBuffers(clip.GetBuffer());
+	}
+	
 	public static void DestroyOpenAL() {
 		for(int buffer : buffers) {
 			AL10.alDeleteBuffers(buffer);

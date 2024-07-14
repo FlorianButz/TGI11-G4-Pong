@@ -10,6 +10,8 @@ public class GhostEnemy extends BaseEnemy {
 		enemySpeed = 1;
 		attackSpeed = 95;
 		setInitHealth(4);
+		stoppingDistance = 125;
+		chaseDistance = 675;
 		
 		setScale(getScale().multiply(2.25f));
 		

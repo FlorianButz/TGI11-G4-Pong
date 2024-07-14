@@ -3,6 +3,7 @@ package de.demoncore.scenes.storymode;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import de.demoncore.audio.MusicManager;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SaveManager;
 import de.demoncore.game.SceneManager;
@@ -17,7 +18,6 @@ import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.TextAlignment;
-import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.LevelLoader;
@@ -106,6 +106,8 @@ public class StorymodeMain extends BaseScene {
 		addObject(new GUICompass());
 
 		StorymodePlayer.getPlayerInstance().setPermPosition(new Vector3(saveData.playerX, saveData.playerY));
+		
+		MusicManager.playStorymode();
 	}
 
 	protected void removeCompassInteractable() {

@@ -37,6 +37,8 @@ public class DungeonDoor extends SpriteObject {
 						super.OnInteract();
 						SceneManager.loadScene(new Dungeon(posX * posY));
 						source.Play(Resources.openDoor);
+
+						destroyInteraction();
 					}
 				});
 				interaction.interactionString = "Enter Dungeon";
@@ -49,6 +51,8 @@ public class DungeonDoor extends SpriteObject {
 						super.OnInteract();
 						SceneManager.loadScene(new StorymodeMain());
 						source.Play(Resources.openDoor);
+						
+						destroyInteraction();
 					}
 				});
 				interaction.interactionString = "Exit Dungeon";
@@ -58,6 +62,10 @@ public class DungeonDoor extends SpriteObject {
 		}else {
 			Logger.logInfo("Dungeon already completed!");
 		}
+	}
+
+	protected void destroyInteraction() {
+		SceneManager.getActiveScene().destroyObject(interaction);		
 	}
 
 	void Destroy() {
