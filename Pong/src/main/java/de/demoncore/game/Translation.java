@@ -194,6 +194,7 @@ public class Translation {
 		germanTranslation.put("shop.info", "Pong Taler koennen im Einzelspieler durch Gewinnen des Spiels erlangt werden.");
 		englishTranslation.put("shop.info", "Pong Taler can be obtained in 1 Player Mode by winning the game.");
 
+		
 		germanTranslation.put("deathReason.baseEnemy", "Spieler wurde vom primitiven Gegnertyp getoetet.");
 		englishTranslation.put("deathReason.baseEnemy", "Player was killed by the primitive enemy type.");
 		
@@ -202,6 +203,24 @@ public class Translation {
 
 		germanTranslation.put("deathReason.endbossLine", "Spieler wurde durch einen Laser dezimiert.");
 		englishTranslation.put("deathReason.endbossLine", "Player was decimated by a laser.");
+		
+		germanTranslation.put("deathReason.bone", "Spieler wurde von einem fliegenden Knochen zerschmettert.");
+		englishTranslation.put("deathReason.bone", "Player was shattered by a flying bone.");
+		
+		germanTranslation.put("deathReason.movingWalls", "Spieler wurde von den Waenden zerquetscht.");
+		englishTranslation.put("deathReason.movingWalls", "Player was squished by moving walls.");
+		
+		germanTranslation.put("deathReason.skeleton", "Spieler wurde von einer magischen Kraft getoetet.");
+		englishTranslation.put("deathReason.skeleton", "Player was killed with magic.");
+		
+		germanTranslation.put("deathReason.zombie", "Spieler wurde von einem Zombie getoetet.");
+		englishTranslation.put("deathReason.zombie", "Player was killed by a zombie.");
+		
+		germanTranslation.put("deathReason.babyZombie", "Spieler wurde von der Pest getoetet.");
+		englishTranslation.put("deathReason.babyZombie", "Player was killed by an baby zombie.");
+		
+		germanTranslation.put("deathReason.ghost", "Spieler ist durch unerklaerliche Gruende gestorben.");
+		englishTranslation.put("deathReason.ghost", "Player was killed by an unknown force.");
 	
 
 		germanTranslation.put("sign.start.0", "Nur die mutigsten aller Kaempfer koennen lernen das Boese in dieser Welt zu besiegen.");
@@ -233,6 +252,26 @@ public class Translation {
 		
 		germanTranslation.put("sign.stone.perfect.1", "Aber nicht alles was perfekt ist, ist schoen.");
 		englishTranslation.put("sign.stone.perfect.1", "But in beauty does not always lie perfection.");
+		
+
+		germanTranslation.put("endboss.dialog.1", "... wurde auch langsam mal Zeit, dass du hier aufkreutzt.");
+		englishTranslation.put("endboss.dialog.1", "... you've finally found me.");
+
+		germanTranslation.put("endboss.dialog.2", "Ich habe gesehen, wie du meine Figuren zerstoert hast. Aber kannst du einer echten Herausforderung standhalten?");
+		englishTranslation.put("endboss.dialog.2", "I've seen you destroy my allies, but can you hold up to a real challenge?");
+
+		germanTranslation.put("endboss.dialog.3", "Kaempfe gegen mich. Wenn du mich besiegen kannst, kannst du deine kleine Welt retten. Aber wenn nicht...");
+		englishTranslation.put("endboss.dialog.3", "Fight me. If you can defeat me, you get to save your little world. But if not...");
+
+		germanTranslation.put("endboss.dialog.4", "Ich wuensch dir viel Glueck, du wirst es brauchen. :)");
+		englishTranslation.put("endboss.dialog.4", "I wish you the best of luck, you'll need it. :)");
+		
+
+		germanTranslation.put("endbossend.dialog.1", "Ich muss zugeben, dass ich dich unterschaetzt habe.");
+		englishTranslation.put("endbossend.dialog.1", "I must admit.. I underestimated you.");
+		
+		germanTranslation.put("endbossend.dialog.2", "Du verdienst den Sieg. Aber du wirst sehen. Einest Tages werde ich wiederkehren!");
+		englishTranslation.put("endbossend.dialog.2", "You deserve your victory. But you'll see. One day I'll be back!");
 	}
 
 	public static TranslationComponent get(String translationID) {

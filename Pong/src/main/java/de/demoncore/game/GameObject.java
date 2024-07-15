@@ -65,6 +65,10 @@ public class GameObject {
 		return rotationZ;
 	}
 	
+	public void setRotationZ(float rotation) { // Setzt rotation
+		rotationZ = rotation;
+	}
+	
 	public void setScale(Vector3 scale) {
 		this.size = scale;
 	}

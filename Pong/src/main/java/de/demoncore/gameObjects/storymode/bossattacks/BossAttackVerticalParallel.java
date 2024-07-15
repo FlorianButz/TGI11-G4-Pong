@@ -4,12 +4,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-public class BossAttackHorizontalParallel extends BossAttackLines {
+public class BossAttackVerticalParallel extends BossAttackLines {
 	
 	@Override
 	void createAreas() {
-		line1 = new Rectangle2D.Float(-2000, 250 - linesWidth / 2, 4000, linesWidth);
-		line2 = new Rectangle2D.Float(-2000, -250 - linesWidth / 2, 4000, linesWidth);
+		line1 = new Rectangle2D.Float(250 - linesWidth / 2, -2000, linesWidth, 4000);
+		line2 = new Rectangle2D.Float(-250 - linesWidth / 2, -2000, linesWidth, 4000);
 
 		AffineTransform affine1 = new AffineTransform();
 		AffineTransform affine2 = new AffineTransform();

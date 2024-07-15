@@ -20,6 +20,7 @@ import de.demoncore.gui.GUIText;
 import de.demoncore.gui.TextAlignment;
 import de.demoncore.main.Main;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.LevelLoader;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -108,6 +109,8 @@ public class StorymodeMain extends BaseScene {
 		StorymodePlayer.getPlayerInstance().setPermPosition(new Vector3(saveData.playerX, saveData.playerY));
 		
 		MusicManager.playStorymode();
+		
+		cameraFollow = StorymodePlayer.getPlayerInstance();
 	}
 
 	protected void removeCompassInteractable() {
@@ -124,13 +127,18 @@ public class StorymodeMain extends BaseScene {
 		return s;
 	}
 
+	public GameObject cameraFollow = StorymodePlayer.getPlayerInstance();
+	public float currentZoomLevel = 1f;
+	
 	@Override
 	public void updateScene() {
 		super.updateScene();
 
 		if(StorymodePlayer.getPlayerInstance() != null)
-			cameraPosition = Vector3.Lerp(cameraPosition, StorymodePlayer.getPlayerInstance().getPosition(), 0.065f);
-
+			cameraPosition = Vector3.Lerp(cameraPosition, cameraFollow.getRawPosition(), 0.065f);
+		
+		cameraZoom = GameMath.Lerp(cameraZoom, currentZoomLevel, 0.05f);
+		
 		//cameraPosition = StorymodePlayer.getPlayerInstance().getPosition();
 	}
 

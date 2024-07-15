@@ -26,6 +26,8 @@ public class GameLogic {
 	public double accurateTps;
 	public double accurateLastTime;
 	
+	public boolean doPauseGameOnDialog = true;
+	
 	public GameLogic() {
 		_instance = this;
 	}
@@ -40,7 +42,7 @@ public class GameLogic {
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
 				
-				if(Dialog.isActiveDialog || PauseMenu.isPauseMenuActive)
+				if(doPauseGameOnDialog ? Dialog.isActiveDialog : false || PauseMenu.isPauseMenuActive)
 					GameLogic.SetGamePaused(true);
 				else
 					GameLogic.SetGamePaused(false);

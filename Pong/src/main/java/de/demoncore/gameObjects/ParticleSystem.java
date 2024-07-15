@@ -111,7 +111,8 @@ public class ParticleSystem extends GameObject {
 
 		p.rotation = GameMath.RandomRange(0, 90);
 		
-		particles.add(p);
+		if(particles != null)
+			particles.add(p);
 	}
 
 	int updateTimer = 0;

@@ -41,6 +41,11 @@ public class Resources {
 	public static AudioClip playerHurt;
 	public static AudioClip playerHeal;
 	public static AudioClip openDoor;
+	public static AudioClip bossBigAttack;
+	public static AudioClip bossLaserCharge;
+	public static AudioClip bossLaserAttack;
+	public static AudioClip bossDeath;
+	public static AudioClip endDoorOpen;
 
 	public static Sprite test;
 	public static Sprite fullHeart;
@@ -67,6 +72,23 @@ public class Resources {
 	public static Sprite compassNeedle;
 	public static Sprite bossDoor;
 	public static Sprite arrow;
+	public static Sprite bone1;
+	public static Sprite bone2;
+
+	public static Sprite bossIdle;
+	public static Sprite bossEye1;
+	public static Sprite bossEye2;
+
+	public static Sprite sans;
+	public static Sprite campfire1;
+	public static Sprite campfire2;
+
+	public static Sprite npc;
+
+	public static Sprite house1;
+	public static Sprite house2;
+	public static Sprite house3;
+	public static Sprite house4;
 
 	public static Sprite shop_ballskin;
 	public static Sprite shop_ballspawn;
@@ -92,9 +114,11 @@ public class Resources {
 	
 	public static DialogLine testLine;
 	public static DialogLine startDialogSign;
+	public static DialogLine stoneDialogSign;
+	public static DialogLine endbossDialog;
+	public static DialogLine endbossDialogEnd;
 	
 	static List<DialogLine> dialogs;
-	private static DialogLine stoneDialogSign;
 	
 	public static void loadFonts() {
 
@@ -155,6 +179,11 @@ public class Resources {
 		playerHurt = AudioMaster.loadSoundWav("/audio/Storymode_Player_Hurt.wav");
 		playerHeal = AudioMaster.loadSoundWav("/audio/Storymode_Player_Heal.wav");
 		openDoor = AudioMaster.loadSoundWav("/audio/Storymode_Player_OpenDoor.wav");
+		bossBigAttack = AudioMaster.loadSoundWav("/audio/Storymode_Boss_BigAttack.wav");
+		bossLaserCharge = AudioMaster.loadSoundWav("/audio/Storymode_Boss_LaserCharge.wav");
+		bossLaserAttack = AudioMaster.loadSoundWav("/audio/Storymode_Boss_LaserAttack.wav");
+		bossDeath = AudioMaster.loadSoundWav("/audio/Storymode_Boss_Death.wav");
+		endDoorOpen = AudioMaster.loadSoundWav("/audio/Storymode_EndDoor_Open.wav");
 		
 		Logger.logMessage("Laden der Soundeffekte Erfolgreich!");
 	}
@@ -189,7 +218,23 @@ public class Resources {
 		compassNeedle = new Sprite(Main.class.getResourceAsStream("/textures/CompassNeedle.png")).load();
 		bossDoor = new Sprite(Main.class.getResourceAsStream("/textures/BossDoor.png")).load();
 		arrow = new Sprite(Main.class.getResourceAsStream("/textures/Arrow.png")).load();
+		bone1 = new Sprite(Main.class.getResourceAsStream("/textures/Bone1.png")).load();
+		bone2 = new Sprite(Main.class.getResourceAsStream("/textures/Bone2.png")).load();
 
+		bossIdle = new Sprite(Main.class.getResourceAsStream("/textures/BossStone_1.png")).load();
+		bossEye1 = new Sprite(Main.class.getResourceAsStream("/textures/BossStone_2.png")).load();
+		bossEye2 = new Sprite(Main.class.getResourceAsStream("/textures/BossStone_3.png")).load();
+
+		sans = new Sprite(Main.class.getResourceAsStream("/textures/Sans.png")).load();
+		campfire1 = new Sprite(Main.class.getResourceAsStream("/textures/Campfire1.png")).load();
+		campfire2 = new Sprite(Main.class.getResourceAsStream("/textures/Campfire2.png")).load();
+		npc = new Sprite(Main.class.getResourceAsStream("/textures/NPC.png")).load();
+		
+		house1 = new Sprite(Main.class.getResourceAsStream("/textures/House1.png")).load();
+		house2 = new Sprite(Main.class.getResourceAsStream("/textures/House2.png")).load();
+		house3 = new Sprite(Main.class.getResourceAsStream("/textures/House3.png")).load();
+		house4 = new Sprite(Main.class.getResourceAsStream("/textures/House4.png")).load();
+		
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();
 		shop_balltrail = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallTrailIcon.png")).load();
@@ -237,6 +282,17 @@ public class Resources {
 		
 		dialogs.add(new DialogLine("Sign", Translation.get("sign.stone.natural"), null));
 		dialogs.add(new DialogLine("Sign", Translation.get("sign.stone.perfect.0"), new DialogLine("Sign", Translation.get("sign.stone.perfect.1"), null)));
+		
+		endbossDialog = new DialogLine("The Rock", Translation.get("endboss.dialog.1"),
+				new DialogLine("The Rock", Translation.get("endboss.dialog.2"),
+						new DialogLine("The Rock", Translation.get("endboss.dialog.3"),
+								new DialogLine("The Rock", Translation.get("endboss.dialog.4"),
+										null))));
+		dialogs.add(endbossDialog);
+		
+		endbossDialogEnd = new DialogLine("The Rock", Translation.get("endbossend.dialog.1"),
+				new DialogLine("The Rock", Translation.get("endbossend.dialog.2"), null));
+		dialogs.add(endbossDialogEnd);
 		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}

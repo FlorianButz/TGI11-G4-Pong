@@ -1,12 +1,16 @@
 package de.demoncore.gameObjects.storymode;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import de.demoncore.audio.AudioSource;
+import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.InteractEvent;
 import de.demoncore.gameObjects.InteractableObject;
-import de.demoncore.scenes.storymode.Dungeon;
+import de.demoncore.scenes.storymode.EndbossFight;
 import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.sprites.SpriteObject;
-import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class BossDoor extends SpriteObject {
@@ -20,7 +24,7 @@ public class BossDoor extends SpriteObject {
 				(int)(81 * 7.5),
 				Resources.bossDoor);
 
-		boolean canEnterBossRoom = StorymodeMain.getDungeonCount() == StorymodeMain.getCompleteDungeonCount();
+		boolean canEnterBossRoom = (StorymodeMain.getDungeonCount() == StorymodeMain.getCompleteDungeonCount());
 
 		if(canEnterBossRoom) {
 
@@ -28,7 +32,28 @@ public class BossDoor extends SpriteObject {
 				@Override
 				public void OnInteract() {
 					super.OnInteract();
-					SceneManager.loadScene(new Dungeon(posX * posY));
+
+					AudioSource source = new AudioSource();
+					source.setSpacial(false);
+					source.SetVolume(0.75f);
+					SceneManager.getActiveScene().addObject(source);
+					
+					source.Play(Resources.endDoorOpen);
+					
+					MusicManager.ForcePlayMusic(MusicManager.endboss, true);
+					
+					((StorymodeMain)SceneManager.getActiveScene()).cameraFollow = getObj();
+					((StorymodeMain)SceneManager.getActiveScene()).currentZoomLevel = 0.75f;
+					
+					SceneManager.getActiveScene().ShakeCamera(20, 15, 200);
+					
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask() {
+						@Override
+						public void run() {
+							SceneManager.loadScene(new EndbossFight());
+						}
+					}, 3500);
 				}
 			});
 			interaction.interactionString = "Enter Boss Room";
@@ -37,6 +62,10 @@ public class BossDoor extends SpriteObject {
 
 	}
 
+	BossDoor getObj() {
+		return this;
+	}
+	
 	void Destroy() {
 		SceneManager.getActiveScene().destroyObject(this);
 		if(interaction != null)

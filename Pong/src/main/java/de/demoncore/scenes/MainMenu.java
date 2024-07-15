@@ -99,8 +99,8 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				//SceneManager.loadScene(new TwoPlayerPong());
-				SceneManager.loadScene(new EndbossFight());
+				SceneManager.loadScene(new TwoPlayerPong());
+//				SceneManager.loadScene(new EndbossFight());
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;

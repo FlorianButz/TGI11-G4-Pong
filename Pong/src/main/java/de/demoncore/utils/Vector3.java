@@ -52,6 +52,14 @@ public class Vector3 {
 		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.y, end.y, value), GameMath.Lerp(start.z, end.z, value));
 	}
 	
+	public Vector3 rotated(double n)
+	{
+	    float x = (float) ((float)(this.x * Math.cos(Math.toRadians(n))) - (this.y * Math.sin(Math.toRadians(n))));
+	    float y = (float) ((float)(this.x * Math.sin(Math.toRadians(n))) + (this.y * Math.cos(Math.toRadians(n))));
+	
+	    return new Vector3(x, y);
+	}
+	
 	public Vector3 reflect(Vector3 normal) {
         float normLength = (float) Math.sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
         float nx = normal.x / normLength;

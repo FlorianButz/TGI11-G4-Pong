@@ -65,7 +65,7 @@ public class DungeonDoor extends SpriteObject {
 	}
 
 	protected void destroyInteraction() {
-		SceneManager.getActiveScene().destroyObject(interaction);		
+		SceneManager.getActiveScene().destroyObject(interaction);
 	}
 
 	void Destroy() {

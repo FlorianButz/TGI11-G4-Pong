@@ -2,6 +2,9 @@ package de.demoncore.gameObjects.storymode;
 
 import java.awt.Color;
 
+import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
+
 public class GhostEnemy extends BaseEnemy {
 
 	public GhostEnemy(int posX, int posY) {
@@ -17,5 +20,10 @@ public class GhostEnemy extends BaseEnemy {
 		
 		color = new Color(1f, 1f, 1f, 0.25f);
 	}
-
+	
+	@Override
+	protected TranslationComponent getDeathReason() {
+		return Translation.get("deathReason.ghost");
+	}
+	
 }

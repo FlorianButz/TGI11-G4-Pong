@@ -49,6 +49,7 @@ public class MusicManager {
 		});
 
 		endboss = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/End.mp3"));
+		endboss_win = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/End_Win.mp3"));
 		
 		playing1Audio = new AudioClip[] {
 //				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Explorer.mp3")),
@@ -78,6 +79,7 @@ public class MusicManager {
 
 	public static AudioClip endboss;
 	public static AudioClip[] playing1Audio;
+	public static AudioClip endboss_win;
 
 	static AudioClip randomlyChoseMusic() {
 		AudioClip music = null;

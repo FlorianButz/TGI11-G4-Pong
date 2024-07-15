@@ -3,6 +3,8 @@ package de.demoncore.gameObjects.storymode;
 import java.awt.Color;
 
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Translation;
+import de.demoncore.game.TranslationComponent;
 import de.demoncore.utils.Vector3;
 
 public class SkeletonEnemy extends BaseEnemy {
@@ -20,6 +22,10 @@ public class SkeletonEnemy extends BaseEnemy {
 		color = new Color(0.5f, 0.5f, 0.5f);
 	}
 	
+	@Override
+	protected TranslationComponent getDeathReason() {
+		return Translation.get("deathReason.skeleton");
+	}
 	
 	@Override
 	protected void attackPlayer() {

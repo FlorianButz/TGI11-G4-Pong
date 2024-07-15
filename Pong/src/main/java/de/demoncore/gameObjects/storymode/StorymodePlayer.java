@@ -28,6 +28,7 @@ import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIHealthbar;
 import de.demoncore.gui.GUIValueBar;
 import de.demoncore.gui.MessagePopup;
+import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.scenes.storymode.EndbossFight;
@@ -243,6 +244,8 @@ public class StorymodePlayer extends RigidBody implements Damageable {
 	public float ballSpeed = 3;
 
 	public void spaceKeyDown() {
+		
+		if(Dialog.isActiveDialog) return;
 		
 		if(stamina >= 75 && !GameLogic.IsGamePaused() && !isBallForm && KeyHandler.isCtrlPressed) {
 			radiusAttack();
