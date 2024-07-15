@@ -48,12 +48,14 @@ public class MusicManager {
 			}
 		});
 
+		endboss = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/End.mp3"));
+		
 		playing1Audio = new AudioClip[] {
-				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Explorer.mp3")),
-				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/FarAway.mp3")),
+//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Explorer.mp3")),
+//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/FarAway.mp3")),
 				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Gone.mp3")),
-				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/NothingLeft.mp3")),
-				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/TheLastLight.mp3")),
+//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/NothingLeft.mp3")),
+//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/TheLastLight.mp3")),
 		};
 
 		Logger.logInfo("Loading music fully complete.");
@@ -74,6 +76,7 @@ public class MusicManager {
 		timer.scheduleAtFixedRate(musicUpdate, 25000, 25000);
 	}
 
+	public static AudioClip endboss;
 	public static AudioClip[] playing1Audio;
 
 	static AudioClip randomlyChoseMusic() {

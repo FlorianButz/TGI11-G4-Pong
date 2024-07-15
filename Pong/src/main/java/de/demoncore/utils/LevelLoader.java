@@ -23,6 +23,7 @@ import de.demoncore.gameObjects.storymode.Tree;
 public class LevelLoader {
 
 	// Level Objekt IDs
+	
 	// 0 Player Spawn
 	// 1 Grass
 	// 2 Kleiner Stein

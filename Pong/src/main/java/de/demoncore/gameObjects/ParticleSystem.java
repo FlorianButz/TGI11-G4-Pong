@@ -110,7 +110,7 @@ public class ParticleSystem extends GameObject {
 		p.startColor = GameMath.lerpColor(particleColorFirst, particleColorSecond, randomColorValue);
 
 		p.rotation = GameMath.RandomRange(0, 90);
-
+		
 		particles.add(p);
 	}
 

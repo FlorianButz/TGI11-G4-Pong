@@ -20,6 +20,7 @@ import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.GuiCreditsMenu;
 import de.demoncore.main.Main;
+import de.demoncore.scenes.storymode.EndbossFight;
 import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -98,7 +99,8 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.loadScene(new TwoPlayerPong());
+				//SceneManager.loadScene(new TwoPlayerPong());
+				SceneManager.loadScene(new EndbossFight());
 			}
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;

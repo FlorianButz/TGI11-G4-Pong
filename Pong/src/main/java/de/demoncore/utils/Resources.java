@@ -165,7 +165,6 @@ public class Resources {
 
 		Logger.logInfo("Lade Ressourcen: Lade Texturen");
 		
-		test = new Sprite(Main.class.getResourceAsStream("/textures/test.jpg")).load();
 		fullHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartFull.png")).load();
 		brokenHeart = new Sprite(Main.class.getResourceAsStream("/textures/HeartBroken.png")).load();
 		cake = new Sprite(Main.class.getResourceAsStream("/textures/Cake.png")).load();

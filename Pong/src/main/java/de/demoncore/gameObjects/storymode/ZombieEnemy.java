@@ -8,7 +8,7 @@ public class ZombieEnemy extends BaseEnemy {
 		super(posX, posY);
 		
 		enemySpeed = 0.6f;
-		attackSpeed = 35;
+		attackSpeed = 55;
 		setInitHealth(8);
 		damageAmount = 2;
 		stoppingDistance = 175;

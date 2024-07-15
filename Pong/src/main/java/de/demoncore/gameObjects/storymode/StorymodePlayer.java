@@ -30,6 +30,7 @@ import de.demoncore.gui.GUIValueBar;
 import de.demoncore.gui.MessagePopup;
 import de.demoncore.scenes.shopnew.BallTrails;
 import de.demoncore.scenes.shopnew.ShopValues;
+import de.demoncore.scenes.storymode.EndbossFight;
 import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.sprites.Sprite;
 import de.demoncore.utils.GameMath;
@@ -95,12 +96,12 @@ public class StorymodePlayer extends RigidBody implements Damageable {
 		
 		normalSize = size;
 		ballSize = new Vector3(normalSize.y * 0.6f, normalSize.y * 0.6f);
-
+		
 		health = new GUIHealthbar(65, 85, 45, 6);
 		health.alignment = GUIAlignment.TopLeft;
-
+		
 		friction = 0.8f;
-
+		
 		stepSource = new AudioSource(this);
 		stepSource.setSpacial(false);
 		stepSource.SetVolume(0.1f);
@@ -153,8 +154,9 @@ public class StorymodePlayer extends RigidBody implements Damageable {
 		levelBar.fillColor = Color.white;
 		levelBar.borderColor = Color.white;
 		levelBar.borderSize = 3.5f;
-
-		SceneManager.getActiveScene().addObject(levelBar);
+		
+		if(!(SceneManager.getActiveScene() instanceof EndbossFight))
+			SceneManager.getActiveScene().addObject(levelBar);
 		SceneManager.getActiveScene().addObject(staminaBar);
 
 		activeImage = Resources.playerIdle;

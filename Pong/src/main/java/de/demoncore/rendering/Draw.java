@@ -87,7 +87,12 @@ public class Draw extends JPanel {
 		g2d.translate((float)-screenwidth / 2, (float)-screenheight / 2);
 		
 		// Speichern von altem transform
-		AffineTransform oldTransform = g2d.getTransform();
+				AffineTransform oldTransform = g2d.getTransform();
+		
+		g2d.translate((float)screenwidth / 2, (float)screenheight / 2);
+		//g2d.scale(screenScale * screenSize, screenScale * screenSize);
+		g2d.scale(SceneManager.getActiveScene().cameraZoom, SceneManager.getActiveScene().cameraZoom);
+		g2d.translate((float)-screenwidth / 2, (float)-screenheight / 2);
 		
 		// Anti aliasing
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	// Anti aliasing - sehr wichtig

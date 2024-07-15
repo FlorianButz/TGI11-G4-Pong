@@ -199,6 +199,9 @@ public class Translation {
 		
 		germanTranslation.put("deathReason.arrow", "Spieler wurde von einem Pfeil aufgespießt.");
 		englishTranslation.put("deathReason.arrow", "Player was impaled by an arrow.");
+
+		germanTranslation.put("deathReason.endbossLine", "Spieler wurde durch einen Laser dezimiert.");
+		englishTranslation.put("deathReason.endbossLine", "Player was decimated by a laser.");
 	
 
 		germanTranslation.put("sign.start.0", "Nur die mutigsten aller Kaempfer koennen lernen das Boese in dieser Welt zu besiegen.");
@@ -222,7 +225,7 @@ public class Translation {
 		germanTranslation.put("sign.stone.4", "Mach was du willst aber zahl den Preis.");
 		englishTranslation.put("sign.stone.4", "Do what you want but pay the price.");
 
-		germanTranslation.put("sign.stone.natural", "Dies ist ein normaller Stein.");
+		germanTranslation.put("sign.stone.natural", "Dies ist ein normaler Stein.");
 		englishTranslation.put("sign.stone.natural", "This is a normal rock.");
 
 		germanTranslation.put("sign.stone.perfect.0", "Dies ist der perfekteste Stein der jemals existiert hat.");

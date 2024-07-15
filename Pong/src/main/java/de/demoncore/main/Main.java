@@ -26,7 +26,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Logger.logInfo("GUI wird erstellt...");		
+		Logger.logInfo("GUI wird erstellt...");
 
 		GameLogic gl = new GameLogic();
 		gl.Start();

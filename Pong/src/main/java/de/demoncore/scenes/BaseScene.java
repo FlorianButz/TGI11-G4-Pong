@@ -20,13 +20,14 @@ public class BaseScene {
 	public Vector3 localCameraPosition = Vector3.zero(); // Lokale Kameraposition
 
 	public float cameraZRotation = 0;
+	public float cameraZoom = 1f;
 
 	private boolean isInitialized = false;
 
 	protected ArrayList<GameObject> sceneObjects; // Alle objekte in dem Level
 	Rectangle cameraViewport;
 
-	float cameraViewportShrink = -35f;
+	float cameraViewportShrink = -75f;
 
 	public float GetViewportShrink() {
 		return cameraViewportShrink;
@@ -79,10 +80,10 @@ public class BaseScene {
 
 	private Rectangle calcViewport() {
 		return cameraViewport = new Rectangle(
-				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2) + cameraViewportShrink),
-				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2) + cameraViewportShrink),
-				(int)((Gui.GetScreenDimensions().x) - cameraViewportShrink * 2),
-				(int)((Gui.GetScreenDimensions().y) - cameraViewportShrink * 2)
+				(int)((cameraPosition.x -Gui.GetScreenDimensions().x/2) + (cameraViewportShrink) * (1f / cameraZoom * 6)),
+				(int)((cameraPosition.y -Gui.GetScreenDimensions().y/2) + (cameraViewportShrink) * (1f / cameraZoom * 6)),
+				(int)((Gui.GetScreenDimensions().x) - (cameraViewportShrink) * (1f / cameraZoom * 6) * 2),
+				(int)((Gui.GetScreenDimensions().y) - (cameraViewportShrink) * (1f / cameraZoom * 6) * 2)
 				);
 	}
 
