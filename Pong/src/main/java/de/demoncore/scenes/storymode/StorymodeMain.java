@@ -155,7 +155,7 @@ public class StorymodeMain extends BaseScene {
 		saveData.playerX = StorymodePlayer.getPlayerInstance().getRawPosition().x;
 		saveData.playerY = StorymodePlayer.getPlayerInstance().getRawPosition().y;
 		saveData.playerXP = StorymodePlayer.getPlayerInstance().getPlayerXP();
-
+		
 		SaveManager.SaveToFile("storymode.g4pong", saveData);
 	}
 

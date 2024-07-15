@@ -11,11 +11,13 @@ import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.gameObjects.storymode.BigStone;
 import de.demoncore.gameObjects.storymode.BossDoor;
+import de.demoncore.gameObjects.storymode.Campfire;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.Grass;
 import de.demoncore.gameObjects.storymode.House;
 import de.demoncore.gameObjects.storymode.Path;
 import de.demoncore.gameObjects.storymode.Pillar;
+import de.demoncore.gameObjects.storymode.Sans;
 import de.demoncore.gameObjects.storymode.Sign;
 import de.demoncore.gameObjects.storymode.SmallStone;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
@@ -41,6 +43,8 @@ public class LevelLoader {
 	// 12 House2
 	// 13 House3
 	// 14 House4
+
+	// 15 Campfire
 	
 	public static void LoadLevel(InputStream stream) {
 
@@ -124,6 +128,12 @@ public class LevelLoader {
 						break;
 					case 14:
 						SceneManager.getActiveScene().addObject(new House(objectPosX, objectPosY, 4));
+						break;
+					case 15:
+						SceneManager.getActiveScene().addObject(new Campfire(objectPosX, objectPosY));
+						break;
+					case 16:
+						SceneManager.getActiveScene().addObject(new Sans(objectPosX, objectPosY));
 						break;
 					}
 				}

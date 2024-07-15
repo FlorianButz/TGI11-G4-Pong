@@ -117,6 +117,7 @@ public class Resources {
 	public static DialogLine stoneDialogSign;
 	public static DialogLine endbossDialog;
 	public static DialogLine endbossDialogEnd;
+	public static DialogLine sansDialog;
 	
 	static List<DialogLine> dialogs;
 	
@@ -293,6 +294,11 @@ public class Resources {
 		endbossDialogEnd = new DialogLine("The Rock", Translation.get("endbossend.dialog.1"),
 				new DialogLine("The Rock", Translation.get("endbossend.dialog.2"), null));
 		dialogs.add(endbossDialogEnd);
+		
+
+		sansDialog = new DialogLine("Sans", Translation.get("sans.dialog.1"),
+				new DialogLine("Sans", Translation.get("sans.dialog.2"), null));
+		dialogs.add(sansDialog);
 		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}

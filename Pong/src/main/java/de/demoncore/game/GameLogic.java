@@ -42,7 +42,7 @@ public class GameLogic {
 			public void run() {
 				Thread.currentThread().setName("gamelogic");
 				
-				if(doPauseGameOnDialog ? Dialog.isActiveDialog : false || PauseMenu.isPauseMenuActive)
+				if((doPauseGameOnDialog ? Dialog.isActiveDialog : false) || PauseMenu.isPauseMenuActive)
 					GameLogic.SetGamePaused(true);
 				else
 					GameLogic.SetGamePaused(false);

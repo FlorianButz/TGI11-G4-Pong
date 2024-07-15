@@ -271,7 +271,14 @@ public class Translation {
 		englishTranslation.put("endbossend.dialog.1", "I must admit.. I underestimated you.");
 		
 		germanTranslation.put("endbossend.dialog.2", "Du verdienst den Sieg. Aber du wirst sehen. Einest Tages werde ich wiederkehren!");
-		englishTranslation.put("endbossend.dialog.2", "You deserve your victory. But you'll see. One day I'll be back!");
+		englishTranslation.put("endbossend.dialog.2", "You deserve your victory. But you'll see. One day I'll be back!");		
+
+		
+		germanTranslation.put("sans.dialog.1", "Diese Welt.. schade wie sehr sie doch leidet. Aber die Einwohner tragen die volle Schuld daran.");
+		englishTranslation.put("sans.dialog.1", "This world... it's sad how it got ruined. But the people are responsible for this on their own.");
+		
+		germanTranslation.put("sans.dialog.2", "Bitte mach dich schnell auf den Weg und versuche diese Welt wieder gerade zu biegen. Ich habe keine Lust schonwieder wo anders hin zu reisen.");
+		englishTranslation.put("sans.dialog.2", "Please, if you can. Fix this world. I don't feel like moving to a different place again already.");
 	}
 
 	public static TranslationComponent get(String translationID) {

@@ -1,19 +1,8 @@
 package de.demoncore.gameObjects.storymode.bossattacks;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import de.demoncore.game.GameObject;
-import de.demoncore.game.SceneManager;
-import de.demoncore.game.Translation;
-import de.demoncore.gameObjects.storymode.StorymodePlayer;
-import de.demoncore.utils.GameMath;
-import de.demoncore.utils.Logger;
 
 public class BossAttackPlus extends BossAttackLines {
 	
