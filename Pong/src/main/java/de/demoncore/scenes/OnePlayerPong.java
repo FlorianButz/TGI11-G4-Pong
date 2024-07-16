@@ -6,7 +6,9 @@ import de.demoncore.game.PointListener;
 import de.demoncore.game.PointSystem;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.BallSizePowerUp;
 import de.demoncore.gameObjects.PauseMenu;
+import de.demoncore.gameObjects.PlayerSizePowerUp;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongEndScreen;
 import de.demoncore.gameObjects.PongLatiku;
@@ -40,7 +42,7 @@ public class OnePlayerPong extends BaseScene {
 		addObject(new PauseMenu());
 		addObject(new PongLatiku());
 
-		addObject(new PowerupBase(150, 150));
+		addObject(new BallSizePowerUp(150, 150));
 		
 		player1 = new PongPlayer(0, 0);
 		player1.isPlayer1 = true;
