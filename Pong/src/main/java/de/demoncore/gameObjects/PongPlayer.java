@@ -21,8 +21,16 @@ public class PongPlayer extends RigidBody {
 	public boolean isPlayer1 = true;
 	protected boolean playerControlsEnabled = true;
 
+	public static PongPlayer player1;
+	public static PongPlayer player2;
+	
 	public PongPlayer(int posX, int posY) {
 		super(posX, posY, 15, 135);
+
+		if(isPlayer1)
+			player1 = this;
+		else
+			player2 = this;
 	}
 
 	@Override
