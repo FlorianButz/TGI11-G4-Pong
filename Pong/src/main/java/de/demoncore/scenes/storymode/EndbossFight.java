@@ -65,7 +65,14 @@ public class EndbossFight extends BaseScene {
 
 				g2d.setColor(new Color(0.6f, 0.6f, 0.6f, 1f));
 				g2d.setStroke(new BasicStroke(25));
-				g2d.drawRect(worldPos.getX(), worldPos.getY(), size.getX(), size.getY());				
+				g2d.drawRect(worldPos.getX(), worldPos.getY(), size.getX(), size.getY());
+
+				g2d.drawImage(Resources.dPuddle1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+				g2d.drawImage(Resources.dPuddle3.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+				g2d.drawImage(Resources.dCobweb1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+				g2d.drawImage(Resources.dCobweb2.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+				g2d.drawImage(Resources.dCobweb4.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+
 			}
 		});
 
@@ -117,7 +124,7 @@ public class EndbossFight extends BaseScene {
 
 	float curCamZoom = 1.25f;
 
-	int cakeCounter = 650;
+	int cakeCounter = 850;
 
 	@Override
 	public void updateScene() {
@@ -135,7 +142,7 @@ public class EndbossFight extends BaseScene {
 				cameraPosition = Vector3.lerp(cameraPosition, new Vector3(0, -75), 0.025f);
 			}
 		}
-		
+
 		super.updateScene();
 
 		if(isFighting)
@@ -231,7 +238,7 @@ public class EndbossFight extends BaseScene {
 		isFighting = false;
 
 		StorymodeMain.saveData.addCompletedDungeon(-1);
-		
+
 		MusicManager.ForcePlayMusic(MusicManager.endboss_win, false);
 
 		Dialog dialog = new Dialog(Resources.endbossDialogEnd) {

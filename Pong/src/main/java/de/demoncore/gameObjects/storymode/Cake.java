@@ -11,7 +11,7 @@ public class Cake extends SpriteObject {
 	InteractableObject interaction;
 	
 	public Cake(int posX, int posY) {
-		super(posX, posY, 50, 50, Resources.cake);
+		super(posX, posY, (int)(21 * 2.5f), (int)(19 * 2.5f), Resources.cake);
 		collisionEnabled = false;
 		
 		interaction = new InteractableObject(posX, posY, 175, 175, StorymodePlayer.getPlayerInstance(), new InteractEvent() {

@@ -2,7 +2,7 @@ package de.demoncore.gameObjects;
 
 public class BallSizePowerUp extends PowerupBase {
 
-	float ballSizeMultiplier = 1.45f;
+	float ballSizeMultiplier = 2f;
 	
 	public BallSizePowerUp(int posX, int posY) {
 		super(posX, posY);

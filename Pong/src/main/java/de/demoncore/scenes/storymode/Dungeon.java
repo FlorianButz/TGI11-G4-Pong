@@ -32,7 +32,7 @@ public class Dungeon extends BaseScene {
 	public Dungeon(int dungeonId) {
 		this.dungeonId = dungeonId;
 		
-		maxRooms = (int)(getDifficulty() * 25) + 3;
+		maxRooms = (int)(getDifficulty() * 25) + 4;
 	}
 	
 	@Override
@@ -189,7 +189,7 @@ public class Dungeon extends BaseScene {
 				for(GameObject[] roomArr : dungeonRoom) {
 					for(GameObject room : roomArr) {
 						if(room != startRoom && room != null)
-							((DungeonRoom)room).spawnEnemies();
+							((DungeonRoom)room).spawnContent();
 					}
 				}
 				

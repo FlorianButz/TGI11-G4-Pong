@@ -2,6 +2,7 @@ package de.demoncore.scenes;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
 
 import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
@@ -11,6 +12,7 @@ import de.demoncore.game.animator.AnimatorUpdateEvent;
 import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.Vector3Animator;
 import de.demoncore.gameObjects.ParticleSystem;
+import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.SettingsMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -85,7 +87,7 @@ public class MainMenu extends BaseScene {
 		});
 		anim.play(); // Spiele animation 1
 		
-		GUIButton singleplayer = new GUIButton(-220, 0, 360, 75, Translation.get("mainmenu.singleplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton singleplayer = new GUIButton(-220, -100, 360, 75, Translation.get("mainmenu.singleplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -95,7 +97,7 @@ public class MainMenu extends BaseScene {
 		singleplayer.alignment = GUIAlignment.Center;
 		addObject(singleplayer);
 		
-		GUIButton localMultiplayer = new GUIButton(220, 0, 360, 75, Translation.get("mainmenu.multiplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+		GUIButton localMultiplayer = new GUIButton(220, -100, 360, 75, Translation.get("mainmenu.multiplayer"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -105,6 +107,38 @@ public class MainMenu extends BaseScene {
 		});
 		localMultiplayer.alignment = GUIAlignment.Center;
 		addObject(localMultiplayer);
+		
+		GUIButton powerupGamemode = new GUIButton(0, 0, 800, 75, Translation.get("mainmenu.poweruppong"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.loadScene(new PowerupPong());
+			}
+		}) {
+			
+			Color startNormalColor = null;
+			
+			@Override
+			public void onAddToScene() {
+				super.onAddToScene();
+				
+				startNormalColor = normalColor;
+			}
+			
+			@Override
+			public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+				if(startNormalColor != null) {
+					if(isHovering)
+						normalColor = PongBall.regenbogen();
+					else
+						normalColor = startNormalColor;
+				}
+				
+				super.draw(g2d, screenWidth, screenHeight);
+			}
+		};
+		powerupGamemode.alignment = GUIAlignment.Center;
+		addObject(powerupGamemode);
 		
 		GUIButton storymode = new GUIButton(0, 100, 800, 75, Translation.get("mainmenu.storymode"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
 			@Override

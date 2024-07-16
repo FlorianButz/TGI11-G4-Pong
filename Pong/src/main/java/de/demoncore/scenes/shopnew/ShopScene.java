@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.demoncore.actions.KeyHandler;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
@@ -149,6 +151,14 @@ public class ShopScene extends BaseScene {
 		ballSkinsButton.normalColor = new Color(1, 1, 1, 0.15f);
 		pedalSkinsButton.normalColor = new Color(1, 1, 1, 0.15f);
 		ballTrailsButton.normalColor = new Color(1, 1, 1, 0.15f);
+	}
+	
+	@Override
+	public void updateScene() {
+		super.updateScene();
+	
+		if(KeyHandler.isCtrlPressed && KeyHandler.playerInput1.y != 0 && Settings.getDebugMode())
+			ShopValues.shopData.addPlayerMoney(5);
 	}
 	
 	int getX(int index) {

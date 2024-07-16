@@ -100,6 +100,7 @@ public class GUIObject extends GameObject {
 	}
 
 	protected boolean isHovering = false;
+	private boolean isDown = false;
 
 	public void MouseDown(MouseEvent e) {
 		if(CheckIntersection(e.getX(), e.getY())) {
@@ -114,24 +115,16 @@ public class GUIObject extends GameObject {
 			}
 			
 			OnMouseDownUIObject(e);
+			isDown = true;
 		}
 	}
 	
 	public void MouseUp(MouseEvent e) {
-		if(CheckIntersection(e.getX(), e.getY())) {
-			
-			for(GameObject o : SceneManager.getActiveScene().getSceneObjects()) {
-				if(o instanceof GUIObject) {
-					if(((GUIObject)o).CheckIntersection(e.getX(), e.getY())) {
-						if(SceneManager.getActiveScene().getSceneObjects().indexOf(this) < SceneManager.getActiveScene().getSceneObjects().indexOf(o)) {
-							if(o.enableRendering) return;
-						}
-					}
-				}
-			}
-			
+		if(isDown) {
 			OnMouseUpUIObject(e);
 		}
+		
+		isDown = false;
 	}
 	
 	protected void EscapePressed() {

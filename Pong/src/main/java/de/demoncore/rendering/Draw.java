@@ -47,7 +47,7 @@ public class Draw extends JPanel {
 		lastTime = System.currentTimeMillis();
 	}
 	
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	
 		accurateFps = 1000000000.0 / (System.nanoTime() - accuratelastTime);
@@ -329,7 +329,7 @@ public class Draw extends JPanel {
 
 		
 		// Debug modus
-		if(Settings.getDebugMode()) {			
+		if(Settings.getDebugMode() && Resources.uiFont != null) {			
 			g2d.setFont(Resources.uiFont.deriveFont(15F));
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.drawString("Version -> " + Main.version, 15, 25);

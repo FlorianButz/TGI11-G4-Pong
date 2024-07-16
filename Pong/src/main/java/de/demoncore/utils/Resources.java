@@ -66,6 +66,8 @@ public class Resources {
 	public static Sprite dungeonDoor;
 	public static Sprite dungeonDoorBroken;
 	public static Sprite path;
+	public static Sprite path2;
+	public static Sprite path3;
 	public static Sprite pillar;
 	public static Sprite compassEmpty;
 	public static Sprite compassNeedle;
@@ -116,6 +118,17 @@ public class Resources {
 	public static Sprite info_icon;
 	public static Sprite credits_icon;
 	public static Sprite credits_icon_dark;
+
+	public static Sprite dCarpet;
+	public static Sprite dCobweb1;
+	public static Sprite dCobweb2;
+	public static Sprite dCobweb3;
+	public static Sprite dCobweb4;
+	public static Sprite dPuddle1;
+	public static Sprite dPuddle2;
+	public static Sprite dPuddle3;
+	public static Sprite dChests;
+	public static Sprite dPillar;
 	
 	public static DialogLine testLine;
 	public static DialogLine startDialogSign;
@@ -224,6 +237,8 @@ public class Resources {
 		dungeonDoor = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoor.png")).load();
 		dungeonDoorBroken = new Sprite(Main.class.getResourceAsStream("/textures/DungeonDoorBroken.png")).load();
 		path = new Sprite(Main.class.getResourceAsStream("/textures/Path.png")).load();
+		path2 = new Sprite(Main.class.getResourceAsStream("/textures/Path2.png")).load();
+		path3 = new Sprite(Main.class.getResourceAsStream("/textures/Path3.png")).load();
 		pillar = new Sprite(Main.class.getResourceAsStream("/textures/Pillar.png")).load();
 		compassEmpty = new Sprite(Main.class.getResourceAsStream("/textures/CompassEmpty.png")).load();
 		compassNeedle = new Sprite(Main.class.getResourceAsStream("/textures/CompassNeedle.png")).load();
@@ -272,6 +287,17 @@ public class Resources {
 		info_icon = new Sprite(Main.class.getResourceAsStream("/textures/InfoIcon.png")).load();
 		credits_icon = new Sprite(Main.class.getResourceAsStream("/textures/CreditsIcon.png")).load();
 		credits_icon_dark = new Sprite(Main.class.getResourceAsStream("/textures/CreditsIconDark.png")).load();
+
+		dCarpet = new Sprite(Main.class.getResourceAsStream("/textures/Carpet.png")).load();
+		dCobweb1 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonCobweb1.png")).load();
+		dCobweb2 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonCobweb2.png")).load();
+		dCobweb3 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonCobweb3.png")).load();
+		dCobweb4 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonCobweb4.png")).load();
+		dChests = new Sprite(Main.class.getResourceAsStream("/textures/DungeonChests.png")).load();
+		dPuddle1 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonPuddle1.png")).load();
+		dPuddle2 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonPuddle2.png")).load();
+		dPuddle3 = new Sprite(Main.class.getResourceAsStream("/textures/DungeonPuddle3.png")).load();
+		dPillar = new Sprite(Main.class.getResourceAsStream("/textures/DungeonPillar.png")).load();
 		
 		Logger.logMessage("Laden der Texturen Erfolgreich!");
 	}

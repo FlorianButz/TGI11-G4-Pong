@@ -73,6 +73,9 @@ public class Translation {
 
 		germanTranslation.put("mainmenu.multiplayer", "2 Spieler");
 		englishTranslation.put("mainmenu.multiplayer", "2 Player");
+
+		germanTranslation.put("mainmenu.poweruppong", "Modus Spezial");
+		englishTranslation.put("mainmenu.poweruppong", "Special");
 		
 		germanTranslation.put("mainmenu.storymode", "Story Modus");
 		englishTranslation.put("mainmenu.storymode", "Storymode");
@@ -270,7 +273,7 @@ public class Translation {
 		germanTranslation.put("endbossend.dialog.1", "Ich muss zugeben, dass ich dich unterschaetzt habe.");
 		englishTranslation.put("endbossend.dialog.1", "I must admit.. I underestimated you.");
 		
-		germanTranslation.put("endbossend.dialog.2", "Du verdienst den Sieg. Aber du wirst sehen. Einest Tages werde ich wiederkehren!");
+		germanTranslation.put("endbossend.dialog.2", "Du verdienst den Sieg. Aber du wirst sehen. Eines Tages werde ich wiederkehren!");
 		englishTranslation.put("endbossend.dialog.2", "You deserve your victory. But you'll see. One day I'll be back!");		
 
 		
@@ -307,7 +310,7 @@ public class Translation {
 		englishTranslation.put("npc3.dialog.1", "Wow.. you really did it.");
 
 		germanTranslation.put("npc3.dialog.2", "Anfangs dachte ich schon wir sind verloren als ich dich sah, aber scheint so als koenntest du mehr als man denkt.");
-		englishTranslation.put("npc3.dialog.2", "When I first saw you I thought we already lost, but it seems like you can do more than you look like.");
+		englishTranslation.put("npc3.dialog.2", "When I first saw you I thought we already lost, but it seems like you can do more than you look.");
 
 		germanTranslation.put("npc3.dialog.3", "Ich danke dir fuer deinen Beitrag. Auf wiedersehen Reisender.");
 		englishTranslation.put("npc3.dialog.3", "I must thank you for your service. Hopefully we'll see you here again, traveller.");

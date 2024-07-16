@@ -8,7 +8,7 @@ import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
 import de.demoncore.gameObjects.BallSizePowerUp;
 import de.demoncore.gameObjects.PauseMenu;
-import de.demoncore.gameObjects.PlayerSizePowerUp;
+import de.demoncore.gameObjects.BallSpeedUpPowerUp;
 import de.demoncore.gameObjects.PongBall;
 import de.demoncore.gameObjects.PongEndScreen;
 import de.demoncore.gameObjects.PongLatiku;
@@ -101,7 +101,7 @@ public class OnePlayerPong extends BaseScene {
 			addObject(new BallSizePowerUp(spawnPos.getX(), spawnPos.getY()));
 			break;
 		case 1:
-			addObject(new PlayerSizePowerUp(spawnPos.getX(), spawnPos.getY()));
+			addObject(new BallSpeedUpPowerUp(spawnPos.getX(), spawnPos.getY()));
 			break;
 		default:
 			addObject(new BallSizePowerUp(spawnPos.getX(), spawnPos.getY()));

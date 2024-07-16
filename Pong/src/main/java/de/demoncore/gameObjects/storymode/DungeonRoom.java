@@ -18,7 +18,7 @@ import de.demoncore.utils.Vector3;
 public class DungeonRoom extends GameObject {
 
 	public int rPX, rPY;
-	
+
 	private GameObject wallRight;
 	private GameObject wallTop;
 	private GameObject wallLeft;
@@ -28,33 +28,97 @@ public class DungeonRoom extends GameObject {
 	private GameObject secondWallTop;
 	private GameObject secondWallLeft;
 	private GameObject secondWallBottom;
-	
+
+	boolean chests = false, cob1 = false, cob2 = false, cob3 = false, cob4 = false, pud1 = false, pud2 = false, pud3 = false;
+
 	public DungeonRoom(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
-		
+
 		color = new Color(1, 1, 1, 0.1f);
 		collisionEnabled = false;
+
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			chests = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			cob1 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			cob2 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			cob3 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			cob4 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			pud1 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			pud2 = true;
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
+			pud3 = true;
 	}
-	
+
+	@Override
+	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
+		super.draw(g2d, screenWidth, screenHeight);
+
+		g2d.setStroke(new BasicStroke(15f));
+		g2d.setColor(Color.white);
+
+		Vector3 worldPos = getPosition();
+		g2d.drawRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
+
+//				g2d.drawImage(Resources.dCarpet.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+
+		//		if(chests)
+		//			g2d.drawImage(Resources.dChests.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(pud1)
+			g2d.drawImage(Resources.dPuddle1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(pud2)
+			g2d.drawImage(Resources.dPuddle2.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(pud3)
+			g2d.drawImage(Resources.dPuddle3.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(cob1)
+			g2d.drawImage(Resources.dCobweb1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(cob2)
+			g2d.drawImage(Resources.dCobweb2.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(cob3)
+			g2d.drawImage(Resources.dCobweb3.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(cob4)
+			g2d.drawImage(Resources.dCobweb4.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+
+		if(Settings.getDebugMode()) {
+			g2d.setFont(Resources.uiFont.deriveFont(45f));
+			g2d.drawString("" + top + bot + lef + rig + " HC: " + count, (int)worldPos.x + 45, (int)worldPos.y + 100);
+		}
+	}
+
 	public void startRoom() {
 		StorymodePlayer.getPlayerInstance().setPosition(getPosition().add(getScale().multiply(0.5f)));
 	}
-	
-	public void spawnEnemies() {
+
+	public void spawnContent() {
 		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f) {
 			for(int i = 0; i < ((int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * (int)(5 * getDifficulty())) + 2); i++) {
 				spawnEnemy();
 			}
 		}
+
+		for(int i = 0; i < (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10); i++) {
+			Vector3 randomPos = getRandomPositionInRoom();
+			SceneManager.getActiveScene().addObject(new DungeonPillar(randomPos.getX(), randomPos.getY()));
+		}
+		
+		for(int i = 0; i < (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 3); i++) {
+			Vector3 randomPos = getRandomPositionInRoom();
+			SceneManager.getActiveScene().addObject(new Cake(randomPos.getX(), randomPos.getY()));
+		}
 	}
-	
+
 	public void spawnEnemy() {
 		Vector3 rand = getRandomPositionInRoom();
-		
+
 		if(getDifficulty() >= 0.8) {
-			
+
 			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 6);
-			
+
 			switch(rng) {
 			case 0:
 				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
@@ -76,9 +140,9 @@ public class DungeonRoom extends GameObject {
 				break;
 			}
 		}else if(getDifficulty() >= 0.6) {
-			
+
 			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
-			
+
 			switch(rng) {
 			case 0:
 				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
@@ -112,9 +176,9 @@ public class DungeonRoom extends GameObject {
 				break;
 			}
 		}else if(getDifficulty() >= 0.4) {
-			
+
 			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
-			
+
 			switch(rng) {
 			case 0:
 				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
@@ -148,9 +212,9 @@ public class DungeonRoom extends GameObject {
 				break;
 			}
 		}else if(getDifficulty() >= 0.2) {
-			
+
 			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
-			
+
 			switch(rng) {
 			case 0:
 				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
@@ -184,9 +248,9 @@ public class DungeonRoom extends GameObject {
 				break;
 			}
 		}else {
-			
+
 			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 2);
-			
+
 			switch(rng) {
 			case 0:
 				SceneManager.getActiveScene().addObject(new ZombieEnemy(rand.getX(), rand.getY()));
@@ -197,32 +261,32 @@ public class DungeonRoom extends GameObject {
 			}
 		}
 	}
-	
+
 	float getDifficulty() {
 		System.out.println(StorymodeMain.difficulty);
 		return StorymodeMain.difficulty;
 	}
-	
+
 	Vector3 getRandomPositionInRoom() {
 		Vector3 startPos = getPosition().add(new Vector3(20, 20));
 		Vector3 toPos = getScale().subtract(new Vector3(20, 20));
-		
+
 		return startPos.add(new Vector3(toPos.x * ((Dungeon)SceneManager.getActiveScene()).rng.nextFloat(), toPos.y * ((Dungeon)SceneManager.getActiveScene()).rng.nextFloat()));
 	}
-	
+
 	boolean top;
 	boolean bot;
 	boolean lef;
 	boolean rig;
 	int count = 0;
-	
+
 	public void createWalls(List<DungeonHallway> hallways) {
-		
+
 		for (DungeonHallway h : hallways) {
 			if(h.fromRPX == rPX && h.fromRPY == rPY) {
 				int x = h.toRPX - h.fromRPX;
 				int y = h.toRPY - h.fromRPY;
-				
+
 				if(x == -1) {
 					count++;
 					lef = true;
@@ -230,7 +294,7 @@ public class DungeonRoom extends GameObject {
 					count++;
 					rig = true;
 				}
-				
+
 				if(y == -1) {
 					count++;
 					top = true;
@@ -241,7 +305,7 @@ public class DungeonRoom extends GameObject {
 			}else if(h.toRPX == rPX && h.toRPY == rPY) {
 				int x = h.fromRPX - h.toRPX;
 				int y = h.fromRPY - h.toRPY;
-				
+
 				if(x == -1) {
 					count++;
 					lef = true;
@@ -249,7 +313,7 @@ public class DungeonRoom extends GameObject {
 					count++;
 					rig = true;
 				}
-				
+
 				if(y == -1) {
 					count++;
 					top = true;
@@ -259,17 +323,17 @@ public class DungeonRoom extends GameObject {
 				}
 			}
 		}
-		
+
 		int space = 210;
-		
+
 		if(top) {
-			
+
 			wallTop = new GameObject(
 					(int)getPosition().x + (int)getScale().x / 4 - space / 2,
 					(int)getPosition().y,
 					(int)getScale().x / 2 - space,
 					25);
-			
+
 			secondWallTop= new GameObject(
 					(int)getPosition().x + (int)getScale().x - (int)getScale().x / 4 + space / 2,
 					(int)getPosition().y ,
@@ -278,7 +342,7 @@ public class DungeonRoom extends GameObject {
 
 			SceneManager.getActiveScene().addObject(wallTop);
 			SceneManager.getActiveScene().addObject(secondWallTop);
-			
+
 		}else {
 			wallTop = new GameObject(
 					(int)getPosition().x + (int)getScale().x / 2,
@@ -288,15 +352,15 @@ public class DungeonRoom extends GameObject {
 			SceneManager.getActiveScene().addObject(wallTop);
 		}
 
-		
+
 		if(bot) {
-			
+
 			wallBottom = new GameObject(
 					(int)getPosition().x + (int)getScale().x / 4 - space / 2,
 					(int)getPosition().y + (int)getScale().y,
 					(int)getScale().x / 2 - space,
 					25);
-			
+
 			secondWallBottom= new GameObject(
 					(int)getPosition().x + (int)getScale().x - (int)getScale().x / 4 + space / 2,
 					(int)getPosition().y + (int)getScale().y,
@@ -305,7 +369,7 @@ public class DungeonRoom extends GameObject {
 
 			SceneManager.getActiveScene().addObject(wallBottom);
 			SceneManager.getActiveScene().addObject(secondWallBottom);
-			
+
 		}else {
 			wallBottom = new GameObject(
 					(int)getPosition().x + (int)getScale().x / 2,
@@ -314,15 +378,15 @@ public class DungeonRoom extends GameObject {
 					25);
 			SceneManager.getActiveScene().addObject(wallBottom);
 		}
-		
+
 		if(rig) {
-			
+
 			wallRight = new GameObject(
 					(int)getPosition().x + (int)getScale().x,
 					(int)getPosition().y + (int)getScale().y / 4 - space / 2,
 					25,
 					(int)getScale().y / 2 - space);
-			
+
 			secondWallRight= new GameObject(
 					(int)getPosition().x + (int)getScale().x,
 					(int)getPosition().y + (int)getScale().y - (int)getScale().y / 4 + space / 2,
@@ -331,7 +395,7 @@ public class DungeonRoom extends GameObject {
 
 			SceneManager.getActiveScene().addObject(wallRight);
 			SceneManager.getActiveScene().addObject(secondWallRight);
-			
+
 		}else {
 			wallRight = new GameObject(
 					(int)getPosition().x + (int)getScale().x,
@@ -340,15 +404,15 @@ public class DungeonRoom extends GameObject {
 					(int)getScale().y);
 			SceneManager.getActiveScene().addObject(wallRight);
 		}
-		
+
 		if(lef) {
-			
+
 			wallLeft = new GameObject(
 					(int)getPosition().x,
 					(int)getPosition().y + (int)getScale().y / 4 - space / 2,
 					25,
 					(int)getScale().y / 2 - space);
-			
+
 			secondWallLeft = new GameObject(
 					(int)getPosition().x,
 					(int)getPosition().y + (int)getScale().y - (int)getScale().y / 4 + space / 2,
@@ -357,7 +421,7 @@ public class DungeonRoom extends GameObject {
 
 			SceneManager.getActiveScene().addObject(wallLeft);
 			SceneManager.getActiveScene().addObject(secondWallLeft);
-			
+
 		}else {
 			wallLeft = new GameObject(
 					(int)getPosition().x,
@@ -381,7 +445,7 @@ public class DungeonRoom extends GameObject {
 		if(secondWallTop != null)
 			secondWallTop.enableRendering = false;
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -390,7 +454,7 @@ public class DungeonRoom extends GameObject {
 		SceneManager.getActiveScene().destroyObject(wallTop);
 		SceneManager.getActiveScene().destroyObject(wallBottom);
 		SceneManager.getActiveScene().destroyObject(wallLeft);
-		
+
 		if(secondWallBottom != null)
 			SceneManager.getActiveScene().destroyObject(secondWallBottom);
 		if(secondWallLeft != null)
@@ -401,29 +465,13 @@ public class DungeonRoom extends GameObject {
 			SceneManager.getActiveScene().destroyObject(secondWallTop);
 
 	}
-	
-	@Override
-	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
-		super.draw(g2d, screenWidth, screenHeight);
-	
-		g2d.setStroke(new BasicStroke(15f));
-		g2d.setColor(Color.white);
-		
-		Vector3 worldPos = getPosition();
-		g2d.drawRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
-		
-		if(Settings.getDebugMode()) {
-			g2d.setFont(Resources.uiFont.deriveFont(45f));
-			g2d.drawString("" + top + bot + lef + rig + " HC: " + count, (int)worldPos.x + 45, (int)worldPos.y + 100);
-		}
-	}
 
 	public DungeonDoor spawnExit() {
 		DungeonDoor door = new DungeonDoor(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2, false);
 		SceneManager.getActiveScene().addObject(door);
-		
+
 		ParticleSystem s = new ParticleSystem(getPosition().getX() + getScale().getX() / 2, getPosition().getY() + getScale().getY() / 2);
-		
+
 		s.emitChunk = 500;
 		s.initialParticleSpeedMax = new Vector3(10, 10);
 		s.initialParticleSpeedMin = new Vector3(-10, -10);
@@ -435,11 +483,11 @@ public class DungeonRoom extends GameObject {
 		s.initialParticleSize = 35;
 		s.initialParticleSizeRandom = 50;
 		s.endParticleSize = 0;
-		
+
 		SceneManager.getActiveScene().addObject(s);
 		s.Init();
-		
+
 		return door;
 	}
-	
+
 }

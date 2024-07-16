@@ -1,10 +1,10 @@
 package de.demoncore.gameObjects;
 
-public class PlayerSizePowerUp extends PowerupBase {
+public class PlayerSizePowerup extends PowerupBase {
 
-	float scaleUpFactor = 1.5f;
+	float scaleUpFactor = 1.75f;
 
-	public PlayerSizePowerUp(int posX, int posY) {
+	public PlayerSizePowerup(int posX, int posY) {
 		super(posX, posY);
 		powerupDuration = 15000;
 

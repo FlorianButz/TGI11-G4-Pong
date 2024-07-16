@@ -10,6 +10,7 @@ import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIRectangle;
 import de.demoncore.gui.Gui;
+import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.rendering.Draw;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.scenes.DefaultScene;
@@ -50,6 +51,8 @@ public class SceneManager {
 	
 	public static void loadScene(BaseScene scene) {
 		ArrayList<GameObject> objectsInCurrentScene = new ArrayList<GameObject>(getActiveScene().getSceneObjects());
+		
+		Dialog.isActiveDialog = false;
 		
 		GUIRectangle blackScreen = new GUIRectangle(0, 0, (int)Gui.GetScreenDimensions().x * 2, (int)Gui.GetScreenDimensions().y * 2, new Color(0, 0, 0, 0f)); // Level uebergang
 		blackScreen.doUIScale = false;

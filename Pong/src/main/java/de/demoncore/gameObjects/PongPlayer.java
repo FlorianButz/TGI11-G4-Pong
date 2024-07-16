@@ -37,7 +37,7 @@ public class PongPlayer extends RigidBody {
 		position.y = GameMath.clamp(position.y, (-Gui.GetScreenDimensions().y / 2) + size.y / 2,
 				(Gui.GetScreenDimensions().y / 2) - size.y / 2);
 
-		size = Vector3.lerp(size, currentScale, 0.15f);
+		size = Vector3.lerp(size, currentScale, 0.25f);
 		
 		if(isPlayer1)
 			player1 = this;

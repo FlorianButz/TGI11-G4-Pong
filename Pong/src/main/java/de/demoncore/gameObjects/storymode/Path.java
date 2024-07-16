@@ -9,6 +9,13 @@ public class Path extends SpriteObject {
 		super(posX, posY, (int)(17 * 5), (int)(16 * 5), Resources.path);
 		collisionEnabled = false;
 		
+		if(Math.random() >= 0.6){
+			sprite = Resources.path2;
+			if(Math.random() >= 0.6){
+				sprite = Resources.path3;
+			}
+		}
+		
 //		switch((int)(Math.random() * 5)) {
 //		case 0:
 //			rotationZ = 0;

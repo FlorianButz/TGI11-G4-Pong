@@ -20,7 +20,7 @@ import de.demoncore.utils.Logger;
 public class Sprite {
 	
 	private String filepath;
-	private VolatileImage texture;
+	private BufferedImage texture;
 	
 	InputStream imageStream;
 	
@@ -38,25 +38,26 @@ public class Sprite {
 		try {
 			
 			BufferedImage bufferedImage = ImageIO.read(imageStream);
+			texture = bufferedImage;
 
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	        GraphicsDevice gd = ge.getDefaultScreenDevice();
-	        GraphicsConfiguration gc = gd.getDefaultConfiguration();
+//			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//	        GraphicsDevice gd = ge.getDefaultScreenDevice();
+//	        GraphicsConfiguration gc = gd.getDefaultConfiguration();
+//			
+//			VolatileImage vImage = gc.createCompatibleVolatileImage(bufferedImage.getWidth(), bufferedImage.getHeight(), Transparency.TRANSLUCENT);
+//
+//	        do {
+//	            if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
+//	                vImage = gc.createCompatibleVolatileImage(bufferedImage.getWidth(), bufferedImage.getHeight(), Transparency.TRANSLUCENT);
+//	            }
+//
+//	            Graphics2D g = vImage.createGraphics();
+//	            g.setComposite(AlphaComposite.Src);
+//	            g.drawImage(bufferedImage, 0, 0, null);
+//	            g.dispose();
+//	        } while (vImage.contentsLost());
 			
-			VolatileImage vImage = gc.createCompatibleVolatileImage(bufferedImage.getWidth(), bufferedImage.getHeight(), Transparency.TRANSLUCENT);
-
-	        do {
-	            if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
-	                vImage = gc.createCompatibleVolatileImage(bufferedImage.getWidth(), bufferedImage.getHeight(), Transparency.TRANSLUCENT);
-	            }
-
-	            Graphics2D g = vImage.createGraphics();
-	            g.setComposite(AlphaComposite.Src);
-	            g.drawImage(bufferedImage, 0, 0, null);
-	            g.dispose();
-	        } while (vImage.contentsLost());
-			
-	        texture = vImage;
+	        texture = bufferedImage;
 	        
 	        imageStream.close();
 	        
@@ -67,7 +68,7 @@ public class Sprite {
 		return this;
 	}
 	
-	public VolatileImage getTexture() {
+	public BufferedImage getTexture() {
 		return texture;
 	}
 }
