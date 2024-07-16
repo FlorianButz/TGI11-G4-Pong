@@ -11,6 +11,7 @@ import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.scenes.storymode.EndbossFight;
 import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.sprites.SpriteObject;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class BossDoor extends SpriteObject {
@@ -24,8 +25,13 @@ public class BossDoor extends SpriteObject {
 				(int)(81 * 7.5),
 				Resources.bossDoor);
 
-		boolean canEnterBossRoom = (StorymodeMain.getDungeonCount() == StorymodeMain.getCompleteDungeonCount());
+		if(StorymodeMain.saveData.completedDungeons.contains(-1)) {
+			sprite = Resources.bossDoorBroken;
+			return;
+		}
 
+		boolean canEnterBossRoom = (StorymodeMain.getDungeonCount() == StorymodeMain.getCompleteDungeonCount());
+		
 		if(canEnterBossRoom) {
 
 			interaction = new InteractableObject(posX, posY, 625, 775, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
@@ -54,12 +60,18 @@ public class BossDoor extends SpriteObject {
 							SceneManager.loadScene(new EndbossFight());
 						}
 					}, 3500);
+					
+					destroyInteraction();
 				}
 			});
 			interaction.interactionString = "Enter Boss Room";
 			SceneManager.getActiveScene().addObject(interaction);
 		}
 
+	}
+
+	protected void destroyInteraction() {
+		SceneManager.getActiveScene().destroyObject(interaction);		
 	}
 
 	BossDoor getObj() {

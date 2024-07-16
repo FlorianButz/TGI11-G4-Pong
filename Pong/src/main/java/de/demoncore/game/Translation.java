@@ -300,7 +300,30 @@ public class Translation {
 		englishTranslation.put("well.dialog.6", "If there are many enemies around and you have more than 3/4 of your stamina left you can also attack with a radial attack [Ctrl + Space].");	
 
 		germanTranslation.put("well.dialog.7", "Ich gebe dir mein Segen. Ich hoffe du wirst es nicht brauchen.");
-		englishTranslation.put("well.dialog.7", "Ich gebe dir mein Segen. Ich hoffe, du brauchst es nicht.");			
+		englishTranslation.put("well.dialog.7", "I give you my blessing. I hope you won't need it.");
+		
+
+		germanTranslation.put("npc3.dialog.1", "Wow.. du hast es also geschafft.");
+		englishTranslation.put("npc3.dialog.1", "Wow.. you really did it.");
+
+		germanTranslation.put("npc3.dialog.2", "Anfangs dachte ich schon wir sind verloren als ich dich sah, aber scheint so als koenntest du mehr als man denkt.");
+		englishTranslation.put("npc3.dialog.2", "When I first saw you I thought we already lost, but it seems like you can do more than you look like.");
+
+		germanTranslation.put("npc3.dialog.3", "Ich danke dir fuer deinen Beitrag. Auf wiedersehen Reisender.");
+		englishTranslation.put("npc3.dialog.3", "I must thank you for your service. Hopefully we'll see you here again, traveller.");
+		
+
+		germanTranslation.put("npc0.dialog.1", "Hey! Du bist der Reisende, oder?");
+		englishTranslation.put("npc0.dialog.1", "Hey there! You're the traveller, right?");
+
+		germanTranslation.put("npc0.dialog.2", "Unsere Welt hatte ziemlich viel Stress in letzter Zeit... Unsere ganze Hoffnung steckt in dir, also verkack es nicht! :)");
+		englishTranslation.put("npc0.dialog.2", "Our world has had some serious trouble lately... All our hopes are on you, so don't mess up :)");
+
+		germanTranslation.put("npc1.dialog.1", "Hallo? Wer bist du denn?");
+		englishTranslation.put("npc1.dialog.1", "Hello? Who are you?");
+
+		germanTranslation.put("npc1.dialog.2", "Ist ja auch egal.. hast du diese riesige Tuer hinter dem Rathaus gesehen? Was das wohl sein mag...");
+		englishTranslation.put("npc1.dialog.2", "Anyway, have you seen that big door above the mayor's house? Who knows what could be inside...");
 	}
 
 	public static TranslationComponent get(String translationID) {

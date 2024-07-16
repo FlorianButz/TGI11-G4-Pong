@@ -14,9 +14,11 @@ import de.demoncore.game.animator.Easing.EasingType;
 import de.demoncore.game.animator.SpriteAnimator;
 import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.scenes.storymode.EndbossFight;
+import de.demoncore.scenes.storymode.StorymodeMain;
 import de.demoncore.sprites.Sprite;
 import de.demoncore.sprites.SpriteObject;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 
 public class BossStone extends SpriteObject implements Damageable {
@@ -88,6 +90,9 @@ public class BossStone extends SpriteObject implements Damageable {
 		};
 		SceneManager.getActiveScene().addObject(dialog);
 		dialog.showDialog();
+		
+
+		Logger.logError("Change back boss stone", this);
 	}
 	
 	@Override

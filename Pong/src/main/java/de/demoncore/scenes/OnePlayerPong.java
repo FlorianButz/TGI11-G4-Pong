@@ -12,6 +12,7 @@ import de.demoncore.gameObjects.PongEndScreen;
 import de.demoncore.gameObjects.PongLatiku;
 import de.demoncore.gameObjects.PongPlayer;
 import de.demoncore.gameObjects.PongPlayerAI;
+import de.demoncore.gameObjects.PowerupBase;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
 import de.demoncore.scenes.shopnew.ShopValues;
@@ -30,8 +31,6 @@ public class OnePlayerPong extends BaseScene {
 	GUIText points;
 	PointListener pointListener;
 
-	
-	
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
@@ -41,6 +40,7 @@ public class OnePlayerPong extends BaseScene {
 		addObject(new PauseMenu());
 		addObject(new PongLatiku());
 
+		addObject(new PowerupBase(150, 150));
 		
 		player1 = new PongPlayer(0, 0);
 		addObject(player1);

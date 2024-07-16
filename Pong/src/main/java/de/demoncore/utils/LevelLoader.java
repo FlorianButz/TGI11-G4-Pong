@@ -15,6 +15,7 @@ import de.demoncore.gameObjects.storymode.Campfire;
 import de.demoncore.gameObjects.storymode.DungeonDoor;
 import de.demoncore.gameObjects.storymode.Grass;
 import de.demoncore.gameObjects.storymode.House;
+import de.demoncore.gameObjects.storymode.NPC;
 import de.demoncore.gameObjects.storymode.Path;
 import de.demoncore.gameObjects.storymode.Pillar;
 import de.demoncore.gameObjects.storymode.Sans;
@@ -23,6 +24,7 @@ import de.demoncore.gameObjects.storymode.SmallStone;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gameObjects.storymode.Tree;
 import de.demoncore.gameObjects.storymode.Well;
+import de.demoncore.scenes.storymode.StorymodeMain;
 
 public class LevelLoader {
 
@@ -46,7 +48,10 @@ public class LevelLoader {
 	// 14 House4
 
 	// 15 Campfire
-	// 15 Well
+	// 16 Sans
+	// 17 Well
+
+	// 18 NPC
 	
 	public static void LoadLevel(InputStream stream) {
 
@@ -139,7 +144,29 @@ public class LevelLoader {
 						break;
 					case 17:
 						int isMain = Integer.parseInt(objectInfos[3]);
-						SceneManager.getActiveScene().addObject(new Well(objectPosX, objectPosY, (isMain == 1) ? true : false));
+						SceneManager.getActiveScene().addObject(new Well(objectPosX, objectPosY, (isMain != 15) ? true : false));
+						break;
+					case 18:
+						int npcId = Integer.parseInt(objectInfos[3]);
+						
+						switch(npcId) {
+						case 15:
+							SceneManager.getActiveScene().addObject(new NPC(objectPosX, objectPosY, null));
+							break;
+						case 1:
+							if(!StorymodeMain.saveData.completedDungeons.contains(-1))
+							SceneManager.getActiveScene().addObject(new NPC(objectPosX, objectPosY, Resources.npc0Dialog));
+							break;
+						case 2:
+							if(!StorymodeMain.saveData.completedDungeons.contains(-1))
+								SceneManager.getActiveScene().addObject(new NPC(objectPosX, objectPosY, Resources.npc1Dialog));
+							break;
+						case 4:
+							if(StorymodeMain.saveData.completedDungeons.contains(-1))
+								SceneManager.getActiveScene().addObject(new NPC(objectPosX, objectPosY, Resources.npc2Dialog));
+							break;
+						}
+						
 						break;
 					}
 				}

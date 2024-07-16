@@ -93,7 +93,6 @@ public class StorymodeMain extends BaseScene {
 		
 		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
 
-
 		if(!saveData.compassUnlocked) {
 
 			compassInteraction = new InteractableObject(690, 215, 175, 175, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
@@ -185,6 +184,10 @@ public class StorymodeMain extends BaseScene {
 		saveData.playerHealth = StorymodePlayer.getPlayerInstance().getHealth();
 		saveData.playerXP = StorymodePlayer.getPlayerInstance().getPlayerXP();
 
+		SaveManager.SaveToFile("storymode.g4pong", saveData);
+	}
+
+	public static void saveCurrent() {
 		SaveManager.SaveToFile("storymode.g4pong", saveData);
 	}
 

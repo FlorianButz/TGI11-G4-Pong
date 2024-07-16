@@ -48,19 +48,6 @@ public class Dungeon extends BaseScene {
 		minimap.alignment = GUIAlignment.TopRight;
 		addObject(minimap);
 		
-		InteractableObject interact = new InteractableObject(25, 25, 75, 75, player, new InteractEvent() {
-		@Override
-		public void OnInteract() {
-			player.health.damage(1);
-		}
-		});
-
-		addObject(new Cake(250, 100));
-		addObject(new Cake(100, 250));
-		addObject(new Cake(250, 250));
-		
-		addObject(interact);
-		
 		generateDungeon();
 	}
 
@@ -109,7 +96,7 @@ public class Dungeon extends BaseScene {
 		zoomAtDoor = true;
 		
 		SceneManager.getActiveScene().ShakeCamera(10, 5, 300);
-		StorymodeMain.saveData.completedDungeons.add(dungeonId);
+		StorymodeMain.saveData.addCompletedDungeon(dungeonId);
 		
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {

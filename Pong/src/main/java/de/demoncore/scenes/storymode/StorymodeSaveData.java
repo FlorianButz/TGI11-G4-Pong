@@ -16,4 +16,9 @@ public class StorymodeSaveData implements Serializable {
 	public List<Integer> completedDungeons = new ArrayList<Integer>();
 	public List<Integer> spokenTo = new ArrayList<Integer>();
 	public boolean compassUnlocked = false;
+	
+	public void addCompletedDungeon(int id) {
+		completedDungeons.add(id);		
+		StorymodeMain.saveCurrent();
+	}
 }

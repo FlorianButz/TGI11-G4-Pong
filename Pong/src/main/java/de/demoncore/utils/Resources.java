@@ -10,7 +10,6 @@ import de.demoncore.audio.AudioMaster;
 import de.demoncore.game.Translation;
 import de.demoncore.gui.dialog.DialogLine;
 import de.demoncore.main.Main;
-import de.demoncore.scenes.SplashScreen;
 import de.demoncore.sprites.Sprite;
 
 public class Resources {
@@ -71,6 +70,7 @@ public class Resources {
 	public static Sprite compassEmpty;
 	public static Sprite compassNeedle;
 	public static Sprite bossDoor;
+	public static Sprite bossDoorBroken;
 	public static Sprite arrow;
 	public static Sprite bone1;
 	public static Sprite bone2;
@@ -84,6 +84,7 @@ public class Resources {
 	public static Sprite campfire2;
 
 	public static Sprite npc;
+	public static Sprite npcSpeech;
 
 	public static Sprite house1;
 	public static Sprite house2;
@@ -121,6 +122,10 @@ public class Resources {
 	public static DialogLine endbossDialogEnd;
 	public static DialogLine sansDialog;
 	public static DialogLine wellDialog;
+	
+	public static DialogLine npc0Dialog;
+	public static DialogLine npc1Dialog;
+	public static DialogLine npc2Dialog;
 	
 	static List<DialogLine> dialogs;
 	
@@ -221,6 +226,7 @@ public class Resources {
 		compassEmpty = new Sprite(Main.class.getResourceAsStream("/textures/CompassEmpty.png")).load();
 		compassNeedle = new Sprite(Main.class.getResourceAsStream("/textures/CompassNeedle.png")).load();
 		bossDoor = new Sprite(Main.class.getResourceAsStream("/textures/BossDoor.png")).load();
+		bossDoorBroken = new Sprite(Main.class.getResourceAsStream("/textures/BossDoorBroken.png")).load();
 		arrow = new Sprite(Main.class.getResourceAsStream("/textures/Arrow.png")).load();
 		bone1 = new Sprite(Main.class.getResourceAsStream("/textures/Bone1.png")).load();
 		bone2 = new Sprite(Main.class.getResourceAsStream("/textures/Bone2.png")).load();
@@ -233,6 +239,7 @@ public class Resources {
 		campfire1 = new Sprite(Main.class.getResourceAsStream("/textures/Campfire1.png")).load();
 		campfire2 = new Sprite(Main.class.getResourceAsStream("/textures/Campfire2.png")).load();
 		npc = new Sprite(Main.class.getResourceAsStream("/textures/NPC.png")).load();
+		npcSpeech = new Sprite(Main.class.getResourceAsStream("/textures/NPCSpeech.png")).load();
 		
 		house1 = new Sprite(Main.class.getResourceAsStream("/textures/House1.png")).load();
 		house2 = new Sprite(Main.class.getResourceAsStream("/textures/House2.png")).load();
@@ -294,16 +301,13 @@ public class Resources {
 						new DialogLine("The Rock", Translation.get("endboss.dialog.3"),
 								new DialogLine("The Rock", Translation.get("endboss.dialog.4"),
 										null))));
-		dialogs.add(endbossDialog);
 		
 		endbossDialogEnd = new DialogLine("The Rock", Translation.get("endbossend.dialog.1"),
 				new DialogLine("The Rock", Translation.get("endbossend.dialog.2"), null));
-		dialogs.add(endbossDialogEnd);
 		
 
 		sansDialog = new DialogLine("Sans", Translation.get("sans.dialog.1"),
 				new DialogLine("Sans", Translation.get("sans.dialog.2"), null));
-		dialogs.add(sansDialog);
 
 		wellDialog = new DialogLine("Holy Well", Translation.get("well.dialog.1"),
 				new DialogLine("Holy Well", Translation.get("well.dialog.2"), 
@@ -312,7 +316,16 @@ public class Resources {
 										new DialogLine("Holy Well", Translation.get("well.dialog.5"), 
 												new DialogLine("Holy Well", Translation.get("well.dialog.6"), 
 														new DialogLine("Holy Well", Translation.get("well.dialog.7"), null)))))));
-		dialogs.add(wellDialog);
+		
+		npc0Dialog = new DialogLine("Villager", Translation.get("npc0.dialog.1"),
+				new DialogLine("Villager", Translation.get("npc0.dialog.2"), null));
+		
+		npc1Dialog = new DialogLine("Villager", Translation.get("npc1.dialog.1"),
+				new DialogLine("Villager", Translation.get("npc1.dialog.2"), null));
+		
+		npc2Dialog = new DialogLine("Villager", Translation.get("npc3.dialog.1"),
+				new DialogLine("Villager", Translation.get("npc3.dialog.2"), 
+						new DialogLine("Villager", Translation.get("npc3.dialog.3"), null)));
 		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}

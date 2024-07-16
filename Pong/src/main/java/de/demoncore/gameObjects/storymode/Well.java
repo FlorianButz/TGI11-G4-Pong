@@ -20,18 +20,19 @@ public class Well extends SpriteObject {
 		if(isMainWell)
 			mainInstance = this;
 
-		InteractableObject interaction = new InteractableObject(posX, posY, 225, 225, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
-			@Override
-			public void OnInteract() {
-				super.OnInteract();
+		if(isMainWell) {
+			InteractableObject interaction = new InteractableObject(posX, posY, 275, 275, StorymodePlayer.getPlayerInstance(), new InteractEvent() {
+				@Override
+				public void OnInteract() {
+					super.OnInteract();
 
-				Dialog dialog = new Dialog(Resources.wellDialog);
-				SceneManager.getActiveScene().addObject(dialog);
-				dialog.showDialog();
-			}
-		});
-		interaction.interactionString = "Talk";
-
-		SceneManager.getActiveScene().addObject(interaction);
+					Dialog dialog = new Dialog(Resources.wellDialog);
+					SceneManager.getActiveScene().addObject(dialog);
+					dialog.showDialog();
+				}
+			});
+			interaction.interactionString = "Talk";
+			SceneManager.getActiveScene().addObject(interaction);
+		}
 	}
 }
