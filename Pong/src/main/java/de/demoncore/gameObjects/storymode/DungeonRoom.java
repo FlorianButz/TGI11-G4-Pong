@@ -53,7 +53,7 @@ public class DungeonRoom extends GameObject {
 		
 		if(getDifficulty() >= 0.8) {
 			
-			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 10);
+			int rng = (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 6);
 			
 			switch(rng) {
 			case 0:
@@ -69,21 +69,9 @@ public class DungeonRoom extends GameObject {
 				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
 				break;
 			case 4:
-				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
+				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
 				break;
 			case 5:
-				SceneManager.getActiveScene().addObject(new SkeletonEnemy(rand.getX(), rand.getY()));
-				break;
-			case 6:
-				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
-				break;
-			case 7:
-				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
-				break;
-			case 8:
-				SceneManager.getActiveScene().addObject(new BabyZombieEnemy(rand.getX(), rand.getY()));
-				break;
-			case 9:
 				SceneManager.getActiveScene().addObject(new GhostEnemy(rand.getX(), rand.getY()));
 				break;
 			}
@@ -211,7 +199,8 @@ public class DungeonRoom extends GameObject {
 	}
 	
 	float getDifficulty() {
-		return (float)StorymodeMain.getCompleteDungeonCount() / (float)StorymodeMain.getDungeonCount();
+		System.out.println(StorymodeMain.difficulty);
+		return StorymodeMain.difficulty;
 	}
 	
 	Vector3 getRandomPositionInRoom() {

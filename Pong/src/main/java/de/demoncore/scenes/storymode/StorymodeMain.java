@@ -22,6 +22,7 @@ import de.demoncore.main.Main;
 import de.demoncore.scenes.BaseScene;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.LevelLoader;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -63,6 +64,24 @@ public class StorymodeMain extends BaseScene {
 		return null;
 	}
 	
+	public static float difficulty = 0;
+	
+	float getDifficulty() {
+		float allCount = 0;
+		float completedCount = 0;
+		for(GameObject go : new ArrayList<GameObject>(SceneManager.getActiveScene().getSceneObjects())) {
+			if(go instanceof DungeonDoor) {
+				allCount++;
+				if(((DungeonDoor)go).isDungeonComplete)
+					completedCount++;
+			}
+		}
+		
+		Logger.logInfo("Difficulty set: "+ completedCount / allCount);
+		
+		return completedCount / allCount;
+	}
+	
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
@@ -74,15 +93,6 @@ public class StorymodeMain extends BaseScene {
 		
 		LevelLoader.LoadLevel(Main.class.getResourceAsStream("/levels/storymode_main.plv"));
 
-		int allCount = 0;
-		int completedCount = 0;
-		for(GameObject go : new ArrayList<GameObject>(getSceneObjects())) {
-			if(go instanceof DungeonDoor) {
-				allCount++;
-				if(((DungeonDoor)go).isDungeonComplete)
-					completedCount++;
-			}
-		}
 
 		if(!saveData.compassUnlocked) {
 
@@ -99,6 +109,16 @@ public class StorymodeMain extends BaseScene {
 			addObject(compassInteraction);
 		}
 
+		int allCount = 0;
+		int completedCount = 0;
+		for(GameObject go : new ArrayList<GameObject>(getSceneObjects())) {
+			if(go instanceof DungeonDoor) {
+				allCount++;
+				if(((DungeonDoor)go).isDungeonComplete)
+					completedCount++;
+			}
+		}
+		
 		completedDungeons = new GUIText(45, 65, Translation.literal(completedCount + "/" + allCount), Resources.uiFont.deriveFont(50F), Color.white);
 		completedDungeons.alignment = GUIAlignment.TopLeft;
 		completedDungeons.SetTextAlignment(TextAlignment.Left);
@@ -107,10 +127,10 @@ public class StorymodeMain extends BaseScene {
 		addObject(new GUICompass());
 
 		StorymodePlayer.getPlayerInstance().setPermPosition(new Vector3(saveData.playerX, saveData.playerY));
-		
 		MusicManager.playStorymode();
-		
 		cameraFollow = StorymodePlayer.getPlayerInstance();
+		
+		difficulty = getDifficulty();
 	}
 
 	protected void removeCompassInteractable() {

@@ -50,7 +50,7 @@ public class GUICompass extends GUIObject {
 		
 		if(StorymodeMain.getBossDoor() != null) {
 			currentAngle = GameMath.Lerp(currentAngle, (float)Math.toRadians(getAngle(StorymodePlayer.getPlayerInstance().getRawPosition(),
-					StorymodeMain.getBossDoor().getPosition())), 0.05f);
+					Well.mainInstance.getRawPosition())), 0.05f);
 		}
 	}
 

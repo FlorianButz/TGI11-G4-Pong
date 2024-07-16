@@ -12,11 +12,11 @@ public class SkeletonEnemy extends BaseEnemy {
 	public SkeletonEnemy(int posX, int posY) {
 		super(posX, posY);
 		
-		enemySpeed = 0.15f;
+		enemySpeed = 0.1f;
 		stoppingDistance = 600f;
 		chaseDistance = 750f;
-		attackSpeed = 125;
-		setInitHealth(5);
+		attackSpeed = 165;
+		setInitHealth(4);
 		damageAmount = 1;
 		
 		color = new Color(0.5f, 0.5f, 0.5f);
@@ -31,7 +31,7 @@ public class SkeletonEnemy extends BaseEnemy {
 	protected void attackPlayer() {
 		Vector3 spawnPosition = getPosition();
 		
-		spawnPosition = spawnPosition.add(StorymodePlayer.getPlayerInstance().getPosition().subtract(position.add(getScale().multiply(0.5f))).normalized().multiply(65f));
+		spawnPosition = spawnPosition.add(StorymodePlayer.getPlayerInstance().getPosition().subtract(position.add(getScale().multiply(0.5f))).normalized().multiply(465f));
 		
 		SceneManager.getActiveScene().addObject(new Arrow(spawnPosition.getX(), spawnPosition.getY(), damageAmount));
 	}

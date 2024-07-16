@@ -279,6 +279,28 @@ public class Translation {
 		
 		germanTranslation.put("sans.dialog.2", "Bitte mach dich schnell auf den Weg und versuche diese Welt wieder gerade zu biegen. Ich habe keine Lust schonwieder wo anders hin zu reisen.");
 		englishTranslation.put("sans.dialog.2", "Please, if you can. Fix this world. I don't feel like moving to a different place again already.");
+
+		
+		germanTranslation.put("well.dialog.1", "...");
+		englishTranslation.put("well.dialog.1", "....");
+		
+		germanTranslation.put("well.dialog.2", "Hallo.. ich spüre, dass du hier bist, um einen Einblick in mein Wissen zu erhalten.");
+		englishTranslation.put("well.dialog.2", "Hello there... I sense you are here to get a glimpse of my knowledge.");
+		
+		germanTranslation.put("well.dialog.3", "In dieser Welt sind Dungeons verteilt. Finde sie und besiege alle Gegner darin, um den Dungeon zu zerstoeren. Sobald du alle Dungeons beseitigt hast, kannst du gegen den Endboss kaempfen.");
+		englishTranslation.put("well.dialog.3", "There are dungeons spread around this world. Find them and defeat all of the enemies inside to destroy the dungeon. Once you beat all of the dungeons you can fight the endboss.");
+
+		germanTranslation.put("well.dialog.4", "Anhand der Zahl oben links auf dem Bildschirm kannst du den Ueberblick über die von dir zerstoerten Dungeons behalten.");
+		englishTranslation.put("well.dialog.4", "You can keep track of the dungeons you've destroyed by the value on the top left of the screen.");
+
+		germanTranslation.put("well.dialog.5", "Um einen Gegner anzugreifen, musst du Geschwindigkeit aufbauen und die Leertaste druecken. Du verwandelst dich in eine Ball Form. In diesem Zustand kannst du von den meisten Gegnern nicht angegriffen werden.");
+		englishTranslation.put("well.dialog.5", "To attack an enemy you have to build up speed and press the space bar. You will turn in to a ball. In this state you can't be damaged by most enemies.");
+
+		germanTranslation.put("well.dialog.6", "Wenn viele Gegner in der Naehe sind und du mehr als 3/4 deiner Ausdauer hast, kanst du auch mit einem Radialangriff [Ctrl + Space] angreifen.");
+		englishTranslation.put("well.dialog.6", "If there are many enemies around and you have more than 3/4 of your stamina left you can also attack with a radial attack [Ctrl + Space].");	
+
+		germanTranslation.put("well.dialog.7", "Ich gebe dir mein Segen. Ich hoffe du wirst es nicht brauchen.");
+		englishTranslation.put("well.dialog.7", "Ich gebe dir mein Segen. Ich hoffe, du brauchst es nicht.");			
 	}
 
 	public static TranslationComponent get(String translationID) {

@@ -22,6 +22,7 @@ import de.demoncore.gameObjects.storymode.Sign;
 import de.demoncore.gameObjects.storymode.SmallStone;
 import de.demoncore.gameObjects.storymode.StorymodePlayer;
 import de.demoncore.gameObjects.storymode.Tree;
+import de.demoncore.gameObjects.storymode.Well;
 
 public class LevelLoader {
 
@@ -45,6 +46,7 @@ public class LevelLoader {
 	// 14 House4
 
 	// 15 Campfire
+	// 15 Well
 	
 	public static void LoadLevel(InputStream stream) {
 
@@ -134,6 +136,10 @@ public class LevelLoader {
 						break;
 					case 16:
 						SceneManager.getActiveScene().addObject(new Sans(objectPosX, objectPosY));
+						break;
+					case 17:
+						int isMain = Integer.parseInt(objectInfos[3]);
+						SceneManager.getActiveScene().addObject(new Well(objectPosX, objectPosY, (isMain == 1) ? true : false));
 						break;
 					}
 				}

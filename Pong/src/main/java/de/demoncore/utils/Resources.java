@@ -90,6 +90,8 @@ public class Resources {
 	public static Sprite house3;
 	public static Sprite house4;
 
+	public static Sprite well;
+
 	public static Sprite shop_ballskin;
 	public static Sprite shop_ballspawn;
 	public static Sprite shop_balltrail;
@@ -118,6 +120,7 @@ public class Resources {
 	public static DialogLine endbossDialog;
 	public static DialogLine endbossDialogEnd;
 	public static DialogLine sansDialog;
+	public static DialogLine wellDialog;
 	
 	static List<DialogLine> dialogs;
 	
@@ -236,6 +239,8 @@ public class Resources {
 		house3 = new Sprite(Main.class.getResourceAsStream("/textures/House3.png")).load();
 		house4 = new Sprite(Main.class.getResourceAsStream("/textures/House4.png")).load();
 		
+		well = new Sprite(Main.class.getResourceAsStream("/textures/Well.png")).load();
+		
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();
 		shop_balltrail = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallTrailIcon.png")).load();
@@ -299,6 +304,15 @@ public class Resources {
 		sansDialog = new DialogLine("Sans", Translation.get("sans.dialog.1"),
 				new DialogLine("Sans", Translation.get("sans.dialog.2"), null));
 		dialogs.add(sansDialog);
+
+		wellDialog = new DialogLine("Holy Well", Translation.get("well.dialog.1"),
+				new DialogLine("Holy Well", Translation.get("well.dialog.2"), 
+						new DialogLine("Holy Well", Translation.get("well.dialog.3"), 
+								new DialogLine("Holy Well", Translation.get("well.dialog.4"), 
+										new DialogLine("Holy Well", Translation.get("well.dialog.5"), 
+												new DialogLine("Holy Well", Translation.get("well.dialog.6"), 
+														new DialogLine("Holy Well", Translation.get("well.dialog.7"), null)))))));
+		dialogs.add(wellDialog);
 		
 		Logger.logMessage("Laden der Dialoge Erfolgreich!");
 	}

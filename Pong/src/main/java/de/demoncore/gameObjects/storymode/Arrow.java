@@ -18,8 +18,8 @@ import de.demoncore.utils.Vector3;
 
 public class Arrow extends RigidBody {
 
-	public float speed = 1.5f;
-	public float speedIncrease = 6f;
+	public float speed = 1f;
+	public float speedIncrease = 4f;
 	public Sprite sprite;
 	int damage = 1;
 	
