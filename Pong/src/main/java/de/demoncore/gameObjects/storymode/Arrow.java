@@ -12,7 +12,6 @@ import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.RigidBody;
 import de.demoncore.rendering.Draw;
 import de.demoncore.sprites.Sprite;
-import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 

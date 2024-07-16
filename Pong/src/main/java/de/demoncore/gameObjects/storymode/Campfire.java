@@ -36,7 +36,7 @@ public class Campfire extends SpriteObject {
 		@Override
 		public void onUpdate(Sprite value) {
 			super.onUpdate(value);
-			sprite = value;
+			setSprite(value);
 		}
 		});
 		

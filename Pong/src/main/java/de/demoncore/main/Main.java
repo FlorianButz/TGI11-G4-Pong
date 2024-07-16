@@ -17,7 +17,7 @@ import de.demoncore.utils.Resources;
 
 public class Main {
 
-	public static String version = "1.6.254r";
+	public static String version = "1.6.255r";
 	public static String gameName = "Pong auf Crack";
 	
 	boolean quickLoad = true; // Nachher auf false setzten

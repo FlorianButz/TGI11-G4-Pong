@@ -65,7 +65,7 @@ public class BossStone extends SpriteObject implements Damageable {
 		@Override
 		public void onUpdate(Sprite value) {
 			super.onUpdate(value);
-			sprite = value;
+			setSprite(value);
 		}
 		});
 		

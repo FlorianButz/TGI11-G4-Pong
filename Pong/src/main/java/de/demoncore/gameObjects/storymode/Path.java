@@ -10,9 +10,9 @@ public class Path extends SpriteObject {
 		collisionEnabled = false;
 		
 		if(Math.random() >= 0.6){
-			sprite = Resources.path2;
+			setSprite(Resources.path2);
 			if(Math.random() >= 0.6){
-				sprite = Resources.path3;
+				setSprite(Resources.path3);
 			}
 		}
 		

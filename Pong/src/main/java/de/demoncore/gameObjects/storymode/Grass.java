@@ -18,15 +18,15 @@ public class Grass extends SpriteObject {
 		switch(random.nextInt(3)) {
 		case 0:
 			size = new Vector3( 5 * 5, 3 * 5);
-			sprite = Resources.grass1;
+			setSprite(Resources.grass1);
 			break;
 		case 1:
 			size = new Vector3( 3 * 5, 3 * 5);
-			sprite = Resources.grass2;
+			setSprite(Resources.grass2);
 			break;
 		case 2:
 			size = new Vector3( 6 * 5, 4 * 5);
-			sprite = Resources.grass3;
+			setSprite(Resources.grass3);
 			break;
 		}
 	}	

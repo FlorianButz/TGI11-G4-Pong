@@ -3,6 +3,7 @@ package de.demoncore.gameObjects.storymode;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.List;
 
 import de.demoncore.game.GameObject;
@@ -11,7 +12,6 @@ import de.demoncore.game.Settings;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.scenes.storymode.Dungeon;
 import de.demoncore.scenes.storymode.StorymodeMain;
-import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -29,16 +29,16 @@ public class DungeonRoom extends GameObject {
 	private GameObject secondWallLeft;
 	private GameObject secondWallBottom;
 
-	boolean chests = false, cob1 = false, cob2 = false, cob3 = false, cob4 = false, pud1 = false, pud2 = false, pud3 = false;
+	boolean car = false, cob1 = false, cob2 = false, cob3 = false, cob4 = false, pud1 = false, pud2 = false, pud3 = false;
 
 	public DungeonRoom(int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);
 
 		color = new Color(1, 1, 1, 0.1f);
 		collisionEnabled = false;
-
-		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
-			chests = true;
+		
+		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.75f)
+			car = true;
 		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
 			cob1 = true;
 		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
@@ -53,7 +53,35 @@ public class DungeonRoom extends GameObject {
 			pud2 = true;
 		if(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() > 0.5f)
 			pud3 = true;
+
+		if(cob1B == null) {
+			cob1B = Resources.dCobweb1.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			cob2B = Resources.dCobweb2.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			cob3B = Resources.dCobweb3.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			cob4B = Resources.dCobweb4.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			pud1B = Resources.dPuddle1.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			pud2B = Resources.dPuddle2.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			pud3B = Resources.dPuddle3.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+			c = Resources.dCarpet.getTexture()
+					.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
+		}
 	}
+
+	static Image cob1B;
+	static Image cob2B;
+	static Image cob3B;
+	static Image cob4B;
+	static Image pud1B;
+	static Image pud2B;
+	static Image pud3B;
+	static Image c;
 
 	@Override
 	public void draw(Graphics2D g2d, int screenWidth, int screenHeight) {
@@ -65,24 +93,25 @@ public class DungeonRoom extends GameObject {
 		Vector3 worldPos = getPosition();
 		g2d.drawRect((int)worldPos.x, (int)worldPos.y, (int)size.x, (int)size.y);
 
-//				g2d.drawImage(Resources.dCarpet.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+		if(car)
+			g2d.drawImage(c, getPosition().getX(), getPosition().getY(), null);
 
 		//		if(chests)
 		//			g2d.drawImage(Resources.dChests.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(pud1)
-			g2d.drawImage(Resources.dPuddle1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(pud1B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(pud2)
-			g2d.drawImage(Resources.dPuddle2.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(pud2B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(pud3)
-			g2d.drawImage(Resources.dPuddle3.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(pud3B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(cob1)
-			g2d.drawImage(Resources.dCobweb1.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(cob1B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(cob2)
-			g2d.drawImage(Resources.dCobweb2.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(cob2B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(cob3)
-			g2d.drawImage(Resources.dCobweb3.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(cob3B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 		if(cob4)
-			g2d.drawImage(Resources.dCobweb4.getTexture(), getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
+			g2d.drawImage(cob4B, getPosition().getX(), getPosition().getY(), getScale().getX(), getScale().getY(), null);
 
 		if(Settings.getDebugMode()) {
 			g2d.setFont(Resources.uiFont.deriveFont(45f));
@@ -105,7 +134,7 @@ public class DungeonRoom extends GameObject {
 			Vector3 randomPos = getRandomPositionInRoom();
 			SceneManager.getActiveScene().addObject(new DungeonPillar(randomPos.getX(), randomPos.getY()));
 		}
-		
+
 		for(int i = 0; i < (int)(((Dungeon)SceneManager.getActiveScene()).rng.nextFloat() * 3); i++) {
 			Vector3 randomPos = getRandomPositionInRoom();
 			SceneManager.getActiveScene().addObject(new Cake(randomPos.getX(), randomPos.getY()));

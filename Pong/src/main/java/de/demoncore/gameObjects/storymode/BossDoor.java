@@ -26,7 +26,7 @@ public class BossDoor extends SpriteObject {
 				Resources.bossDoor);
 
 		if(StorymodeMain.saveData.completedDungeons.contains(-1)) {
-			sprite = Resources.bossDoorBroken;
+			setSprite(Resources.bossDoorBroken);
 			return;
 		}
 

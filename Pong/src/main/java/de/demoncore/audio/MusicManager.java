@@ -162,10 +162,12 @@ public class MusicManager {
 
 	static void stopMusic() {
 		AL10.alSourceStop(sourceId);
+		playing = 0;
 	}
 	
 	public static void playStorymode() {
-		playing = 1;
+		if(playing == 1) return;
 		stopMusic();
+		playing = 1;
 	}
 }
