@@ -26,11 +26,6 @@ public class PongPlayer extends RigidBody {
 	
 	public PongPlayer(int posX, int posY) {
 		super(posX, posY, 15, 135);
-
-		if(isPlayer1)
-			player1 = this;
-		else
-			player2 = this;
 	}
 
 	@Override
@@ -40,6 +35,11 @@ public class PongPlayer extends RigidBody {
 		position.y = GameMath.clamp(position.y, (-Gui.GetScreenDimensions().y / 2) + size.y / 2,
 				(Gui.GetScreenDimensions().y / 2) - size.y / 2);
 
+		if(isPlayer1)
+			player1 = this;
+		else
+			player2 = this;
+		
 		playerAcceleration = Settings.isSlowPedals() ? 5.5f : 15f;
 
 		if (playerControlsEnabled) {

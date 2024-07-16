@@ -36,6 +36,7 @@ public class TwoPlayerPong extends BaseScene {
 		addObject(new PauseMenu());
 
 		player1 = new PongPlayer(0, 0);
+		player1.isPlayer1 = true;
 		addObject(player1);
 
 		player2 = new PongPlayer(0, 0);

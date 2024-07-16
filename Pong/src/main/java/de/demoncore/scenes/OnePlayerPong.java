@@ -43,6 +43,7 @@ public class OnePlayerPong extends BaseScene {
 		addObject(new PowerupBase(150, 150));
 		
 		player1 = new PongPlayer(0, 0);
+		player1.isPlayer1 = true;
 		addObject(player1);
 
 		player2 = new PongPlayerAI(0, 0);
