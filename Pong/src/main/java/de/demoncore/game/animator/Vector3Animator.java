@@ -72,7 +72,7 @@ public class Vector3Animator {
                         	time = Easing.EaseInOutSine(time);
                         }
                         
-                        value = Vector3.Lerp(fromValue, toValue, time);
+                        value = Vector3.lerp(fromValue, toValue, time);
                         if(updateEvent != null && !isAnimationCancled)
                         	updateEvent.onUpdate(value);
                         

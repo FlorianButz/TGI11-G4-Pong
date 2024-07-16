@@ -50,10 +50,10 @@ public class Gui {
 		
 		frame.requestFocus();
 		
-		frame.setExtendedState(frame.MAXIMIZED_BOTH);
-		
 		// Aktiviere fullscreen nach einstellung
-		Gui.Fullscreen(Settings.getFullscreen());
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		if(Settings.getFullscreen())
+			frame.setUndecorated(true);
 		
 		// Kein Maus Cursor
 		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
@@ -86,17 +86,6 @@ public class Gui {
 	
 	public static Vector3 GetScreenLocation() {
 		return new Vector3(frame.getLocationOnScreen().x, frame.getLocationOnScreen().y);
-	}
-	
-	public static void Fullscreen(boolean isEnabled) {
-		if(isEnabled) {
-			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			frame.setUndecorated(true);
-			
-		}else {
-			frame.setExtendedState(frame.MAXIMIZED_BOTH);
-			frame.setUndecorated(false);
-		}
 	}
 	
 	public static void addOnApplicationClose(WindowListener event) {

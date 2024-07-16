@@ -27,20 +27,18 @@ public class GuiCreditsMenu extends GUIMenu{
 		
 		guiText = new GUITextArea(0, -550, Translation.literal("\r\n"
 				+ "\bGrafikdesigner\r\n"
-				+ "\r\n"
 				+ "Jonathan Kugler\r\n"
 				+ "Philip Hoeschle\r\n"
 				+ "\r\n"
-				+ "\r\n"
 				+ "\bProgrammierer\r\n"
-				+ "\r\n"
-				+ "Florian Karl Butz\r\n"
-				+ "Marcel Firlus\r\n"
-				+ "Tim Hilzinger\r\n"
+				+ "LD - Florian Karl Butz\r\n"
+				+ "FE - Marcel Firlus\r\n"
+				+ "FE - Tim Hilzinger\r\n"
+				+ "BE - Philip Hoeschle\r\n"
+				+ "BE - Jonathan Kugler\r\n"
 				+ "\r\n"
 				+ "\bMusik\r\n"
-				+ "\r\n"
-				+ "Florian Karl Butz"), Resources.uiFont.deriveFont(40f),regenbogen());
+				+ "Produziert und Komponiert von Florian Karl Butz"), Resources.uiFont.deriveFont(40f),regenbogen());
 		guiText.alignment = GUIAlignment.Center;
 		guiText.SetTextAlignment(TextAlignment.Center);
 		Objects.add(guiText);

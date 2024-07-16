@@ -54,7 +54,7 @@ public class Bone extends RigidBody {
 		rotationZ += rotSpeed;
 		velocity = initialSpeed;
 		
-		setScale(Vector3.Lerp(getScale(), new Vector3(7 * 3.5f, 13 * 3.5f), 0.1f));
+		setScale(Vector3.lerp(getScale(), new Vector3(7 * 3.5f, 13 * 3.5f), 0.1f));
 	}
 	
 	private void spawnParticles() {

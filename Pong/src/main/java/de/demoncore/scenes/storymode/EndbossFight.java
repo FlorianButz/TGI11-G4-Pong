@@ -126,13 +126,13 @@ public class EndbossFight extends BaseScene {
 		cameraZoom = GameMath.Lerp(cameraZoom, curCamZoom, 0.025f);
 
 		if(bossStone.getHealth() <= 0) {
-			cameraPosition = Vector3.Lerp(cameraPosition, StorymodePlayer.getPlayerInstance().getRawPosition(), 0.075f);
+			cameraPosition = Vector3.lerp(cameraPosition, StorymodePlayer.getPlayerInstance().getRawPosition(), 0.075f);
 		}
 		else {
 			if(!isFighting) {
-				cameraPosition = Vector3.Lerp(cameraPosition, new Vector3(0, 100), 0.025f);
+				cameraPosition = Vector3.lerp(cameraPosition, new Vector3(0, 100), 0.025f);
 			}else {
-				cameraPosition = Vector3.Lerp(cameraPosition, new Vector3(0, -75), 0.025f);
+				cameraPosition = Vector3.lerp(cameraPosition, new Vector3(0, -75), 0.025f);
 			}
 		}
 		

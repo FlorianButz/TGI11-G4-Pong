@@ -391,7 +391,7 @@ public class StorymodePlayer extends RigidBody implements Damageable {
 		if (GameLogic.IsGamePaused())
 			return;
 
-		size = Vector3.Lerp(size, isBallForm ? ballSize : normalSize, 0.15f);
+		size = Vector3.lerp(size, isBallForm ? ballSize : normalSize, 0.15f);
 
 		// Partikel effekt fuer den spieler
 		if (trail == null) {

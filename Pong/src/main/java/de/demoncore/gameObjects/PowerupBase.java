@@ -12,7 +12,7 @@ public class PowerupBase extends SpriteObject {
 	public long powerupDuration = 5000l;
 	
 	public PowerupBase(int posX, int posY) {
-		super(posX, posY, 100, 100, Resources.info_icon);
+		super(posX, posY, 100, 100, Resources.powerup);
 		
 		collisionEnabled = false;
 	}
@@ -31,10 +31,12 @@ public class PowerupBase extends SpriteObject {
 		}
 	}
 	
+	boolean wasDestroyed = false;
+	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		powerupTask.cancel();
+		wasDestroyed = true;
 	}
 	
 	private void trigPowerup() {
@@ -43,7 +45,8 @@ public class PowerupBase extends SpriteObject {
 		startPowerup();
 		powerupTask = new TimerTask() {
 			public void run() {
-				stopPowerup();
+				if(!wasDestroyed)
+					stopPowerup();
 			};
 		};
 		t.schedule(powerupTask, powerupDuration);

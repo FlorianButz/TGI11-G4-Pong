@@ -48,7 +48,7 @@ public class Vector3 {
 		return new Vector3(x - subtractor.x, y - subtractor.y, z - subtractor.z);
 	}
 	
-	public static Vector3 Lerp(Vector3 start, Vector3 end, float value) {
+	public static Vector3 lerp(Vector3 start, Vector3 end, float value) {
 		return new Vector3(GameMath.Lerp(start.x, end.x, value), GameMath.Lerp(start.y, end.y, value), GameMath.Lerp(start.z, end.z, value));
 	}
 	

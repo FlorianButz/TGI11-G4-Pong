@@ -48,7 +48,7 @@ public class TestSzene extends BaseScene {
 	public void updateScene() {
 		super.updateScene();
 
-		cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.035f);
+		cameraPosition = Vector3.lerp(cameraPosition, player.getPosition(), 0.035f);
 	}
 	
 }

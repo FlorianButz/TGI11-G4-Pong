@@ -66,9 +66,9 @@ public class Dungeon extends BaseScene {
 		super.updateScene();
 		
 		if(!zoomAtDoor)
-			cameraPosition = Vector3.Lerp(cameraPosition, player.getPosition(), 0.065f);
+			cameraPosition = Vector3.lerp(cameraPosition, player.getPosition(), 0.065f);
 		else
-			cameraPosition = Vector3.Lerp(cameraPosition, exitDoor.getPosition().add(exitDoor.getScale().multiply(0.5f)), 0.03f);
+			cameraPosition = Vector3.lerp(cameraPosition, exitDoor.getPosition().add(exitDoor.getScale().multiply(0.5f)), 0.03f);
 		
 		if(!isDungeonComplete && dungeonGenerated) {
 			

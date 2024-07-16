@@ -19,6 +19,7 @@ import de.demoncore.gui.GUIText;
 import de.demoncore.gui.Gui;
 import de.demoncore.scenes.shopnew.ShopValues;
 import de.demoncore.scenes.shopnew.ShopValuesSave;
+import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -41,8 +42,6 @@ public class OnePlayerPong extends BaseScene {
 
 		addObject(new PauseMenu());
 		addObject(new PongLatiku());
-
-		addObject(new BallSizePowerUp(150, 150));
 		
 		player1 = new PongPlayer(0, 0);
 		player1.isPlayer1 = true;
@@ -91,7 +90,25 @@ public class OnePlayerPong extends BaseScene {
 	}
 		
 	float ogSpeed = 0;
+
+	void spawnPowerup() {
+		Vector3 spawnPos = new Vector3(((float)(Math.random() * 850) - 250), ((float)(Math.random() * 500) - 250));
+	
+		int powerupId = GameMath.RandomRange(0, 2);
 		
+		switch (powerupId) {
+		case 0:
+			addObject(new BallSizePowerUp(spawnPos.getX(), spawnPos.getY()));
+			break;
+		case 1:
+			addObject(new PlayerSizePowerUp(spawnPos.getX(), spawnPos.getY()));
+			break;
+		default:
+			addObject(new BallSizePowerUp(spawnPos.getX(), spawnPos.getY()));
+			break;
+		}
+	}
+	
 	@Override
 	public void updateScene() {
 		super.updateScene();

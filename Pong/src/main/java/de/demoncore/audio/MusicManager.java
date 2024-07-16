@@ -52,11 +52,11 @@ public class MusicManager {
 		endboss_win = AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/End_Win.mp3"));
 		
 		playing1Audio = new AudioClip[] {
-//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Explorer.mp3")),
-//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/FarAway.mp3")),
+				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Explorer.mp3")),
+				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/FarAway.mp3")),
 				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/Gone.mp3")),
-//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/NothingLeft.mp3")),
-//				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/TheLastLight.mp3")),
+				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/NothingLeft.mp3")),
+				AudioMaster.loadSoundMp3(Main.class.getResourceAsStream("/audio/music/new/NothingLeft.mp3"))
 		};
 
 		Logger.logInfo("Loading music fully complete.");
@@ -70,11 +70,11 @@ public class MusicManager {
 				if(rand != null && Math.random() >= 0.5f)
 					PlayMusic(randomlyChoseMusic());
 
-
+				System.out.println(isPlaying());
 			};
 		};
 
-		timer.scheduleAtFixedRate(musicUpdate, 25000, 25000);
+		timer.scheduleAtFixedRate(musicUpdate, 10000, 10000);
 	}
 
 	public static AudioClip endboss;
@@ -108,7 +108,10 @@ public class MusicManager {
 
 					AL10.alSourceStop(sourceId);
 					activeMusic = musicClip;
-					AL10.alSourcei(sourceId, AL10.AL_LOOPING, looping ? 1 : 0);
+					int loopingV = 0;
+					if(looping)
+						loopingV = 1;
+					AL10.alSourcei(sourceId, AL10.AL_LOOPING, loopingV);
 					AL10.alSourcei(sourceId, AL10.AL_BUFFER, activeMusic.GetBuffer());
 					AL10.alSourcePlay(sourceId);
 

@@ -21,6 +21,8 @@ public class PongPlayer extends RigidBody {
 	public boolean isPlayer1 = true;
 	protected boolean playerControlsEnabled = true;
 
+	public Vector3 currentScale = getScale();
+	
 	public static PongPlayer player1;
 	public static PongPlayer player2;
 	
@@ -35,6 +37,8 @@ public class PongPlayer extends RigidBody {
 		position.y = GameMath.clamp(position.y, (-Gui.GetScreenDimensions().y / 2) + size.y / 2,
 				(Gui.GetScreenDimensions().y / 2) - size.y / 2);
 
+		size = Vector3.lerp(size, currentScale, 0.15f);
+		
 		if(isPlayer1)
 			player1 = this;
 		else

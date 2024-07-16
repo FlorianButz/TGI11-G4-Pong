@@ -29,10 +29,21 @@ public class SkeletonEnemy extends BaseEnemy {
 	
 	@Override
 	protected void attackPlayer() {
-		Vector3 spawnPosition = getPosition();
+		Vector3 spawnPosition = getRawPosition();
 		
-		spawnPosition = spawnPosition.add(StorymodePlayer.getPlayerInstance().getPosition().subtract(position.add(getScale().multiply(0.5f))).normalized().multiply(465f));
+		spawnPosition = spawnPosition.add(new Vector3(0, -60).rotated(getAngle(getPosition(), StorymodePlayer.getPlayerInstance().getRawPosition())));
 		
 		SceneManager.getActiveScene().addObject(new Arrow(spawnPosition.getX(), spawnPosition.getY(), damageAmount));
 	}
+	
+	public float getAngle(Vector3 start, Vector3 target) {
+		float angle = (float) Math.toDegrees(Math.atan2(target.y - start.y, target.x - start.x));
+
+		if(angle < 0){
+			angle += 360;
+		}
+
+		return angle + 90;
+	}
+	
 }

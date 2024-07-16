@@ -74,6 +74,8 @@ public class Resources {
 	public static Sprite arrow;
 	public static Sprite bone1;
 	public static Sprite bone2;
+	
+	public static Sprite powerup;
 
 	public static Sprite bossIdle;
 	public static Sprite bossEye1;
@@ -245,8 +247,9 @@ public class Resources {
 		house2 = new Sprite(Main.class.getResourceAsStream("/textures/House2.png")).load();
 		house3 = new Sprite(Main.class.getResourceAsStream("/textures/House3.png")).load();
 		house4 = new Sprite(Main.class.getResourceAsStream("/textures/House4.png")).load();
-		
+
 		well = new Sprite(Main.class.getResourceAsStream("/textures/Well.png")).load();
+		powerup = new Sprite(Main.class.getResourceAsStream("/textures/Powerup.png")).load();
 		
 		shop_ballskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_BallSkinsIcon.png")).load();
 		shop_pedalskin = new Sprite(Main.class.getResourceAsStream("/textures/Shop_PedalSkinsIcon.png")).load();

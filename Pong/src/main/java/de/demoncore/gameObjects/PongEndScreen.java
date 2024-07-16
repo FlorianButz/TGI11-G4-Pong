@@ -24,11 +24,15 @@ public class PongEndScreen extends GUIMenu {
 	public PongEndScreen(boolean isPlayer1, int points) {
 		this.isPlayer1 = isPlayer1;
 		this.points = points;
+
+		canCloseWithEscape = false;
 	}
 	
 	public PongEndScreen(boolean isPlayer1) {
 		this.isPlayer1 = isPlayer1;
 		this.points = -100;
+
+		canCloseWithEscape = false;
 	}
 	
 	@Override

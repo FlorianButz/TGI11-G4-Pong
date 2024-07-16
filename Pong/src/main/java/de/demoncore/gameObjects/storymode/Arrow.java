@@ -90,7 +90,7 @@ public class Arrow extends RigidBody {
 		
 		speed += speedIncrease / Draw.GetFramesPerSecond();
 		
-		velVector = Vector3.Lerp(velVector, StorymodePlayer.getPlayerInstance().getPosition().add(StorymodePlayer.getPlayerInstance().getScale().multiply(0.5f)).subtract(position).normalized().multiply(speed), 0.05f);
+		velVector = Vector3.lerp(velVector, StorymodePlayer.getPlayerInstance().getPosition().add(StorymodePlayer.getPlayerInstance().getScale().multiply(0.5f)).subtract(position).normalized().multiply(speed), 0.05f);
 		addForce(velVector);
 	}
 	

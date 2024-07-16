@@ -154,7 +154,7 @@ public class StorymodeMain extends BaseScene {
 		super.updateScene();
 
 		if(StorymodePlayer.getPlayerInstance() != null)
-			cameraPosition = Vector3.Lerp(cameraPosition, cameraFollow.getRawPosition(), 0.065f);
+			cameraPosition = Vector3.lerp(cameraPosition, cameraFollow.getRawPosition(), 0.065f);
 		
 		cameraZoom = GameMath.Lerp(cameraZoom, currentZoomLevel, 0.05f);
 		

@@ -37,6 +37,8 @@ public class PongBall extends GameObject {
 
 	public static boolean isMovingTowardsPlayer2 = false;
 	
+	public Vector3 currentScale = getScale();
+	
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
 
 	public static PongBall getInstance() {
@@ -154,6 +156,8 @@ public class PongBall extends GameObject {
 	public void update() {
 		super.update();
 
+		size = Vector3.lerp(size, currentScale, 0.15f);
+		
 		if(lastPos.x < getRawPosition().x) {
 			isMovingTowardsPlayer2 = true;
 		}else {

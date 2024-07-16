@@ -28,6 +28,8 @@ public class Main {
 		
 		Logger.logInfo("GUI wird erstellt...");
 
+		Settings.LoadAllSettings();
+		
 		GameLogic gl = new GameLogic();
 		gl.Start();
 		new Gui(gl);
@@ -65,7 +67,6 @@ public class Main {
 		
 		SplashScreen.instance.setProg((1 / progressActions) * 5, "save files");
 		
-		Settings.LoadAllSettings();
 		ShopValues.LoadAllSettings();
 		
 		SplashScreen.instance.setProg((1 / progressActions) * 6, "translations");
