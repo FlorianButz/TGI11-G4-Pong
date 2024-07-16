@@ -35,6 +35,8 @@ public class PongBall extends GameObject {
 	boolean isIntersectionWithPlayer = false;
 	boolean isMoving = false;
 
+	public static boolean isMovingTowardsPlayer2 = false;
+	
 	List<Vector3> positions = new ArrayList<Vector3>(Collections.nCopies(10, Vector3.zero()));
 
 	public static PongBall getInstance() {
@@ -42,6 +44,7 @@ public class PongBall extends GameObject {
 	}
 
 	ParticleSystem trail;
+	Vector3 lastPos = Vector3.zero();
 
 	public PongBall(int posX, int posY, PongPlayer player1, PongPlayer player2) {
 		super(posX, posY, 25, 25);
@@ -81,6 +84,7 @@ public class PongBall extends GameObject {
 		trail.emitLoop = false;
 		trail.Init();
 		SceneManager.getActiveScene().addObject(trail);
+		
 	}
 
 	void moveTimer() {
@@ -150,7 +154,14 @@ public class PongBall extends GameObject {
 	public void update() {
 		super.update();
 
-
+		if(lastPos.x < getRawPosition().x) {
+			isMovingTowardsPlayer2 = true;
+		}else {
+			isMovingTowardsPlayer2 = false;
+		}
+		
+		lastPos = getRawPosition();
+		
 		switch (ShopValues.shopData.activeBallSkin) {
 		case White:
 			color = Color.white;
