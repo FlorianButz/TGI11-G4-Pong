@@ -127,7 +127,7 @@ public class Translation {
 		germanTranslation.put("pong.end_title", " hat das Spiel gewonnen!");
 		englishTranslation.put("pong.end_title", " won the game!");
 		
-		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugef�gt: ");
+		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugefuegt: ");
 		englishTranslation.put("pong.end_title_points", "Pong Taler gathered: ");
 
 		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
@@ -287,13 +287,13 @@ public class Translation {
 		germanTranslation.put("well.dialog.1", "...");
 		englishTranslation.put("well.dialog.1", "....");
 		
-		germanTranslation.put("well.dialog.2", "Hallo.. ich spüre, dass du hier bist, um einen Einblick in mein Wissen zu erhalten.");
+		germanTranslation.put("well.dialog.2", "Hallo.. ich spuere, dass du hier bist, um einen Einblick in mein Wissen zu erhalten.");
 		englishTranslation.put("well.dialog.2", "Hello there... I sense you are here to get a glimpse of my knowledge.");
 		
 		germanTranslation.put("well.dialog.3", "In dieser Welt sind Dungeons verteilt. Finde sie und besiege alle Gegner darin, um den Dungeon zu zerstoeren. Sobald du alle Dungeons beseitigt hast, kannst du gegen den Endboss kaempfen.");
 		englishTranslation.put("well.dialog.3", "There are dungeons spread around this world. Find them and defeat all of the enemies inside to destroy the dungeon. Once you beat all of the dungeons you can fight the endboss.");
 
-		germanTranslation.put("well.dialog.4", "Anhand der Zahl oben links auf dem Bildschirm kannst du den Ueberblick über die von dir zerstoerten Dungeons behalten.");
+		germanTranslation.put("well.dialog.4", "Anhand der Zahl oben links auf dem Bildschirm kannst du den Ueberblick ueber die von dir zerstoerten Dungeons behalten.");
 		englishTranslation.put("well.dialog.4", "You can keep track of the dungeons you've destroyed by the value on the top left of the screen.");
 
 		germanTranslation.put("well.dialog.5", "Um einen Gegner anzugreifen, musst du Geschwindigkeit aufbauen und die Leertaste druecken. Du verwandelst dich in eine Ball Form. In diesem Zustand kannst du von den meisten Gegnern nicht angegriffen werden.");

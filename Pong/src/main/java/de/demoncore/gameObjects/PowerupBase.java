@@ -42,6 +42,7 @@ public class PowerupBase extends SpriteObject {
 		super.update();
 
 		size = Vector3.lerp(size, Vector3.one().multiply(75), 0.15f);
+		calcSprite();
 		
 		if(PongBall.getInstance().getBoundingBox().intersects(getBoundingBox()) && !isUsed) {
 			isUsed = true;

@@ -32,7 +32,7 @@ public class SpriteObject extends GameObject {
 		calcSprite();
 	}
 	
-	void calcSprite() {
+	protected void calcSprite() {
 		Image image = sprite.getTexture();
 		this.image = image.getScaledInstance(getScale().getX() + 1, getScale().getY() + 1, 0);
 	}
